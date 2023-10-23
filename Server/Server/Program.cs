@@ -1,3 +1,5 @@
+using Serilog;
+
 string corseName = "FenXsOnline";
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,10 +11,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(options => {
-    options.AddPolicy(corseName, policy => {
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corseName, policy =>
+    {
         policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
     });
+});
+
+builder.Host.UseSerilog((ctx, lc) =>
+{
+    lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration);
 });
 
 var app = builder.Build();
@@ -23,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
