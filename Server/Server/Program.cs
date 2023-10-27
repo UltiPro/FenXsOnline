@@ -4,6 +4,11 @@ using Database;
 using Database.Configuration;
 using Classes.Models.User;
 using Microsoft.AspNetCore.Identity;
+using Database.Contracts;
+using Database.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 const string configuration = "FenXsOnline";
 
@@ -40,6 +45,27 @@ builder.Host.UseSerilog((ctx, lc) =>
 });
 
 builder.Services.AddAutoMapper(typeof(MapperConfiguration));
+
+builder.Services.AddScoped<IAuthMenager, AuthMenager>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
+    };
+});
 
 var app = builder.Build();
 
