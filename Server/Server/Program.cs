@@ -17,12 +17,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString(configuration));
+    options.UseSqlServer(builder.Configuration.GetConnectionString(configuration), b => b.MigrationsAssembly("Server"));
 });
 
 builder.Services.AddIdentityCore<DBUser>()
     .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<DBUser>>(configuration)
+    .AddTokenProvider<DataProtectorTokenProvider<DBUser>>(builder.Configuration["Settings:TokenProvider"])
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultTokenProviders();
 
