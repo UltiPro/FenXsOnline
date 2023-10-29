@@ -9,6 +9,7 @@ using Database.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Server.Middleware;
 
 const string configuration = "FenXsOnline";
 
@@ -75,6 +76,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseSerilogRequestLogging();
 
