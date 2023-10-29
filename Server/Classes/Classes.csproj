@@ -9,7 +9,7 @@
 
 	<ItemGroup>
 		<Folder Include="Exceptions\" />
-		<Folder Include="Models\Hero\" />
+		<Folder Include="Models\Game\Hero\" />
 	</ItemGroup>
 
 	<ItemGroup>
