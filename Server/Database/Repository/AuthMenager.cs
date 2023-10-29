@@ -4,6 +4,7 @@ using Classes.Models.User;
 using Database.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -16,17 +17,19 @@ public class AuthMenager : IAuthMenager
     private readonly IMapper _mapper;
     private readonly UserManager<DBUser> _userManager;
     private readonly IConfiguration _configuration;
+    private readonly ILogger<AuthMenager> _logger;
 
     private readonly string _loginProvider;
     private readonly string _refreshToken;
 
     private DBUser? _user;
 
-    public AuthMenager(IMapper _mapper, UserManager<DBUser> _userManager, IConfiguration _configuration)
+    public AuthMenager(IMapper _mapper, UserManager<DBUser> _userManager, IConfiguration _configuration, ILogger<AuthMenager> _logger)
     {
         this._mapper = _mapper;
         this._userManager = _userManager;
         this._configuration = _configuration;
+        this._logger = _logger;
         _loginProvider = _configuration["Settings:TokenProvider"];
         _refreshToken = _configuration["Settings:RefreshToken"];
     }
@@ -37,7 +40,11 @@ public class AuthMenager : IAuthMenager
         user.UserName = userRegister.Login;
         var result = await _userManager.CreateAsync(user, userRegister.Password);
 
-        if (result.Succeeded) await _userManager.AddToRoleAsync(user, "User");
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(user, "User");
+            _logger.LogInformation($"Registered new user at email '{user.Email}'.");
+        }
 
         return result.Errors;
     }
@@ -48,6 +55,8 @@ public class AuthMenager : IAuthMenager
         bool isValidUser = await _userManager.CheckPasswordAsync(_user, userLogin.Password);
 
         if (!isValidUser || _user is null) return null;
+
+        _logger.LogInformation($"User '{userLogin.Login}' loged in.");
 
         return new AuthResponse
         {
