@@ -1,122 +1,122 @@
 @font-face {
-  font-family: font_page;
-  src: url("./../font/page.ttf");
+    font-family: font_page;
+    src: url("./../font/page.ttf");
 }
 
 @font-face {
-  font-family: font_logo;
-  src: url("./../font/logo.ttf");
+    font-family: font_logo;
+    src: url("./../font/logo.ttf");
 }
 
 @font-face {
-  font-family: font_form;
-  src: url("./../font/form.ttf");
+    font-family: font_form;
+    src: url("./../font/form.ttf");
 }
 
 @font-face {
-  font-family: font_anchor;
-  src: url("./../font/anchor.ttf");
+    font-family: font_anchor;
+    src: url("./../font/anchor.ttf");
 }
 
 :root {
-  --wooden: 156, 102, 68;
-  --dark-wooden: 127, 85, 67;
+    --wooden: 156, 102, 68;
+    --dark-wooden: 127, 85, 67;
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
-  background: rgb(var(--dark-wooden));
+    width: 7px;
+    background: rgb(var(--dark-wooden));
 }
 
 ::-webkit-scrollbar-track {
-  border: 1px solid rgb(var(--bs-dark-rgb));
-  background: rgb(var(--dark-wooden));
+    border: 1px solid rgb(var(--bs-dark-rgb));
+    background: rgb(var(--dark-wooden));
 }
 
 ::-webkit-scrollbar-thumb {
-  border: 1px solid rgb(var(--bs-dark-rgb));
-  background: rgb(var(--wooden));
+    border: 1px solid rgb(var(--bs-dark-rgb));
+    background: rgb(var(--wooden));
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  border: 1px solid whitesmoke;
+    border: 1px solid whitesmoke;
 }
 
 body,
 html {
-  height: 100%;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url("./../img/background.jpg");
-  font-family: font_page;
-  font-size: 20px;
-  color: black;
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("./../img/background.jpg");
+    font-family: font_page;
+    font-size: 20px;
+    color: black;
 }
 
 header {
-  font-family: font_logo;
+    font-family: font_logo;
 }
 
 form {
-  font-family: font_form;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    font-family: font_form;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 a,
 a:focus,
 a:active {
-  font-family: font_anchor;
-  text-decoration: none;
-  text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+    font-family: font_anchor;
+    text-decoration: none;
+    text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
 }
 
 a:hover {
-  text-shadow: -1px 0 darkgrey, 0 1px darkgrey, 1px 0 darkgrey, 0 -1px darkgrey;
+    text-shadow: -1px 0 darkgrey, 0 1px darkgrey, 1px 0 darkgrey, 0 -1px darkgrey;
 }
 
 .btn:focus,
 .btn-close:focus {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .text-justify {
-  text-align: justify;
+    text-align: justify;
 }
 
 .bg-wooden {
-  background-color: rgb(var(--wooden));
+    background-color: rgb(var(--wooden));
 }
 
 .bg-darkwooden {
-  background-color: rgb(var(--dark-wooden));
+    background-color: rgb(var(--dark-wooden));
 }
 
 .header-big {
-  font-size: 100px;
-  text-shadow: -3px 0 whitesmoke, 0 3px whitesmoke, 3px 0 whitesmoke, 0 -3px whitesmoke;
+    font-size: 100px;
+    text-shadow: -3px 0 whitesmoke, 0 3px whitesmoke, 3px 0 whitesmoke, 0 -3px whitesmoke;
 }
 
 .header-small {
-  font-size: 75px;
-  text-shadow: -2px 0 whitesmoke, 0 2px whitesmoke, 2px 0 whitesmoke, 0 -2px whitesmoke;
+    font-size: 75px;
+    text-shadow: -2px 0 whitesmoke, 0 2px whitesmoke, 2px 0 whitesmoke, 0 -2px whitesmoke;
 }
 
 .footer-min {
-  border-radius: 10px 0 0 0;
+    border-radius: 10px 0 0 0;
 }
 
 .footer-max {
-  width: 100%;
+    width: 100%;
 }
 
 .btn-darkwooden {
-  background-color: rgb(var(--dark-wooden));
-  border-color: rgb(var(--bs-dark-rgb));
+    background-color: rgb(var(--dark-wooden));
+    border-color: rgb(var(--bs-dark-rgb));
 }
 
 .btn-darkwooden:hover {
-  color: whitesmoke;
-  border-color: whitesmoke;
+    color: whitesmoke;
+    border-color: whitesmoke;
 }
