@@ -1,0 +1,33 @@
+.menu {
+    width: 400px;
+    height: 305px;
+}
+
+.menu-tab {
+    height: 35px;
+}
+
+.menu-form {
+    height: 270px;
+}
+
+.error {
+    width: 450px;
+    font-size: 18px;
+}
+
+#selector-login {
+    cursor: pointer;
+}
+
+#selector-register {
+    cursor: pointer;
+}
+
+#selector-login label {
+    height: 42px;
+}
+
+#selector-register label {
+    height: 38.25px;
+}
