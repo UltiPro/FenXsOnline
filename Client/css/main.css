@@ -59,6 +59,10 @@ header {
     font-family: font_logo;
 }
 
+footer {
+    width: 100%;
+}
+
 form {
     font-family: font_form;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
@@ -101,14 +105,6 @@ a:hover {
 .header-small {
     font-size: 75px;
     text-shadow: -2px 0 whitesmoke, 0 2px whitesmoke, 2px 0 whitesmoke, 0 -2px whitesmoke;
-}
-
-.footer-min {
-    border-radius: 10px 0 0 0;
-}
-
-.footer-max {
-    width: 100%;
 }
 
 .btn-darkwooden {
