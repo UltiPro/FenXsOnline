@@ -1,6 +1,31 @@
-.menu {
+#menu {
     width: 400px;
     height: 305px;
+    font-family: font_form;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+#menu-login label {
+    height: 42px;
+}
+
+#menu-register label {
+    height: 38.25px;
+}
+
+#menu-info {
+    width: 400px;
+    height: 307px;
+}
+
+#selector-login,
+#selector-register {
+    cursor: pointer;
+}
+
+.server-responses {
+    width: 450px;
+    font-size: 18px;
 }
 
 .menu-tab {
@@ -9,25 +34,4 @@
 
 .menu-form {
     height: 270px;
-}
-
-.error {
-    width: 450px;
-    font-size: 18px;
-}
-
-#selector-login {
-    cursor: pointer;
-}
-
-#selector-register {
-    cursor: pointer;
-}
-
-#selector-login label {
-    height: 42px;
-}
-
-#selector-register label {
-    height: 38.25px;
 }
