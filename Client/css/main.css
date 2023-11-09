@@ -119,3 +119,7 @@ a:hover {
     color: whitesmoke;
     border-color: whitesmoke;
 }
+
+.text-small {
+    font-size: 0.855rem;
+}
