@@ -70,6 +70,11 @@ form {
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
+input[type]:focus {
+    box-shadow: none;
+    outline: 1px solid whitesmoke;
+}
+
 a,
 a:focus,
 a:active {
