@@ -60,6 +60,8 @@ header {
 }
 
 footer {
+    font-family: font_logo;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     width: 100%;
 }
 
@@ -103,6 +105,7 @@ a:hover {
 }
 
 .header-small {
+    margin-top: -2rem;
     font-size: 75px;
     text-shadow: -2px 0 whitesmoke, 0 2px whitesmoke, 2px 0 whitesmoke, 0 -2px whitesmoke;
 }
