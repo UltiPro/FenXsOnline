@@ -22,11 +22,13 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString(configuration), b => b.MigrationsAssembly("Server"));
 });
 
-builder.Services.AddIdentityCore<DBUser>()
-    .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<DBUser>>(builder.Configuration["Settings:TokenProvider"])
-    .AddEntityFrameworkStores<DatabaseContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddIdentityCore<DBUser>(model =>
+{
+    model.User.RequireUniqueEmail = true;
+}).AddRoles<IdentityRole>()
+  .AddTokenProvider<DataProtectorTokenProvider<DBUser>>(builder.Configuration["Settings:TokenProvider"])
+  .AddEntityFrameworkStores<DatabaseContext>()
+  .AddDefaultTokenProviders();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
