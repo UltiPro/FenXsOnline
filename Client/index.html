@@ -16,7 +16,7 @@
         FenXs
     </header>
     <main role="main">
-        <div class="container error">
+        <div class="container server-responses">
             <div class="alert alert-dismissible bg-danger border border-2 border-dark shadow-lg" role="alert"
                 style="display:none;">
                 <span id="alert-error">error</span>
@@ -42,31 +42,29 @@
             <div class="row bg-wooden border border-top-0 border-2 border-dark rounded-bottom">
                 <div id="menu-login" style="display:none">
                     <div class="row menu-form">
-                        <!--tutaj-->
                         <div class="col-4 border-end border-2 border-dark">
                             <label for="l.login" class="mt-4 p-1 w-100">Login</label>
                             <label for="l.password" class="my-2 p-1 w-100">Password</label>
                         </div>
                         <div class="col-8">
-                            <form method="post" onsubmit="return ValidateLoginIn()">
+                            <form id="form-login" method="post">
                                 <div class="form-group mt-4">
                                     <input type="text" id="l.login" class="form-control p-1 border border-dark"
                                         placeholder="Your Login">
                                 </div>
                                 <div class="form-group my-2">
-                                    <input type="password" asp-for="l.password"
-                                        class="form-control p-1 border border-dark" placeholder="Your Password">
+                                    <input type="password" id="l.password" class="form-control p-1 border border-dark"
+                                        placeholder="Your Password">
                                 </div>
                                 <div class="form-group my-2 mb-0">
                                     <button type="submit" class="btn btn-success p-1 w-100 border border-dark">Login
                                         In</button>
                                 </div>
                                 <div class="form-group text-center small">
-                                    <a href="*" class="link-light">Forget Your Password?</a>
+                                    <a href="./recovery.html" class="link-light">Forget Your Password?</a>
                                 </div>
                             </form>
                         </div>
-                        <!--tutaj-->
                     </div>
                 </div>
                 <div id="menu-register">
@@ -80,8 +78,7 @@
                                 class="btn btn-darkwooden btn-sm mt-2 p-1 w-100">Info</button>
                         </div>
                         <div class="col-8">
-                            <!--tutaj-->
-                            <form method="post" onsubmit="return ValidateRegister()">
+                            <form id="form-register" method="post">
                                 <div class="form-group mt-3">
                                     <input type="text" id="r.login"
                                         class="form-control form-control-sm border border-dark"
@@ -101,7 +98,6 @@
                                     <input type="password" id="r.c_password"
                                         class="form-control form-control-sm border border-dark"
                                         placeholder="Confirm Your Password">
-                                    <!--tutaj-->
                                 </div>
                                 <div class="form-group mt-2">
                                     <button type="submit" class="btn btn-success btn-sm w-100 border border-dark">Sign
@@ -132,7 +128,7 @@
 </body>
 <script src="./node_modules/jquery/dist/jquery.min.js" defer></script>
 <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script src="./node_modules/axios/dist/axios.min.js" defer></script>
 <script src="./js/validators.js" defer></script>
 <script src="./js/main.js" defer></script>
 <script src="./js/index.js" defer></script>
