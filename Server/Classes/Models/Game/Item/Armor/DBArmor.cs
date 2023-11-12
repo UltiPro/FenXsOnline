@@ -1,5 +1,3 @@
 ﻿namespace Classes.Models.Game.Item.Armor;
 
-public class DBArmor
-{
-}
+public class DBArmor : BaseItemArmor { }
