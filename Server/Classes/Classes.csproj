@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<Folder Include="Exceptions\" />
 		<Folder Include="Models\Game\Hero\" />
+		<Folder Include="Models\Game\Item\" />
 	</ItemGroup>
 
 	<ItemGroup>
