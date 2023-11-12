@@ -1,5 +1,3 @@
 ﻿namespace Classes.Models.Game.Item.Ring;
 
-public class DBRing
-{
-}
+public class DBRing : BaseItemJewelry { }
