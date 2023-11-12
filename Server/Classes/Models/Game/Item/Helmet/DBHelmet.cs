@@ -1,5 +1,3 @@
-﻿namespace Classes.Models.Game.Items.Helmet;
+﻿namespace Classes.Models.Game.Item.Helmet;
 
-public class DBHelmet
-{
-}
+public class DBHelmet : BaseItemArmor { }
