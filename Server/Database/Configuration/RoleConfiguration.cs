@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Classes.Statics;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,18 +12,18 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
         entityTypeBuilder.HasData(
             new IdentityRole
             {
-                Name = "User",
-                NormalizedName = "USER"
+                Name = Roles.User,
+                NormalizedName = Roles.UserN
             },
             new IdentityRole
             {
-                Name = "Moderator",
-                NormalizedName = "MOD"
+                Name = Roles.Mod,
+                NormalizedName = Roles.ModN
             },
             new IdentityRole
             {
-                Name = "Administrator",
-                NormalizedName = "ADMIN"
+                Name = Roles.Admin,
+                NormalizedName = Roles.AdminN
             }
             );
     }
