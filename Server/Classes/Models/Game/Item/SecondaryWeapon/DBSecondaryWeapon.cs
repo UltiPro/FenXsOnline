@@ -1,5 +1,3 @@
 ﻿namespace Classes.Models.Game.Item.SecondaryWeapon;
 
-public class DBSecondaryWeapon
-{
-}
+public class DBSecondaryWeapon : BaseItemWeapon { }
