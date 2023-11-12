@@ -8,12 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Exceptions\" />
-		<Folder Include="Models\Game\Hero\" />
-		<Folder Include="Models\Game\Item\" />
-	</ItemGroup>
-
-	<ItemGroup>
 
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.12" />
 	</ItemGroup>
