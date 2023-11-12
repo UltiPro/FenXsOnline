@@ -49,10 +49,6 @@ public class ExceptionMiddleware
                 statusCode = HttpStatusCode.Forbidden;
                 errorDetails.Code = "Forbidden";
                 break;
-            default:
-                statusCode = HttpStatusCode.BadRequest;
-                errorDetails.Code = "Bad Request";
-                break;
         }
 
         string response = JsonConvert.SerializeObject(errorDetails);
