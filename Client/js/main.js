@@ -1,3 +1,5 @@
+const apiBaseUrl = "https://localhost:7180/";
+
 const changeInputAudio = new Audio("./audio/input.wav");
 const changeWindowAudio = new Audio("./audio/window.wav");
 const unsuccessAudio = new Audio("./audio/unsuccess.wav");
