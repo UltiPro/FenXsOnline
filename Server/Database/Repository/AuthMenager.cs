@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Classes.Exceptions;
 using Classes.Models.Auth;
 using Classes.Models.User;
 using Database.Contracts;
@@ -56,6 +57,8 @@ public class AuthMenager : IAuthMenager
 
         if (!isValidUser || _user is null) return null;
 
+        if (_user.IsBanned) throw new BannedException();
+
         _logger.LogInformation($"User '{userLogin.Login}' loged in.");
 
         return new AuthResponse
@@ -106,6 +109,8 @@ public class AuthMenager : IAuthMenager
         _user = await _userManager.FindByEmailAsync(username);
 
         if (_user is null || _user.Id != authResponse.Id) return null;
+
+        if (_user.IsBanned) throw new BannedException();
 
         if (await _userManager.VerifyUserTokenAsync(_user, _loginProvider, _refreshToken, authResponse.RefreshToken))
             return new AuthResponse
