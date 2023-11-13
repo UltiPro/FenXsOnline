@@ -81,6 +81,7 @@ builder.Host.UseSerilog((ctx, lc) =>
 builder.Services.AddAutoMapper(typeof(MapperConfiguration));
 
 builder.Services.AddScoped<IAuthMenager, AuthMenager>();
+builder.Services.AddScoped<IAdminMenager, AdminMenager>();
 
 builder.Services.AddAuthentication(options =>
 {
