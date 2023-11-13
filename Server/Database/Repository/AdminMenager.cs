@@ -34,9 +34,9 @@ public class AdminMenager : IAdminMenager
 
         if (user is null) throw new NotFoundException(nameof(SetAdmin), id);
 
-        await _userManager.AddToRoleAsync(user, Roles.Admin);
+        await _userManager.AddToRoleAsync(user, Role.Admin);
 
-        _logger.LogInformation($"A {user.Email} has been promoted to '{Roles.Admin}' roles.");
+        _logger.LogInformation($"A {user.Email} has been promoted to '{Role.Admin}' roles.");
 
         return true;
     }
@@ -47,9 +47,9 @@ public class AdminMenager : IAdminMenager
 
         if (user is null) throw new NotFoundException(nameof(UnsetAdmin), id);
 
-        await _userManager.RemoveFromRoleAsync(user, Roles.Admin);
+        await _userManager.RemoveFromRoleAsync(user, Role.Admin);
 
-        _logger.LogInformation($"A {user.Email} has been removed from '{Roles.Admin}' roles.");
+        _logger.LogInformation($"A {user.Email} has been removed from '{Role.Admin}' roles.");
 
         return true;
     }
@@ -60,9 +60,9 @@ public class AdminMenager : IAdminMenager
 
         if (user is null) throw new NotFoundException(nameof(SetModerator), id);
 
-        await _userManager.AddToRoleAsync(user, Roles.Mod);
+        await _userManager.AddToRoleAsync(user, Role.Mod);
 
-        _logger.LogInformation($"A {user.Email} has been promoted to '{Roles.Mod}' roles.");
+        _logger.LogInformation($"A {user.Email} has been promoted to '{Role.Mod}' roles.");
 
         return true;
     }
@@ -73,9 +73,9 @@ public class AdminMenager : IAdminMenager
 
         if (user is null) throw new NotFoundException(nameof(UnsetModerator), id);
 
-        await _userManager.RemoveFromRoleAsync(user, Roles.Mod);
+        await _userManager.RemoveFromRoleAsync(user, Role.Mod);
 
-        _logger.LogInformation($"A {user.Email} has been removed from '{Roles.Mod}' roles.");
+        _logger.LogInformation($"A {user.Email} has been removed from '{Role.Mod}' roles.");
 
         return true;
     }
