@@ -12,18 +12,18 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
         entityTypeBuilder.HasData(
             new IdentityRole
             {
-                Name = Roles.User,
-                NormalizedName = Roles.UserN
+                Name = Role.User,
+                NormalizedName = Role.UserN
             },
             new IdentityRole
             {
-                Name = Roles.Mod,
-                NormalizedName = Roles.ModN
+                Name = Role.Mod,
+                NormalizedName = Role.ModN
             },
             new IdentityRole
             {
-                Name = Roles.Admin,
-                NormalizedName = Roles.AdminN
+                Name = Role.Admin,
+                NormalizedName = Role.AdminN
             }
             );
     }
