@@ -1,6 +1,6 @@
 ﻿namespace Classes.Statics;
 
-public static class Roles
+public static class Role
 {
     public static readonly string User = "User";
     public static readonly string UserN = "USER";
