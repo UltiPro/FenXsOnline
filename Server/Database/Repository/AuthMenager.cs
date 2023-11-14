@@ -112,7 +112,7 @@ public class AuthMenager : IAuthMenager
         }
         catch
         {
-            throw new BadRequestException("Invalid token, please relogin.");
+            throw new UnauthorizedException("Invalid token, please relogin.");
         }
 
         _user = await _userManager.FindByEmailAsync(username);
