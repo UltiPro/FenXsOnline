@@ -2,5 +2,5 @@
 
 public class UnauthorizedException : Exception
 {
-    public UnauthorizedException() : base("You are not permitted to do this action.") { }
+    public UnauthorizedException(string? message) : base(message ?? "You are not permitted to do this action.") { }
 }
