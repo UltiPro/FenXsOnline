@@ -22,13 +22,13 @@ public class AdminMenager : IAdminMenager
         this._logger = _logger;
     }
 
-    public async Task<bool> SetAdminByCode(AdminSetByCode adminSetByCode)
+    public async Task SetAdminByCode(AdminSetByCode adminSetByCode)
     {
         if (adminSetByCode.Code != _configuration["Settings:AdminCode"]) throw new UnauthorizedException();
-        return await SetAdmin(adminSetByCode.Id);
+        await SetAdmin(adminSetByCode.Id);
     }
 
-    public async Task<bool> SetAdmin(string id)
+    public async Task SetAdmin(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
 
@@ -37,11 +37,9 @@ public class AdminMenager : IAdminMenager
         await _userManager.AddToRoleAsync(user, Role.Admin);
 
         _logger.LogInformation($"A {user.Email} has been promoted to '{Role.Admin}' roles.");
-
-        return true;
     }
 
-    public async Task<bool> UnsetAdmin(string id)
+    public async Task UnsetAdmin(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
 
@@ -50,11 +48,9 @@ public class AdminMenager : IAdminMenager
         await _userManager.RemoveFromRoleAsync(user, Role.Admin);
 
         _logger.LogInformation($"A {user.Email} has been removed from '{Role.Admin}' roles.");
-
-        return true;
     }
 
-    public async Task<bool> SetModerator(string id)
+    public async Task SetModerator(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
 
@@ -63,11 +59,9 @@ public class AdminMenager : IAdminMenager
         await _userManager.AddToRoleAsync(user, Role.Mod);
 
         _logger.LogInformation($"A {user.Email} has been promoted to '{Role.Mod}' roles.");
-
-        return true;
     }
 
-    public async Task<bool> UnsetModerator(string id)
+    public async Task UnsetModerator(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
 
@@ -76,11 +70,9 @@ public class AdminMenager : IAdminMenager
         await _userManager.RemoveFromRoleAsync(user, Role.Mod);
 
         _logger.LogInformation($"A {user.Email} has been removed from '{Role.Mod}' roles.");
-
-        return true;
     }
 
-    public async Task<bool> BanUser(string id)
+    public async Task BanUser(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
 
@@ -91,11 +83,9 @@ public class AdminMenager : IAdminMenager
         await _userManager.UpdateAsync(user);
 
         _logger.LogInformation($"A {user.Email} has been banned.");
-
-        return true;
     }
 
-    public async Task<bool> UnbanUser(string id)
+    public async Task UnbanUser(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
 
@@ -106,7 +96,5 @@ public class AdminMenager : IAdminMenager
         await _userManager.UpdateAsync(user);
 
         _logger.LogInformation($"A {user.Email} has been unbanned.");
-
-        return true;
     }
 }
