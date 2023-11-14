@@ -24,7 +24,7 @@ public class AdminMenager : IAdminMenager
 
     public async Task SetAdminByCode(AdminSetByCode adminSetByCode)
     {
-        if (adminSetByCode.Code != _configuration["Settings:AdminCode"]) throw new UnauthorizedException();
+        if (adminSetByCode.Code != _configuration["Settings:AdminCode"]) throw new UnauthorizedException(null);
         await SetAdmin(adminSetByCode.Id);
     }
 
