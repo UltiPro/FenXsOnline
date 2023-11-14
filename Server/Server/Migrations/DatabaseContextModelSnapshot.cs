@@ -47,7 +47,7 @@ namespace Server.Migrations
 
                     b.HasIndex("DBUserId");
 
-                    b.ToTable("Heroes");
+                    b.ToTable("Heroes", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Item.Armor.DBArmor", b =>
@@ -88,7 +88,7 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Armors");
+                    b.ToTable("Armors", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Item.Boots.DBBoots", b =>
@@ -129,7 +129,7 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Boots");
+                    b.ToTable("Boots", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Item.Gloves.DBGloves", b =>
@@ -170,7 +170,7 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gloves");
+                    b.ToTable("Gloves", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Item.Helmet.DBHelmet", b =>
@@ -211,7 +211,7 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Helmets");
+                    b.ToTable("Helmets", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Item.Necklace.DBNecklace", b =>
@@ -252,7 +252,7 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Necklaces");
+                    b.ToTable("Necklaces", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Item.Ring.DBRing", b =>
@@ -293,7 +293,7 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rings");
+                    b.ToTable("Rings", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Item.SecondaryWeapon.DBSecondaryWeapon", b =>
@@ -331,7 +331,7 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SecondaryWeapons");
+                    b.ToTable("SecondaryWeapons", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Item.Weapon.DBWeapon", b =>
@@ -369,7 +369,7 @@ namespace Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Weapons");
+                    b.ToTable("Weapons", (string)null);
                 });
 
             modelBuilder.Entity("Classes.Models.User.DBUser", b =>
