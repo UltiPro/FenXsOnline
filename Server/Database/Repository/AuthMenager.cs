@@ -87,7 +87,7 @@ public class AuthMenager : IAuthMenager
             issuer: _configuration["JwtSettings:Issuer"],
             audience: _configuration["JwtSettings:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddHours(Convert.ToInt32(_configuration["JwtSettings:DurationInHours"])),
+            expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
             signingCredentials: credentials
             );
         return new JwtSecurityTokenHandler().WriteToken(token);
@@ -103,9 +103,18 @@ public class AuthMenager : IAuthMenager
 
     public async Task<AuthResponse> VerifyRefreshToken(AuthResponse authResponse)
     {
-        var username = new JwtSecurityTokenHandler()
-            .ReadJwtToken(authResponse.Token).Claims.ToList()
-            .FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email)?.Value;
+        string? username;
+        try
+        {
+            username = new JwtSecurityTokenHandler()
+                .ReadJwtToken(authResponse.Token).Claims.ToList()
+                .FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email)?.Value;
+        }
+        catch
+        {
+            throw new BadRequestException("Invalid token, please relogin.");
+        }
+
         _user = await _userManager.FindByEmailAsync(username);
 
         if (_user is null || _user.Id != authResponse.Id) return null;
