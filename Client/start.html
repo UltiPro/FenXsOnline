@@ -8,6 +8,7 @@
     <title>FenXs</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/start.css" />
     <!-- tutaj pliki css -->
 </head>
 
@@ -16,7 +17,66 @@
         FenXs
     </header>
     <main role="main">
-        <!--tutaj dawid twój kod pamiętaj że formularz to tworzenie postaci-->
+        <!--kreator postaci-->
+        <div id="menu" class="container">
+
+            <div class="row text-center menu-tab">
+                <div id="selector-slot-1" class="col bg-wooden rounded-top border-end-0 border border-2 border-dark character-slot">
+                    <span>Slot 1</span>
+                </div>
+                <div id="selector-slot-2" class="col bg-darkwooden rounded-top border border-end-0 border-2 border-dark character-slot">
+                    <span>Slot 2</span>
+                </div><div id="selector-slot-3" class="col bg-darkwooden rounded-top border border-end-0 border-2 border-dark character-slot">
+                    <span>Slot 3</span>
+                </div>
+                <div id="selector-slot-4" class="col bg-darkwooden rounded-top border border-2 border-dark character-slot">
+                    <span>Slot 4</span>
+                </div>
+            </div>
+
+            <div class="row bg-wooden border border-top-0 border-2 border-dark rounded-bottom">
+                <div id="menu-character-present" style="display: none">
+                    <div>
+                        
+                    </div>
+                </div>
+                
+                <div id="menu-character-creation">
+                    <div class="row menu-form">
+                        <div class="col-6 border-end border-2 border-dark text-center">
+                            <div id="profession-info" class="text-small"><span id="character-desc">Warrior</span>
+                                <img class="row mx-auto d-block" id="character-image" src="./img/logo.png" alt="Character Image">
+                            </div>
+                        </div>
+                        <div class="col-2 border-end border-1 border-dark">
+                            <label for="hero.nick" class="mt-3 w-100">Nick</label>
+                            <label for="hero.profession" class="mt-2 w-100">Profession</label>
+                        </div>
+                        <div class="col-4">
+                            <form id="form-register" method="post">
+                                <div class="form-group mt-3">
+                                    <input type="text" id="hero.nick"
+                                        class="form-control form-control-sm border border-dark"
+                                        placeholder="e.g. Player007">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <select name="profession" id="hero.profession" class="form-control form-control-sm border border-dark">
+                                        <option value="" disabled selected>Select your option</option>
+                                        <option value="Paladin">Paladin</option>
+                                        <option value="Warrior">Warrior</option>
+                                        <option value="Mage">Mage</option>
+                                        <option value="Hunter">Hunter</option>
+                                    </select>  
+                                </div>
+                                <div class="form-group mt-2">
+                                    <button type="submit" class="btn btn-success btn-sm w-100 border border-dark">Create hero</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer
         class="footer position-fixed bottom-0 end-0 bg-wooden text-center p-1 border-top border-start border-2 border-dark">
@@ -29,5 +89,6 @@
 <script src="./js/validators.js" defer></script> <!-- tutaj będzie walidacja nicku po froncie -->
 <script src="./js/main.js" defer></script> <!-- tutaj są audio -->
 <!-- tutaj pliki js -->
+<script src="./js/start.js" defer></script>
 
 </html>

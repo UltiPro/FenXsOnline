@@ -1,0 +1,31 @@
+#menu {
+    width: 600px;
+    height: 300px;
+    font-family: font_form;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+#character-image{
+    width: 200px;
+    height: 200px;
+}
+
+#menu-character-creation label {
+    height: 38.25px;
+}
+
+#character-info {
+    width: 400px;
+    height: 307px;
+}
+
+.menu-tab {
+    height: 35px;
+}
+
+.menu-form {
+    height: 300px;
+}
+
+#profession-info{
+    margin-top: 20px;
+}
