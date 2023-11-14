@@ -4,6 +4,7 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Server.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231114132354_dbupdate")]
+    partial class dbupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -469,21 +472,21 @@ namespace Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8d82a973-eb2f-44bb-b744-b641122a8d9e",
+                            Id = "220f18fe-86d8-4ad4-8258-e9d69e062fab",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "2159b142-2fbf-4073-a01a-65429fcfe064",
+                            Id = "14523996-2a92-465b-827e-db82abbba65d",
                             Name = "Moderator",
-                            NormalizedName = "MODERATOR"
+                            NormalizedName = "MOD"
                         },
                         new
                         {
-                            Id = "859febee-6351-40c9-b879-a9f480b458f1",
+                            Id = "a0f4d829-9892-4389-80cc-de9d9cb03d7b",
                             Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
+                            NormalizedName = "ADMIN"
                         });
                 });
 
