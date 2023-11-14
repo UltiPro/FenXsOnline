@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 using Database.Configuration;
 using Classes.Models.User;
 using Classes.Models.Game.Hero;
@@ -36,21 +34,5 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
-    }
-
-    public class APIDBContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
-    {
-        public DatabaseContext CreateDbContext(string[] args)
-        {
-            IConfiguration config = new ConfigurationBuilder().SetBasePath(Directory
-                .GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
-                .Build();
-
-            var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-            var conn = config.GetConnectionString("API");
-            optionsBuilder.UseSqlServer(conn);
-            return new DatabaseContext(optionsBuilder.Options);
-        }
     }
 }
