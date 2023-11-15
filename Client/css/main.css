@@ -98,10 +98,12 @@ a:hover {
 
 .bg-wooden {
     background-color: rgb(var(--wooden));
+    background-image: url("./../img/background_wood_light.png");
 }
 
 .bg-darkwooden {
     background-color: rgb(var(--dark-wooden));
+    background-image: url("./../img/background_wood_dark.png");
 }
 
 .header-big {
@@ -127,4 +129,12 @@ a:hover {
 
 .text-small {
     font-size: 0.855rem;
+}
+
+#alert-success {
+    text-shadow: -1px 0 lightgreen, 0 1px lightgreen, 1px 0 lightgreen, 0 -1px lightgreen;
+}
+
+#alert-error {
+    text-shadow: -1px 0 lightcoral, 0 1px lightcoral, 1px 0 lightcoral, 0 -1px lightcoral;
 }
