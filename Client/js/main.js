@@ -1,4 +1,9 @@
-const apiBaseUrl = "https://localhost:7180/";
+const apiBaseUrl = "https://localhost:7180/api/";
+
+const app = axios.create({
+    apiBaseUrl,
+    withCredentials: true
+});
 
 const changeInputAudio = new Audio("./audio/input.wav");
 const changeWindowAudio = new Audio("./audio/window.wav");
