@@ -1,4 +1,4 @@
-﻿namespace Classes.Models.Error;
+﻿namespace Classes.Models;
 
 public class Error
 {
