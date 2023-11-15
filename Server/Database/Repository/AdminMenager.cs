@@ -1,5 +1,5 @@
 ﻿using Classes.Exceptions;
-using Classes.Models.Admin;
+using Classes.Models;
 using Classes.Models.User;
 using Classes.Statics;
 using Database.Contracts;

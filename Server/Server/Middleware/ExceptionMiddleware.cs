@@ -1,5 +1,5 @@
 ﻿using Classes.Exceptions;
-using Classes.Models.Error;
+using Classes.Models;
 using Newtonsoft.Json;
 using System.Net;
 

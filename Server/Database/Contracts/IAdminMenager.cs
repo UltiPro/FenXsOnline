@@ -1,4 +1,4 @@
-﻿using Classes.Models.Admin;
+﻿using Classes.Models;
 
 namespace Database.Contracts;
 

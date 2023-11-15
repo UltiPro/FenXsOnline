@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
-using Classes.Models.Admin;
+using Classes.Models;
 
 namespace Server.Controllers
 {

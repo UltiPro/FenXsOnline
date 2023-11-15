@@ -1,4 +1,4 @@
-﻿using Classes.Models.Auth;
+﻿using Classes.Models;
 using Classes.Models.User;
 using Database.Contracts;
 using Microsoft.AspNetCore.Mvc;
