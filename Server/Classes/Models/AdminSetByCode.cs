@@ -1,4 +1,4 @@
-﻿namespace Classes.Models.Admin;
+﻿namespace Classes.Models;
 
 public class AdminSetByCode
 {

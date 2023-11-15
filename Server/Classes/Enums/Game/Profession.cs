@@ -1,4 +1,4 @@
-﻿namespace Classes.Enums;
+﻿namespace Classes.Enums.Game;
 
 public enum Profession
 {

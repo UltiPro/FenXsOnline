@@ -1,4 +1,4 @@
-﻿namespace Classes.Models.Auth;
+﻿namespace Classes.Models;
 
 public class AuthResponse
 {
