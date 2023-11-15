@@ -19,13 +19,13 @@
         <div class="container server-responses">
             <div id="alert-error" class="alert alert-dismissible bg-danger border border-2 border-dark shadow-lg"
                 role="alert" style="display:none;">
-                <span id="alert-error-message"></span>
+                <div id="alert-error-message"></div>
                 <button type="button" class="btn-close position-absolute top-50 translate-middle-y"
                     aria-label="Close"></button>
             </div>
             <div id="alert-success" class="alert alert-dismissible bg-success border border-2 border-dark shadow-lg"
                 role="alert" style="display:none;">
-                <span id="alert-success-message"></span>
+                <div id="alert-success-message"></div>
                 <button type="button" class="btn-close position-absolute top-50 translate-middle-y"
                     aria-label="Close"></button>
             </div>
@@ -75,7 +75,7 @@
                             <label for="r.password" class="mt-2 p-1 w-100">Password</label>
                             <label for="r.c_password" class="mt-2 p-1 w-100">Confirm P.</label>
                             <button id="menu-register-info"
-                                class="btn btn-darkwooden btn-sm mt-2 p-1 w-100">Info</button>
+                                class="btn btn-darkwooden bg-darkwooden btn-sm mt-2 p-1 w-100">Info</button>
                         </div>
                         <div class="col-8">
                             <form id="form-register" method="post">
@@ -129,8 +129,9 @@
 <script src="./node_modules/jquery/dist/jquery.min.js" defer></script>
 <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
 <script src="./node_modules/axios/dist/axios.min.js" defer></script>
-<script src="./js/validators.js" defer></script>
 <script src="./js/main.js" defer></script>
+<script src="./js/logged.js" async></script>
+<script src="./js/validators.js" defer></script>
 <script src="./js/index.js" defer></script>
 
 </html>
