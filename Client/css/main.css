@@ -131,6 +131,10 @@ a:hover {
     font-size: 0.855rem;
 }
 
+.font-shadow {
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
 #alert-success {
     text-shadow: -1px 0 lightgreen, 0 1px lightgreen, 1px 0 lightgreen, 0 -1px lightgreen;
 }
