@@ -16,3 +16,11 @@ const PlayUnsuccessAudio = () => unsuccessAudio.play();
 $(document).ready(function () {
     $("input").bind("focus", PlayChangeInputAudio);
 });
+
+$(document).ready(function () {
+    $("select").bind("change", PlayChangeInputAudio);
+});
+$(document).ready(function () {
+    $("select").bind("focus", PlayChangeInputAudio);
+});
+
