@@ -18,7 +18,10 @@
 
 .profession-image:hover{
     opacity: 1;
- 
+}
+
+.profession-image.clicked {
+    opacity: 1;
 }
 
 

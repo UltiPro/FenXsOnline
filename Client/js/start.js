@@ -1,5 +1,9 @@
 $(document).ready(function () {
-    // Function to get character descriptions based on profession
+    $('.profession-image').click(function () {
+        $('.profession-image').removeClass('clicked'); // Usunięcie flagi ze wszystkich
+        $(this).addClass('clicked'); // dodanie flagi do klikniętego
+    });
+    
     function getCharacterDescription(profession) {
         switch (profession) {
             case "Paladin":
@@ -20,16 +24,30 @@ $(document).ready(function () {
         var characterDescription = getCharacterDescription(selectedProfession);
         $("#character-desc").text(characterDescription);
 
-        $('.profession-image').removeClass('highlighted');
-        $('.profession-image[data-profession="' + selectedProfession + '"]').addClass('highlighted');
+        $('.profession-image').removeClass('clicked');
+        $('.profession-image[data-profession="' + selectedProfession + '"]').addClass('clicked');
     });
 
 
     $('.profession-image').hover(function () {
         var profession = $(this).data('profession');
         $('#character-desc').text(getCharacterDescription(profession));
-        $('#hero\\.profession').val(profession).change();
     }, function () {
         $('#character-desc').text("Profession description will appear here.");
     });
+
+    $('.profession-image').click(function () {
+        var profession = $(this).data('profession');
+        $('#hero\\.profession').val(profession).change();
+        highlightProfession(profession);
+    });
+
+       $("#hero\\.profession").change(function () {
+        var selectedProfession = $(this).val();
+        highlightProfession(selectedProfession);
+    });
+
+    
 });
+
+
