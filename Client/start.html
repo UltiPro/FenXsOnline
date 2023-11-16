@@ -18,42 +18,43 @@
     </header>
     <main role="main">
         <!--kreator postaci-->
+
         <div id="menu" class="container">
+            <div class="row">
+                <div class="col-1 text-center d-flex flex-column">
+                    <div id="selector-slot-1"
+                        class="row flex-grow-1 bg-wooden border rounded-start border-2 border-end-0 border-bottom-0 border-dark character-slot d-flex align-items-center justify-content-center">
+                        <span>Slot 1</span>
+                    </div>
+                    <div id="selector-slot-2"
+                        class="row flex-grow-1 bg-darkwooden border rounded-start border-2 border-end-0 border-bottom-0 border-dark character-slot d-flex align-items-center justify-content-center">
+                        <span>Slot 2</span>
+                    </div>
+                    <div id="selector-slot-3"
+                        class="row flex-grow-1 bg-darkwooden border rounded-start border-2 border-end-0 border-bottom-0 border-dark character-slot d-flex align-items-center justify-content-center">
+                        <span>Slot 3</span>
+                    </div>
+                    <div id="selector-slot-4"
+                        class="row flex-grow-1 bg-darkwooden border rounded-start border-2 border-end-0 border-dark character-slot d-flex align-items-center justify-content-center">
+                        <span>Slot 4</span>
+                    </div>
+                </div>
 
-            <div class="row text-center menu-tab">
-                <div id="selector-slot-1"
-                    class="col bg-wooden rounded-top border-end-0 border border-2 border-dark character-slot">
-                    <span>Slot 1</span>
-                </div>
-                <div id="selector-slot-2"
-                    class="col bg-darkwooden rounded-top border border-end-0 border-2 border-dark character-slot">
-                    <span>Slot 2</span>
-                </div>
-                <div id="selector-slot-3"
-                    class="col bg-darkwooden rounded-top border border-end-0 border-2 border-dark character-slot">
-                    <span>Slot 3</span>
-                </div>
-                <div id="selector-slot-4"
-                    class="col bg-darkwooden rounded-top border border-2 border-dark character-slot">
-                    <span>Slot 4</span>
-                </div>
-            </div>
-
-            <div class="row bg-wooden border border-top-0 border-2 border-dark rounded-bottom">
-                 <!--Occupied slot-->
-                <div id="menu-character-present" style="display: none;">
-                    <div class="row menu-form">
-                        <div class="col-6 border-end border-1 border-dark">
-                            <label class="mt-3 w-100">Nick</label>
-                            <label class="mt-2 w-100">Profession</label>
-                            <label class="mt-2 w-100">Level</label>
-                        </div>
-                        <div class="col-6">
-                            <form id="form-play" method="post"></form>
+                <div class="col bg-wooden rounded-end border border-2 border-dark">
+                    <!--Occupied slot-->
+                    <div id="menu-character-present" style="display: none;">
+                        <div class="row menu-form">
+                            <div class="col-6 border-end border-1 border-dark">
+                                <label class="mt-3 w-100">Nick</label>
+                                <label class="mt-2 w-100">Profession</label>
+                                <label class="mt-2 w-100">Level</label>
+                            </div>
+                            <div class="col-6">
+                                <form id="form-play" method="post"></form>
                                 <div class="form-group mt-3">
                                     <div>
                                         Player007
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="form-group mt-2">
                                     <div>Proffesion</div>
@@ -62,49 +63,64 @@
                                     <div>0</div>
                                 </div>
                                 <div class="form-group mt-2">
-                                    <button type="submit" class="btn btn-success btn-sm w-100 border border-dark">Play</button>
+                                    <button type="submit"
+                                        class="btn btn-success btn-sm w-100 border border-dark">Play</button>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Empty slot-->
-                <div id="menu-character-creation">
-                    <div class="row menu-form">
-                        <div class="col-6 border-end border-2 border-dark text-center">
-                            <div id="profession-info" class="text-small">
-                                <span id="character-desc" class="text-small p-1 small text-justify p-1 ps-3"></span>
-                                <img class="row mx-auto d-block" id="character-image" src="./img/logo.png"
-                                    alt="Character Image">
+                                </form>
                             </div>
                         </div>
-                        <div class="col-2 border-end border-1 border-dark">
-                            <label for="hero.nick" class="mt-3 w-100">Nick</label>
-                            <label for="hero.profession" class="mt-2 w-100">Profession</label>
-                        </div>
-                        <div class="col-4">
-                            <form id="form-register" method="post">
-                                <div class="form-group mt-3">
-                                    <input type="text" id="hero.nick"
-                                        class="form-control form-control-sm border border-dark"
-                                        placeholder="e.g. Player007">
+                    </div>
+                    <!--Empty slot-->
+                    <div id="menu-character-creation">
+                        <div class="row menu-form text-center">
+                            <div class="desc-area">
+                                <span id="character-desc" class="text-small p-1 small text-justify p-1 ps-3">Profession description will appear here.</span>
+                            </div>
+                            <div id="hero-preview" class="row">
+                                <div id="profession-info" class="text-small row">
+                                    <img class="col-3 mx-auto d-block profession-image" data-profession="Paladin" src="./img/hero_preview/paladin_menu.gif" alt="Paladin Image">
+                                    <img class="col-3 mx-auto d-block profession-image" data-profession="Warrior" src="./img/hero_preview/warrior_menu.gif" alt="Warrior Image">
+                                    <img class="col-3 mx-auto d-block profession-image" data-profession="Mage" src="./img/hero_preview/mage_menu.gif" alt="Mage Image">
+                                    <img class="col-3 mx-auto d-block profession-image" data-profession="Hunter" src="./img/hero_preview/hunter_menu.gif" alt="Hunter Image">
                                 </div>
-                                <div class="form-group mt-2">
-                                    <select name="profession" id="hero.profession"
-                                        class="form-control form-control-sm border border-dark">
-                                        <option value="" disabled selected>Select hero's class</option>
-                                        <option value="Paladin">Paladin</option>
-                                        <option value="Warrior">Warrior</option>
-                                        <option value="Mage">Mage</option>
-                                        <option value="Hunter">Hunter</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mt-2">
-                                    <button type="submit" class="btn btn-success btn-sm w-100 border border-dark">Create
-                                        hero</button>
-                                </div>
-                            </form>
+                            </div>
+                            <div id="hero-conf" class="row">
+                                <form id="form-register" method="post">
+                                    <div class="row justify-content-center">
+                                        <label for="hero.nick" class="mt-3 col-1">Nick</label>
+                                        <div class="form-group mt-3 col-3">
+                                            <input type="text" id="hero.nick"
+                                                class="form-control form-control-sm border border-dark"
+                                                placeholder="e.g. Player007">
+                                        </div>
+                                        <label for="hero.sex" class="mt-3 col-1">Sex</label>
+                                        <div class="form-group mt-3 col-3">
+                                            <select name="profession" id="hero.sex"
+                                                class="form-control form-control-sm border border-dark">
+                                                <option value="" disabled selected>Select hero's sex</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        <label for="hero.profession" class="mt-3 col-1">Profession</label>
+                                        <div class="form-group mt-3 col-3">
+                                            <select name="profession" id="hero.profession"
+                                                class="form-control form-control-sm border border-dark">
+                                                <option value="" disabled selected>Select hero's class</option>
+                                                <option value="Paladin">Paladin</option>
+                                                <option value="Warrior">Warrior</option>
+                                                <option value="Mage">Mage</option>
+                                                <option value="Hunter">Hunter</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-2 text-center">
+                                        <button type="submit"
+                                            class="btn btn-success btn-sm w-50 border border-dark">Create
+                                            hero</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

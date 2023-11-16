@@ -1,18 +1,25 @@
 #menu {
-    width: 600px;
-    height: 400px;
+    width: 1200px;
+    height: 600px;
     font-family: font_form;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
-#character-image{
+.profession-image{
     width: 128px;
     height: 192px;
     resize: none;
     background-size: contain;
     background-repeat: no-repeat;
     image-rendering: pixelated;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
 }
 
+.profession-image:hover{
+    opacity: 1;
+ 
+}
 
 
 #menu-character-creation label {
@@ -25,13 +32,32 @@
 }
 
 .menu-tab {
-    height: 35px;
+    height: 602px;
 }
 
 .menu-form {
-    height: 400px;
+    height: 598px;
 }
 
 #profession-info{
     margin-top: 20px;
+}
+
+#selector-slot-1,
+#selector-slot-2,
+#selector-slot-3,
+#selector-slot-4 {
+    cursor: pointer;
+}
+
+#hero-conf{
+    height: 20%;
+}
+
+#hero-preview{
+    height: 40%;
+}
+
+#desc-area{
+    height: 40%;
 }

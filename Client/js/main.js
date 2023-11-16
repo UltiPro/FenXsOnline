@@ -15,6 +15,6 @@ const PlayUnsuccessAudio = () => unsuccessAudio.play();
 
 $(document).ready(function () {
     $("input").bind("focus", PlayChangeInputAudio);
-    $("select").bind("focus", PlayChangeInputAudio);
+    $("select").bind("click", PlayChangeInputAudio);
     $("select").bind("change", PlayChangeInputAudio);
 });
