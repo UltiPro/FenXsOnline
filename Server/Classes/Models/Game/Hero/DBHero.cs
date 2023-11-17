@@ -6,6 +6,7 @@ using Classes.Models.Game.Item.Necklace;
 using Classes.Models.Game.Item.Ring;
 using Classes.Models.Game.Item.SecondaryWeapon;
 using Classes.Models.Game.Item.Weapon;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Classes.Models.Game.Hero;
 
@@ -22,12 +23,32 @@ public class DBHero : HeroBasicInfo
     public int MapId { get; set; } = 0;
     public int X { get; set; } = 3;
     public int Y { get; set; } = 2;
-    public DBArmor? armor { get; set; } = null;
-    public DBBoots? boots { get; set; } = null;
-    public DBGloves? gloves { get; set; } = null;
-    public DBHelmet? helmet { get; set; } = null;
-    public DBNecklace? necklace { get; set; } = null;
-    public DBRing? ring { get; set; } = null;
-    public DBSecondaryWeapon? secondaryWeapon { get; set; } = null;
-    public DBWeapon? weapon { get; set; } = null;
+
+    // Foreigns Ids
+    public int? ArmorId { get; set; } = null;
+    public int? BootsId { get; set; } = null;
+    public int? GlovesId { get; set; } = null;
+    public int? HelmetId { get; set; } = null;
+    public int? NecklaceId { get; set; } = null;
+    public int? RingId { get; set; } = null;
+    public int? SecondaryWeaponId { get; set; } = null;
+    public int? WeaponId { get; set; } = null;
+
+    // Foreigns Objects
+    [ForeignKey("ArmorId")]
+    public DBArmor? DBArmor { get; set; } = null;
+    [ForeignKey("BootsId")]
+    public DBBoots? DBBoots { get; set; } = null;
+    [ForeignKey("GlovesId")]
+    public DBGloves? DBGloves { get; set; } = null;
+    [ForeignKey("HelmetId")]
+    public DBHelmet? DBHelmet { get; set; } = null;
+    [ForeignKey("NecklaceId")]
+    public DBNecklace? DBNecklace { get; set; } = null;
+    [ForeignKey("RingId")]
+    public DBRing? DBRing { get; set; } = null;
+    [ForeignKey("SecondaryWeaponId")]
+    public DBSecondaryWeapon? DBSecondaryWeapon { get; set; } = null;
+    [ForeignKey("WeaponId")]
+    public DBWeapon? DBWeapon { get; set; } = null;
 }

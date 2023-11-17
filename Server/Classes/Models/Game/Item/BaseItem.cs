@@ -1,4 +1,6 @@
-﻿namespace Classes.Models.Game.Item;
+﻿using Classes.Models.Game.Hero;
+
+namespace Classes.Models.Game.Item;
 
 public class BaseItem
 {
@@ -7,5 +9,7 @@ public class BaseItem
     public int Level { get; set; } = 1;
     public int Weight { get; set; } = 1;
     public int Price { get; set; } = 1;
+    public string SpriteURL { get; set; }
     public bool QuestItem { get; set; } = false;
+    public ICollection<DBHero>? Heroes { get; set; }
 }

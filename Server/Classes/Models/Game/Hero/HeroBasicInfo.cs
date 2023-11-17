@@ -15,5 +15,5 @@ public class HeroBasicInfo
     public int MaxMana { get; set; } = 0;
     public int Stamina { get; set; } = 0;
     public int MaxStamina { get; set; } = 0;
-    public string Sprite { get; set; }
+    public string SpriteURL { get; set; }
 }
