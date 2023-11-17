@@ -3,5 +3,5 @@
 public class Map
 {
     public string Name { get; set; }
-    public bool[][] fields { get; set; }
+    public bool[][] Fields { get; set; }
 }
