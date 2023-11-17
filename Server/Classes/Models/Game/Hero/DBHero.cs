@@ -6,6 +6,7 @@ using Classes.Models.Game.Item.Necklace;
 using Classes.Models.Game.Item.Ring;
 using Classes.Models.Game.Item.SecondaryWeapon;
 using Classes.Models.Game.Item.Weapon;
+using Classes.Models.User;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Classes.Models.Game.Hero;
@@ -23,6 +24,11 @@ public class DBHero : HeroBasicInfo
     public int MapId { get; set; } = 0;
     public int X { get; set; } = 3;
     public int Y { get; set; } = 2;
+
+    // Account
+    public int UserId { get; set; }
+    [ForeignKey("UserId")]
+    public DBUser DBUser { get; set; }
 
     // Foreigns Ids
     public int? ArmorId { get; set; } = null;

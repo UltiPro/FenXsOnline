@@ -6,5 +6,5 @@ namespace Classes.Models.User;
 public class DBUser : IdentityUser
 {
     public bool IsBanned { get; set; } = false;
-    public virtual IList<DBHero> Heroes { get; set; }
+    public ICollection<DBHero>? Heroes { get; set; }
 }
