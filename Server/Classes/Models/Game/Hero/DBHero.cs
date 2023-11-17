@@ -26,7 +26,7 @@ public class DBHero : HeroBasicInfo
     public int Y { get; set; } = 2;
 
     // Account
-    public int UserId { get; set; }
+    public string UserId { get; set; }
     [ForeignKey("UserId")]
     public DBUser DBUser { get; set; }
 
