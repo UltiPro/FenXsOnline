@@ -34,7 +34,7 @@ public class AccountController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        return Ok();
+        return NoContent();
     }
 
     [HttpPost]
@@ -52,7 +52,7 @@ public class AccountController : ControllerBase
 
         SetHttpOnlyCookie(authResponse);
 
-        return Ok();
+        return NoContent();
     }
 
     [HttpPost]
@@ -77,7 +77,7 @@ public class AccountController : ControllerBase
 
         SetHttpOnlyCookie(authResponse);
 
-        return Ok();
+        return NoContent();
     }
 
     private void SetHttpOnlyCookie(AuthResponse authResponse)
@@ -85,7 +85,7 @@ public class AccountController : ControllerBase
         HttpContext.Response.Cookies.Append(_configuration["JwtSettings:IdCookie"], authResponse.Id,
             new CookieOptions
             {
-                Expires = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
+                Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
@@ -94,7 +94,7 @@ public class AccountController : ControllerBase
         HttpContext.Response.Cookies.Append(_configuration["JwtSettings:TokenCookie"], authResponse.Token,
             new CookieOptions
             {
-                Expires = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
+                Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
@@ -103,7 +103,7 @@ public class AccountController : ControllerBase
         HttpContext.Response.Cookies.Append(_configuration["JwtSettings:RefreshTokenCookie"], authResponse.RefreshToken,
             new CookieOptions
             {
-                Expires = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
+                Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
