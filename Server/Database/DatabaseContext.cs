@@ -34,5 +34,7 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
+        modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
     }
 }
