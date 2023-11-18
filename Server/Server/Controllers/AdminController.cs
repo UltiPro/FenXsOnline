@@ -66,7 +66,6 @@ namespace Server.Controllers
         public async Task<ActionResult> SetModerator([FromBody] string id)
         {
             await _adminMenager.SetModerator(id);
-
             return Ok();
         }
 
