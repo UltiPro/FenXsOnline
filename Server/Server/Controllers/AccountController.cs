@@ -75,7 +75,7 @@ public class AccountController : ControllerBase
         if (authResponser is null)
             return Unauthorized();
 
-        SetHttpOnlyCookie(authResponse);
+        SetHttpOnlyCookie(authResponser);
 
         return NoContent();
     }
