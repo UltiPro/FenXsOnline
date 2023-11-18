@@ -32,7 +32,7 @@ public class ExceptionMiddleware
         var errorDetails = new Error
         {
             Code = "Failure",
-            Message = ex.Message,
+            Message = ex.Message
         };
 
         switch (ex)
@@ -48,6 +48,10 @@ public class ExceptionMiddleware
             case BannedException:
                 statusCode = HttpStatusCode.Forbidden;
                 errorDetails.Code = "Forbidden";
+                break;
+            case BadRequestException:
+                statusCode = HttpStatusCode.BadRequest;
+                errorDetails.Code = "Bad Request";
                 break;
         }
 
