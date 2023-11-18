@@ -49,8 +49,10 @@ builder.Host.UseSerilog((ctx, lc) =>
 
 builder.Services.AddAutoMapper(typeof(MapperConfiguration));
 
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IAuthMenager, AuthMenager>();
 builder.Services.AddScoped<IAdminMenager, AdminMenager>();
+builder.Services.AddScoped<IHeroMenager, HeroMenager>();
 
 builder.Services.AddAuthentication(options =>
 {
