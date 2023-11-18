@@ -6,7 +6,7 @@ namespace Classes.Models.Game.Hero;
 public class HeroCreate
 {
     [Required(ErrorMessage = "Hero name is required.")]
-    [RegularExpression(@"^[a-zA-Z]\w{2,15}$", ErrorMessage = "A nickname cannot be shorter than 3 characters and longer than 15 characters.")]
+    [RegularExpression(@"^(^[^0-9])([\w a-z A-Z 0-9-_]{2,14})$", ErrorMessage = "A nickname cannot be shorter than 3 characters and longer than 15 characters.")]
     public string Name { get; set; }
     [Required(ErrorMessage = "Hero profession is required.")]
     [Range(0, 3)]
