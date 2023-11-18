@@ -10,4 +10,5 @@ public interface IAuthMenager
     Task<AuthResponse> Login(UserLogin userLogin);
     Task<string> RefreshToken();
     Task<AuthResponse> VerifyRefreshToken(AuthResponse authResponse);
+    Task VerifyId(string id, string token);
 }

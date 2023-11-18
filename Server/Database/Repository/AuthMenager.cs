@@ -23,6 +23,8 @@ public class AuthMenager : IAuthMenager
     private readonly string _loginProvider;
     private readonly string _refreshToken;
 
+    private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+
     private DBUser? _user;
 
     public AuthMenager(IMapper _mapper, UserManager<DBUser> _userManager, IConfiguration _configuration, ILogger<AuthMenager> _logger)
@@ -90,7 +92,7 @@ public class AuthMenager : IAuthMenager
             expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
             signingCredentials: credentials
             );
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return jwtSecurityTokenHandler.WriteToken(token);
     }
 
     public async Task<string> RefreshToken()
@@ -103,22 +105,18 @@ public class AuthMenager : IAuthMenager
 
     public async Task<AuthResponse> VerifyRefreshToken(AuthResponse authResponse)
     {
-        string? username;
         try
         {
-            username = new JwtSecurityTokenHandler()
+            _user = await _userManager.FindByEmailAsync(jwtSecurityTokenHandler
                 .ReadJwtToken(authResponse.Token).Claims.ToList()
-                .FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email)?.Value;
+                .FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email)?.Value);
         }
         catch
         {
             throw new UnauthorizedException("Invalid token, please relogin.");
         }
 
-        _user = await _userManager.FindByEmailAsync(username);
-
         if (_user is null || _user.Id != authResponse.Id) return null;
-
         if (_user.IsBanned) throw new BannedException();
 
         if (await _userManager.VerifyUserTokenAsync(_user, _loginProvider, _refreshToken, authResponse.RefreshToken))
@@ -132,5 +130,22 @@ public class AuthMenager : IAuthMenager
         await _userManager.UpdateSecurityStampAsync(_user);
 
         return null;
+    }
+
+    public async Task VerifyId(string id, string token)
+    {
+        try
+        {
+            _user = await _userManager.FindByEmailAsync(jwtSecurityTokenHandler
+                .ReadJwtToken(token).Claims.ToList().FirstOrDefault(c =>
+                c.Type == JwtRegisteredClaimNames.Email)?.Value);
+        }
+        catch
+        {
+            throw new UnauthorizedException("Invalid token, please relogin.");
+        }
+
+        if (_user is null || _user.Id != id) throw new UnauthorizedException("Invalid token, please relogin.");
+        if (_user.IsBanned) throw new BannedException();
     }
 }
