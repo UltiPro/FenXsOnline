@@ -24,6 +24,8 @@ public class DBHero : HeroBasicInfo
     public int MapId { get; set; } = 0;
     public int X { get; set; } = 3;
     public int Y { get; set; } = 2;
+    public bool InGame { get; set; } = false;
+    public bool IsDead { get; set; } = false;
 
     // Account
     public string UserId { get; set; }
