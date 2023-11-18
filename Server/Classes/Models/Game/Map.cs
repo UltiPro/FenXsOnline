@@ -1,4 +1,4 @@
-﻿namespace Classes.Models.Game.Map;
+﻿namespace Classes.Models.Game;
 
 public class Map
 {
