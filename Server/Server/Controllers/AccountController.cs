@@ -1,6 +1,7 @@
 ﻿using Classes.Models;
 using Classes.Models.User;
 using Database.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Controllers;
@@ -50,16 +51,17 @@ public class AccountController : ControllerBase
         if (authResponse is null)
             return Unauthorized();
 
-        SetHttpOnlyCookie(authResponse);
+        SetHttpOnlyCookie(authResponse, DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])));
 
         return NoContent();
     }
 
     [HttpPost]
     [Route("refreshtoken")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> RefreshToken()
     {
@@ -75,17 +77,35 @@ public class AccountController : ControllerBase
         if (authResponser is null)
             return Unauthorized();
 
-        SetHttpOnlyCookie(authResponser);
+        SetHttpOnlyCookie(authResponser, DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])));
 
         return NoContent();
     }
 
-    private void SetHttpOnlyCookie(AuthResponse authResponse)
+    [HttpPost]
+    [Route("logout")]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public ActionResult Logout()
+    {
+        SetHttpOnlyCookie(new AuthResponse
+        {
+            Id = "",
+            Token = "",
+            RefreshToken = ""
+        }, DateTime.Now);
+
+        return NoContent();
+    }
+
+    private void SetHttpOnlyCookie(AuthResponse authResponse, DateTime dateTime)
     {
         HttpContext.Response.Cookies.Append(_configuration["JwtSettings:IdCookie"], authResponse.Id,
             new CookieOptions
             {
-                Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
+                Expires = dateTime,
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
@@ -94,7 +114,7 @@ public class AccountController : ControllerBase
         HttpContext.Response.Cookies.Append(_configuration["JwtSettings:TokenCookie"], authResponse.Token,
             new CookieOptions
             {
-                Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
+                Expires = dateTime,
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
@@ -103,7 +123,7 @@ public class AccountController : ControllerBase
         HttpContext.Response.Cookies.Append(_configuration["JwtSettings:RefreshTokenCookie"], authResponse.RefreshToken,
             new CookieOptions
             {
-                Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
+                Expires = dateTime,
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
