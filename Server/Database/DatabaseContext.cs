@@ -37,6 +37,8 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
         modelBuilder.ApplyConfiguration(new DBRingConfiguration());
         modelBuilder.ApplyConfiguration(new DBNecklaceConfiguration());
+        modelBuilder.ApplyConfiguration(new DBWeaponConfiguration());
+        modelBuilder.ApplyConfiguration(new DBSecondaryWeaponConfiguration());
 
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
     }
