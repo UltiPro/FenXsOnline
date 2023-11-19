@@ -1,3 +1,8 @@
-﻿namespace Classes.Models.Game.Item.Boots;
+﻿using Classes.Enums.Game;
 
-public class DBBoots : BaseItemArmor { }
+namespace Classes.Models.Game.Item.Boots;
+
+public class DBBoots : BaseItemArmor
+{
+    public ItemType ItemType { get; set; } = ItemType.Boots;
+}

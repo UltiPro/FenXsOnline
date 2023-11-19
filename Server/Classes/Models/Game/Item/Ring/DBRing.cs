@@ -1,3 +1,8 @@
-﻿namespace Classes.Models.Game.Item.Ring;
+﻿using Classes.Enums.Game;
 
-public class DBRing : BaseItemJewelry { }
+namespace Classes.Models.Game.Item.Ring;
+
+public class DBRing : BaseItemJewelry
+{
+    public ItemType ItemType { get; set; } = ItemType.Ring;
+}

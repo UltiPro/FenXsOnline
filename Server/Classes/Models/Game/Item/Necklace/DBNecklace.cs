@@ -1,3 +1,8 @@
-﻿namespace Classes.Models.Game.Item.Necklace;
+﻿using Classes.Enums.Game;
 
-public class DBNecklace : BaseItemJewelry { }
+namespace Classes.Models.Game.Item.Necklace;
+
+public class DBNecklace : BaseItemJewelry
+{
+    public ItemType ItemType { get; set; } = ItemType.Necklace;
+}

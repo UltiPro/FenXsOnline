@@ -1,3 +1,8 @@
-﻿namespace Classes.Models.Game.Item.Gloves;
+﻿using Classes.Enums.Game;
 
-public class DBGloves : BaseItemArmor { }
+namespace Classes.Models.Game.Item.Gloves;
+
+public class DBGloves : BaseItemArmor
+{
+    public ItemType ItemType { get; set; } = ItemType.Gloves;
+}
