@@ -49,7 +49,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
         }, new DBWeapon
         {
             Id = 5,
-            Name = "Victors' Saber",
+            Name = "Sword Of Glory",
             Level = 10,
             Weight = 7,
             Price = 50,
@@ -92,7 +92,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
         }, new DBWeapon
         {
             Id = 9,
-            Name = "Obsidian Sword",
+            Name = "Victors' Saber",
             Level = 20,
             Weight = 8,
             Price = 150,
