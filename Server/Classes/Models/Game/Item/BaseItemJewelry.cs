@@ -1,6 +1,6 @@
 ﻿namespace Classes.Models.Game.Item;
 
-public class BaseItemJewelry : BaseItem
+public class BaseItemJewelry : BaseItemWornable
 {
     public int Stamina { get; set; } = 0;
     public int Mana { get; set; } = 0;
