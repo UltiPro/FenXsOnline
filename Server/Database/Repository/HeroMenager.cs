@@ -42,7 +42,7 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
 
     public async Task<List<HeroBasicInfo>> GetHeroes(string userId)
     {
-        return await _context.Heroes.ProjectTo<HeroBasicInfo>(_mapper.ConfigurationProvider).ToListAsync();
+        return _mapper.Map<List<HeroBasicInfo>>(await _context.Heroes.Where(hero => hero.UserId == userId).ToListAsync());
     }
 
     public async Task ChangeSprite(int heroId, int spriteLevel)
