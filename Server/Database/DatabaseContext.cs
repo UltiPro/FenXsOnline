@@ -11,6 +11,7 @@ using Classes.Models.Game.Item.Necklace;
 using Classes.Models.Game.Item.Ring;
 using Classes.Models.Game.Item.SecondaryWeapon;
 using Classes.Models.Game.Item.Weapon;
+using Database.Configuration.Game;
 
 namespace Database;
 
@@ -34,6 +35,8 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new DBRingConfiguration());
+        modelBuilder.ApplyConfiguration(new DBNecklaceConfiguration());
 
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
     }
