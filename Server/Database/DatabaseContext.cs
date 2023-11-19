@@ -35,10 +35,15 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
-        modelBuilder.ApplyConfiguration(new DBRingConfiguration());
+
+        modelBuilder.ApplyConfiguration(new DBArmorConfiguration());
+        modelBuilder.ApplyConfiguration(new DBBootsConfiguration());
+        modelBuilder.ApplyConfiguration(new DBGlovesConfiguration());
+        modelBuilder.ApplyConfiguration(new DBHelmetConfiguration());
         modelBuilder.ApplyConfiguration(new DBNecklaceConfiguration());
-        modelBuilder.ApplyConfiguration(new DBWeaponConfiguration());
+        modelBuilder.ApplyConfiguration(new DBRingConfiguration());
         modelBuilder.ApplyConfiguration(new DBSecondaryWeaponConfiguration());
+        modelBuilder.ApplyConfiguration(new DBWeaponConfiguration());
 
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
     }
