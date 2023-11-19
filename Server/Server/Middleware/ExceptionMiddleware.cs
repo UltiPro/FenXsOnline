@@ -1,4 +1,5 @@
 ﻿using Classes.Exceptions;
+using Classes.Exceptions.Game;
 using Classes.Models;
 using Newtonsoft.Json;
 using System.Net;
@@ -37,21 +38,21 @@ public class ExceptionMiddleware
 
         switch (ex)
         {
-            case NotFoundException:
-                statusCode = HttpStatusCode.NotFound;
-                errorDetails.Code = "Not Found";
+            case BadRequestException:
+                statusCode = HttpStatusCode.BadRequest;
+                errorDetails.Code = "Bad Request";
                 break;
             case UnauthorizedException:
                 statusCode = HttpStatusCode.Unauthorized;
                 errorDetails.Code = "Unauthorized";
                 break;
-            case BannedException:
+            case BannedException or HeroLimitReachedException or HeroLevelTooLowException:
                 statusCode = HttpStatusCode.Forbidden;
                 errorDetails.Code = "Forbidden";
                 break;
-            case BadRequestException:
-                statusCode = HttpStatusCode.BadRequest;
-                errorDetails.Code = "Bad Request";
+            case NotFoundException:
+                statusCode = HttpStatusCode.NotFound;
+                errorDetails.Code = "Not Found";
                 break;
         }
 
