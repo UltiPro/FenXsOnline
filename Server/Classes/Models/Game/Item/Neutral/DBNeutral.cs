@@ -2,7 +2,7 @@
 
 namespace Classes.Models.Game.Item.Neutral;
 
-public class DBNeutral
+public class DBNeutral : BaseItem
 {
     public int Price { get; set; } = 0;
     public string Description { get; set; } = string.Empty;
