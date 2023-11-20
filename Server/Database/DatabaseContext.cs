@@ -12,6 +12,9 @@ using Classes.Models.Game.Item.Ring;
 using Classes.Models.Game.Item.SecondaryWeapon;
 using Classes.Models.Game.Item.Weapon;
 using Database.Configuration.Game;
+using Classes.Models.Game.Item.Consumables;
+using Classes.Models.Game.Item.Neutral;
+using Classes.Models.Game.Item.QuestItem;
 
 namespace Database;
 
@@ -29,6 +32,9 @@ public class DatabaseContext : IdentityDbContext<DBUser>
     public DbSet<DBRing> Rings { get; set; }
     public DbSet<DBSecondaryWeapon> SecondaryWeapons { get; set; }
     public DbSet<DBWeapon> Weapons { get; set; }
+    public DbSet<DBConsumables> Consumables { get; set; }
+    public DbSet<DBNeutral> Neutrals { get; set; }
+    public DbSet<DBQuestItem> QuestItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -44,6 +50,10 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         modelBuilder.ApplyConfiguration(new DBRingConfiguration());
         modelBuilder.ApplyConfiguration(new DBSecondaryWeaponConfiguration());
         modelBuilder.ApplyConfiguration(new DBWeaponConfiguration());
+
+        modelBuilder.ApplyConfiguration(new DBConsumablesConfiguration());
+        modelBuilder.ApplyConfiguration(new DBNeutralConfiguration());
+        modelBuilder.ApplyConfiguration(new DBQuestItemConfiguration());
 
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
     }
