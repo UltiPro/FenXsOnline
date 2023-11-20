@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FenXsAlpha</title>
+    <link rel="stylesheet" href="./css/game.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body onload='javascript:GameInit()'>
+    <div class="game-container">
+		<canvas class="game-canvas" width="480" height="320"></canvas>
+	</div>
+	
+	
+	<!-- SCRIPTS -->
+	<!-- order of these have meaning -->
+	<script type="text/javascript" src="./js/game/utils.js"></script>
+	<script type="text/javascript" src="./js/game/DirectionInput.js"></script>
+	<script type="text/javascript" src="./js/game/Overworld.js"></script>
+	<script type="text/javascript" src="./js/game/GameObject.js"></script>
+	<script type="text/javascript" src="./js/game/Person.js"></script> <!-- should be loaded after gameObject.js, Person extends GameObject-->
+	<script type="text/javascript" src="./js/game/Sprite.js"></script>
+	<script type="text/javascript" src="./js/game/OverworldMap.js"></script>
+    <script type="text/javascript" src="./js/game/init.js"></script> <!-- always last -->
+    
+</body>
+</html>
