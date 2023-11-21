@@ -43,12 +43,10 @@ $(document).ready(function () {
   $(".profession-image").click(function () {
     var profession = $(this).data("profession");
     $("#hero\\.profession").val(profession).change();
-    highlightProfession(profession);
   });
 
   $("#hero\\.profession").change(function () {
     var selectedProfession = $(this).val();
-    highlightProfession(selectedProfession);
     var selectedSex = $("#hero\\.sex").val();
     updateProfessionImages(selectedSex, selectedProfession);
   });
@@ -56,6 +54,7 @@ $(document).ready(function () {
   function updateProfessionImages(sex, profession) {
     $(".profession-image").each(function () {
       var professionType = $(this).data("profession");
+      sex = sex || "male";
       var imageSrc = `./img/hero_preview/${professionType.toLowerCase()}_${sex.toLowerCase()}.gif`;
       $(this).attr("src", imageSrc);
     });
@@ -69,25 +68,34 @@ $(document).ready(function () {
 
   function handleSlotClick(clickedElement) {
     var slotId = clickedElement.attr("id") || clickedElement.attr("1");
-    var slotIsEmpty = true; //axios
+    //var slotIsEmpty = true; //axios
 
     $(".character-slot")
       .removeClass("selected bg-wooden")
       .addClass("bg-darkwooden");
     clickedElement.removeClass("bg-darkwooden").addClass("selected bg-wooden");
 
-    if (slotIsEmpty) {
-      $("#menu-character-present").toggle(!slotId.startsWith("selector"));
-      var slotText = $("#" + slotId).text();
-      $("#menu-character-creation").toggle(slotId.startsWith("selector"));
-      console.log("Slot is empty!");
-      $("#menu-character-present .form-group:nth-child(1) div").text(slotText);
-    } else {
-      $("#menu-character-present").toggle(slotId.startsWith("selector"));
-      var slotText = $("#" + slotId).text();
-      $("#menu-character-creation").toggle(!slotId.startsWith("selector"));
-      console.log("Slot is not empty!");
-    }
+    axios.get(apiBaseUrl + "Hero/all").then(
+      (_) => {
+        if (slotIsEmpty) {
+          $("#menu-character-present").toggle(!slotId.startsWith("selector"));
+          var slotText = $("#" + slotId).text();
+          $("#menu-character-creation").toggle(slotId.startsWith("selector"));
+          console.log("Slot is empty!");
+          $("#menu-character-present .form-group:nth-child(1) div").text(
+            slotText
+          );
+        } else {
+          $("#menu-character-present").toggle(slotId.startsWith("selector"));
+          var slotText = $("#" + slotId).text();
+          $("#menu-character-creation").toggle(!slotId.startsWith("selector"));
+          console.log("Slot is not empty!");
+        }
+      },
+      (error) => {
+        console.log("Connection error or Forbidden!");
+      }
+    );
   }
 
   $(".character-slot").ready(function () {

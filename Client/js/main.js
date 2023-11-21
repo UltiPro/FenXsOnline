@@ -1,8 +1,8 @@
 const apiBaseUrl = "https://localhost:7180/api/";
 
 const app = axios.create({
-    apiBaseUrl,
-    withCredentials: true
+  apiBaseUrl,
+  withCredentials: true,
 });
 
 const changeInputAudio = new Audio("./audio/input.wav");
@@ -14,7 +14,8 @@ const PlayChangeWindowAudio = () => changeWindowAudio.play();
 const PlayUnsuccessAudio = () => unsuccessAudio.play();
 
 $(document).ready(function () {
-    $("input").bind("focus", PlayChangeInputAudio);
-    $("select").bind("click", PlayChangeInputAudio);
-    $("select").bind("change", PlayChangeInputAudio);
+  $("input").bind("focus", PlayChangeInputAudio);
+  $("select").bind("click", PlayChangeInputAudio);
+  $("select").bind("change", PlayChangeInputAudio);
+  $(".character-slot").bind("click", PlayChangeInputAudio);
 });
