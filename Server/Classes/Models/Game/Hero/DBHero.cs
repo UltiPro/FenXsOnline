@@ -23,8 +23,8 @@ public class DBHero : HeroBasicInfo
     public int Weight { get; set; } = 0;
     public int Gold { get; set; } = 0;
     public int MapId { get; set; } = 0;
-    public int X { get; set; } = 3;
-    public int Y { get; set; } = 2;
+    public int X { get; set; } = 2;
+    public int Y { get; set; } = 4;
     [JsonIgnore]
     public bool InGame { get; set; } = false;
     public DateTime? Dead { get; set; } = null;
