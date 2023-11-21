@@ -6,7 +6,6 @@ using Database.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Classes.Statics.Game;
 using Classes.Exceptions.Game;
-using AutoMapper.QueryableExtensions;
 
 namespace Database.Repository;
 
@@ -101,8 +100,17 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
         await _context.SaveChangesAsync();
     }
 
-    public async Task<HeroGet> GetInGameHero(string accountId)
+    public async Task<DBHero> GetInGameHero(string accountId)
     {
-        return _mapper.Map<HeroGet>(await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true));
+        return await _context.Heroes
+            .Include(hero => hero.DBArmor)
+            .Include(hero => hero.DBBoots)
+            .Include(hero => hero.DBGloves)
+            .Include(hero => hero.DBHelmet)
+            .Include(hero => hero.DBNecklace)
+            .Include(hero => hero.DBRing)
+            .Include(hero => hero.DBSecondaryWeapon)
+            .Include(hero => hero.DBWeapon)
+            .FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true);
     }
 }
