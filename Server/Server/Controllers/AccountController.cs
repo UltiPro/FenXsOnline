@@ -38,7 +38,7 @@ public class AccountController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost]
+    [HttpPut]
     [Route("login")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -56,7 +56,7 @@ public class AccountController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost]
+    [HttpPut]
     [Route("refreshtoken")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -82,7 +82,7 @@ public class AccountController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost]
+    [HttpPut]
     [Route("logout")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
