@@ -66,4 +66,35 @@ $(document).ready(function () {
     var selectedProfession = $("#hero\\.profession").val();
     updateProfessionImages(selectedSex, selectedProfession);
   });
+
+  function handleSlotClick(clickedElement) {
+    var slotId = clickedElement.attr("id") || clickedElement.attr("1");
+    var slotIsEmpty = true; //axios
+
+    $(".character-slot")
+      .removeClass("selected bg-wooden")
+      .addClass("bg-darkwooden");
+    clickedElement.removeClass("bg-darkwooden").addClass("selected bg-wooden");
+
+    if (slotIsEmpty) {
+      $("#menu-character-present").toggle(!slotId.startsWith("selector"));
+      var slotText = $("#" + slotId).text();
+      $("#menu-character-creation").toggle(slotId.startsWith("selector"));
+      console.log("Slot is empty!");
+      $("#menu-character-present .form-group:nth-child(1) div").text(slotText);
+    } else {
+      $("#menu-character-present").toggle(slotId.startsWith("selector"));
+      var slotText = $("#" + slotId).text();
+      $("#menu-character-creation").toggle(!slotId.startsWith("selector"));
+      console.log("Slot is not empty!");
+    }
+  }
+
+  $(".character-slot").ready(function () {
+    handleSlotClick($(".character-slot").first());
+  });
+
+  $(".character-slot").click(function () {
+    handleSlotClick($(this));
+  });
 });
