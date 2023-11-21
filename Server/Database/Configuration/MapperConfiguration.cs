@@ -11,6 +11,5 @@ public class MapperConfiguration : Profile
         CreateMap<UserRegister, DBUser>().ReverseMap();
         CreateMap<HeroCreateBackend, DBHero>().ReverseMap();
         CreateMap<HeroBasicInfo, DBHero>().ReverseMap();
-        CreateMap<HeroGet, DBHero>().ReverseMap();
     }
 }
