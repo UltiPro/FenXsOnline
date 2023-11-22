@@ -48,19 +48,29 @@
                                 <label class="mt-3 w-100">Nick</label>
                                 <label class="mt-2 w-100">Profession</label>
                                 <label class="mt-2 w-100">Level</label>
+                                <label class="mt-2 w-100">Total Health Points</label>
+                                <label class="mt-2 w-100">Total Stamina Points</label>
+                                <label class="mt-2 w-100">Total Mana Points</label>
                             </div>
                             <div class="col-6">
                                 <form id="form-play" method="post"></form>
                                 <div class="form-group mt-3">
-                                    <div>
-                                        Player007
-                                    </div>
+                                    <div id="readNick"></div>
                                 </div>
                                 <div class="form-group mt-2">
-                                    <div>Proffesion</div>
+                                    <div id="readProfession"></div>
                                 </div>
                                 <div class="form-group mt-2">
-                                    <div>0</div>
+                                    <div id="readLevel"></div>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <div id="readHealth"></div>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <div id="readStamina"></div>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <div id="readMana"></div>
                                 </div>
                                 <div class="form-group mt-2">
                                     <button type="submit"
@@ -71,7 +81,7 @@
                         </div>
                     </div>
                     <!--Empty slot-->
-                    <div id="menu-character-creation">
+                    <div id="menu-character-creation" style="display: none;">
                         <div class="row menu-form text-center">
                             <div class="desc-area">
                                 <span id="character-desc" class="text-small p-1 small text-justify p-1 ps-3">Profession description will appear here.</span>

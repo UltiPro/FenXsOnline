@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(".profession-image").removeClass("clicked"); // Usunięcie flagi ze wszystkich
     $(this).addClass("clicked"); // dodanie flagi do klikniętego
   });
-
+  //opisy profesji
   function getCharacterDescription(profession) {
     switch (profession) {
       case "Paladin":
@@ -19,9 +19,12 @@ $(document).ready(function () {
     }
   }
 
+  //obsługa kliknięć i update ilustracji zależnie od płci
   $("#hero\\.profession").change(function () {
     var selectedProfession = $(this).val();
+    var selectedSex = $("#hero\\.sex").val();
     var characterDescription = getCharacterDescription(selectedProfession);
+    updateProfessionImages(selectedSex, selectedProfession);
     $("#character-desc").text(characterDescription);
 
     $(".profession-image").removeClass("clicked");
@@ -30,6 +33,7 @@ $(document).ready(function () {
     ).addClass("clicked");
   });
 
+  //zmiana opisu po najechaniu myszą na sprite
   $(".profession-image").hover(
     function () {
       var profession = $(this).data("profession");
@@ -40,17 +44,13 @@ $(document).ready(function () {
     }
   );
 
+  //zmiana profesji po kliknięciu
   $(".profession-image").click(function () {
     var profession = $(this).data("profession");
     $("#hero\\.profession").val(profession).change();
   });
 
-  $("#hero\\.profession").change(function () {
-    var selectedProfession = $(this).val();
-    var selectedSex = $("#hero\\.sex").val();
-    updateProfessionImages(selectedSex, selectedProfession);
-  });
-
+  //zmiana spritów na podstawie płci
   function updateProfessionImages(sex, profession) {
     $(".profession-image").each(function () {
       var professionType = $(this).data("profession");
@@ -66,30 +66,38 @@ $(document).ready(function () {
     updateProfessionImages(selectedSex, selectedProfession);
   });
 
+  //
   function handleSlotClick(clickedElement) {
     var slotId = clickedElement.attr("id") || clickedElement.attr("1");
-    //var slotIsEmpty = true; //axios
-
     $(".character-slot")
       .removeClass("selected bg-wooden")
       .addClass("bg-darkwooden");
     clickedElement.removeClass("bg-darkwooden").addClass("selected bg-wooden");
 
-    axios.get(apiBaseUrl + "Hero/all").then(
-      (_) => {
-        if (slotIsEmpty) {
+    app.get(apiBaseUrl + "Hero/all").then(
+      (response) => {
+        let heroInfo = response.data[parseInt(slotId.slice(-1)) - 1];
+        if (heroInfo === undefined) {
+          console.log("Slot is empty!");
           $("#menu-character-present").toggle(!slotId.startsWith("selector"));
           var slotText = $("#" + slotId).text();
           $("#menu-character-creation").toggle(slotId.startsWith("selector"));
-          console.log("Slot is empty!");
-          $("#menu-character-present .form-group:nth-child(1) div").text(
-            slotText
-          );
+          // $("#menu-character-present .form-group:nth-child(1) div").text(
+          //   slotText
+          // );
         } else {
+          console.log("Slot is not empty!");
+
+          $("#readNick").text(heroInfo.name);
+          $("#readProfession").text(professionParser(heroInfo.profession));
+          $("#readLevel").text(heroInfo.level);
+          $("#readHealth").text(heroInfo.maxHealthPoints);
+          $("#readStamina").text(heroInfo.maxStamina);
+          $("#readMana").text(heroInfo.maxMana);
+
           $("#menu-character-present").toggle(slotId.startsWith("selector"));
           var slotText = $("#" + slotId).text();
           $("#menu-character-creation").toggle(!slotId.startsWith("selector"));
-          console.log("Slot is not empty!");
         }
       },
       (error) => {
@@ -98,6 +106,20 @@ $(document).ready(function () {
     );
   }
 
+  function professionParser(profession) {
+    switch (profession) {
+      case 0:
+        return "Warrior";
+      case 1:
+        return "Hutner";
+      case 2:
+        return "Mage";
+      case 3:
+        return "Paladin";
+    }
+  }
+
+  //handlery slotow
   $(".character-slot").ready(function () {
     handleSlotClick($(".character-slot").first());
   });
