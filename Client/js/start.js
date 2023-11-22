@@ -66,7 +66,6 @@ $(document).ready(function () {
     updateProfessionImages(selectedSex, selectedProfession);
   });
 
-  //
   function handleSlotClick(clickedElement) {
     var slotId = clickedElement.attr("id") || clickedElement.attr("1");
     $(".character-slot")
@@ -82,9 +81,6 @@ $(document).ready(function () {
           $("#menu-character-present").toggle(!slotId.startsWith("selector"));
           var slotText = $("#" + slotId).text();
           $("#menu-character-creation").toggle(slotId.startsWith("selector"));
-          // $("#menu-character-present .form-group:nth-child(1) div").text(
-          //   slotText
-          // );
         } else {
           console.log("Slot is not empty!");
 
@@ -118,6 +114,8 @@ $(document).ready(function () {
         return "Paladin";
     }
   }
+
+  function test() {}
 
   //handlery slotow
   $(".character-slot").ready(function () {
