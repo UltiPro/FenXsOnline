@@ -74,4 +74,6 @@ public class DBHero : HeroBasicInfo
     public int? WeaponId { get; set; } = null;
     [ForeignKey("WeaponId")]
     public DBWeapon? DBWeapon { get; set; } = null;
+
+    public ICollection<DBHeroEquipment>? HeroEquipment { get; set; }
 }
