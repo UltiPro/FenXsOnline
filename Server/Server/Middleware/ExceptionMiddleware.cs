@@ -50,7 +50,7 @@ public class ExceptionMiddleware
                 statusCode = HttpStatusCode.Forbidden;
                 errorDetails.Code = "Forbidden";
                 break;
-            case NotFoundException:
+            case NotFoundException or HeroIsNotInTheGameException:
                 statusCode = HttpStatusCode.NotFound;
                 errorDetails.Code = "Not Found";
                 break;
