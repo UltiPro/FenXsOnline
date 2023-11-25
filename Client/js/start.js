@@ -31,7 +31,7 @@ $(document).ready(function () {
     $(
       '.profession-image[data-profession="' + selectedProfession + '"]'
     ).addClass("clicked");
-    console.log(selectedSex, selectedProfession)
+    console.log(selectedSex, selectedProfession);
   });
 
   //zmiana opisu po najechaniu myszą na sprite
@@ -65,7 +65,7 @@ $(document).ready(function () {
     var selectedSex = $(this).val();
     var selectedProfession = $("#hero\\.profession").val();
     updateProfessionImages(selectedSex, selectedProfession);
-    console.log(selectedSex, selectedProfession)
+    console.log(selectedSex, selectedProfession);
   });
 
   function handleSlotClick(clickedElement) {
@@ -88,6 +88,7 @@ $(document).ready(function () {
           $("input[name='hero.id']").val(heroInfo.id);
           $("#readNick").text(heroInfo.name);
           $("#readProfession").text(professionParser(heroInfo.profession));
+          $("#readSex").text(sexParser(heroInfo.sex));
           $("#readLevel").text(heroInfo.level);
           $("#readHealth").text(heroInfo.maxHealthPoints);
           $("#readStamina").text(heroInfo.maxStamina);
@@ -117,20 +118,29 @@ $(document).ready(function () {
     }
   }
 
-  var typingTimer;               
-  var doneTypingInterval = 1000;  
-  $("#hero\\.nick").keyup(function(){
-      clearTimeout(typingTimer);
-      if ($("input[id='hero.nick']").val()) {
-          typingTimer = setTimeout(ValidateNickname, doneTypingInterval);
-      }
+  function sexParser(sex) {
+    switch (sex) {
+      case 0:
+        return "Male";
+      case 1:
+        return "Female";
+    }
+  }
+
+  var typingTimer;
+  var doneTypingInterval = 1000;
+  $("#hero\\.nick").keyup(function () {
+    clearTimeout(typingTimer);
+    if ($("input[id='hero.nick']").val()) {
+      typingTimer = setTimeout(ValidateNickname, doneTypingInterval);
+    }
   });
-  
+
   function ValidateNickname() {
     let valid = true;
     valid = Validation(nicknameRegex, $("input[id='hero.nick']"), valid);
     if (!valid) PlayUnsuccessAudio();
-    console.log(valid)
+    console.log(valid);
     return valid;
   }
 
@@ -143,62 +153,89 @@ $(document).ready(function () {
     handleSlotClick($(this));
   });
 
-
   //wysłanie formularza tworzenia postaci
   $("#form-create-hero").bind("submit", function (e) {
-    e.preventDefault()
-    app.post(apiBaseUrl + "Hero",
-      {
+    e.preventDefault();
+    app
+      .post(apiBaseUrl + "Hero", {
         name: $("input[id='hero.nick']").val(),
-        profession: CreationConvertProfession( $("select[id='hero.profession']").val()),
-        sex: CreationConvertSex($("select[id='hero.sex']").val()) ,
-      }
-    )
-    .then(
-      (_) => {
-        window.location.replace("./start.html");
-        console.log("Character has been created!")
-      },
-      (error) => {
-        console.log("Error post!")
-      }
-    );
+        profession: CreationConvertProfession(
+          $("select[id='hero.profession']").val()
+        ),
+        sex: CreationConvertSex($("select[id='hero.sex']").val()),
+      })
+      .then(
+        (_) => {
+          $("#hero-created-message").text(
+            "Your hero has just been created! You're one step ahead of your adventure!"
+          );
+          $("#alert-hero-created").show();
+          //window.location.replace("./start.html");
+          console.log("Character has been created!");
+        },
+        (error) => {
+          console.log("Error post!");
+        }
+      );
+  });
+
+  $("#alert-hero-created button").bind("click", () => {
+    $("#alert-hero-created").hide();
   });
 
   $("#form-delete-hero").bind("submit", function (e) {
     e.preventDefault();
     var deleteId = $("input[name='hero.id']").val();
     if (deleteId) {
-      app.delete(apiBaseUrl+"Hero?id="+deleteId)
-        .then(response => {
-          console.log('Item deleted:', response.data);
-          window.location.replace("./start.html")
+      app
+        .delete(apiBaseUrl + "Hero?id=" + deleteId)
+        .then((response) => {
+          console.log("Item deleted:", response.data);
+          $("#hero-delete-message").text(
+            "This character has just been deleted."
+          );
+          $("#alert-hero-delete").show();
+          //window.location.replace("./start.html")
         })
-        .catch(error => {
-          console.error('Error deleting item:', error);
+        .catch((error) => {
+          console.error("Error deleting item:", error);
         });
     } else {
-      console.error('No deleteId provided');
+      console.error("No deleteId provided");
     }
   });
+
+  $("#alert-hero-delete button").bind("click", () => {
+    $("#alert-hero-delete").hide();
+  });
+
+  
 
   //wysłanie informacji do serwera, która postać została wybrana
   $("#form-play").bind("submit", function (e) {
-
+    e.preventDefault();
+    var playId = $("input[name='hero.id']").val();
+    app
+      .put(apiBaseUrl + "Hero/play", { id: playId })
+      .then((response) => {
+        console.log("hero with id: " + playId + "enters the game");
+      })
+      .catch((error) => {
+        console.error("Error with throwing character into the game", error);
+      });
   });
 
   //sex: string -> int
-  function CreationConvertSex(sex){
-    if(sex == "Male"){
-      return 0
-    }
-    else {
-      return 1
+  function CreationConvertSex(sex) {
+    if (sex == "Male") {
+      return 0;
+    } else {
+      return 1;
     }
   }
 
   //profession: string -> int
-  function CreationConvertProfession(profession){
+  function CreationConvertProfession(profession) {
     switch (profession) {
       case "Warrior":
         return 0;
@@ -208,18 +245,25 @@ $(document).ready(function () {
         return 2;
       case "Paladin":
         return 3;
+      default:
+        return 0;
     }
   }
 
   //test function
-  $("#testdata").click(function (){
-    var sex, profession
-    sex = CreationConvertSex($("select[id='hero.sex']").val()) 
-    profession = CreationConvertProfession( $("select[id='hero.profession']").val())
-    CreationConvertSex(sex)
-    CreationConvertProfession(profession)
-    console.log(sex,profession)
-    console.log( $("input[id='hero.nick']").val(), $("select[id='hero.profession']").val(), $("select[id='hero.sex']").val())
-
-  })
+  $("#testdata").click(function () {
+    var sex, profession;
+    sex = CreationConvertSex($("select[id='hero.sex']").val());
+    profession = CreationConvertProfession(
+      $("select[id='hero.profession']").val()
+    );
+    CreationConvertSex(sex);
+    CreationConvertProfession(profession);
+    console.log(sex, profession);
+    console.log(
+      $("input[id='hero.nick']").val(),
+      $("select[id='hero.profession']").val(),
+      $("select[id='hero.sex']").val()
+    );
+  });
 });
