@@ -1,8 +1,6 @@
-﻿using Classes.Models.Game.Item;
-
-namespace Database.Contracts;
+﻿namespace Database.Contracts;
 
 public interface IItemMenager
 {
-    Task Get(ItemGet itemGet);
+    Task<T> Get<T>(int id) where T : class;
 }
