@@ -8,11 +8,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     private readonly DatabaseContext _context;
     private readonly IMapper _mapper;
+
     public GenericRepository(DatabaseContext _context, IMapper _mapper)
     {
         this._context = _context;
         this._mapper = _mapper;
     }
+
     public async Task<TResult> Get<TResult>(int id)
     {
         var entity = await _context.Set<T>().FindAsync(id);
@@ -21,6 +23,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
         return _mapper.Map<TResult>(entity);
     }
+
     public async Task<TResult> Create<TSource, TResult>(TSource source)
     {
         var entity = _mapper.Map<T>(source);
@@ -30,6 +33,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
         return _mapper.Map<TResult>(entity);
     }
+
     public async Task Update<TSource>(int id, TSource source)
     {
         var entity = await _context.Set<T>().FindAsync(id);
@@ -40,6 +44,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _context.Update(entity);
         await _context.SaveChangesAsync();
     }
+
     public async Task Delete(int id)
     {
         var entity = await _context.Set<T>().FindAsync(id);
