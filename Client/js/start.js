@@ -165,6 +165,23 @@ $(document).ready(function () {
     );
   });
 
+  $("#form-delete-hero").bind("submit", function (e) {
+    e.preventDefault();
+    var deleteId = $("input[name='hero.id']").val();
+    if (deleteId) {
+      app.delete(apiBaseUrl+"Hero?id="+deleteId)
+        .then(response => {
+          console.log('Item deleted:', response.data);
+          window.location.replace("./start.html")
+        })
+        .catch(error => {
+          console.error('Error deleting item:', error);
+        });
+    } else {
+      console.error('No deleteId provided');
+    }
+  });
+
   //wysłanie informacji do serwera, która postać została wybrana
   $("#form-play").bind("submit", function (e) {
 
