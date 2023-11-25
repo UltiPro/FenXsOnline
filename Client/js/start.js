@@ -31,6 +31,7 @@ $(document).ready(function () {
     $(
       '.profession-image[data-profession="' + selectedProfession + '"]'
     ).addClass("clicked");
+    console.log(selectedSex, selectedProfession)
   });
 
   //zmiana opisu po najechaniu myszą na sprite
@@ -64,6 +65,7 @@ $(document).ready(function () {
     var selectedSex = $(this).val();
     var selectedProfession = $("#hero\\.profession").val();
     updateProfessionImages(selectedSex, selectedProfession);
+    console.log(selectedSex, selectedProfession)
   });
 
   function handleSlotClick(clickedElement) {
@@ -83,7 +85,7 @@ $(document).ready(function () {
           $("#menu-character-creation").toggle(slotId.startsWith("selector"));
         } else {
           console.log("Slot is not empty!");
-
+          $("input[name='hero.id']").val(heroInfo.id);
           $("#readNick").text(heroInfo.name);
           $("#readProfession").text(professionParser(heroInfo.profession));
           $("#readLevel").text(heroInfo.level);
@@ -115,7 +117,22 @@ $(document).ready(function () {
     }
   }
 
-  function test() {}
+  var typingTimer;               
+  var doneTypingInterval = 1000;  
+  $("#hero\\.nick").keyup(function(){
+      clearTimeout(typingTimer);
+      if ($("input[id='hero.nick']").val()) {
+          typingTimer = setTimeout(ValidateNickname, doneTypingInterval);
+      }
+  });
+  
+  function ValidateNickname() {
+    let valid = true;
+    valid = Validation(nicknameRegex, $("input[id='hero.nick']"), valid);
+    if (!valid) PlayUnsuccessAudio();
+    console.log(valid)
+    return valid;
+  }
 
   //handlery slotow
   $(".character-slot").ready(function () {
@@ -125,4 +142,67 @@ $(document).ready(function () {
   $(".character-slot").click(function () {
     handleSlotClick($(this));
   });
+
+
+  //wysłanie formularza tworzenia postaci
+  $("#form-create-hero").bind("submit", function (e) {
+    e.preventDefault()
+    app.post(apiBaseUrl + "Hero",
+      {
+        name: $("input[id='hero.nick']").val(),
+        profession: CreationConvertProfession( $("select[id='hero.profession']").val()),
+        sex: CreationConvertSex($("select[id='hero.sex']").val()) ,
+      }
+    )
+    .then(
+      (_) => {
+        window.location.replace("./start.html");
+        console.log("Character has been created!")
+      },
+      (error) => {
+        console.log("Error post!")
+      }
+    );
+  });
+
+  //wysłanie informacji do serwera, która postać została wybrana
+  $("#form-play").bind("submit", function (e) {
+
+  });
+
+  //sex: string -> int
+  function CreationConvertSex(sex){
+    if(sex == "Male"){
+      return 0
+    }
+    else {
+      return 1
+    }
+  }
+
+  //profession: string -> int
+  function CreationConvertProfession(profession){
+    switch (profession) {
+      case "Warrior":
+        return 0;
+      case "Hunter":
+        return 1;
+      case "Mage":
+        return 2;
+      case "Paladin":
+        return 3;
+    }
+  }
+
+  //test function
+  $("#testdata").click(function (){
+    var sex, profession
+    sex = CreationConvertSex($("select[id='hero.sex']").val()) 
+    profession = CreationConvertProfession( $("select[id='hero.profession']").val())
+    CreationConvertSex(sex)
+    CreationConvertProfession(profession)
+    console.log(sex,profession)
+    console.log( $("input[id='hero.nick']").val(), $("select[id='hero.profession']").val(), $("select[id='hero.sex']").val())
+
+  })
 });

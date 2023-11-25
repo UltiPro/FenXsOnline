@@ -44,7 +44,7 @@
                     <!--Occupied slot-->
                     <div id="menu-character-present" style="display: none;">
                         <div class="row menu-form">
-                            <div class="col-6 border-end border-1 border-dark">
+                            <div class="col-4">
                                 <label class="mt-3 w-100">Nick</label>
                                 <label class="mt-2 w-100">Profession</label>
                                 <label class="mt-2 w-100">Level</label>
@@ -52,8 +52,9 @@
                                 <label class="mt-2 w-100">Total Stamina Points</label>
                                 <label class="mt-2 w-100">Total Mana Points</label>
                             </div>
-                            <div class="col-6">
+                            <div class="col">
                                 <form id="form-play" method="post"></form>
+                                <input type='hidden' name='hero.id' value='' />
                                 <div class="form-group mt-3">
                                     <div id="readNick"></div>
                                 </div>
@@ -77,6 +78,11 @@
                                         class="btn btn-success btn-sm w-100 border border-dark">Play</button>
                                 </div>
                                 </form>
+                                <form id="form-delete-hero" method="post">
+                                    <input type='hidden' name='hero.id' value='' />
+                                    <button type="submit"
+                                    class="btn btn-danger btn-sm w-100 border border-dark">Delete hero</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -95,7 +101,7 @@
                                 </div>
                             </div>
                             <div id="hero-conf" class="row">
-                                <form id="form-register" method="post">
+                                <form id="form-create-hero" method="post">
                                     <div class="row justify-content-center">
                                         <label for="hero.nick" class="mt-3 col-1">Nick</label>
                                         <div class="form-group mt-3 col-3">
@@ -105,7 +111,7 @@
                                         </div>
                                         <label for="hero.sex" class="mt-3 col-1">Sex</label>
                                         <div class="form-group mt-3 col-3">
-                                            <select name="profession" id="hero.sex"
+                                            <select for="hero.sex" id="hero.sex"
                                                 class="form-control form-control-sm border border-dark">
                                                 <option value="" disabled selected>Select hero's sex</option>
                                                 <option value="Male">Male</option>
@@ -114,7 +120,7 @@
                                         </div>
                                         <label for="hero.profession" class="mt-3 col-1">Profession</label>
                                         <div class="form-group mt-3 col-3">
-                                            <select name="profession" id="hero.profession"
+                                            <select for="hero.profession" id="hero.profession"
                                                 class="form-control form-control-sm border border-dark">
                                                 <option value="" disabled selected>Select hero's class</option>
                                                 <option value="Paladin">Paladin</option>
@@ -130,6 +136,7 @@
                                             hero</button>
                                     </div>
                                 </form>
+                                <!-- <button id="testdata">testdata</button> -->
                             </div>
                         </div>
                     </div>
