@@ -1,8 +1,8 @@
-﻿using Classes.Enums.Game;
+﻿using Classes.Models.Game.Item;
 
 namespace Database.Contracts;
 
 public interface IItemMenager
 {
-    public Task Get(ItemType type, int id);
+    public Task Get(ItemGet itemGet);
 }
