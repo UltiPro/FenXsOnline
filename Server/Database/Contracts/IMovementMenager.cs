@@ -4,5 +4,5 @@ namespace Database.Contracts;
 
 public interface IMovementMenager
 {
-    Task<PositionResponse> Move(int x, int y);
+    Task<MapPositionResponse> Move(int x, int y);
 }
