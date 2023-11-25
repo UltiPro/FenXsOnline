@@ -57,6 +57,8 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<IAuthMenager, AuthMenager>();
 builder.Services.AddScoped<IAdminMenager, AdminMenager>();
 builder.Services.AddScoped<IHeroMenager, HeroMenager>();
+builder.Services.AddScoped<IMovementMenager, MovementMenager>();
+builder.Services.AddScoped<IItemMenager, ItemMenager>();
 
 builder.Services.AddAuthentication(options =>
 {
