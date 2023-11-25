@@ -4,5 +4,5 @@ namespace Database.Contracts;
 
 public interface IItemMenager
 {
-    public Task Get(ItemGet itemGet);
+    Task Get(ItemGet itemGet);
 }
