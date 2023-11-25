@@ -4,11 +4,11 @@ namespace Database.Contracts;
 
 public interface IHeroMenager : IGenericRepository<DBHero>
 {
-    public Task<bool> IsAvailableNickname(string nickname);
-    public Task<bool> IsHeroLimitReached(string accountId);
-    public Task<bool> IsHeroThisUser(string accountId, int heroId);
-    public Task<List<HeroBasicInfo>> GetHeroes(string accountId);
-    public Task ChangeSprite(int heroId, int spriteLevel);
-    public Task Play(string accountId, int heroId);
-    public Task<DBHero> GetInGameHero(string accountId);
+    Task<bool> IsAvailableNickname(string nickname);
+    Task<bool> IsHeroLimitReached(string accountId);
+    Task<bool> IsHeroThisUser(string accountId, int heroId);
+    Task<List<HeroBasicInfo>> GetHeroes(string accountId);
+    Task ChangeSprite(int heroId, int spriteLevel);
+    Task Play(string accountId, int heroId);
+    Task<DBHero> GetInGameHero(string accountId);
 }
