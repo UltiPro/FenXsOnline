@@ -1,5 +1,4 @@
 ﻿using Classes.Models.Game.Item;
-using Classes.Models.User;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -9,8 +8,8 @@ public class DBHeroEquipment : ItemProvider
 {
     public int OrderId { get; set; }
     [JsonIgnore]
-    public string UserId { get; set; }
-    [ForeignKey("UserId")]
+    public string HeroId { get; set; }
+    [ForeignKey("HeroId")]
     [JsonIgnore]
-    public DBUser DBUser { get; set; }
+    public DBHero DBHero { get; set; }
 }
