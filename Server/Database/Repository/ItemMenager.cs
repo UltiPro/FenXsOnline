@@ -6,10 +6,12 @@ namespace Database.Repository;
 public class ItemMenager : IItemMenager
 {
     private readonly DatabaseContext _context;
+
     public ItemMenager(DatabaseContext _context)
     {
         this._context = _context;
     }
+
     public async Task<T> Get<T>(int id) where T : class
     {
         if (id < 1) throw new BadRequestException("Item id needs to be larger than 0.");
