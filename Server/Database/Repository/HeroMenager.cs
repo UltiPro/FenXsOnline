@@ -13,11 +13,13 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
 {
     private readonly IMapper _mapper;
     private readonly DatabaseContext _context;
+    private readonly IEquipmentMenager _equipmentMenager;
 
-    public HeroMenager(DatabaseContext _context, IMapper _mapper) : base(_context, _mapper)
+    public HeroMenager(DatabaseContext _context, IMapper _mapper, IEquipmentMenager _equipmentMenager) : base(_context, _mapper)
     {
         this._mapper = _mapper;
         this._context = _context;
+        this._equipmentMenager = _equipmentMenager;
     }
 
     public async Task<bool> IsAvailableNickname(string nickname)
@@ -30,6 +32,15 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
         return await _context.Heroes.CountAsync(hero => hero.UserId == accountId) > 3;
     }
 
+    public async Task<HeroBasicInfo> CreateHero(HeroCreateBackend heroCreateBackend)
+    {
+        var hero = await Create<HeroCreateBackend, HeroBasicInfo>(heroCreateBackend);
+
+        await _equipmentMenager.Create(hero.Id);
+
+        return hero;
+    }
+
     public async Task<bool> IsHeroThisUser(string accountId, int heroId)
     {
         var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.Id == heroId);
@@ -37,6 +48,13 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
         if (hero is null) throw new NotFoundException("Hero", heroId.ToString());
 
         return hero.UserId == accountId;
+    }
+
+    public async Task DeleteHero(int id)
+    {
+        await Delete(id);
+
+        await _equipmentMenager.Delete(id);
     }
 
     public async Task<List<HeroBasicInfo>> GetHeroes(string userId)

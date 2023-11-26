@@ -16,6 +16,7 @@ public class HeroController : ControllerBase
     private readonly IHeroMenager _heroMenager;
     private readonly IAuthMenager _authMenager;
     private readonly IConfiguration _configuration;
+
     public HeroController(IHeroMenager _heroMenager, IAuthMenager _authMenager, IConfiguration _configuration)
     {
         this._heroMenager = _heroMenager;
@@ -55,7 +56,7 @@ public class HeroController : ControllerBase
         if (await _heroMenager.IsHeroLimitReached(cookieId)) throw new HeroLimitReachedException();
         if (!await _heroMenager.IsAvailableNickname(heroCreate.Name)) return Conflict("This nickname is already taken.");
 
-        return CreatedAtAction(null, await _heroMenager.Create<HeroCreateBackend, HeroBasicInfo>(new HeroCreateBackend(heroCreate, cookieId)));
+        return CreatedAtAction(null, await _heroMenager.CreateHero(new HeroCreateBackend(heroCreate, cookieId)));
     }
 
     [HttpDelete]
@@ -72,7 +73,7 @@ public class HeroController : ControllerBase
 
         if (await _heroMenager.IsHeroThisUser(cookieId, id))
         {
-            await _heroMenager.Delete(id);
+            await _heroMenager.DeleteHero(id);
             return NoContent();
         }
 
