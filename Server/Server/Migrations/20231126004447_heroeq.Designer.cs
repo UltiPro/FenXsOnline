@@ -4,6 +4,7 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Server.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231126004447_heroeq")]
+    partial class heroeq
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,16 +166,16 @@ namespace Server.Migrations
                     b.Property<int>("HeroId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ItemId")
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ItemType")
+                    b.Property<int>("ItemType")
                         .HasColumnType("int");
 
-                    b.HasKey("HeroId", "Id");
+                    b.HasKey("HeroId", "OrderId");
 
                     b.ToTable("HeroesEquipments");
                 });
@@ -2161,19 +2164,19 @@ namespace Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f3e840db-57f4-4cb0-b129-1ea6b7d7151d",
+                            Id = "c4593731-59d3-411a-a2f3-8f312d50b744",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "cfa14437-e0bf-4943-a45a-3fcfea7dbd02",
+                            Id = "9ce37f33-96e9-49e6-95d4-9a11303fa477",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "866d8437-0433-4872-8cf6-c3de9bc6fca4",
+                            Id = "8a8278a3-78a0-405d-9d0f-d6444d78e4c4",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
