@@ -7,7 +7,6 @@ class Sprite{
 		this.image.onload = () => {
 			this.isLoaded = true;
 		}
-		
 		//Animation & Initial State
 		//In the future more animations and there behaviour can be programmed
 		//based just on the coords in the arrays here
@@ -66,7 +65,7 @@ class Sprite{
 
 
 
-	draw(ctx, cameraPerson){
+	draw(ctx, cameraPerson, isBehindObject){
 		const x = this.gameObject.x - 0 + utils.withGrid(7) - cameraPerson.x; // x and y -> current object position
 		const y = this.gameObject.y - 20 + utils.withGrid(5) - cameraPerson.y; // x/y - smth -> smth is the pixel correction for placement 
 		// + utils - cameraPerson -> taking gridbased movement and subtracting cameraObject placement
@@ -74,14 +73,21 @@ class Sprite{
 		//when canvas dimentions are changed those values have to be changed too based on this math
 		
 		const[frameX, frameY] = this.frame; //getting appropriate frame to cute from spritesheet
-
+		
+		//chaging hero opacity behind object
+		if (isBehindObject) {
+			ctx.globalAlpha = 0.4;
+			ctx.fillStyle = 'black';
+			ctx.fillRect(x, y + 32, 32, 32); 
+		}
+		
 		this.isLoaded && ctx.drawImage(this.image,
 		frameX * 32, frameY * 48,
 		32,48,
 		x,y,
 		32,48
 		)
-
+		ctx.globalAlpha = 1;
 		this.updateAnimationProgress();
 	}
 

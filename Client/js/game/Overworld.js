@@ -23,7 +23,6 @@ class Overworld{
 			//For now I don't now how to resolve it in multiplayer
 			//how to detect individual players there?
 			const cameraPerson = this.map.gameObjects.hero;
-
 			//update all objects
 			//drawing have to be done after updating objects
 			//so drawing methods are below
@@ -39,7 +38,7 @@ class Overworld{
 			
 			//draw "center" layer, all game objects
 			Object.values(this.map.gameObjects).forEach(object => {
-				object.sprite.draw(this.ctx, cameraPerson);
+				object.sprite.draw(this.ctx, cameraPerson, object.isHeroBehindObject);
 			})
 			
 			//draw lower layer of the map

@@ -2,6 +2,7 @@ class OverworldMap {
   constructor(config) {
     this.gameObjects = config.gameObjects;
     this.walls = config.walls || {};
+    this.zindex = config.zindex || {};
 
     //lower layer of the map, gameobjects should be visible
     this.lowerImage = new Image();
@@ -34,6 +35,11 @@ class OverworldMap {
   isSpaceTaken(currentX, currentY, direction) {
     const { x, y } = utils.nextPosition(currentX, currentY, direction);
     return this.walls[`${x},${y}`] || false;
+  }
+
+  isHeroBehindObject(currentX, currentY, direction){
+    const {x,y} = utils.nextPosition(currentX, currentY, direction);
+    return this.zindex[`${x},${y}`] || false;
   }
 
   mountObjects() {
@@ -131,7 +137,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(12, 4)]: true,
       // row 5
       [utils.asGridCoord(0, 5)]: true,
-      [utils.asGridCoord(4, 5)]: true,
+      [utils.asGridCoord(4, 5)]: false,
       [utils.asGridCoord(5, 5)]: true,
       [utils.asGridCoord(8, 5)]: true,
       [utils.asGridCoord(9, 5)]: true,
@@ -182,5 +188,8 @@ window.OverworldMaps = {
       [utils.asGridCoord(11, 10)]: true,
       [utils.asGridCoord(12, 10)]: true,
     },
+    zindex:{
+      [utils.asGridCoord(4, 5)]: true,
+    }
   },
 };
