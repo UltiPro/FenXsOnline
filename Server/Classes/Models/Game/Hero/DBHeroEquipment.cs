@@ -11,7 +11,7 @@ public class DBHeroEquipment
     [ForeignKey("HeroId")]
     [JsonIgnore]
     public DBHero DBHero { get; set; }
-    public int OrderId { get; set; }
+    public int Id { get; set; }
     public ItemType? ItemType { get; set; } = null;
     public int? ItemId { get; set; } = null;
 }

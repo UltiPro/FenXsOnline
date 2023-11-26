@@ -35,6 +35,7 @@ public class DatabaseContext : IdentityDbContext<DBUser>
     public DbSet<DBConsumables> Consumables { get; set; }
     public DbSet<DBNeutral> Neutrals { get; set; }
     public DbSet<DBQuestItem> QuestItems { get; set; }
+    public DbSet<DBHeroEquipment> HeroesEquipments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -56,5 +57,6 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         modelBuilder.ApplyConfiguration(new DBQuestItemConfiguration());
 
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
+        modelBuilder.Entity<DBHeroEquipment>().HasKey(heroEquipment => new { heroEquipment.HeroId, heroEquipment.Id });
     }
 }
