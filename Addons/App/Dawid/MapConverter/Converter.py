@@ -1,4 +1,4 @@
-from PIL import Image, ImageSequence
+from PIL import Image
 import tkinter as tk
 from tkinter import filedialog
 
@@ -7,56 +7,84 @@ def check_color_block(img, x, y):
     red_threshold = 150  # Adjust this threshold as needed
     blue_threshold = 150  # Adjust this threshold as needed
     
-    green_count = 0
-    red_count = 0
-    blue_count = 0
-
+    unique_colors = set()
     for i in range(x, x + 32):
         for j in range(y, y + 32):
             if i < img.width and j < img.height:
                 pixel = img.getpixel((i, j))
                 if isinstance(pixel, int):  # For grayscale images
-                    if pixel > green_threshold:
-                        green_count += 1
-                    elif pixel < red_threshold:
-                        red_count += 1
-                    elif pixel > blue_threshold:
-                        blue_count += 1
+                    unique_colors.add(pixel)
                 else:  # For RGB images
-                    r, g, b = pixel[:3]
-                    if g >= green_threshold and r < red_threshold:
-                        green_count += 1
-                    elif r >= red_threshold and g < green_threshold:
-                        red_count += 1
-                    elif b >= blue_threshold:
-                        blue_count += 1
-    
-    return (green_count > red_count) or (blue_count > green_count + red_count), blue_count > green_count + red_count
+                    unique_colors.add(pixel[:3])
+
+    if len(unique_colors) == 1:  # Tile has only one color
+        color = next(iter(unique_colors))  # Get the color
+        if isinstance(color, int):  # For grayscale images
+            if color > green_threshold:
+                return 'G'
+            elif color < red_threshold:
+                return 'R'
+            elif color < blue_threshold:
+                return 'B'
+        else:  # For RGB images
+            r, g, b = color
+            if g >= green_threshold and r < red_threshold:
+                return 'G'
+            elif r >= red_threshold and g < green_threshold:
+                return 'R'
+            elif b >= blue_threshold and r < red_threshold and g < green_threshold:
+                return 'B'
+
+    return 'Mixed'  # Tile has multiple colors
 
 def process_image(image_path):
     img = Image.open(image_path)
-    rows = img.height // 32
-    cols = img.width // 32
 
-    output_data = []
-    output_data_blue = []
+    collisions_data = []
+    zindex_data = []
+    error_coordinates = []
+    log_messages = []
 
     for y in range(0, img.height, 32):
-        row_data = []
-        row_data_blue = []
+        collisions_row = []
+        zindex_row = []
         for x in range(0, img.width, 32):
-            is_green, is_blue = check_color_block(img, x, y)
-            row_data.append(str(is_green))
-            row_data_blue.append(str(is_blue))
-        output_data.append(' '.join(row_data))
-        output_data_blue.append(' '.join(row_data_blue))
+            log_messages.append(f"Processing tile at ({x}, {y})")
+            color = check_color_block(img, x, y)
+            if color == 'R':
+                collisions_row.append('True')
+                zindex_row.append('False')
+            elif color == 'G':
+                collisions_row.append('False')
+                zindex_row.append('False')
+            elif color == 'B':
+                collisions_row.append('False')
+                zindex_row.append('True')
+            else:
+                error_coordinates.append((x, y))
+                collisions_row.append('Error')
+                zindex_row.append('Error')
+                log_messages.append(f"Tile at ({x}, {y}) contains multiple colors.")
 
-    # Save the boolean values to text files with rows and cols
-    with open('output_green_red.txt', 'w') as file:
-        file.write('\n'.join(output_data))
+        collisions_data.append(' '.join(collisions_row))
+        zindex_data.append(' '.join(zindex_row))
 
-    with open('output_blue.txt', 'w') as file:
-        file.write('\n'.join(output_data_blue))
+    # Save the boolean values to two separate text files
+    with open('Collisions.txt', 'w') as collisions_file:
+        collisions_file.write('\n'.join(collisions_data))
+
+    with open('Zindex.txt', 'w') as zindex_file:
+        zindex_file.write('\n'.join(zindex_data))
+
+    # Log messages to a file
+    with open('logs.txt', 'w') as logs_file:
+        logs_file.write('\n'.join(log_messages))
+        
+    # Print out error coordinates to logs file
+    if error_coordinates:
+        with open('logs.txt', 'a') as logs_file:
+            logs_file.write("\nCoordinates of tiles with multiple colors:\n")
+            logs_file.write('\n'.join(str(coord) for coord in error_coordinates))
 
 def select_file():
     root = tk.Tk()
@@ -66,61 +94,3 @@ def select_file():
         process_image(file_path)
 
 select_file()
-
-
-# OLD LOGIC
-# from PIL import Image, ImageSequence
-# import tkinter as tk
-# from tkinter import filedialog
-
-# def check_color_block(img, x, y):
-#     green_threshold = 200  # Adjust this threshold as needed
-#     red_threshold = 150  # Adjust this threshold as needed
-    
-#     green_count = 0
-#     red_count = 0
-
-#     for i in range(x, x + 32):
-#         for j in range(y, y + 32):
-#             if i < img.width and j < img.height:
-#                 pixel = img.getpixel((i, j))
-#                 if isinstance(pixel, int):  # For grayscale images
-#                     if pixel > green_threshold:
-#                         green_count += 1
-#                     elif pixel < red_threshold:
-#                         red_count += 1
-#                 else:  # For RGB images
-#                     r, g, b = pixel[:3]
-#                     if g >= green_threshold and r < red_threshold:
-#                         green_count += 1
-#                     elif r >= red_threshold and g < green_threshold:
-#                         red_count += 1
-    
-#     return green_count > red_count
-
-# def process_image(image_path):
-#     img = Image.open(image_path)
-#     rows = img.height // 32
-#     cols = img.width // 32
-
-#     output_data = []
-
-#     for y in range(0, img.height, 32):
-#         row_data = []
-#         for x in range(0, img.width, 32):
-#             is_green = check_color_block(img, x, y)
-#             row_data.append(str(is_green))
-#         output_data.append(' '.join(row_data))
-
-#     # Save the boolean values to a text file with rows and cols
-#     with open('output.txt', 'w') as file:
-#         file.write('\n'.join(output_data))
-
-# def select_file():
-#     root = tk.Tk()
-#     root.withdraw()
-#     file_path = filedialog.askopenfilename(title="Select Image File", filetypes=[("Image Files", "*.png;*.jpg;*.jpeg;*.gif;*.bmp")])
-#     if file_path:
-#         process_image(file_path)
-
-# select_file()
