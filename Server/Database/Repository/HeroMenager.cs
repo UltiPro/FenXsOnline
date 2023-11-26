@@ -129,6 +129,7 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
             .Include(hero => hero.DBRing)
             .Include(hero => hero.DBSecondaryWeapon)
             .Include(hero => hero.DBWeapon)
+            .Include(hero => hero.HeroEquipment)
             .FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true);
     }
 }
