@@ -219,7 +219,7 @@ $(document).ready(function () {
         .then((response) => {
             console.log("Hero with id: " + playId + " enters the game");
             sessionStorage.setItem('heroId', playId);
-            //window.location.replace("./game.html")
+            window.location.replace("./game.html")
         })
         .catch((error) => {
             console.error("Error with throwing character into the game", error);
