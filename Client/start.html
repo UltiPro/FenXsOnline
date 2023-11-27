@@ -67,7 +67,7 @@
                                 <label class="mt-2 w-100">Total Mana Points</label>
                             </div>
                             <div class="col">
-                                <form id="form-play" method="post"></form>
+                                <form id="form-play" method="post">
                                 <input type='hidden' name='hero.id' value='' />
                                 <div class="form-group mt-3">
                                     <div id="readNick"></div>
@@ -90,6 +90,7 @@
                                 <div class="form-group mt-2">
                                     <div id="readMana"></div>
                                 </div>
+                            </div>
                                 <div class="form-group mt-2">
                                     <button type="submit"
                                         class="btn btn-success btn-sm w-100 border border-dark">Play</button>
@@ -100,7 +101,7 @@
                                     <button type="submit"
                                     class="btn btn-danger btn-sm w-100 border border-dark">Delete hero</button>
                                 </form>
-                            </div>
+                           
                         </div>
                     </div>
                     <!--Empty slot-->
@@ -111,22 +112,22 @@
                             </div>
                             <div id="hero-preview" class="row">
                                 <div id="profession-info" class="text-small row">
-                                    <img class="col-3 mx-auto d-block profession-image" data-profession="Paladin" src="./img/hero_preview/paladin_male.gif" alt="Paladin Image">
-                                    <img class="col-3 mx-auto d-block profession-image" data-profession="Warrior" src="./img/hero_preview/warrior_male.gif" alt="Warrior Image">
-                                    <img class="col-3 mx-auto d-block profession-image" data-profession="Mage" src="./img/hero_preview/mage_male.gif" alt="Mage Image">
-                                    <img class="col-3 mx-auto d-block profession-image" data-profession="Hunter" src="./img/hero_preview/hunter_male.gif" alt="Hunter Image">
+                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Paladin" src="./img/hero_preview/paladin_male.gif" alt="Paladin Image">
+                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Warrior" src="./img/hero_preview/warrior_male.gif" alt="Warrior Image">
+                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Mage" src="./img/hero_preview/mage_male.gif" alt="Mage Image">
+                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Hunter" src="./img/hero_preview/hunter_male.gif" alt="Hunter Image">
                                 </div>
                             </div>
                             <div id="hero-conf" class="row">
                                 <form id="form-create-hero" method="post">
-                                    <div class="row justify-content-center">
+                                    <div class="row d-flex justify-content-between">
                                         <label for="hero.nick" class="mt-3 col-1">Nick</label>
                                         <div class="form-group mt-3 col-3">
                                             <input type="text" id="hero.nick"
                                                 class="form-control form-control-sm border border-dark"
                                                 placeholder="e.g. Player007">
                                         </div>
-                                        <label for="hero.sex" class="mt-3 col-1">Sex</label>
+                                        <label for="hero.sex" class="mt-3 col-1 p-0 ">Sex</label>
                                         <div class="form-group mt-3 col-3">
                                             <select for="hero.sex" id="hero.sex"
                                                 class="form-control form-control-sm border border-dark" required>
@@ -135,7 +136,7 @@
                                                 <option value="Female">Female</option>
                                             </select>
                                         </div>
-                                        <label for="hero.profession" class="mt-3 col-1">Profession</label>
+                                        <label for="hero.profession" class="mt-3 col-1 px-0">Profession</label>
                                         <div class="form-group mt-3 col-3">
                                             <select for="hero.profession" id="hero.profession"
                                                 class="form-control form-control-sm border border-dark" required>

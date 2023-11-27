@@ -81,7 +81,6 @@ $(document).ready(function () {
         if (heroInfo === undefined) {
           console.log("Slot is empty!");
           $("#menu-character-present").toggle(!slotId.startsWith("selector"));
-          var slotText = $("#" + slotId).text();
           $("#menu-character-creation").toggle(slotId.startsWith("selector"));
         } else {
           console.log("Slot is not empty!");
@@ -95,7 +94,6 @@ $(document).ready(function () {
           $("#readMana").text(heroInfo.maxMana);
 
           $("#menu-character-present").toggle(slotId.startsWith("selector"));
-          var slotText = $("#" + slotId).text();
           $("#menu-character-creation").toggle(!slotId.startsWith("selector"));
         }
       },
@@ -212,18 +210,21 @@ $(document).ready(function () {
   
 
   //wysłanie informacji do serwera, która postać została wybrana
-  $("#form-play").bind("submit", function (e) {
+  $("#form-play").on("submit", function (e) {
     e.preventDefault();
     var playId = $("input[name='hero.id']").val();
-    app
-      .put(apiBaseUrl + "Hero/play", { id: playId })
-      .then((response) => {
-        console.log("hero with id: " + playId + "enters the game");
-      })
-      .catch((error) => {
-        console.error("Error with throwing character into the game", error);
-      });
-  });
+    console.log(playId);
+
+    app.put(apiBaseUrl + "Hero/play?id="+playId)
+        .then((response) => {
+            console.log("Hero with id: " + playId + " enters the game");
+            sessionStorage.setItem('heroId', playId);
+            //window.location.replace("./game.html")
+        })
+        .catch((error) => {
+            console.error("Error with throwing character into the game", error);
+        });
+});
 
   //sex: string -> int
   function CreationConvertSex(sex) {

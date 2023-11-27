@@ -1,13 +1,13 @@
 #menu {
-    width: 1200px;
-    height: 600px;
+    width: 1000px;
+    height: 500px;
     font-family: font_form;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 .profession-image{
-    width: 128px;
-    height: 192px;
+    width: 16vh;
+    height: 20vh;
     resize: none;
     background-size: contain;
     background-repeat: no-repeat;
@@ -25,7 +25,6 @@
     opacity: 1;
 }
 
-
 #menu-character-creation label {
     height: 38.25px;
 }
@@ -40,7 +39,7 @@
 }
 
 .menu-form {
-    height: 598px;
+    height: 498px;
 }
 
 #profession-info{
