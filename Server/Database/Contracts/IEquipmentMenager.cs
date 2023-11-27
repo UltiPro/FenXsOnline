@@ -6,7 +6,8 @@ public interface IEquipmentMenager
 {
     Task Create(int heroId);
     Task Delete(int heroId);
-    Task GetItem(int heroId, ItemType itemType, int itemId);
-    Task MoveItem(int heroId, int fromSlotId, int toSlotId);
-    Task DestroyItem(int heroId, int itemId);
+    Task AddItem(string accountId, ItemType itemType, int itemId);
+    Task MoveItem(string accountId, int fromSlotId, int toSlotId);
+    Task RemoveItem(string accountId, int itemId);
+    Task<bool> HasItem(string accountId, ItemType itemType, int itemId);
 }
