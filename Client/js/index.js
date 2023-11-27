@@ -143,7 +143,7 @@ $(document).ready(function () {
     if (!ValidateLogin()) return;
     ClearAlerts();
     app
-      .put(
+      .post(
         apiBaseUrl + "Account/login",
         {
           Login: $("input[id='l.login']").val(),
