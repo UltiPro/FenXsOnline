@@ -1,4 +1,4 @@
-﻿namespace Classes.Models.Game.Map.Instance;
+﻿namespace Classes.Models.Game.Map;
 
 public class MapFieldsHelper
 {
