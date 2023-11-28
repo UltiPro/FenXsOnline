@@ -1,8 +1,6 @@
 ﻿namespace Classes.Models.Game.Map;
 
-public class MapPositionResponse
+public class MapPositionResponse : MapPosition
 {
     public int MapId { get; set; }
-    public int X { get; set; }
-    public int Y { get; set; }
 }
