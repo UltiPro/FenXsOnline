@@ -27,7 +27,7 @@ public class MovementController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult> RefreshToken(int x, int y)
+    public async Task<ActionResult> Move(int x, int y)
     {
         var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
 
