@@ -4,6 +4,11 @@
 
 body{
 	overflow: hidden;
+	
+}
+
+#font{
+	font-family: font_form;
 }
 
 .game-container{
@@ -12,8 +17,77 @@ body{
 	height: 640px;
 	margin: 0 auto;
 	transform: scale(1) translateY(0%);
+	margin-left: 10%;
 }
 
 .game-container canvas{
 	image-rendering: pixelated;
 }	
+
+#equipment-container{
+	position: relative;
+	display: block;
+	flex-direction: column;
+	width: 320px;
+	height: 640px;
+	margin: 0 auto;
+}
+
+
+.container{
+	display: flex;
+}
+
+#status{
+	margin-left: 12px;
+	display: flex;
+	width: 180px;
+	height: 140px;
+}
+
+#used{
+	margin-left: 12px;
+	width: 180px;
+	display: flex;
+}
+
+#backpack{
+	margin-left: 12px;
+	width: 180px;
+	display: flex;
+}
+
+.bp-slot, .eq-slot{
+	position: relative;
+    overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+	margin: 4px;
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+    background-repeat: no-repeat;
+	background-image: url("./../assets/ui/box/boxNormal.png");
+}
+
+.bp-slot:hover, .eq-slot:hover{
+	background-image: url("./../assets/ui/box/boxHover.png");
+}
+
+.bp-slot:active, .eq-slot:active{
+	background-image: url("./../assets/ui/box/boxSelect.png");
+}
+
+.item-image{
+	background-size: contain;
+    background-repeat: no-repeat;
+	position: absolute;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100%;
+	background-image: url("");
+	z-index: 2;
+}
