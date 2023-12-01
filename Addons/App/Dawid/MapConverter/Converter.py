@@ -52,14 +52,14 @@ def process_image(image_path):
             log_messages.append(f"Processing tile at ({x}, {y})")
             color = check_color_block(img, x, y)
             if color == 'R':
-                collisions_row.append('True')
-                zindex_row.append('False')
+                collisions_row.append('True, ')
+                zindex_row.append('False, ')
             elif color == 'G':
-                collisions_row.append('False')
-                zindex_row.append('False')
+                collisions_row.append('False, ')
+                zindex_row.append('False, ')
             elif color == 'B':
-                collisions_row.append('False')
-                zindex_row.append('True')
+                collisions_row.append('False, ')
+                zindex_row.append('True, ')
             else:
                 error_coordinates.append((x, y))
                 collisions_row.append('Error')
