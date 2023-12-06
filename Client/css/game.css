@@ -18,6 +18,7 @@ body{
 	margin: 0 auto;
 	transform: scale(1) translateY(0%);
 	margin-left: 10%;
+	background-image: url("./../assets/ui/woodBackground.png");
 }
 
 .game-container canvas{
@@ -28,9 +29,13 @@ body{
 	position: relative;
 	display: block;
 	flex-direction: column;
-	width: 320px;
+	width: 300px;
 	height: 640px;
 	margin: 0 auto;
+	margin-left: 4px;
+	background-image: url("./../assets/ui/woodBackground.png");
+	color: goldenrod;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 
@@ -39,21 +44,20 @@ body{
 }
 
 #status{
-	margin-left: 12px;
+	margin-left: 20px;
 	display: flex;
-	width: 180px;
-	height: 140px;
+	width: 300px;
+	height: 130px;
 }
 
 #used{
-	margin-left: 12px;
-	width: 180px;
+	width: 300px;
 	display: flex;
 }
 
 #backpack{
-	margin-left: 12px;
-	width: 180px;
+	margin-left: 17px;
+	width: 300px;
 	display: flex;
 }
 
@@ -64,12 +68,15 @@ body{
 	align-items: center;
 	justify-content: center;
 	z-index: 1;
-	margin: 4px;
-	width: 32px;
-	height: 32px;
+	width: 48px;
+	height: 48px;
 	background-size: contain;
     background-repeat: no-repeat;
 	background-image: url("./../assets/ui/box/boxNormal.png");
+}
+
+.eq-slot::before{
+	background-color: rgba(0,0,0,0.25);
 }
 
 .bp-slot:hover, .eq-slot:hover{
@@ -90,4 +97,87 @@ body{
     height: 100%;
 	background-image: url("");
 	z-index: 2;
+}
+
+
+/*eq slot styles*/
+#helmet{
+	background-image: url("./../assets/ui/eq/helmet.png");
+}
+
+#ring{
+	background-image: url("./../assets/ui/eq/ring.png");
+}
+
+#necklece{
+	background-image: url("./../assets/ui/eq/necklece.png");
+}
+
+#gloves{
+	background-image: url("./../assets/ui/eq/gloves.png");
+}
+
+#primary{
+	background-image: url("./../assets/ui/eq/primary.png");
+}
+
+#armor{
+	background-image: url("./../assets/ui/eq/armor.png");
+}
+
+#secondary{
+	background-image: url("./../assets/ui/eq/secondary.png");
+}
+
+#boots{
+	background-image: url("./../assets/ui/eq/boots.png");
+}
+
+.item-opacity{
+	opacity: 40%;
+}
+
+/*stats styles*/
+.stat-icon{
+	position: relative;
+    overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+    background-repeat: no-repeat;
+}
+#dmg{
+	background-image: url("./../assets/ui/eq/Dmg.png");
+}
+
+#m-dmg{
+	background-image: url("./../assets/ui/eq/MagicDmg.png");
+}
+
+#def{
+	background-image: url("./../assets/ui/eq/defence.png");
+}
+
+#m-def{
+	background-image: url("./../assets/ui/eq/MagicDefence.png");
+}
+
+#health{
+	background-image: url("./../assets/ui/eq/health.png");
+}
+
+#mana{
+	background-image: url("./../assets/ui/eq/mana.png");
+}
+
+#agility{
+	background-image: url("./../assets/ui/eq/agility.png");
+}
+
+#gold{
+	background-image: url("./../assets/ui/eq/gold.png");
 }

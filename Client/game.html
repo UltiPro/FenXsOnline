@@ -15,66 +15,72 @@
         <header class="text-center p-5 header-small">FenXs</header>
         <main role="main">
             <div id="font" class="container">
-                <div class="game-container bg-wooden rounded border border-2 border-dark">
+                <div class="game-container rounded border border-2 border-dark">
                     <canvas class="game-canvas" width="960" height="640"></canvas>
                 </div>
-                <div id="equipment-container" width="320" height="640" class="bg-wooden rounded border border-2 border-dark">
-                    <h6 class="mt-1 text-center">Hero Status</h6>
-                    <div id="status" class="text-center"></div>
+                <div id="equipment-container" width="320" height="640" class="rounded border border-2 border-dark">
+                    <h6 class="text-center">Hero Statistics</h6>
+                    <div id="status">
+                        <div class="row">
+                        <div class="stat-icon col-2 col-sm-2" title="Physical Damage" id="dmg"></div><p class="text-small col-2 col-sm-2">123</p>
+                        <div class="stat-icon col-2 col-sm-2" id="def"></div><p class="text-small col-2 col-sm-2">123</p>
+                        <div class="stat-icon col-2 col-sm-2" id="health"></div><p class="text-small col-2 col-sm-2">100/100</p>
+                        <div class="w-100"></div>
+                        <div class="stat-icon col-2 col-sm-2" id="m-dmg"></div><p class="text-small col-2 col-sm-2">123</p>
+                        <div class="stat-icon col-2 col-sm-2" id="m-def"></div><p class="text-small col-2 col-sm-2">123</p>
+                        <div class="stat-icon col-2 col-sm-2" id="mana"></div><p class="text-small col-2 col-sm-2">100/100</p>
+                        <div class="w-100"></div>
+                        <div class="stat-icon col-2 col-sm-2" id="agility"></div><p class="text-small col-2 col-sm-2">10</p>
+                        <div class="stat-icon col-2 col-sm-2" id="gold"></div><p class="text-small col-2 col-sm-2">1000000</p>
+                        </div>
+                    </div>
                     <h6 class="text-center">Equipment</h6>
                     <div id="used">
                         <div class="row justify-content-center">
-                            <div class="eq-slot col-2 col-sm-2"><div id="necklece" class="item-image"></div></div>
-                            <div class="eq-slot col-2 col-sm-2"><div id="helmet" class="item-image"></div></div>
-                            <div class="eq-slot col-2 col-sm-2"><div id="ring" class="item-image"></div></div>
-                            <div class="eq-slot col-2 col-sm-2"><div id="gloves" class="item-image"></div></div>
+                            <div class="eq-slot col-2 col-sm-2"><div id="helmet" class="item-image item-opacity"></div></div>
                             <div class="w-100"></div>
-                            <div class="eq-slot col-2 col-sm-2"><div id="primary" class="item-image"></div></div>
-                            <div class="eq-slot col-2 col-sm-2"><div id="armor" class="item-image"></div></div>
-                            <div class="eq-slot col-2 col-sm-2"><div id="secondary" class="item-image"></div></div>
-                            <div class="eq-slot col-2 col-sm-2"><div id="boots" class="item-image"></div></div>
+                            <div class="eq-slot col-2 col-sm-2"><div id="ring" class="item-image item-opacity"></div></div>
+                            <div class="eq-slot col-2 col-sm-2"><div id="necklece" class="item-image item-opacity"></div></div>
+                            <div class="eq-slot col-2 col-sm-2"><div id="gloves" class="item-image item-opacity"></div></div>
                             <div class="w-100"></div>
+                            <div class="eq-slot col-2 col-sm-2"><div id="primary" class="item-image item-opacity"></div></div>
+                            <div class="eq-slot col-2 col-sm-2"><div id="armor" class="item-image item-opacity"></div></div>
+                            <div class="eq-slot col-2 col-sm-2"><div id="secondary" class="item-image item-opacity"></div></div>
+                            <div class="w-100"></div>
+                            <div class="eq-slot col-2 col-sm-2"><div id="boots" class="item-image item-opacity"></div></div>
                         </div>
                     </div>
-
-                    <h6 class="text-center">Backpack</h6>
-                    <div id="backpack">
+                    <div id="backpack" class="justify-content-center">
                         <div class="row">
                             <div class="bp-slot col-2 col-sm-2"><div id="s0" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s1" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s2" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s3" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s4" class="item-image"></div></div>
-
-                            <div class="w-100"></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s5" class="item-image"></div></div>
+                            <div class="w-100"></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s6" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s7" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s8" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s9" class="item-image"></div></div>
-
-                            <div class="w-100"></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s10" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s11" class="item-image"></div></div>
+                            <div class="w-100"></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s12" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s13" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s14" class="item-image"></div></div>
-
-                            <div class="w-100"></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s15" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s16" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s17" class="item-image"></div></div>
+                            <div class="w-100"></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s18" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s19" class="item-image"></div></div>
-
-                            <div class="w-100"></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s20" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s21" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s22" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s23" class="item-image"></div></div>
-                            <div class="bp-slot col-2 col-sm-2"><div id="s24" class="item-image"></div></div>
-
                             <div class="w-100"></div>
+                            <div class="bp-slot col-2 col-sm-2"><div id="s24" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s25" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s26" class="item-image"></div></div>
                             <div class="bp-slot col-2 col-sm-2"><div id="s27" class="item-image"></div></div>
