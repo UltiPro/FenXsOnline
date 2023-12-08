@@ -13,5 +13,6 @@ public class MapperConfiguration : Profile
         CreateMap<HeroCreateBackend, DBHero>().ReverseMap();
         CreateMap<HeroBasicInfo, DBHero>().ReverseMap();
         CreateMap<MapHero, DBHero>().ReverseMap();
+        CreateMap<MapData, MapDataRefresh>().ReverseMap();
     }
 }
