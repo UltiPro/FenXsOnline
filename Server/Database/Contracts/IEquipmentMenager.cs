@@ -10,7 +10,6 @@ public interface IEquipmentMenager
     Task AddItem(string accountId, ItemType itemType, int itemId);
     Task MoveItem(string accountId, int fromSlotId, int toSlotId);
     Task RemoveItem(string accountId, int slotId);
-    Task<bool> HasItem(int heroId, ItemType itemType, int itemId);
     Task<DBHero> UseItem(string accountId, int slotId);
     Task<DBHero> UnuseItem(string accountId, ItemType itemType, int slotId);
 }
