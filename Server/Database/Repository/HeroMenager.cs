@@ -132,4 +132,9 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
             .Include(hero => hero.HeroEquipment)
             .FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true);
     }
+
+    public async Task<DBHero> GetInGameHeroBackend(string accountId)
+    {
+        return await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true);
+    }
 }

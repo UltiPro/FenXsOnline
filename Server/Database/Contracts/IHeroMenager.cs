@@ -13,4 +13,5 @@ public interface IHeroMenager : IGenericRepository<DBHero>
     Task ChangeSprite(int heroId, int spriteLevel);
     Task Play(string accountId, int heroId);
     Task<DBHero> GetInGameHero(string accountId);
+    Task<DBHero> GetInGameHeroBackend(string accountId);
 }
