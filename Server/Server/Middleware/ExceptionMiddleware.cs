@@ -47,7 +47,7 @@ public class ExceptionMiddleware
                 errorDetails.Code = "Unauthorized";
                 break;
             case BannedException or HeroLimitReachedException or HeroLevelTooLowException or HeroEquipmentIsFullException
-                 or ItemRequiresAnotherProfessionException or ItemIsNotWornableException:
+                 or ItemRequiresAnotherProfessionException or ItemIsNotWornableException or HeroEquipmentSlotIsOccupiedException:
                 statusCode = HttpStatusCode.Forbidden;
                 errorDetails.Code = "Forbidden";
                 break;
