@@ -1,6 +1,6 @@
 ﻿namespace Classes.Models.Game.Item;
 
-public class ItemProviderTimer : ItemProvider
+public class ItemProviderGroundTimer : ItemProviderGround
 {
     DateTime Avaliable { get; set; }
 }
