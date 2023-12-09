@@ -1,20 +1,20 @@
 ﻿using Classes.Exceptions;
+using Classes.Exceptions.Game;
 using Classes.Models.Game;
 using Classes.Models.Game.Map;
 using Database.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Database.Repository;
 
 public class MovementMenager : IMovementMenager
 {
     private readonly DatabaseContext _context;
-    private readonly IHeroMenager _heroMenager;
     private readonly World _world;
 
-    public MovementMenager(DatabaseContext _context, IHeroMenager _heroMenager)
+    public MovementMenager(DatabaseContext _context)
     {
         this._context = _context;
-        this._heroMenager = _heroMenager;
         _world = World.GetInstance();
     }
 
@@ -24,7 +24,9 @@ public class MovementMenager : IMovementMenager
             throw new BadRequestException("The hero can't move on " +
                 "both axes at the same time and have to take a 1 step.");
 
-        var hero = await _heroMenager.GetInGameHeroBackend(accountId);
+        var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true);
+
+        if (hero is null) throw new HeroIsNotInTheGameException();
 
         try
         {
