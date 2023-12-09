@@ -9,6 +9,7 @@ namespace Server.Middleware;
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _requestDelegate;
+
     public ExceptionMiddleware(RequestDelegate _requestDelegate)
     {
         this._requestDelegate = _requestDelegate;
@@ -47,7 +48,8 @@ public class ExceptionMiddleware
                 errorDetails.Code = "Unauthorized";
                 break;
             case BannedException or HeroLimitReachedException or HeroLevelTooLowException or HeroEquipmentIsFullException
-                 or ItemRequiresAnotherProfessionException or ItemIsNotWornableException or HeroEquipmentSlotIsOccupiedException:
+                 or ItemRequiresAnotherProfessionException or ItemIsNotWornableException or HeroEquipmentSlotIsOccupiedException
+                 or ItemIsNotDroppableException:
                 statusCode = HttpStatusCode.Forbidden;
                 errorDetails.Code = "Forbidden";
                 break;
