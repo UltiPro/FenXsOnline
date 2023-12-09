@@ -59,8 +59,7 @@ public class ExceptionMiddleware
                 break;
         }
 
-        string response = JsonConvert.SerializeObject(errorDetails);
         context.Response.StatusCode = (int)statusCode;
-        return context.Response.WriteAsync(response);
+        return context.Response.WriteAsync(JsonConvert.SerializeObject(errorDetails));
     }
 }
