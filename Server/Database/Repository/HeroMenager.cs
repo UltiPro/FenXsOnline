@@ -11,14 +11,14 @@ namespace Database.Repository;
 
 public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
 {
-    private readonly IMapper _mapper;
     private readonly DatabaseContext _context;
+    private readonly IMapper _mapper;
     private readonly IEquipmentMenager _equipmentMenager;
 
     public HeroMenager(DatabaseContext _context, IMapper _mapper, IEquipmentMenager _equipmentMenager) : base(_context, _mapper)
     {
-        this._mapper = _mapper;
         this._context = _context;
+        this._mapper = _mapper;
         this._equipmentMenager = _equipmentMenager;
     }
 
@@ -43,11 +43,16 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
 
     public async Task<bool> IsHeroThisUser(string accountId, int heroId)
     {
+        return (await GetHero(heroId)).UserId == accountId;
+    }
+
+    private async Task<DBHero> GetHero(int heroId)
+    {
         var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.Id == heroId);
 
         if (hero is null) throw new NotFoundException("Hero", heroId.ToString());
 
-        return hero.UserId == accountId;
+        return hero;
     }
 
     public async Task DeleteHero(int id)
@@ -66,9 +71,7 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
     {
         if (spriteLevel % 10 != 0) throw new BadRequestException("Incorrect sprite level. Only dozens are allowed.");
 
-        var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.Id == heroId);
-
-        if (hero is null) throw new NotFoundException("Hero", heroId.ToString());
+        var hero = await GetHero(heroId);
 
         if (hero.Level < spriteLevel) throw new HeroLevelTooLowException(spriteLevel);
 
@@ -131,10 +134,5 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
             .Include(hero => hero.DBWeapon)
             .Include(hero => hero.HeroEquipment)
             .FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true);
-    }
-
-    public async Task<DBHero> GetInGameHeroBackend(string accountId)
-    {
-        return await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true);
     }
 }
