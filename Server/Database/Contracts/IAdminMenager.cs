@@ -1,10 +1,7 @@
-﻿using Classes.Models;
-
-namespace Database.Contracts;
+﻿namespace Database.Contracts;
 
 public interface IAdminMenager
 {
-    Task SetAdminByCode(AdminSetByCode adminSetByCode);
     Task SetAdmin(string id);
     Task UnsetAdmin(string id);
     Task SetModerator(string id);
