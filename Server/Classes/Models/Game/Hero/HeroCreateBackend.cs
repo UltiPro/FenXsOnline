@@ -1,4 +1,5 @@
 ﻿using Classes.Enums.Game;
+using Classes.Statics.Game;
 
 namespace Classes.Models.Game.Hero;
 
@@ -6,6 +7,7 @@ public class HeroCreateBackend : HeroCreate
 {
     public string UserId { get; set; }
     public string SpriteURL { get; set; }
+
     public HeroCreateBackend(HeroCreate heroCreate, string userId)
     {
         Name = heroCreate.Name;
@@ -15,20 +17,20 @@ public class HeroCreateBackend : HeroCreate
         switch (Profession)
         {
             case Profession.Warrior:
-                if (Sex == Sex.Male) SpriteURL = "warriorM0.gif";
-                else SpriteURL = "warriorF0.gif";
+                if (Sex == Sex.Male) SpriteURL = Sprites.warriorMale[0];
+                else SpriteURL = Sprites.warriorFemale[0];
                 break;
             case Profession.Hunter:
-                if (Sex == Sex.Male) SpriteURL = "hunterM0.gif";
-                else SpriteURL = "hunterF0.gif";
+                if (Sex == Sex.Male) SpriteURL = Sprites.hunterMale[0];
+                else SpriteURL = Sprites.hunterFemale[0];
                 break;
             case Profession.Mage:
-                if (Sex == Sex.Male) SpriteURL = "mageM0.gif";
-                else SpriteURL = "mageF0.gif";
+                if (Sex == Sex.Male) SpriteURL = Sprites.mageMale[0];
+                else SpriteURL = Sprites.mageFemale[0];
                 break;
             case Profession.Paladin:
-                if (Sex == Sex.Male) SpriteURL = "paladinM0.gif";
-                else SpriteURL = "paladinF0.gif";
+                if (Sex == Sex.Male) SpriteURL = Sprites.paladinMale[0];
+                else SpriteURL = Sprites.paladinFemale[0];
                 break;
         }
     }
