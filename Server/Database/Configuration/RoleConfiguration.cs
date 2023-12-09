@@ -13,17 +13,17 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
             new IdentityRole
             {
                 Name = Role.User,
-                NormalizedName = Role.UserN
+                NormalizedName = Role.User.ToUpper()
             },
             new IdentityRole
             {
                 Name = Role.Mod,
-                NormalizedName = Role.ModN
+                NormalizedName = Role.Mod.ToUpper()
             },
             new IdentityRole
             {
                 Name = Role.Admin,
-                NormalizedName = Role.AdminN
+                NormalizedName = Role.Admin.ToUpper()
             }
             );
     }
