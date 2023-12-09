@@ -20,12 +20,10 @@ namespace Database.Repository;
 public class EquipmentMenager : IEquipmentMenager
 {
     private readonly DatabaseContext _context;
-    private readonly IHeroMenager _heroMenager;
 
-    public EquipmentMenager(DatabaseContext _context, IHeroMenager _heroMenager)
+    public EquipmentMenager(DatabaseContext _context)
     {
         this._context = _context;
-        this._heroMenager = _heroMenager;
     }
 
     public async Task Create(int heroId)
@@ -49,7 +47,7 @@ public class EquipmentMenager : IEquipmentMenager
 
     public async Task AddItem(string accountId, ItemType itemType, int itemId)
     {
-        var hero = await _heroMenager.GetInGameHeroBackend(accountId);
+        var hero = await GetInGameHero(accountId);
 
         var freeSlot = await _context.HeroesEquipments.FirstOrDefaultAsync(heroEquipment =>
             heroEquipment.DBHero == hero &&
@@ -66,7 +64,7 @@ public class EquipmentMenager : IEquipmentMenager
 
     public async Task MoveItem(string accountId, int fromSlotId, int toSlotId)
     {
-        var hero = await _heroMenager.GetInGameHeroBackend(accountId);
+        var hero = await GetInGameHero(accountId);
 
         var slot_1 = await _context.HeroesEquipments.FirstOrDefaultAsync(heroEquipment => heroEquipment.DBHero == hero && heroEquipment.Id == fromSlotId);
         var slot_2 = await _context.HeroesEquipments.FirstOrDefaultAsync(heroEquipment => heroEquipment.DBHero == hero && heroEquipment.Id == toSlotId);
@@ -88,7 +86,7 @@ public class EquipmentMenager : IEquipmentMenager
 
     public async Task RemoveItem(string accountId, int slotId)
     {
-        var hero = await _heroMenager.GetInGameHeroBackend(accountId);
+        var hero = await GetInGameHero(accountId);
 
         var slot = await _context.HeroesEquipments.FirstOrDefaultAsync(heroEquipment => heroEquipment.DBHero == hero && heroEquipment.Id == slotId);
 
@@ -104,7 +102,7 @@ public class EquipmentMenager : IEquipmentMenager
     {
         if (slotId < 1) throw new BadRequestException("Slot id needs to be larger than 0.");
 
-        var hero = await _heroMenager.GetInGameHeroBackend(accountId);
+        var hero = await GetInGameHero(accountId);
 
         var slot = await _context.HeroesEquipments.FirstOrDefaultAsync(heroEquipment => heroEquipment.DBHero == hero && heroEquipment.Id == slotId);
 
@@ -238,7 +236,7 @@ public class EquipmentMenager : IEquipmentMenager
     {
         if (slotId < 1) throw new BadRequestException("Slot id needs to be larger than 0.");
 
-        var hero = await _heroMenager.GetInGameHeroBackend(accountId);
+        var hero = await GetInGameHero(accountId);
 
         var slot = await _context.HeroesEquipments.FirstOrDefaultAsync(heroEquipment => heroEquipment.DBHero == hero && heroEquipment.Id == slotId);
 
@@ -246,47 +244,71 @@ public class EquipmentMenager : IEquipmentMenager
 
         if (slot.ItemId != null) throw new HeroEquipmentSlotIsOccupiedException();
 
-        switch (slot.ItemType)
+        switch (itemType)
         {
             case ItemType.Armor:
-                SetSlot(slot, hero.DBArmor.ItemType, hero.DBArmor.Id);
-                UpdateArmor(hero, hero.DBArmor, -1);
-                hero.DBArmor = null;
+                if (hero.DBArmor != null)
+                {
+                    SetSlot(slot, hero.DBArmor.ItemType, hero.DBArmor.Id);
+                    UpdateArmor(hero, hero.DBArmor, -1);
+                    hero.DBArmor = null;
+                }
                 break;
             case ItemType.Boots:
-                SetSlot(slot, hero.DBBoots.ItemType, hero.DBBoots.Id);
-                UpdateArmor(hero, hero.DBBoots, -1);
-                hero.DBBoots = null;
+                if (hero.DBBoots != null)
+                {
+                    SetSlot(slot, hero.DBBoots.ItemType, hero.DBBoots.Id);
+                    UpdateArmor(hero, hero.DBBoots, -1);
+                    hero.DBBoots = null;
+                }
                 break;
             case ItemType.Gloves:
-                SetSlot(slot, hero.DBGloves.ItemType, hero.DBGloves.Id);
-                UpdateArmor(hero, hero.DBGloves, -1);
-                hero.DBGloves = null;
+                if (hero.DBGloves != null)
+                {
+                    SetSlot(slot, hero.DBGloves.ItemType, hero.DBGloves.Id);
+                    UpdateArmor(hero, hero.DBGloves, -1);
+                    hero.DBGloves = null;
+                }
                 break;
             case ItemType.Helmet:
-                SetSlot(slot, hero.DBHelmet.ItemType, hero.DBHelmet.Id);
-                UpdateArmor(hero, hero.DBHelmet, -1);
-                hero.DBHelmet = null;
+                if (hero.DBHelmet != null)
+                {
+                    SetSlot(slot, hero.DBHelmet.ItemType, hero.DBHelmet.Id);
+                    UpdateArmor(hero, hero.DBHelmet, -1);
+                    hero.DBHelmet = null;
+                }
                 break;
             case ItemType.Necklace:
-                SetSlot(slot, hero.DBNecklace.ItemType, hero.DBNecklace.Id);
-                UpdateJewelry(hero, hero.DBNecklace, -1);
-                hero.DBNecklace = null;
+                if (hero.DBNecklace != null)
+                {
+                    SetSlot(slot, hero.DBNecklace.ItemType, hero.DBNecklace.Id);
+                    UpdateJewelry(hero, hero.DBNecklace, -1);
+                    hero.DBNecklace = null;
+                }
                 break;
             case ItemType.Ring:
-                SetSlot(slot, hero.DBRing.ItemType, hero.DBRing.Id);
-                UpdateJewelry(hero, hero.DBRing, -1);
-                hero.DBRing = null;
+                if (hero.DBRing != null)
+                {
+                    SetSlot(slot, hero.DBRing.ItemType, hero.DBRing.Id);
+                    UpdateJewelry(hero, hero.DBRing, -1);
+                    hero.DBRing = null;
+                }
                 break;
             case ItemType.SecondaryWeapon:
-                SetSlot(slot, hero.DBSecondaryWeapon.ItemType, hero.DBSecondaryWeapon.Id);
-                UpdateSecondaryWeapon(hero, hero.DBSecondaryWeapon, -1);
-                hero.DBSecondaryWeapon = null;
+                if (hero.DBSecondaryWeapon != null)
+                {
+                    SetSlot(slot, hero.DBSecondaryWeapon.ItemType, hero.DBSecondaryWeapon.Id);
+                    UpdateSecondaryWeapon(hero, hero.DBSecondaryWeapon, -1);
+                    hero.DBSecondaryWeapon = null;
+                }
                 break;
             case ItemType.Weapon:
-                SetSlot(slot, hero.DBWeapon.ItemType, hero.DBWeapon.Id);
-                UpdateWeapon(hero, hero.DBWeapon, -1);
-                hero.DBWeapon = null;
+                if (hero.DBWeapon != null)
+                {
+                    SetSlot(slot, hero.DBWeapon.ItemType, hero.DBWeapon.Id);
+                    UpdateWeapon(hero, hero.DBWeapon, -1);
+                    hero.DBWeapon = null;
+                }
                 break;
             default:
                 throw new ItemIsNotWornableException();
@@ -354,5 +376,23 @@ public class EquipmentMenager : IEquipmentMenager
         hero.HealthPoints += consumable.HealthPoints;
         if (hero.HealthPoints > hero.MaxHealthPoints) hero.HealthPoints = hero.MaxHealthPoints;
         hero.Gold += consumable.Gold;
+    }
+
+    private async Task<DBHero> GetInGameHero(string accountId)
+    {
+        var hero = await _context.Heroes
+            .Include(hero => hero.DBArmor)
+            .Include(hero => hero.DBBoots)
+            .Include(hero => hero.DBGloves)
+            .Include(hero => hero.DBHelmet)
+            .Include(hero => hero.DBNecklace)
+            .Include(hero => hero.DBRing)
+            .Include(hero => hero.DBSecondaryWeapon)
+            .Include(hero => hero.DBWeapon)
+            .FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame == true);
+
+        if (hero is null) throw new HeroIsNotInTheGameException();
+
+        return hero;
     }
 }

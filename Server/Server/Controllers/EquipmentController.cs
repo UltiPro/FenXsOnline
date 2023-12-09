@@ -1,4 +1,5 @@
-﻿using Database.Contracts;
+﻿using Classes.Enums.Game;
+using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,5 +57,43 @@ public class EquipmentController : ControllerBase
         await _equipmentMenager.RemoveItem(cookieId, slotId);
 
         return NoContent();
+    }
+
+    [HttpPut]
+    [Route("use-item")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult> UseItem(int slotId)
+    {
+        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
+
+        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
+
+        var hero = await _equipmentMenager.UseItem(cookieId, slotId);
+
+        return Ok(hero);
+    }
+
+    [HttpPut]
+    [Route("unuse-item")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult> UnuseItem(ItemType itemType, int slotId)
+    {
+        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
+
+        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
+
+        var hero = await _equipmentMenager.UnuseItem(cookieId, itemType, slotId);
+
+        return Ok(hero);
     }
 }
