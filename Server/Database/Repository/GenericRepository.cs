@@ -17,9 +17,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public async Task<TResult> Get<TResult>(int id)
     {
-        var entity = await _context.Set<T>().FindAsync(id);
-
-        if (entity is null) throw new NotFoundException(typeof(T).Name, id);
+        var entity = await GetEntity(id);
 
         return _mapper.Map<TResult>(entity);
     }
@@ -36,9 +34,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public async Task Update<TSource>(int id, TSource source)
     {
-        var entity = await _context.Set<T>().FindAsync(id);
-
-        if (entity is null) throw new NotFoundException(typeof(T).Name, id);
+        var entity = await GetEntity(id);
 
         _mapper.Map(entity, source);
         _context.Update(entity);
@@ -47,11 +43,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public async Task Delete(int id)
     {
+        var entity = await GetEntity(id);
+
+        _context.Remove(entity);
+        await _context.SaveChangesAsync();
+    }
+
+    private async Task<T> GetEntity(int id)
+    {
         var entity = await _context.Set<T>().FindAsync(id);
 
         if (entity is null) throw new NotFoundException(typeof(T).Name, id);
 
-        _context.Remove(entity);
-        await _context.SaveChangesAsync();
+        return entity;
     }
 }
