@@ -1,31 +1,21 @@
 ﻿using Classes.Exceptions;
-using Classes.Models;
 using Classes.Models.User;
 using Classes.Statics;
 using Database.Contracts;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Database.Repository;
 
 public class AdminMenager : IAdminMenager
 {
-    private readonly IConfiguration _configuration;
     private readonly ILogger<AdminMenager> _logger;
     private readonly UserManager<DBUser> _userManager;
 
-    public AdminMenager(IConfiguration _configuration, ILogger<AdminMenager> _logger, UserManager<DBUser> _userManager)
+    public AdminMenager(ILogger<AdminMenager> _logger, UserManager<DBUser> _userManager)
     {
-        this._configuration = _configuration;
         this._logger = _logger;
         this._userManager = _userManager;
-    }
-
-    public async Task SetAdminByCode(AdminSetByCode adminSetByCode)
-    {
-        if (adminSetByCode.Code != _configuration["Settings:AdminCode"]) throw new UnauthorizedException(null);
-        await SetAdmin(adminSetByCode.Id);
     }
 
     public async Task SetAdmin(string id)
