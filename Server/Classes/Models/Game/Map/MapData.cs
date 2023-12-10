@@ -9,7 +9,6 @@ public class MapData
     public string Name { get; set; }
     public string SpriteURL { get; set; }
     public bool IsPvP { get; set; }
-    [JsonIgnore]
     public bool[,] Fields { get; set; }
     public List<MapDoor>? Doors { get; set; } = null;
     public List<MapNPC>? NPCs { get; set; } = null;
