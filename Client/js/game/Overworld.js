@@ -77,16 +77,29 @@ class Overworld{
 		})
 	}
 
+	bindHeroPositionCheck(){
+		document.addEventListener("PersonWalkingComplete", e => {
+			if(e.detail.whoId === "hero"){	//Hero position has change
+				//Check for events
+				this.map.checkForFootstepCutscene();
+			}
+		})
+	}
+
+	startMap(mapConfig){
+		this.map = new OverworldMap(mapConfig); //loading current map
+		this.map.overworld = this;
+		this.map.mountObjects(); //mounting objects collisions
+	}
+
 	//async to fetch the data with getHero(), otherwise this.heroData will be null
 	init(){
 		// this.heroData = await this.getHero()
 		// console.log(this.heroData)
+		this.startMap(window.OverworldMaps.Home);
 
- 
-		this.map = new OverworldMap(window.OverworldMaps.Home); //loading current map
-		this.map.mountObjects(); //mounting objects collisions
-
-		this.bindActionInput();
+		this.bindActionInput(); //check for events by pressing button
+		this.bindHeroPositionCheck(); //check for events by standing in specific area
 
 		this.directionInput = new DirectionInput(); //directionInput object constructor
 		this.directionInput.init(); //running movement function

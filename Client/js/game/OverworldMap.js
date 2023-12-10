@@ -1,8 +1,10 @@
 class OverworldMap {
   constructor(config) {
+    this.overworld = null;
     this.gameObjects = config.gameObjects;
     this.walls = config.walls || {};
     this.zindex = config.zindex || {};
+    this.cutsceneSpaces = config.cutsceneSpaces || {};
 
     //lower layer of the map, gameobjects should be visible
     this.lowerImage = new Image();
@@ -83,7 +85,17 @@ class OverworldMap {
     if(!this.isCutscenePlaying && match && match.talking.length){
       this.startCutscene(match.talking[0].events)
     }
-    console.log(match);
+    // console.log(match);
+  }
+
+  //check for event by entering specific area
+  checkForFootstepCutscene(){
+    const hero = this.gameObjects["hero"]; //current player
+    const match = this.cutsceneSpaces[ `${hero.x},${hero.y}` ];
+    if(!this.isCutscenePlaying && match){
+      this.startCutscene(match[0].events)
+    }
+    // console.log(match);
   }
 
   addWall(x, y) {
@@ -242,6 +254,50 @@ window.OverworldMaps = {
     },
     zindex:{
       [utils.asGridCoord(4, 5)]: true,
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(4, 5)]: [
+        {
+          events: [
+            {type: "textMessage", text: "What a beautiful lil tree!"}
+          ]
+        }
+      ],
+      [utils.asGridCoord(8, 9)]: [
+        {
+          events: [
+            {type: "changeMap", map: "City"},
+          ]
+        }
+      ],
+      [utils.asGridCoord(7, 9)]: [
+        {
+          events: [
+            {type: "changeMap", map: "City"},
+          ]
+        }
+      ],
     }
   },
+
+  City:{
+    lowerSrc: "./assets/maps/fenxscity.png",
+    upperSrc: "",
+    gameObjects:{
+      hero: new Person({
+        isPlayerControlled: true,
+        x: utils.withGrid(6),
+        y: utils.withGrid(79),
+        src: "./assets/heroes/hunter/hunterF0.gif",
+      })
+    }
+  },
+
+  Cave:{
+    lowerSrc: "./assets/maps/nearcave.png",
+  },
+  
+  Ruins:{
+    lowerSrc: "./assets/maps/ruins.png",
+  }
 };
