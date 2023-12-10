@@ -11,6 +11,8 @@ class OverworldMap {
     //upper layer of the map like trees etc, gameobjects should not be visible
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
+
+    this.isCutscenePlaying = false;
   }
 
   //drawing lower layer of the map
@@ -31,22 +33,57 @@ class OverworldMap {
       utils.withGrid(10) - cameraPerson.y
     );
   }
-
+  //check if hero can walk to the position
   isSpaceTaken(currentX, currentY, direction) {
     const { x, y } = utils.nextPosition(currentX, currentY, direction);
     return this.walls[`${x},${y}`] || false;
   }
 
+  //checking if hero is behind an object
   isHeroBehindObject(currentX, currentY, direction){
     const {x,y} = utils.nextPosition(currentX, currentY, direction);
     return this.zindex[`${x},${y}`] || false;
   }
 
   mountObjects() {
-    Object.values(this.gameObjects).forEach((o) => {
+    Object.keys(this.gameObjects).forEach((key) => {
+
+      let object = this.gameObjects[key];
+      object.id = key;
       //in the future : check if the object should mount xD;
-      o.mount(this);
+      object.mount(this);
     });
+  }
+
+  async startCutscene(events){
+    this.isCutscenePlaying = true;
+    //start a loop of async events 
+    //await each one
+    for(let i=0; i<events.length; i++){
+      const event = new OverworldEvent({
+        event: events[i],
+        map: this,
+      })
+      await event.init();
+    }
+
+    this.isCutscenePlaying = false;
+
+    //Reset NPC to do idle behavior
+    Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this));
+  }
+
+  //check for event for ex. talking
+  checkForAction(){
+    const hero = this.gameObjects["hero"]; //current player
+    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction); //npc
+    const match = Object.values(this.gameObjects).find(object => {
+      return `${object.x}, ${object.y}` === `${nextCoords.x}, ${nextCoords.y}`
+    })
+    if(!this.isCutscenePlaying && match && match.talking.length){
+      this.startCutscene(match.talking[0].events)
+    }
+    console.log(match);
   }
 
   addWall(x, y) {
@@ -74,6 +111,22 @@ window.OverworldMaps = {
         x: utils.withGrid(2),
         y: utils.withGrid(4),
         src: "./assets/heroes/hunter/hunterF0.gif",
+      }),
+      npc1: new Person({
+        isPlayerControlled: false, //npc shouldn't walk and they're in person class so I added a flag in the Person class
+        x: utils.withGrid(10),
+        y: utils.withGrid(3),
+        src: "./assets/heroes/mage/mageM20.gif",
+        behaviorLoop: [
+          {type: "stand", direction: "up", time: "200"},
+        ],
+        talking:[
+          {
+            events:[
+              {type: "textMessage", text: "Why hello there, Old Sport!"},
+            ]
+          },
+        ]
       }),
     },
     //walls contains cells where collision are
