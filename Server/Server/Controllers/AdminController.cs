@@ -17,20 +17,6 @@ public class AdminController : ControllerBase
     }
 
     [HttpPut]
-    [Route("setadminbycode")]
-    [AllowAnonymous]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult> SetAdmin([FromBody] AdminSetByCode adminSetByCode)
-    {
-        await _adminMenager.SetAdminByCode(adminSetByCode);
-        return Ok();
-    }
-
-    [HttpPut]
     [Route("setadmin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
