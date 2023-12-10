@@ -13,9 +13,9 @@ namespace Server.Controllers;
 [Authorize]
 public class HeroController : ControllerBase
 {
+    private readonly IConfiguration _configuration;
     private readonly IHeroMenager _heroMenager;
     private readonly IAuthMenager _authMenager;
-    private readonly IConfiguration _configuration;
 
     public HeroController(IHeroMenager _heroMenager, IAuthMenager _authMenager, IConfiguration _configuration)
     {
