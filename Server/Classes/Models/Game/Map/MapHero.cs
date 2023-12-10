@@ -4,7 +4,6 @@ namespace Classes.Models.Game.Map;
 
 public class MapHero
 {
-    public int Id { get; set; }
     public string Name { get; set; }
     public int Level { get; set; }
     public Profession Profession { get; set; }
