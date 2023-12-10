@@ -6,7 +6,6 @@ public class Map1 : MapFieldsHelper
     {
         return new MapData
         {
-            Id = 1,
             Name = "Fenxs City",
             SpriteURL = "fenxscity.png",
             IsPvP = false,

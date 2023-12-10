@@ -6,7 +6,6 @@ public class Map0 : MapFieldsHelper
     {
         return new MapData
         {
-            Id = 0,
             Name = "Home",
             SpriteURL = "home.png",
             IsPvP = false,

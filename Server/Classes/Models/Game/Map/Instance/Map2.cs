@@ -6,7 +6,6 @@ public class Map2 : MapFieldsHelper
     {
         return new MapData
         {
-            Id = 2,
             Name = "Near Cave",
             SpriteURL = "nearcave.png",
             IsPvP = true,
