@@ -45,7 +45,7 @@ public class EquipmentMenager : IEquipmentMenager
         _context.HeroesEquipments.RemoveRange(await _context.HeroesEquipments.Where(heroEquipment => heroEquipment.HeroId == heroId).ToListAsync());
     }
 
-    public async Task AddItem(string accountId, ItemType itemType, int itemId)
+    public async Task<DBHeroEquipment> AddItem(string accountId, ItemType itemType, int itemId)
     {
         var hero = await GetInGameHero(accountId);
 
@@ -60,6 +60,8 @@ public class EquipmentMenager : IEquipmentMenager
         freeSlot.ItemId = itemId;
 
         await _context.SaveChangesAsync();
+
+        return freeSlot;
     }
 
     public async Task MoveItem(string accountId, int fromSlotId, int toSlotId)
