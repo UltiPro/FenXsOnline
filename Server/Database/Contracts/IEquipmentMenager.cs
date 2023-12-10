@@ -7,7 +7,7 @@ public interface IEquipmentMenager
 {
     Task Create(int heroId);
     Task Delete(int heroId);
-    Task AddItem(string accountId, ItemType itemType, int itemId);
+    Task<DBHeroEquipment> AddItem(string accountId, ItemType itemType, int itemId);
     Task MoveItem(string accountId, int fromSlotId, int toSlotId);
     Task RemoveItem(string accountId, int slotId);
     Task<DBHero> UseItem(string accountId, int slotId);
