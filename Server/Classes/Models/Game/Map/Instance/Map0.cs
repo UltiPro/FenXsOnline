@@ -26,15 +26,15 @@ public class Map0 : MapFieldsHelper
             },
             Doors = new List<MapDoor>{
                 new MapDoor{
-                    FromX = 7,
-                    FromY = 9,
+                    X = 7,
+                    Y = 9,
                     ToMapId = 1,
                     ToX = 1,
                     ToY = 1
                 },
                 new MapDoor{
-                    FromX = 8,
-                    FromY = 9,
+                    X = 8,
+                    Y = 9,
                     ToMapId = 1,
                     ToX = 1,
                     ToY = 1
