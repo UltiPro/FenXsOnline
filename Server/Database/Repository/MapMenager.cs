@@ -14,11 +14,14 @@ public class MapMenager : IMapMenager
 {
     private readonly DatabaseContext _context;
     private readonly IMapper _mapper;
+    private readonly IEquipmentMenager _equipmentMenager;
     private readonly World _world;
 
-    public MapMenager(DatabaseContext _context)
+    public MapMenager(DatabaseContext _context, IMapper _mapper, IEquipmentMenager _equipmentMenager)
     {
         this._context = _context;
+        this._mapper = _mapper;
+        this._equipmentMenager = _equipmentMenager;
         _world = World.GetInstance();
     }
 
@@ -32,7 +35,7 @@ public class MapMenager : IMapMenager
         return _mapper.Map<MapDataRefresh>(_world.Maps[(await GetHero(accountId)).MapId]);
     }
 
-    public async Task DropItem(string accountId, int itemId)
+    public async Task<ItemProviderGround> DropItem(string accountId, int itemId)
     {
         var hero = await GetHero(accountId);
 
@@ -42,23 +45,35 @@ public class MapMenager : IMapMenager
 
         if (slot.ItemType is ItemType.ToQuest) throw new ItemIsNotDroppableException();
 
-        _world.Maps[hero.MapId].Items.Add(new ItemProviderGround
+        var itemOnGround = new ItemProviderGround
         {
             ItemType = (ItemType)slot.ItemType,
             ItemId = (int)slot.ItemId,
             X = hero.X,
             Y = hero.Y
-        });
+        };
+
+        _world.Maps[hero.MapId].Items.Add(itemOnGround);
 
         slot.ItemType = null;
         slot.ItemId = null;
 
         await _context.SaveChangesAsync();
+
+        return itemOnGround;
     }
 
-    public Task<ItemProvider> GrabItem(string accountId)
+    public async Task<DBHeroEquipment> GrabItem(string accountId)
     {
-        throw new NotImplementedException();
+        var hero = await GetHero(accountId);
+
+        var item = _world.Maps[hero.MapId].Items.FirstOrDefault(item => item.X == hero.X && item.Y == hero.Y);
+
+        if (item is null) return null;
+
+        var itemEq = await _equipmentMenager.AddItem(accountId, item.ItemType, item.ItemId);
+
+        return itemEq;
     }
 
     private async Task<DBHero> GetHero(string accountId)
