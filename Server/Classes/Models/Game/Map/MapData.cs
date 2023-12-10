@@ -12,6 +12,5 @@ public class MapData
     public List<MapDoor>? Doors { get; set; } = null;
     public List<MapNPC>? NPCs { get; set; } = null;
     public List<MapMob>? Mobs { get; set; } = null;
-    public List<ItemProviderTimer>? Items { get; set; } = null;
-    public List<ItemProvider>? Dropped_Items { get; set; } = null;
+    public List<ItemProviderGround>? Items { get; set; } = new List<ItemProviderGround>();
 }
