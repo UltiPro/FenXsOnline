@@ -1,6 +1,4 @@
-﻿using Classes.Models.Game.Item;
-
-namespace Classes.Models.Game.Map.Instance;
+﻿namespace Classes.Models.Game.Map.Instance;
 
 public class Map2 : MapFieldsHelper
 {
@@ -8,32 +6,56 @@ public class Map2 : MapFieldsHelper
     {
         return new MapData
         {
-            Id = 0,
-            Name = "Home",
+            Id = 2,
+            Name = "Near Cave",
             SpriteURL = "nearcave.png",
-            IsPvP = false,
-            Fields = new bool[11, 13]
+            IsPvP = true,
+            Fields = new bool[32, 32]
             {
-                {x, x, x, x, x, x, x, x, x, x, x, x, x },
-                {x, x, x, x, x, x, x, x, x, x, x, x, x },
-                {x, x, x, x, x, x, x, x, x, x, x, x, x },
-                {x, x, o, o, x, o, o, o, o, o, o, o, x },
-                {x, o, o, o, o, x, o, o, x, x, x, x, x },
-                {x, o, o, o, x, x, o, o, x, x, x, x, x },
-                {x, x, o, o, x, x, o, o, o, x, x, x, x },
-                {x, x, o, o, o, o, o, o, o, o, o, o, x },
-                {x, x, o, o, o, o, o, o, o, o, o, o, x },
-                {x, x, x, x, x, x, x, o, o, x, x, x, x },
-                {x, x, x, x, x, x, x, x, x, x, x, x, x }
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, o, o, x, o, o, o, o, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, o, o, o, o, o, o, o, o, o, x, x, x, x, x, o, o, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, o, o, o, x, x, x, x, x, o, o, o, x, x, x, x, o, o, o, o, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, o, o, x, x, x, x, x, x, o, o, o, o, o, o, o, o, o, o, o, x, x, x, x, x},
+                {x, x, x, o, o, o, x, x, o, x, x, x, x, x, x, x, o, o, o, o, x, x, o, o, o, o, o, x, x, x, x, x},
+                {x, x, o, o, o, o, x, x, o, x, x, x, x, x, x, x, o, o, o, x, x, x, o, o, o, x, o, o, x, x, x, x},
+                {x, x, x, o, o, o, o, o, o, x, x, x, x, x, x, x, o, o, o, o, o, o, o, o, o, x, x, x, x, x, x, x},
+                {x, x, x, x, o, o, o, o, x, x, x, x, x, x, x, x, o, x, o, o, o, o, o, o, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, o, o, o, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, o, o, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, o, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, o, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, o, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, o, o, o, x, o, o, o, o, x, x, x, x, x, x, o, o, o, o, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, o, o, x, o, o, x, o, x, o, x, x, x, x, x, x, x, o, o, o, x, x, x, x, x, x, x, x, x},
+                {x, x, x, o, o, o, o, o, o, o, o, o, x, x, x, x, x, x, x, x, x, o, o, o, x, x, x, x, x, x, x, x},
+                {x, x, o, o, o, o, o, o, o, o, o, x, x, x, x, x, x, x, x, x, x, o, o, o, x, x, x, x, x, x, x, x},
+                {x, x, o, o, o, o, o, x, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, x, x, x, x, x, x, x, x},
+                {x, x, x, o, o, o, o, x, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, o, x, x, x, x, x, x, x},
+                {x, x, x, x, o, o, o, x, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, o, x, x, x, x, x, x, x},
+                {x, x, x, x, x, o, o, o, x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, o, o, o, o, o, o, x, x, x, x, x, x, o, o, o, o, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, o, o, o, o, o, x, x, x, o, o, o, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, o, o, o, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, o, o, o, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x},
+                {x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x}
             },
             Doors = new List<MapDoor>
             {
-
-            },
-            NPCs = new List<MapNPC> { },
-            Mobs = new List<MapMob> { },
-            Items = new List<ItemProviderTimer> { },
-            Dropped_Items = new List<ItemProvider> { }
+                new MapDoor
+                {
+                    X = 14,
+                    Y = 28,
+                    ToMapId = 1,
+                    ToX = 35,
+                    ToY = 86
+                }
+            }
         };
     }
 }
