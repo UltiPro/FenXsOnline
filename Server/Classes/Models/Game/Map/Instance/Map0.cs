@@ -1,6 +1,4 @@
-﻿using Classes.Models.Game.Item;
-
-namespace Classes.Models.Game.Map.Instance;
+﻿namespace Classes.Models.Game.Map.Instance;
 
 public class Map0 : MapFieldsHelper
 {
@@ -41,12 +39,7 @@ public class Map0 : MapFieldsHelper
                     ToX = 1,
                     ToY = 1
                 }
-            },
-            NPCs = new List<MapNPC> 
-            { 
-                
-            },
-            Dropped_Items = new List<ItemProvider>()
+            }
         };
     }
 }
