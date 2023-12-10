@@ -60,6 +60,7 @@ builder.Services.AddScoped<IHeroMenager, HeroMenager>();
 builder.Services.AddScoped<IMovementMenager, MovementMenager>();
 builder.Services.AddScoped<IItemMenager, ItemMenager>();
 builder.Services.AddScoped<IEquipmentMenager, EquipmentMenager>();
+builder.Services.AddScoped<IMapMenager, MapMenager>();
 
 builder.Services.AddAuthentication(options =>
 {
