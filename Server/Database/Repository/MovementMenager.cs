@@ -35,7 +35,7 @@ public class MovementMenager : IMovementMenager
             hero.X += x;
             hero.Y += y;
 
-            var door = _world.Maps[hero.MapId].Doors?.FirstOrDefault(door => door.FromX == hero.X && door.FromY == hero.Y);
+            var door = _world.Maps[hero.MapId].Doors?.FirstOrDefault(door => door.X == hero.X && door.Y == hero.Y);
 
             if (door != null)
             {
