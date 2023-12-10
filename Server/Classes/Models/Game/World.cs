@@ -19,7 +19,7 @@ public sealed class World
 
     public static World GetInstance()
     {
-        if (_world == null)
+        if (_world is null)
             _world = new World();
 
         return _world;
