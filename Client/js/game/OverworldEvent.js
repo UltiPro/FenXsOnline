@@ -47,6 +47,12 @@ class OverworldEvent{
     }
 
     textMessage(resolve){
+        //during talking with npc change npc standing direction to face character position
+        if(this.event.faceHero){
+            const obj = this.map.gameObjects[this.event.faceHero];
+            obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
+        }
+
         const message = new TextMessage({
             text: this.event.text,
             onComplete: () => resolve()
