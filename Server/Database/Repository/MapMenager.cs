@@ -25,14 +25,26 @@ public class MapMenager : IMapMenager
         _world = World.GetInstance();
     }
 
-    public async Task<MapData> Get(string accountId)
+    public async Task<MapDataResponse> Get(string accountId)
     {
-        return _world.Maps[(await GetHero(accountId)).MapId];
+        var hero = await GetHero(accountId);
+
+        var mapDataResponse = _mapper.Map<MapDataResponse>(_world.Maps[hero.MapId]);
+
+        mapDataResponse.Heroes = _mapper.Map<List<MapHero>>(await _context.Heroes.Where(h => h.InGame == true && h.MapId == hero.MapId && h != hero).ToListAsync());
+
+        return mapDataResponse;
     }
 
     public async Task<MapDataRefresh> GetRefresh(string accountId)
     {
-        return _mapper.Map<MapDataRefresh>(_world.Maps[(await GetHero(accountId)).MapId]);
+        var hero = await GetHero(accountId);
+
+        var mapDataRefresh = _mapper.Map<MapDataRefresh>(_world.Maps[hero.MapId]);
+
+        mapDataRefresh.Heroes = _mapper.Map<List<MapHero>>(await _context.Heroes.Where(h => h.InGame == true && h.MapId == hero.MapId && h != hero).ToListAsync());
+
+        return mapDataRefresh;
     }
 
     public async Task<ItemProviderGround> DropItem(string accountId, int itemId)
@@ -41,7 +53,7 @@ public class MapMenager : IMapMenager
 
         var slot = hero.HeroEquipment.FirstOrDefault(slot => slot.Id == itemId);
 
-        if (slot.ItemType is null || slot.ItemId is null) throw new HeroEquipmentSlotIsEmptyException();
+        if (slot is null || slot.ItemType is null || slot.ItemId is null) throw new HeroEquipmentSlotIsEmptyException();
 
         if (slot.ItemType is ItemType.ToQuest) throw new ItemIsNotDroppableException();
 
@@ -73,12 +85,16 @@ public class MapMenager : IMapMenager
 
         var itemEq = await _equipmentMenager.AddItem(accountId, item.ItemType, item.ItemId);
 
+        _world.Maps[hero.MapId].Items.Remove(item);
+
         return itemEq;
     }
 
     private async Task<DBHero> GetHero(string accountId)
     {
-        var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame);
+        var hero = await _context.Heroes
+            .Include(hero => hero.HeroEquipment)
+            .FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame);
 
         if (hero is null) throw new HeroIsNotInTheGameException();
 
