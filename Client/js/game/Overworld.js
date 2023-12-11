@@ -92,11 +92,29 @@ class Overworld{
 		this.map.mountObjects(); //mounting objects collisions
 	}
 
+	//load map based on ID fetched from database
+	GetMap() {
+		const mapIds = {
+			0: window.OverworldMaps.Home,
+			1: window.OverworldMaps.City,
+			2: window.OverworldMaps.Cave,
+			3: window.OverworldMaps.Ruin,
+		};
+	
+		const mapConfig = this.heroData && mapIds[this.heroData.mapId] ?
+			mapIds[this.heroData.mapId] :
+			window.OverworldMaps.DefaultMap;
+	
+		this.startMap(mapConfig);
+	}	
+
 	//async to fetch the data with getHero(), otherwise this.heroData will be null
-	init(){
-		// this.heroData = await this.getHero()
-		// console.log(this.heroData)
-		this.startMap(window.OverworldMaps.Home);
+	async init(){
+		this.heroData = await this.getHero()
+		console.log(this.heroData)
+	
+		this.GetMap();
+		//this.startMap(window.OverworldMaps.Home);
 
 		this.bindActionInput(); //check for events by pressing button
 		this.bindHeroPositionCheck(); //check for events by standing in specific area
@@ -107,8 +125,7 @@ class Overworld{
 		this.startGameLoop();
 
 		this.map.startCutscene([
-			//{type: "textMessage", text: "Why hello there, Old Sport!"}
-			// {who: "hero", type: "walk", direction: "down"},
+			//{type: "textMessage", text: "Samouczek dla gracza"}
 		])
 	}
 }
