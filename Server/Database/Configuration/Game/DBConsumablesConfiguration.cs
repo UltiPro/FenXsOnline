@@ -99,7 +99,8 @@ public class DBConsumablesConfiguration : IEntityTypeConfiguration<DBConsumables
             Id = 13,
             Name = "Pile Of Coins",
             SpriteURL = "pileOfCoins.gif",
-            Gold = 15
+            Gold = 15,
+            Price = 0
         });
     }
 }

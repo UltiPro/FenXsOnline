@@ -13,7 +13,7 @@ public class DBNeutralConfiguration : IEntityTypeConfiguration<DBNeutral>
             Id = 1,
             Name = "Feather",
             SpriteURL = "feather.gif",
-            Price = 1
+            Price = 5
         }, new DBNeutral
         {
             Id = 2,
