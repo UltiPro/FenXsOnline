@@ -168,7 +168,7 @@ $(document).ready(function () {
             "Your hero has just been created! You're one step ahead of your adventure!"
           );
           $("#alert-hero-created").show();
-          //window.location.replace("./start.html");
+          window.location.replace("./start.html");
           console.log("Character has been created!");
         },
         (error) => {
@@ -193,7 +193,7 @@ $(document).ready(function () {
             "This character has just been deleted."
           );
           $("#alert-hero-delete").show();
-          //window.location.replace("./start.html")
+          window.location.replace("./start.html")
         })
         .catch((error) => {
           console.error("Error deleting item:", error);
