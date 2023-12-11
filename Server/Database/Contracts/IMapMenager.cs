@@ -6,7 +6,7 @@ namespace Database.Contracts;
 
 public interface IMapMenager
 {
-    Task<MapData> Get(string accountId);
+    Task<MapDataResponse> Get(string accountId);
     Task<MapDataRefresh> GetRefresh(string accountId);
     Task<ItemProviderGround> DropItem(string accountId, int itemId);
     Task<DBHeroEquipment> GrabItem(string accountId);
