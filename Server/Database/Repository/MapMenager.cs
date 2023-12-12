@@ -83,7 +83,7 @@ public class MapMenager : IMapMenager
 
         if (item is null) return null;
 
-        var itemEq = await _equipmentMenager.AddItem(accountId, item.ItemType, item.ItemId);
+        var itemEq = await _equipmentMenager.AddItem(accountId, item);
 
         _world.Maps[hero.MapId].Items.Remove(item);
 
