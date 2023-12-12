@@ -28,15 +28,15 @@ public class Map0 : MapFieldsHelper
                     X = 7,
                     Y = 9,
                     ToMapId = 1,
-                    ToX = 1,
-                    ToY = 1
+                    ToX = 6,
+                    ToY = 79
                 },
                 new MapDoor{
                     X = 8,
                     Y = 9,
                     ToMapId = 1,
-                    ToX = 1,
-                    ToY = 1
+                    ToX = 6,
+                    ToY = 79
                 }
             }
         };
