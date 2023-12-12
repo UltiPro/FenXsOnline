@@ -10,5 +10,5 @@ public class MapNPC : MapPosition
     public bool IsHealer { get; set; } = false;
     public bool IsTrader { get; set; } = false;
     public double PricePercent { get; set; } = 0.25;
-    public List<ItemProvider>? Items { get; set; } = null;
+    public List<ItemProviderSlot>? Items { get; set; } = null;
 }

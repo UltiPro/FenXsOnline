@@ -16,14 +16,14 @@ public static class Map1Npc2
             SpriteURL = "gustaf.gif",
             IsTrader = true,
             PricePercent = 0.80,
-            Items = new List<ItemProvider>()
+            Items = new List<ItemProviderSlot>()
             {
-                new ItemProvider() { ItemType = ItemType.Ring, ItemId = 1 },
-                new ItemProvider() { ItemType = ItemType.Ring, ItemId = 2 },
-                new ItemProvider() { ItemType = ItemType.Ring, ItemId = 3 },
-                new ItemProvider() { ItemType = ItemType.Necklace, ItemId = 1 },
-                new ItemProvider() { ItemType = ItemType.Necklace, ItemId = 2 },
-                new ItemProvider() { ItemType = ItemType.Necklace, ItemId = 3 }
+                new ItemProviderSlot() { ItemType = ItemType.Ring, ItemId = 1, Id = 1 },
+                new ItemProviderSlot() { ItemType = ItemType.Ring, ItemId = 2, Id = 2 },
+                new ItemProviderSlot() { ItemType = ItemType.Ring, ItemId = 3, Id = 3 },
+                new ItemProviderSlot() { ItemType = ItemType.Necklace, ItemId = 1, Id = 7 },
+                new ItemProviderSlot() { ItemType = ItemType.Necklace, ItemId = 2, Id = 8 },
+                new ItemProviderSlot() { ItemType = ItemType.Necklace, ItemId = 3, Id = 9 }
             }
         };
     }
