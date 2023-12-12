@@ -52,7 +52,6 @@ class OverworldMap {
 
       let object = this.gameObjects[key];
       object.id = key;
-      //in the future : check if the object should mount xD;
       object.mount(this);
     });
   }
@@ -115,6 +114,7 @@ class OverworldMap {
 //maps configuration
 window.OverworldMaps = {
   Home: {
+    id: "Home",
     lowerSrc: "./assets/maps/home.png",
     upperSrc: "",
     gameObjects: {
@@ -281,6 +281,7 @@ window.OverworldMaps = {
   },
 
   City:{
+    id: "City",
     lowerSrc: "./assets/maps/fenxscity.png",
     upperSrc: "",
     gameObjects:{
@@ -290,14 +291,25 @@ window.OverworldMaps = {
         y: utils.withGrid(79),
         src: "./assets/heroes/hunter/hunterF0.gif",
       })
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(6, 79)]: [
+        {
+          events: [
+            {type: "changeMap", map: "Home"}
+          ]
+        }
+      ],
     }
   },
 
   Cave:{
+    id: "Cave",
     lowerSrc: "./assets/maps/nearcave.png",
   },
   
   Ruins:{
+    id: "Ruins",
     lowerSrc: "./assets/maps/ruins.png",
   }
 };
