@@ -2,7 +2,7 @@
 
 namespace Classes.Models.Game.Map;
 
-public class MapHero
+public class MapHero : MapPosition
 {
     public string Name { get; set; }
     public int Level { get; set; }
