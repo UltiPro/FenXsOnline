@@ -23,16 +23,17 @@
                     <h6 class="text-center">Hero Statistics</h6>
                     <div id="status">
                         <div class="row">
-                        <div class="stat-icon col-2 col-sm-2" title="Physical Damage" id="dmg"></div><p class="text-small col-2 col-sm-2">123</p>
-                        <div class="stat-icon col-2 col-sm-2" id="def"></div><p class="text-small col-2 col-sm-2">123</p>
-                        <div class="stat-icon col-2 col-sm-2" id="health"></div><p class="text-small col-2 col-sm-2">100/100</p>
+                        <div class="stat-icon col-2 col-sm-2" title="Physical Damage" id="dmg"></div><p id="dmg.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" id="def"></div><p id="def.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" id="health"></div><p id="health.value" class="text-small col-2 col-sm-2"></p>
                         <div class="w-100"></div>
-                        <div class="stat-icon col-2 col-sm-2" id="m-dmg"></div><p class="text-small col-2 col-sm-2">123</p>
-                        <div class="stat-icon col-2 col-sm-2" id="m-def"></div><p class="text-small col-2 col-sm-2">123</p>
-                        <div class="stat-icon col-2 col-sm-2" id="mana"></div><p class="text-small col-2 col-sm-2">100/100</p>
+                        <div class="stat-icon col-2 col-sm-2" id="m-dmg"></div><p id="m-dmg.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" id="m-def"></div><p id="m-def.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" id="mana"></div><p id="mana.value" class="text-small col-2 col-sm-2"></p>
                         <div class="w-100"></div>
-                        <div class="stat-icon col-2 col-sm-2" id="agility"></div><p class="text-small col-2 col-sm-2">10</p>
-                        <div class="stat-icon col-2 col-sm-2" id="gold"></div><p class="text-small col-2 col-sm-2">1000000</p>
+                        <div class="stat-icon col-2 col-sm-2" id="agility"></div><p id="agility.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" id="gold"></div><p id="gold.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" id="stamina"></div><p id="stamina.value" class="text-small col-2 col-sm-2"></p>
                         </div>
                     </div>
                     <h6 class="text-center">Equipment</h6>
@@ -102,7 +103,7 @@
     <!-- tutaj pliki js -->
     <!-- SCRIPTS -->
     <!-- API CALLS-->
-    <script type="text/javascript" src="./js/game/apiCalls/getHero.js"></script>
+    <script src="./js/game/apiCalls/getPlayerStats.js" defer></script>
     <!-- GAME -->
     <!-- order of these have meaning -->
     <script type="text/javascript" src="./js/game/utils.js"></script>
