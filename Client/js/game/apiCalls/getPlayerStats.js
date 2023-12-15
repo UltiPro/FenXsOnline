@@ -39,8 +39,9 @@ function GetItemDetails(item) {
     return app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`)
         .then(function (response) {
             var type = ItemTypeParser(item.itemType)
+            //create div with item
             var draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
-            console.log(type)
+            //console.log(type)
             $(`#s${item.id}`).append(draggableDiv);
             
             return response.data;
@@ -67,7 +68,7 @@ function UpdateHeroBackpack(eq) {
             console.error("Error fetching item details for backpack:", error);
         });
 }
-//background-image: url("./../assets/ui/eq/ring.png");
+
 function ItemTypeParser(type){
     switch(type){
         case 0: return "./assets/primaryWeapons/"

@@ -1,8 +1,4 @@
 // Create a draggable div
-// for (let i = 1; i <= 29; i++) {
-//     var draggableDiv = $(`<div class="item-image" draggable="true">${i}</div>`);
-//     $(`#s${i}`).append(draggableDiv);
-// }
 $(document).on('dragstart', '.item-image', function(event) {
     if ($(this).html() !== '') {
         event.originalEvent.dataTransfer.setData('text/plain', $(this).attr('id'));
@@ -19,24 +15,6 @@ $(document).on('dragend', '.item-image', function() {
     $(this).css('transform', 'scale(1)'); 
 });
 
-
-// Add drag event listeners to all draggable items
-// $('.item-image').on('dragstart', function(event) {
-//     if ($(this).html() !== '') {
-//         event.originalEvent.dataTransfer.setData('text/plain', $(this).attr('id'));
-//         $(this).addClass('dragging');
-//         $(this).css('transform', 'scale(1.1)'); // Adjust scale as needed
-//     } else {
-//         event.preventDefault();
-//     }
-// });
-
-// //handling drag end
-// $('.item-image').on('dragend', function() {
-//     $(this).removeClass('dragging');
-//     $(this).css('transform', 'scale(1)'); 
-// });
-
 // Add drop event listeners to all .bp-slot elements
 $('.bp-slot').on('dragover', function(event) {
     event.preventDefault();
@@ -47,16 +25,32 @@ $('.bp-slot').on('drop', function(event) {
     var draggedItem = $('.item-image.dragging');
     var dropTarget = $(this);
 
-    // Check if there's a child within the drop target
-    if (dropTarget.children('.item-image').length > 0) {
-        // Get the existing item in the slot
-        var existingItem = dropTarget.children('.item-image');
+    var fromId = draggedItem.parent().attr('id');
+    var toId = dropTarget.attr('id');
 
+    if (fromId !== toId) {
         // Swap the dragged item with the existing item in the slot
+        var existingItem = dropTarget.children('.item-image');
         draggedItem.after(existingItem);
         dropTarget.append(draggedItem);
+        //removing letter s
+        const cleanFromId = fromId.replace('s', '');
+        const cleanToId = toId.replace('s', '');    
+        swapItems(cleanFromId, cleanToId);
     } else {
-        // If the slot is empty, simply append the dragged item
-        dropTarget.append(draggedItem);
+        console.log("Item moved within the same slot. No API call needed.");
     }
 });
+
+function swapItems(fromId, toId) {
+    console.log(`From ID: ${fromId}, To ID: ${toId}`); // Debug log to check the IDs
+
+    // Ensure 'app' is correctly initialized and reachable in this scope
+    app.put(apiBaseUrl+`Equipment/move-item?fromId=${fromId}&toId=${toId}`)
+        .then(_ => {
+            console.log(`Item from ${fromId} was dragged to ${toId}`);
+        })
+        .catch(error => {
+            console.error("Error moving item:", error);
+        });
+}
