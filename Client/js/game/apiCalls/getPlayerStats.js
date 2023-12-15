@@ -17,8 +17,6 @@ function fetchHeroStats() {
         $('#agility\\.value').text(response.data.agility);
         $('#gold\\.value').text(response.data.gold);
         $('#stamina\\.value').text(response.data.stamina+"/"+response.data.maxStamina);
- 
-  
       })
       .catch(function (error) {
         console.error('Error fetching hero stats:', error);
