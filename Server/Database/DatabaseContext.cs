@@ -15,6 +15,7 @@ using Database.Configuration.Game;
 using Classes.Models.Game.Item.Consumables;
 using Classes.Models.Game.Item.Neutral;
 using Classes.Models.Game.Item.QuestItem;
+using Classes.Models.Game.Mob;
 
 namespace Database;
 
@@ -36,6 +37,8 @@ public class DatabaseContext : IdentityDbContext<DBUser>
     public DbSet<DBNeutral> Neutrals { get; set; }
     public DbSet<DBQuestItem> QuestItems { get; set; }
     public DbSet<DBHeroEquipment> HeroesEquipments { get; set; }
+    public DbSet<DBMob> Mobs { get; set; }
+    public DbSet<DBMobDrop> MobsDrop { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -55,6 +58,9 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         modelBuilder.ApplyConfiguration(new DBConsumablesConfiguration());
         modelBuilder.ApplyConfiguration(new DBNeutralConfiguration());
         modelBuilder.ApplyConfiguration(new DBQuestItemConfiguration());
+
+        modelBuilder.ApplyConfiguration(new DBMobConfiguration());
+        modelBuilder.ApplyConfiguration(new DBMobDropConfiguration());
 
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
         modelBuilder.Entity<DBHeroEquipment>().HasKey(heroEquipment => new { heroEquipment.HeroId, heroEquipment.Id });
