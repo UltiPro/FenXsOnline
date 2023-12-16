@@ -64,5 +64,6 @@ public class DatabaseContext : IdentityDbContext<DBUser>
 
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
         modelBuilder.Entity<DBHeroEquipment>().HasKey(heroEquipment => new { heroEquipment.HeroId, heroEquipment.Id });
+        modelBuilder.Entity<DBMobDrop>().HasKey(mobDrop => new { mobDrop.MobId, mobDrop.ItemType, mobDrop.ItemId });
     }
 }
