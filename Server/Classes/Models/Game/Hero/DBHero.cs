@@ -27,7 +27,7 @@ public class DBHero : HeroBasicInfo
     public int Y { get; set; } = 4;
     [JsonIgnore]
     public bool InGame { get; set; } = false;
-    public DateTime? Dead { get; set; } = null;
+    public DateTime Dead { get; set; } = DateTime.Now;
 
     [JsonIgnore]
     public string UserId { get; set; }
