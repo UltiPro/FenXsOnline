@@ -28,12 +28,17 @@ public class MovementMenager : IMovementMenager
 
         if (hero is null) throw new HeroIsNotInTheGameException();
 
+        var tempX = hero.X + x;
+        var tempY = hero.Y + y;
+
         try
         {
-            if (!_world.Maps[hero.MapId].Fields[hero.Y + y, hero.X + x]) return null;
+            if (!_world.Maps[hero.MapId].Fields[tempY, tempX]
+                || _context.MapMobs.Any(mapMob => mapMob.MapId == hero.MapId
+                && mapMob.Available < DateTime.Now && mapMob.X == tempX && mapMob.Y == tempY)) return null;
 
-            hero.X += x;
-            hero.Y += y;
+            hero.X = tempX;
+            hero.Y = tempY;
 
             var door = _world.Maps[hero.MapId].Doors?.FirstOrDefault(door => door.X == hero.X && door.Y == hero.Y);
 
