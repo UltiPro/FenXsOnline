@@ -2,7 +2,6 @@
 using Classes.Exceptions.Game;
 using Classes.Models.Game;
 using Classes.Models.Game.Hero;
-using Classes.Models.Game.Item;
 using Classes.Models.Game.Map;
 using Classes.Enums.Game;
 using Database.Contracts;
@@ -47,7 +46,7 @@ public class MapMenager : IMapMenager
         return mapDataRefresh;
     }
 
-    public async Task<ItemProviderGround> DropItem(string accountId, int itemId)
+    public async Task<DBMapItem> DropItem(string accountId, int itemId)
     {
         var hero = await GetHero(accountId);
 
@@ -57,15 +56,19 @@ public class MapMenager : IMapMenager
 
         if (slot.ItemType is ItemType.ToQuest) throw new ItemIsNotDroppableException();
 
-        var itemOnGround = new ItemProviderGround
+        if (await _context.MapItems.AnyAsync(mapItem => mapItem.MapId == hero.MapId
+            && mapItem.X == hero.X && mapItem.Y == hero.Y)) throw new TileIsOccupiedException();
+
+        var itemOnGround = new DBMapItem
         {
             ItemType = (ItemType)slot.ItemType,
             ItemId = (int)slot.ItemId,
+            MapId = hero.MapId,
             X = hero.X,
             Y = hero.Y
         };
 
-        _world.Maps[hero.MapId].Items.Add(itemOnGround);
+        await _context.MapItems.AddAsync(itemOnGround);
 
         slot.ItemType = null;
         slot.ItemId = null;
@@ -79,13 +82,17 @@ public class MapMenager : IMapMenager
     {
         var hero = await GetHero(accountId);
 
-        var item = _world.Maps[hero.MapId].Items.FirstOrDefault(item => item.X == hero.X && item.Y == hero.Y);
+        var item = await _context.MapItems.FirstOrDefaultAsync(item =>
+            item.MapId == hero.MapId && item.X == hero.X && item.Y == hero.Y);
 
-        if (item is null) return null;
+        if (item is null || item.Available > DateTime.Now) return null;
 
         var itemEq = await _equipmentMenager.AddItem(accountId, item);
 
-        _world.Maps[hero.MapId].Items.Remove(item);
+        if (item.Available != null) item.Available = DateTime.Now.AddMinutes(10);
+        else _context.MapItems.Remove(item);
+
+        await _context.SaveChangesAsync();
 
         return itemEq;
     }
