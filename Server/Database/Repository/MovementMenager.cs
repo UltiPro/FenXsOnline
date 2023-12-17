@@ -36,7 +36,7 @@ public class MovementMenager : IMovementMenager
         try
         {
             if (!_world.Maps[hero.MapId].Fields[tempY, tempX]
-                || _context.MapMobs.Any(mapMob => mapMob.MapId == hero.MapId
+                || await _context.MapMobs.AnyAsync(mapMob => mapMob.MapId == hero.MapId
                 && mapMob.Available < DateTime.Now && mapMob.X == tempX && mapMob.Y == tempY)) return null;
 
             hero.X = tempX;
