@@ -28,6 +28,8 @@ public class MovementMenager : IMovementMenager
 
         if (hero is null) throw new HeroIsNotInTheGameException();
 
+        if (hero.Dead > DateTime.Now) throw new HeroIsDeadException();
+
         var tempX = hero.X + x;
         var tempY = hero.Y + y;
 
