@@ -49,7 +49,8 @@ public class ExceptionMiddleware
                 break;
             case BannedException or HeroLimitReachedException or HeroLevelTooLowException or HeroEquipmentIsFullException
                  or ItemRequiresAnotherProfessionException or ItemIsNotWornableException or HeroEquipmentSlotIsOccupiedException
-                 or ItemIsNotDroppableException or HeroIsTooFarAwayException or ItemIsNotSellableException or HeroHasNotEnoughGoldException:
+                 or ItemIsNotDroppableException or HeroIsTooFarAwayException or ItemIsNotSellableException or HeroHasNotEnoughGoldException
+                 or HeroIsDeadException:
                 statusCode = HttpStatusCode.Forbidden;
                 errorDetails.Code = "Forbidden";
                 break;
