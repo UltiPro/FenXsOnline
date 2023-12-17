@@ -12,7 +12,7 @@ public class DBNpcConfiguration : IEntityTypeConfiguration<DBNpc>
         {
             Id = 1,
             MapId = 1,
-            Name = "Adelide",
+            Name = "Adelaide",
             X = 36,
             Y = 49,
             SpriteURL = "adelide.gif",
