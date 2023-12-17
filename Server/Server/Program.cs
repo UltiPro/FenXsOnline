@@ -62,6 +62,7 @@ builder.Services.AddScoped<IItemMenager, ItemMenager>();
 builder.Services.AddScoped<IEquipmentMenager, EquipmentMenager>();
 builder.Services.AddScoped<IMapMenager, MapMenager>();
 builder.Services.AddScoped<INpcMenager, NpcMenager>();
+builder.Services.AddScoped<IMobMenager, MobMenager>();
 
 builder.Services.AddAuthentication(options =>
 {
