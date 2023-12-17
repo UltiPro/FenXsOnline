@@ -9,5 +9,6 @@ public class DBMapItem : ItemProvider
     public int MapId { get; set; }
     public int X { get; set; }
     public int Y { get; set; }
+    [JsonIgnore]
     public DateTime? Available { get; set; } = null;
 }
