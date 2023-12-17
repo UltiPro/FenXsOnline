@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using Classes.Models.Game.Map;
+using System.Text.Json.Serialization;
 
 namespace Classes.Models.Game.Npc;
 
-public class DBNpc
+public class DBNpc : MapPosition
 {
     public int Id { get; set; }
     [JsonIgnore]
