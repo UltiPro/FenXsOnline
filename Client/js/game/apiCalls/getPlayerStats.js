@@ -81,7 +81,7 @@ function ItemTypeParser(type){
         case 7: return "./assets/rings/"
         case 8: return "./assets/consumables/"
         case 9: return "./assets/neutrals/"
-        case 9: return "./assets/quest/"
+        case 10: return "./assets/quest/"
     }
     
 }
