@@ -41,6 +41,7 @@ public class DatabaseContext : IdentityDbContext<DBUser>
     public DbSet<DBMob> Mobs { get; set; }
     public DbSet<DBMobDrop> MobsDrop { get; set; }
     public DbSet<DBMapMob> MapMobs { get; set; }
+    public DbSet<DBMapItem> MapItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -67,9 +68,13 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         modelBuilder.ApplyConfiguration(new DBMap1MobConfiguration());
         modelBuilder.ApplyConfiguration(new DBMap2MobConfiguration());
 
+        modelBuilder.ApplyConfiguration(new DBMap1ItemConfiguration());
+        modelBuilder.ApplyConfiguration(new DBMap2ItemConfiguration());
+
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
         modelBuilder.Entity<DBHeroEquipment>().HasKey(heroEquipment => new { heroEquipment.HeroId, heroEquipment.Id });
         modelBuilder.Entity<DBMobDrop>().HasKey(mobDrop => new { mobDrop.MobId, mobDrop.ItemType, mobDrop.ItemId });
         modelBuilder.Entity<DBMapMob>().HasKey(mapMob => new { mapMob.MapId, mapMob.X, mapMob.Y });
+        modelBuilder.Entity<DBMapItem>().HasKey(mapItem => new { mapItem.MapId, mapItem.X, mapItem.Y });
     }
 }
