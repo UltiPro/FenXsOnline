@@ -1,4 +1,8 @@
-const exportedEqData = [];
+let itemDetailsList = []; // Declare an array to store item details
+
+function Test(){
+   return itemDetailsList
+}
 
 $(document).ready(function () {
     fetchHeroData();
@@ -13,13 +17,12 @@ function fetchHeroData() {
 }
 
 function processHeroData(response) {
-    response.data.agility = 5;
-    response.data.gold = 100;
     const heroData = response.data;
     const eq = response.data.heroEquipment;
 
     UpdateHeroStats(heroData);
     UpdateHeroBackpack(eq);
+    UpdateHeroEquipment();
 }
 
 //Updating stat labels
@@ -41,8 +44,15 @@ function GetItemDetails(item) {
             var type = ItemTypeParser(item.itemType)
             //create div with item
             var draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
-            //console.log(type)
             $(`#s${item.id}`).append(draggableDiv);
+
+            //asigning data about which slot it is in backpack
+            const itemWithSlot = {
+                itemDetails: response.data,
+                slotInfo: `${item.id}`
+            };
+            //console.log(itemWithSlot)
+            itemDetailsList.push(itemWithSlot);
             
             return response.data;
           
@@ -53,20 +63,16 @@ function GetItemDetails(item) {
         });
 }
 
-// Inside UpdateHeroBackpack function
+// ForEach item get it's data
 function UpdateHeroBackpack(eq) {
     const promises = eq
         .filter(item => item && item.itemType !== null && item.itemId !== null)
         .map(GetItemDetails);
+}
 
-    Promise.all(promises)
-        .then(function (itemDetails) {
-            exportedEqData.push(...itemDetails);
-            // Any further processing with exportedEqData or other logic can be placed here
-        })
-        .catch(function (error) {
-            console.error("Error fetching item details for backpack:", error);
-        });
+//
+function UpdateHeroEquipment(){
+    
 }
 
 function ItemTypeParser(type){

@@ -120,35 +120,35 @@ body{
 
 
 /*eq slot styles*/
-#helmet{
+#dbHelmet .item-image{
 	background-image: url("./../assets/ui/eq/helmet.png");
 }
 
-#ring{
+#dbRing .item-image{
 	background-image: url("./../assets/ui/eq/ring.png");
 }
 
-#necklece{
-	background-image: url("./../assets/ui/eq/necklece.png");
+#dbNecklace .item-image{
+	background-image: url("./../assets/ui/eq/necklace.png");
 }
 
-#gloves{
+#dbGloves .item-image{
 	background-image: url("./../assets/ui/eq/gloves.png");
 }
 
-#primary{
+#dbWeapon .item-image{
 	background-image: url("./../assets/ui/eq/primary.png");
 }
 
-#armor{
+#dbArmor .item-image{
 	background-image: url("./../assets/ui/eq/armor.png");
 }
 
-#secondary{
+#dbSecondaryWeapon .item-image{
 	background-image: url("./../assets/ui/eq/secondary.png");
 }
 
-#boots{
+#dbBoots .item-image{
 	background-image: url("./../assets/ui/eq/boots.png");
 }
 
