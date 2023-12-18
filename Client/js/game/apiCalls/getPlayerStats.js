@@ -90,7 +90,7 @@ function UpdateHeroBackpack(bp) {
         .map(GetItemDetails);
 }
 
-//
+//Loading Hero Equipment
 function UpdateHeroEquipment(heroData) {
     for (const key in heroData) {
         if (key.startsWith('db') && heroData[key] !== null) {
@@ -109,7 +109,7 @@ function UpdateHeroEquipment(heroData) {
             let response = { data: { spriteURL: spriteURL } }; 
         
             let draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
-            $(`#${key}`).append(draggableDiv);
+            $(`#${key}`).empty().append(draggableDiv);
 
             console.log(itemWithSlot);
             itemDetailsListEQ.push(itemWithSlot);
