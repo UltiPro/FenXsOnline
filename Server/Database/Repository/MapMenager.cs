@@ -30,7 +30,10 @@ public class MapMenager : IMapMenager
 
         var mapDataResponse = _mapper.Map<MapDataResponse>(_world.Maps[hero.MapId]);
 
-        mapDataResponse.Heroes = _mapper.Map<List<MapHero>>(await _context.Heroes.Where(h => h.InGame == true && h.MapId == hero.MapId && h != hero).ToListAsync());
+        mapDataResponse.NPCs = await _context.Npcs.Include(npc => npc.ShopItems).Where(npc => npc.MapId == hero.MapId).ToListAsync();
+        mapDataResponse.Mobs = await _context.MapMobs.Where(mapMob => mapMob.MapId == hero.MapId && mapMob.Available < DateTime.Now).ToListAsync();
+        mapDataResponse.Items = await _context.MapItems.Where(mapItem => mapItem.MapId == hero.MapId && (mapItem.Available < DateTime.Now || mapItem.Available == null)).ToListAsync();
+        mapDataResponse.Heroes = _mapper.Map<List<MapHero>>(await _context.Heroes.Where(h => h.InGame && h.MapId == hero.MapId && h != hero).ToListAsync());
 
         return mapDataResponse;
     }
@@ -39,11 +42,12 @@ public class MapMenager : IMapMenager
     {
         var hero = await GetHero(accountId);
 
-        var mapDataRefresh = _mapper.Map<MapDataRefresh>(_world.Maps[hero.MapId]);
-
-        mapDataRefresh.Heroes = _mapper.Map<List<MapHero>>(await _context.Heroes.Where(h => h.InGame == true && h.MapId == hero.MapId && h != hero).ToListAsync());
-
-        return mapDataRefresh;
+        return new MapDataRefresh
+        {
+            Mobs = await _context.MapMobs.Where(mapMob => mapMob.MapId == hero.MapId && mapMob.Available < DateTime.Now).ToListAsync(),
+            Items = await _context.MapItems.Where(mapItem => mapItem.MapId == hero.MapId && (mapItem.Available < DateTime.Now || mapItem.Available == null)).ToListAsync(),
+            Heroes = _mapper.Map<List<MapHero>>(await _context.Heroes.Where(h => h.InGame && h.MapId == hero.MapId && h != hero).ToListAsync())
+        };
     }
 
     public async Task<DBMapItem> DropItem(string accountId, int itemId)
