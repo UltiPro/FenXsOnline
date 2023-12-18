@@ -91,23 +91,29 @@ function UpdateHeroBackpack(bp) {
 }
 
 //
-async function UpdateHeroEquipment(heroData){
+function UpdateHeroEquipment(heroData) {
     for (const key in heroData) {
-        if (key.startsWith('db')) {
+        if (key.startsWith('db') && heroData[key] !== null) {
             const parsedKey = ParseEqId(key);
-            console.log(key);
-            console.log(parsedKey);
-           
-            if(heroData[key] !== null){
-                // Assuming 'type' and 'response.data.spriteURL' should come from somewhere
-                var type = ""; // Define 'type' - this might be specific to your use case
-                var response = { data: { spriteURL: "./assets/armors/armorWarrior0.gif" } }; // Define 'response' - this might be specific to your use case
+            
+            const itemWithSlot = {
+                itemDetails: heroData[key],
+                slotInfo: `${parsedKey}`
+            };
 
-                var draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
-                
-                $(`#${key}`).append(draggableDiv);
-                //UpdateHeroStatLabels();
-            }
+            const itemType = itemWithSlot.itemDetails.itemType;
+            const spriteURL = itemWithSlot.itemDetails.spriteURL;
+
+            console.log(itemType, spriteURL)
+            let type = ItemTypeParser(itemType);
+            let response = { data: { spriteURL: spriteURL } }; 
+        
+            let draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
+            $(`#${key}`).append(draggableDiv);
+
+            console.log(itemWithSlot);
+            itemDetailsListEQ.push(itemWithSlot);
+            //UpdateHeroStatLabels();
         }
     }
 }
