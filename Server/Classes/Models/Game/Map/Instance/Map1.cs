@@ -1,6 +1,4 @@
-﻿using Classes.Models.Game.Map.Instance.Npc;
-
-namespace Classes.Models.Game.Map.Instance;
+﻿namespace Classes.Models.Game.Map.Instance;
 
 public class Map1 : MapFieldsHelper
 {
@@ -144,12 +142,6 @@ public class Map1 : MapFieldsHelper
                     ToX = 20,
                     ToY = 0
                 }
-            },
-            NPCs = new List<MapNPC> {
-                Map1Npc0.Get(),
-                Map1Npc1.Get(),
-                Map1Npc2.Get(),
-                Map1Npc3.Get()
             }
         };
     }
