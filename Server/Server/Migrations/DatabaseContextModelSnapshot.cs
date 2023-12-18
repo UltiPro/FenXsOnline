@@ -2102,7 +2102,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 16,
                             Y = 94,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5738),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(334),
                             ItemId = 10,
                             ItemType = 8
                         },
@@ -2111,7 +2111,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 15,
                             Y = 69,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5743),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(468),
                             ItemId = 10,
                             ItemType = 8
                         },
@@ -2120,7 +2120,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 3,
                             Y = 49,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5745),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(470),
                             ItemId = 10,
                             ItemType = 8
                         },
@@ -2129,7 +2129,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 43,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5747),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(472),
                             ItemId = 10,
                             ItemType = 8
                         },
@@ -2138,7 +2138,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 20,
                             Y = 12,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5803),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(605),
                             ItemId = 12,
                             ItemType = 8
                         },
@@ -2147,7 +2147,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 1,
                             Y = 2,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5806),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(608),
                             ItemId = 12,
                             ItemType = 8
                         });
@@ -2180,7 +2180,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 12,
                             Y = 88,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5327),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(777),
                             MobId = 1
                         },
                         new
@@ -2188,7 +2188,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 16,
                             Y = 89,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5377),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(781),
                             MobId = 1
                         },
                         new
@@ -2196,7 +2196,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 19,
                             Y = 83,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5379),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(783),
                             MobId = 1
                         },
                         new
@@ -2204,7 +2204,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 5,
                             Y = 86,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5380),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(784),
                             MobId = 1
                         },
                         new
@@ -2212,7 +2212,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 26,
                             Y = 91,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5382),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(786),
                             MobId = 1
                         },
                         new
@@ -2220,7 +2220,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 29,
                             Y = 94,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5383),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(787),
                             MobId = 1
                         },
                         new
@@ -2228,7 +2228,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 9,
                             Y = 66,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5386),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(789),
                             MobId = 1
                         },
                         new
@@ -2236,7 +2236,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 1,
                             Y = 43,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5387),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(790),
                             MobId = 1
                         },
                         new
@@ -2244,7 +2244,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 3,
                             Y = 39,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5388),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(791),
                             MobId = 1
                         },
                         new
@@ -2252,7 +2252,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 6,
                             Y = 46,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5390),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(793),
                             MobId = 1
                         },
                         new
@@ -2260,7 +2260,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 1,
                             Y = 50,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5391),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(794),
                             MobId = 1
                         },
                         new
@@ -2268,7 +2268,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 6,
                             Y = 51,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5393),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(795),
                             MobId = 1
                         },
                         new
@@ -2276,7 +2276,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 1,
                             Y = 61,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5394),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(797),
                             MobId = 1
                         },
                         new
@@ -2284,7 +2284,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 40,
                             Y = 93,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5396),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(798),
                             MobId = 1
                         },
                         new
@@ -2292,7 +2292,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 40,
                             Y = 89,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5397),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(800),
                             MobId = 1
                         },
                         new
@@ -2300,7 +2300,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 57,
                             Y = 94,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5399),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(801),
                             MobId = 1
                         },
                         new
@@ -2308,7 +2308,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 54,
                             Y = 92,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5400),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(802),
                             MobId = 1
                         },
                         new
@@ -2316,7 +2316,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 53,
                             Y = 94,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5401),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(804),
                             MobId = 1
                         },
                         new
@@ -2324,7 +2324,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 47,
                             Y = 92,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5403),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(805),
                             MobId = 1
                         },
                         new
@@ -2332,7 +2332,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 48,
                             Y = 88,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5404),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(807),
                             MobId = 1
                         },
                         new
@@ -2340,7 +2340,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 42,
                             Y = 73,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5406),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(810),
                             MobId = 1
                         },
                         new
@@ -2348,7 +2348,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 47,
                             Y = 73,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5407),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(812),
                             MobId = 1
                         },
                         new
@@ -2356,7 +2356,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 51,
                             Y = 75,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5408),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(813),
                             MobId = 1
                         },
                         new
@@ -2364,7 +2364,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 58,
                             Y = 67,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5410),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(815),
                             MobId = 1
                         },
                         new
@@ -2372,7 +2372,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 53,
                             Y = 65,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5411),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(817),
                             MobId = 1
                         },
                         new
@@ -2380,7 +2380,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 65,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5412),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(818),
                             MobId = 1
                         },
                         new
@@ -2388,7 +2388,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 61,
                             Y = 62,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5413),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(820),
                             MobId = 1
                         },
                         new
@@ -2396,7 +2396,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 58,
                             Y = 63,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5415),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(821),
                             MobId = 1
                         },
                         new
@@ -2404,7 +2404,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 63,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5416),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(822),
                             MobId = 1
                         },
                         new
@@ -2412,7 +2412,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 52,
                             Y = 60,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5417),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(824),
                             MobId = 1
                         },
                         new
@@ -2420,7 +2420,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 57,
                             Y = 61,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5419),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(825),
                             MobId = 1
                         },
                         new
@@ -2428,7 +2428,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 61,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5420),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(827),
                             MobId = 1
                         },
                         new
@@ -2436,7 +2436,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 61,
                             Y = 60,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5421),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(828),
                             MobId = 1
                         },
                         new
@@ -2444,7 +2444,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 62,
                             Y = 57,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5423),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(830),
                             MobId = 1
                         },
                         new
@@ -2452,7 +2452,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 58,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5424),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(831),
                             MobId = 1
                         },
                         new
@@ -2460,7 +2460,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 53,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5425),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(832),
                             MobId = 1
                         },
                         new
@@ -2468,7 +2468,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 27,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5427),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(834),
                             MobId = 1
                         },
                         new
@@ -2476,7 +2476,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 25,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5428),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(835),
                             MobId = 1
                         },
                         new
@@ -2484,7 +2484,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 53,
                             Y = 26,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5429),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(836),
                             MobId = 1
                         },
                         new
@@ -2492,7 +2492,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 62,
                             Y = 20,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5431),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(838),
                             MobId = 1
                         },
                         new
@@ -2500,7 +2500,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 19,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5432),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(839),
                             MobId = 1
                         },
                         new
@@ -2508,7 +2508,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 53,
                             Y = 12,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5433),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(841),
                             MobId = 1
                         },
                         new
@@ -2516,7 +2516,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 13,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5435),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(869),
                             MobId = 1
                         },
                         new
@@ -2524,7 +2524,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 57,
                             Y = 9,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5436),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(870),
                             MobId = 1
                         },
                         new
@@ -2532,7 +2532,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 15,
                             Y = 25,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5515),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(945),
                             MobId = 2
                         },
                         new
@@ -2540,7 +2540,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 6,
                             Y = 22,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5517),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(947),
                             MobId = 2
                         },
                         new
@@ -2548,7 +2548,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 2,
                             Y = 21,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5518),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(948),
                             MobId = 2
                         },
                         new
@@ -2556,7 +2556,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 4,
                             Y = 18,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5520),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(950),
                             MobId = 2
                         },
                         new
@@ -2564,7 +2564,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 7,
                             Y = 17,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5522),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(951),
                             MobId = 2
                         },
                         new
@@ -2572,7 +2572,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 9,
                             Y = 20,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5523),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(953),
                             MobId = 2
                         },
                         new
@@ -2580,7 +2580,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 23,
                             Y = 24,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5524),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(955),
                             MobId = 2
                         },
                         new
@@ -2588,7 +2588,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 24,
                             Y = 22,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5526),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(956),
                             MobId = 2
                         },
                         new
@@ -2596,7 +2596,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 23,
                             Y = 19,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5527),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(957),
                             MobId = 2
                         },
                         new
@@ -2604,7 +2604,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 22,
                             Y = 14,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5529),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(959),
                             MobId = 2
                         },
                         new
@@ -2612,7 +2612,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 17,
                             Y = 12,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5530),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(960),
                             MobId = 2
                         },
                         new
@@ -2620,7 +2620,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 16,
                             Y = 19,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5531),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(961),
                             MobId = 2
                         },
                         new
@@ -2628,7 +2628,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 24,
                             Y = 10,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5534),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(963),
                             MobId = 2
                         },
                         new
@@ -2636,7 +2636,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 22,
                             Y = 7,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5535),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(965),
                             MobId = 2
                         },
                         new
@@ -2644,7 +2644,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 27,
                             Y = 9,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5537),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(966),
                             MobId = 2
                         },
                         new
@@ -2652,7 +2652,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 17,
                             Y = 5,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5538),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(967),
                             MobId = 2
                         },
                         new
@@ -2660,7 +2660,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 19,
                             Y = 8,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5539),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(969),
                             MobId = 2
                         },
                         new
@@ -2668,7 +2668,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 13,
                             Y = 4,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5541),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(970),
                             MobId = 2
                         },
                         new
@@ -2676,7 +2676,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 8,
                             Y = 6,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5542),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(972),
                             MobId = 2
                         },
                         new
@@ -2684,7 +2684,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 7,
                             Y = 11,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5543),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(973),
                             MobId = 2
                         },
                         new
@@ -2692,7 +2692,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 4,
                             Y = 8,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5545),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(974),
                             MobId = 2
                         },
                         new
@@ -2700,7 +2700,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 2,
                             Y = 9,
-                            Available = new DateTime(2023, 12, 17, 20, 29, 1, 76, DateTimeKind.Local).AddTicks(5546),
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(976),
                             MobId = 2
                         });
                 });
@@ -2922,6 +2922,669 @@ namespace Server.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Classes.Models.Game.Npc.DBNpc", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsHealer")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTrader")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MapId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PricePercent")
+                        .HasColumnType("float");
+
+                    b.Property<string>("SpriteURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("X")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Npcs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsHealer = true,
+                            IsTrader = true,
+                            MapId = 1,
+                            Name = "Adelaide",
+                            PricePercent = 0.75,
+                            SpriteURL = "adelide.gif",
+                            X = 36,
+                            Y = 49
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsHealer = false,
+                            IsTrader = true,
+                            MapId = 1,
+                            Name = "Eldrik",
+                            PricePercent = 0.84999999999999998,
+                            SpriteURL = "eldrik.gif",
+                            X = 19,
+                            Y = 39
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsHealer = false,
+                            IsTrader = true,
+                            MapId = 1,
+                            Name = "Gustaf",
+                            PricePercent = 0.80000000000000004,
+                            SpriteURL = "gustaf.gif",
+                            X = 14,
+                            Y = 13
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsHealer = false,
+                            IsTrader = true,
+                            MapId = 1,
+                            Name = "Franko",
+                            PricePercent = 0.84999999999999998,
+                            SpriteURL = "franko.gif",
+                            X = 56,
+                            Y = 36
+                        });
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Npc.DBNpcShopItem", b =>
+                {
+                    b.Property<int>("NpcId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemType")
+                        .HasColumnType("int");
+
+                    b.HasKey("NpcId", "Id");
+
+                    b.ToTable("NpcsItem");
+
+                    b.HasData(
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 1,
+                            ItemId = 1,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 7,
+                            ItemId = 2,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 13,
+                            ItemId = 3,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 2,
+                            ItemId = 4,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 8,
+                            ItemId = 5,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 14,
+                            ItemId = 6,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 3,
+                            ItemId = 7,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 9,
+                            ItemId = 8,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 15,
+                            ItemId = 9,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 1,
+                            ItemId = 1,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 7,
+                            ItemId = 2,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 13,
+                            ItemId = 3,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 19,
+                            ItemId = 4,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 2,
+                            ItemId = 5,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 8,
+                            ItemId = 6,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 14,
+                            ItemId = 7,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 20,
+                            ItemId = 8,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 3,
+                            ItemId = 9,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 9,
+                            ItemId = 10,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 15,
+                            ItemId = 11,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 21,
+                            ItemId = 12,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 4,
+                            ItemId = 13,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 10,
+                            ItemId = 14,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 16,
+                            ItemId = 15,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 22,
+                            ItemId = 16,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 25,
+                            ItemId = 1,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 31,
+                            ItemId = 2,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 37,
+                            ItemId = 3,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 43,
+                            ItemId = 4,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 26,
+                            ItemId = 5,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 32,
+                            ItemId = 6,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 38,
+                            ItemId = 7,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 44,
+                            ItemId = 8,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 27,
+                            ItemId = 9,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 33,
+                            ItemId = 10,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 39,
+                            ItemId = 11,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 45,
+                            ItemId = 12,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 1,
+                            ItemId = 1,
+                            ItemType = 7
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 2,
+                            ItemId = 2,
+                            ItemType = 7
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 3,
+                            ItemId = 3,
+                            ItemType = 7
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 7,
+                            ItemId = 1,
+                            ItemType = 6
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 8,
+                            ItemId = 2,
+                            ItemType = 6
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 9,
+                            ItemId = 3,
+                            ItemType = 6
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 19,
+                            ItemId = 1,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 20,
+                            ItemId = 2,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 21,
+                            ItemId = 3,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 22,
+                            ItemId = 4,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 25,
+                            ItemId = 5,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 26,
+                            ItemId = 6,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 27,
+                            ItemId = 7,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 28,
+                            ItemId = 8,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 31,
+                            ItemId = 9,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 32,
+                            ItemId = 10,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 33,
+                            ItemId = 11,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 34,
+                            ItemId = 12,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 1,
+                            ItemId = 1,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 2,
+                            ItemId = 2,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 3,
+                            ItemId = 3,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 4,
+                            ItemId = 4,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 7,
+                            ItemId = 5,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 8,
+                            ItemId = 6,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 9,
+                            ItemId = 7,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 10,
+                            ItemId = 8,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 13,
+                            ItemId = 9,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 14,
+                            ItemId = 10,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 15,
+                            ItemId = 11,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 16,
+                            ItemId = 12,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 5,
+                            ItemId = 13,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 6,
+                            ItemId = 14,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 11,
+                            ItemId = 15,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 12,
+                            ItemId = 16,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 43,
+                            ItemId = 1,
+                            ItemType = 4
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 44,
+                            ItemId = 2,
+                            ItemType = 4
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 45,
+                            ItemId = 3,
+                            ItemType = 4
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 46,
+                            ItemId = 4,
+                            ItemType = 4
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 37,
+                            ItemId = 1,
+                            ItemType = 5
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 38,
+                            ItemId = 2,
+                            ItemType = 5
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 39,
+                            ItemId = 3,
+                            ItemType = 5
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 40,
+                            ItemId = 4,
+                            ItemType = 5
+                        });
+                });
+
             modelBuilder.Entity("Classes.Models.User.DBUser", b =>
                 {
                     b.Property<string>("Id")
@@ -3019,19 +3682,19 @@ namespace Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "92e48b30-6cc7-4c1d-b8fb-ac8e0b7b7048",
+                            Id = "031fefb0-f91a-48e2-9262-f3c41b6d5156",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "cbbbd303-a82c-49f5-825a-52c27d79c8df",
+                            Id = "d20f0e43-0272-4de1-aa74-77ee8abad1d7",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "2e86f927-b30a-4ef2-aff6-d150515045c8",
+                            Id = "cbb4b8b5-f012-4b09-87e7-1bbf151b6ead",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -3224,6 +3887,17 @@ namespace Server.Migrations
                     b.Navigation("DBMob");
                 });
 
+            modelBuilder.Entity("Classes.Models.Game.Npc.DBNpcShopItem", b =>
+                {
+                    b.HasOne("Classes.Models.Game.Npc.DBNpc", "DBNpc")
+                        .WithMany("ShopItems")
+                        .HasForeignKey("NpcId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DBNpc");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -3323,6 +3997,11 @@ namespace Server.Migrations
             modelBuilder.Entity("Classes.Models.Game.Mob.DBMob", b =>
                 {
                     b.Navigation("DropItems");
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Npc.DBNpc", b =>
+                {
+                    b.Navigation("ShopItems");
                 });
 
             modelBuilder.Entity("Classes.Models.User.DBUser", b =>

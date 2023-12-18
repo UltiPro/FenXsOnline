@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Server.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231211231726_improvementItems")]
-    partial class improvementItems
+    [Migration("20231218011125_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace Server.Migrations
                     b.Property<int>("CriticalChance")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Dead")
+                    b.Property<DateTime>("Dead")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("GlovesId")
@@ -2075,6 +2075,1519 @@ namespace Server.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Classes.Models.Game.Map.DBMapItem", b =>
+                {
+                    b.Property<int>("MapId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("X")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Available")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemType")
+                        .HasColumnType("int");
+
+                    b.HasKey("MapId", "X", "Y");
+
+                    b.ToTable("MapItems");
+
+                    b.HasData(
+                        new
+                        {
+                            MapId = 1,
+                            X = 16,
+                            Y = 94,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(334),
+                            ItemId = 10,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 15,
+                            Y = 69,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(468),
+                            ItemId = 10,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 3,
+                            Y = 49,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(470),
+                            ItemId = 10,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 55,
+                            Y = 43,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(472),
+                            ItemId = 10,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 20,
+                            Y = 12,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(605),
+                            ItemId = 12,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 1,
+                            Y = 2,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(608),
+                            ItemId = 12,
+                            ItemType = 8
+                        });
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Map.DBMapMob", b =>
+                {
+                    b.Property<int>("MapId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("X")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Available")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MobId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MapId", "X", "Y");
+
+                    b.ToTable("MapMobs");
+
+                    b.HasData(
+                        new
+                        {
+                            MapId = 1,
+                            X = 12,
+                            Y = 88,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(777),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 16,
+                            Y = 89,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(781),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 19,
+                            Y = 83,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(783),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 5,
+                            Y = 86,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(784),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 26,
+                            Y = 91,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(786),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 29,
+                            Y = 94,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(787),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 9,
+                            Y = 66,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(789),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 1,
+                            Y = 43,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(790),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 3,
+                            Y = 39,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(791),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 6,
+                            Y = 46,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(793),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 1,
+                            Y = 50,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(794),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 6,
+                            Y = 51,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(795),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 1,
+                            Y = 61,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(797),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 40,
+                            Y = 93,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(798),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 40,
+                            Y = 89,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(800),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 57,
+                            Y = 94,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(801),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 54,
+                            Y = 92,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(802),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 53,
+                            Y = 94,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(804),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 47,
+                            Y = 92,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(805),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 48,
+                            Y = 88,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(807),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 42,
+                            Y = 73,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(810),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 47,
+                            Y = 73,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(812),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 51,
+                            Y = 75,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(813),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 58,
+                            Y = 67,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(815),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 53,
+                            Y = 65,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(817),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 59,
+                            Y = 65,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(818),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 61,
+                            Y = 62,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(820),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 58,
+                            Y = 63,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(821),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 55,
+                            Y = 63,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(822),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 52,
+                            Y = 60,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(824),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 57,
+                            Y = 61,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(825),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 59,
+                            Y = 61,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(827),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 61,
+                            Y = 60,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(828),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 62,
+                            Y = 57,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(830),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 59,
+                            Y = 58,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(831),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 59,
+                            Y = 53,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(832),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 59,
+                            Y = 27,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(834),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 55,
+                            Y = 25,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(835),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 53,
+                            Y = 26,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(836),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 62,
+                            Y = 20,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(838),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 55,
+                            Y = 19,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(839),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 53,
+                            Y = 12,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(841),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 55,
+                            Y = 13,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(869),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 1,
+                            X = 57,
+                            Y = 9,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(870),
+                            MobId = 1
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 15,
+                            Y = 25,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(945),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 6,
+                            Y = 22,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(947),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 2,
+                            Y = 21,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(948),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 4,
+                            Y = 18,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(950),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 7,
+                            Y = 17,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(951),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 9,
+                            Y = 20,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(953),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 23,
+                            Y = 24,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(955),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 24,
+                            Y = 22,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(956),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 23,
+                            Y = 19,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(957),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 22,
+                            Y = 14,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(959),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 17,
+                            Y = 12,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(960),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 16,
+                            Y = 19,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(961),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 24,
+                            Y = 10,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(963),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 22,
+                            Y = 7,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(965),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 27,
+                            Y = 9,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(966),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 17,
+                            Y = 5,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(967),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 19,
+                            Y = 8,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(969),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 13,
+                            Y = 4,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(970),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 8,
+                            Y = 6,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(972),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 7,
+                            Y = 11,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(973),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 4,
+                            Y = 8,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(974),
+                            MobId = 2
+                        },
+                        new
+                        {
+                            MapId = 2,
+                            X = 2,
+                            Y = 9,
+                            Available = new DateTime(2023, 12, 18, 2, 11, 24, 952, DateTimeKind.Local).AddTicks(976),
+                            MobId = 2
+                        });
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Mob.DBMob", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Agility")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Armor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Atack")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CriticalChance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DropChance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HealthPoints")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MagicArmor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MagicAtack")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpriteUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mobs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Agility = 15,
+                            Armor = 0,
+                            Atack = 10,
+                            CriticalChance = 0,
+                            DropChance = 50,
+                            HealthPoints = 100,
+                            Level = 1,
+                            MagicArmor = 0,
+                            MagicAtack = 0,
+                            Name = "Rabbit",
+                            SpriteUrl = "rabbit.gif",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Agility = 5,
+                            Armor = 0,
+                            Atack = 20,
+                            CriticalChance = 5,
+                            DropChance = 25,
+                            HealthPoints = 100,
+                            Level = 5,
+                            MagicArmor = 0,
+                            MagicAtack = 0,
+                            Name = "Spider",
+                            SpriteUrl = "spider.gif",
+                            Weight = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Agility = 10,
+                            Armor = 0,
+                            Atack = 25,
+                            CriticalChance = 20,
+                            DropChance = 25,
+                            HealthPoints = 150,
+                            Level = 10,
+                            MagicArmor = 0,
+                            MagicAtack = 0,
+                            Name = "Wolf",
+                            SpriteUrl = "wolf.gif",
+                            Weight = 10
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Agility = 10,
+                            Armor = 10,
+                            Atack = 40,
+                            CriticalChance = 20,
+                            DropChance = 25,
+                            HealthPoints = 200,
+                            Level = 15,
+                            MagicArmor = 0,
+                            MagicAtack = 0,
+                            Name = "Boar",
+                            SpriteUrl = "boar.gif",
+                            Weight = 20
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Agility = 10,
+                            Armor = 50,
+                            Atack = 50,
+                            CriticalChance = 15,
+                            DropChance = 15,
+                            HealthPoints = 350,
+                            Level = 20,
+                            MagicArmor = 100,
+                            MagicAtack = 50,
+                            Name = "Apparition",
+                            SpriteUrl = "apparition.gif",
+                            Weight = 35
+                        });
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Mob.DBMobDrop", b =>
+                {
+                    b.Property<int>("MobId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MobId", "ItemType", "ItemId");
+
+                    b.ToTable("MobsDrop");
+
+                    b.HasData(
+                        new
+                        {
+                            MobId = 1,
+                            ItemType = 8,
+                            ItemId = 11
+                        },
+                        new
+                        {
+                            MobId = 2,
+                            ItemType = 9,
+                            ItemId = 6
+                        },
+                        new
+                        {
+                            MobId = 3,
+                            ItemType = 9,
+                            ItemId = 5
+                        },
+                        new
+                        {
+                            MobId = 4,
+                            ItemType = 9,
+                            ItemId = 2
+                        },
+                        new
+                        {
+                            MobId = 4,
+                            ItemType = 9,
+                            ItemId = 3
+                        },
+                        new
+                        {
+                            MobId = 4,
+                            ItemType = 9,
+                            ItemId = 4
+                        },
+                        new
+                        {
+                            MobId = 4,
+                            ItemType = 8,
+                            ItemId = 11
+                        },
+                        new
+                        {
+                            MobId = 5,
+                            ItemType = 9,
+                            ItemId = 14
+                        },
+                        new
+                        {
+                            MobId = 5,
+                            ItemType = 9,
+                            ItemId = 7
+                        },
+                        new
+                        {
+                            MobId = 5,
+                            ItemType = 9,
+                            ItemId = 9
+                        },
+                        new
+                        {
+                            MobId = 5,
+                            ItemType = 8,
+                            ItemId = 3
+                        });
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Npc.DBNpc", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsHealer")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTrader")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MapId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PricePercent")
+                        .HasColumnType("float");
+
+                    b.Property<string>("SpriteURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("X")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Npcs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsHealer = true,
+                            IsTrader = true,
+                            MapId = 1,
+                            Name = "Adelaide",
+                            PricePercent = 0.75,
+                            SpriteURL = "adelide.gif",
+                            X = 36,
+                            Y = 49
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsHealer = false,
+                            IsTrader = true,
+                            MapId = 1,
+                            Name = "Eldrik",
+                            PricePercent = 0.84999999999999998,
+                            SpriteURL = "eldrik.gif",
+                            X = 19,
+                            Y = 39
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsHealer = false,
+                            IsTrader = true,
+                            MapId = 1,
+                            Name = "Gustaf",
+                            PricePercent = 0.80000000000000004,
+                            SpriteURL = "gustaf.gif",
+                            X = 14,
+                            Y = 13
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsHealer = false,
+                            IsTrader = true,
+                            MapId = 1,
+                            Name = "Franko",
+                            PricePercent = 0.84999999999999998,
+                            SpriteURL = "franko.gif",
+                            X = 56,
+                            Y = 36
+                        });
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Npc.DBNpcShopItem", b =>
+                {
+                    b.Property<int>("NpcId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemType")
+                        .HasColumnType("int");
+
+                    b.HasKey("NpcId", "Id");
+
+                    b.ToTable("NpcsItem");
+
+                    b.HasData(
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 1,
+                            ItemId = 1,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 7,
+                            ItemId = 2,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 13,
+                            ItemId = 3,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 2,
+                            ItemId = 4,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 8,
+                            ItemId = 5,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 14,
+                            ItemId = 6,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 3,
+                            ItemId = 7,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 9,
+                            ItemId = 8,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 1,
+                            Id = 15,
+                            ItemId = 9,
+                            ItemType = 8
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 1,
+                            ItemId = 1,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 7,
+                            ItemId = 2,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 13,
+                            ItemId = 3,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 19,
+                            ItemId = 4,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 2,
+                            ItemId = 5,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 8,
+                            ItemId = 6,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 14,
+                            ItemId = 7,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 20,
+                            ItemId = 8,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 3,
+                            ItemId = 9,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 9,
+                            ItemId = 10,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 15,
+                            ItemId = 11,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 21,
+                            ItemId = 12,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 4,
+                            ItemId = 13,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 10,
+                            ItemId = 14,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 16,
+                            ItemId = 15,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 22,
+                            ItemId = 16,
+                            ItemType = 0
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 25,
+                            ItemId = 1,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 31,
+                            ItemId = 2,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 37,
+                            ItemId = 3,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 43,
+                            ItemId = 4,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 26,
+                            ItemId = 5,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 32,
+                            ItemId = 6,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 38,
+                            ItemId = 7,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 44,
+                            ItemId = 8,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 27,
+                            ItemId = 9,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 33,
+                            ItemId = 10,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 39,
+                            ItemId = 11,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 2,
+                            Id = 45,
+                            ItemId = 12,
+                            ItemType = 1
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 1,
+                            ItemId = 1,
+                            ItemType = 7
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 2,
+                            ItemId = 2,
+                            ItemType = 7
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 3,
+                            ItemId = 3,
+                            ItemType = 7
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 7,
+                            ItemId = 1,
+                            ItemType = 6
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 8,
+                            ItemId = 2,
+                            ItemType = 6
+                        },
+                        new
+                        {
+                            NpcId = 3,
+                            Id = 9,
+                            ItemId = 3,
+                            ItemType = 6
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 19,
+                            ItemId = 1,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 20,
+                            ItemId = 2,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 21,
+                            ItemId = 3,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 22,
+                            ItemId = 4,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 25,
+                            ItemId = 5,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 26,
+                            ItemId = 6,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 27,
+                            ItemId = 7,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 28,
+                            ItemId = 8,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 31,
+                            ItemId = 9,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 32,
+                            ItemId = 10,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 33,
+                            ItemId = 11,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 34,
+                            ItemId = 12,
+                            ItemType = 2
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 1,
+                            ItemId = 1,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 2,
+                            ItemId = 2,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 3,
+                            ItemId = 3,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 4,
+                            ItemId = 4,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 7,
+                            ItemId = 5,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 8,
+                            ItemId = 6,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 9,
+                            ItemId = 7,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 10,
+                            ItemId = 8,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 13,
+                            ItemId = 9,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 14,
+                            ItemId = 10,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 15,
+                            ItemId = 11,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 16,
+                            ItemId = 12,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 5,
+                            ItemId = 13,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 6,
+                            ItemId = 14,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 11,
+                            ItemId = 15,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 12,
+                            ItemId = 16,
+                            ItemType = 3
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 43,
+                            ItemId = 1,
+                            ItemType = 4
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 44,
+                            ItemId = 2,
+                            ItemType = 4
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 45,
+                            ItemId = 3,
+                            ItemType = 4
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 46,
+                            ItemId = 4,
+                            ItemType = 4
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 37,
+                            ItemId = 1,
+                            ItemType = 5
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 38,
+                            ItemId = 2,
+                            ItemType = 5
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 39,
+                            ItemId = 3,
+                            ItemType = 5
+                        },
+                        new
+                        {
+                            NpcId = 4,
+                            Id = 40,
+                            ItemId = 4,
+                            ItemType = 5
+                        });
+                });
+
             modelBuilder.Entity("Classes.Models.User.DBUser", b =>
                 {
                     b.Property<string>("Id")
@@ -2172,19 +3685,19 @@ namespace Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5d69a4ee-0427-4c51-820b-009cb5e74d7c",
+                            Id = "031fefb0-f91a-48e2-9262-f3c41b6d5156",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "eafb617f-a66b-42eb-856a-019b11d19857",
+                            Id = "d20f0e43-0272-4de1-aa74-77ee8abad1d7",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "f1ac6a39-2a21-422b-9ed0-e8e00b9302f6",
+                            Id = "cbb4b8b5-f012-4b09-87e7-1bbf151b6ead",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -2366,6 +3879,28 @@ namespace Server.Migrations
                     b.Navigation("DBHero");
                 });
 
+            modelBuilder.Entity("Classes.Models.Game.Mob.DBMobDrop", b =>
+                {
+                    b.HasOne("Classes.Models.Game.Mob.DBMob", "DBMob")
+                        .WithMany("DropItems")
+                        .HasForeignKey("MobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DBMob");
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Npc.DBNpcShopItem", b =>
+                {
+                    b.HasOne("Classes.Models.Game.Npc.DBNpc", "DBNpc")
+                        .WithMany("ShopItems")
+                        .HasForeignKey("NpcId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DBNpc");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -2460,6 +3995,16 @@ namespace Server.Migrations
             modelBuilder.Entity("Classes.Models.Game.Item.Weapon.DBWeapon", b =>
                 {
                     b.Navigation("Heroes");
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Mob.DBMob", b =>
+                {
+                    b.Navigation("DropItems");
+                });
+
+            modelBuilder.Entity("Classes.Models.Game.Npc.DBNpc", b =>
+                {
+                    b.Navigation("ShopItems");
                 });
 
             modelBuilder.Entity("Classes.Models.User.DBUser", b =>
