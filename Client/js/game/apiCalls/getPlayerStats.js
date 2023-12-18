@@ -1,7 +1,20 @@
-let itemDetailsList = []; // Declare an array to store item details
+let itemDetailsListBP = []; // Declare an array to store item details
+let itemDetailsListEQ = []
+
+function GetEquipmentDetails(){
+    return itemDetailsListEQ
+}
+
+function SetEquipmentDetails(updatedItemList) {
+    itemDetailsListEq = updatedItemList;
+}
 
 function GetBackpackDetails(){
-   return itemDetailsList
+   return itemDetailsListBP
+}
+
+function SetBackpackDetails(updatedItemList) {
+    itemDetailsListBP = updatedItemList;
 }
 
 $(document).ready(function () {
@@ -59,7 +72,7 @@ function GetItemDetails(item) {
                 slotInfo: `${item.id}`
             };
             //console.log(itemWithSlot)
-            itemDetailsList.push(itemWithSlot);
+            itemDetailsListBP.push(itemWithSlot);
             
             return response.data;
           

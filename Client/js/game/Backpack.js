@@ -31,16 +31,30 @@ $(".bp-slot").on("drop", function (event) {
     //check if source parent contains .eq-slot
     if (ancestor.length > 0) {
         const absent = $(`<div class="item-image item-opacity"></div>`);
-        draggedItem.parent().append(absent);
-        dropTarget.append(draggedItem);
-        swapItems(fromId, cleanToId);
-        UpdateHeroStatLabels();
+
+        swapItems(fromId, cleanToId)
+           .then((flag) => {
+                    if (flag === true) {
+                        draggedItem.parent().append(absent);
+                        dropTarget.append(draggedItem);
+                        const newItemDetails = UpdateItemPosition(fromId, cleanToId)
+
+                        UpdateHeroStatLabels();
+                    }
+                }).catch((err) => {
+                    console.log("Error in swapItem: ", err)
+                })
+
+     
     } else if (fromId !== toId) {
         const existingItem = dropTarget.children(".item-image");
         draggedItem.after(existingItem);
         dropTarget.append(draggedItem);
         const cleanFromId = fromId.replace("s", "");
+        const newItemDetails = UpdateItemPosition(cleanFromId, cleanToId)
         swapItems(cleanFromId, cleanToId);
+        SetBackpackDetails(newItemDetails)
+        
     } else {
         console.log("Item moved within the same slot. No API call needed.");
     }
@@ -60,16 +74,26 @@ $(".eq-slot").on("drop", function (event) {
     const cleanFromId = fromId.replace("s", "");
     let existingItem = dropTarget.children(".item-image");
 
+    //if hero will meet al requirements for item, but already have
+    //item equipped at this slot break equipping another item
+    if (!(dropTarget.children().hasClass("item-opacity"))) {
+        console.log("Hero has already equipped item of this type");
+        
+    } else
     //check if source parent contains .bp-slot
     if (ancestor.length > 0) {
         const DoesEqSlotFitsItemType = Equip(cleanFromId, toId);
         if (DoesEqSlotFitsItemType === true) {
             swapItems(cleanFromId, toId)
                 .then((flag) => {
-                    if (flag === true) {
-                        dropTarget.append(draggedItem);
+                    if (flag === true) {    
                         existingItem.removeClass();
+                        dropTarget.append(draggedItem);
+                    
+  
+                        const newItemDetails = UpdateItemPosition(cleanFromId, toId)
                         UpdateHeroStatLabels();
+
                     }
                 })
                 .catch((error) => {
@@ -118,13 +142,46 @@ function swapItems(fromId, toId) {
     });
 }
 
-function Unequip(fromId) {
-
+function UpdateItemPosition(oldId, newId) {
+    let EQdetails = GetEquipmentDetails();
+    let BPdetails = GetBackpackDetails();
+    if(isNaN(oldId) || isNaN(newId)){
+        if(isNaN(oldId)){
+            const itemType = ParseEqId(oldId)
+            const alphaIndex = EQdetails.findIndex((item) => item.slotInfo === itemType);
+            let itemToMove = EQdetails.splice(alphaIndex,1)[0];
+            console.log("BPdetails new item: "+itemToMove)
+            itemToMove.slotInfo = newId
+            BPdetails.push(itemToMove); 
+        } else {
+            const itemType = ParseEqId(newId)
+            const betaIndex = BPdetails.findIndex((item) => item.slotInfo === oldId)
+            let itemToMove = BPdetails.splice(betaIndex,1)[0];
+            console.log("EQdetails new item: "+itemToMove)
+            itemToMove.slotInfo = itemType;
+            EQdetails.push(itemToMove)
+        }
+    
+    } else {
+        const alphaIndex = BPdetails.findIndex((item) => item.slotInfo === oldId);
+        const betaIndex = BPdetails.findIndex((item) => item.slotInfo === newId);
+        if (alphaIndex !== -1) {
+            BPdetails[alphaIndex].slotInfo = newId;
+            console.log('Item slotInfo updated:', BPdetails[alphaIndex]);
+            if(betaIndex !== -1){
+                BPdetails[betaIndex].slotInfo = oldId;
+                console.log('Item slotInfo updated:', BPdetails[betaIndex]);
+            }
+            return BPdetails;
+        } else {
+            console.log('Item with oldId not found.');
+        }
+    }
 }
 
 function Equip(fromId, toId) {
-    let details = GetBackpackDetails();
-    const x = details.find((item) => item.slotInfo === fromId);
+    let BPdetails = GetBackpackDetails();
+    const x = BPdetails.find((item) => item.slotInfo === fromId);
     let type = ParseEqId(toId);
     if (x.itemDetails.itemType === type) {
         return true;
