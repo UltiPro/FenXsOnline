@@ -1,6 +1,6 @@
 let itemDetailsList = []; // Declare an array to store item details
 
-function Test(){
+function GetBackpackDetails(){
    return itemDetailsList
 }
 
@@ -23,6 +23,13 @@ function processHeroData(response) {
     UpdateHeroStats(heroData);
     UpdateHeroBackpack(eq);
     UpdateHeroEquipment();
+}
+
+async function UpdateHeroStatLabels(){
+    app.get(apiBaseUrl + "Hero/").then((response) =>{
+        UpdateHeroStats(response.data)
+    })
+    .catch(err => {console.log("Error with updating hero statistic labels"), err})
 }
 
 //Updating stat labels
@@ -72,7 +79,7 @@ function UpdateHeroBackpack(eq) {
 
 //
 function UpdateHeroEquipment(){
-    
+
 }
 
 function ItemTypeParser(type){
