@@ -31,11 +31,11 @@ function fetchHeroData() {
 
 function processHeroData(response) {
     const heroData = response.data;
-    const eq = response.data.heroEquipment;
+    const bp = response.data.heroEquipment;
 
     UpdateHeroStats(heroData);
-    UpdateHeroBackpack(eq);
-    UpdateHeroEquipment();
+    UpdateHeroBackpack(bp);
+    UpdateHeroEquipment(heroData);
 }
 
 async function UpdateHeroStatLabels(){
@@ -84,15 +84,32 @@ function GetItemDetails(item) {
 }
 
 // ForEach item get it's data
-function UpdateHeroBackpack(eq) {
-    const promises = eq
+function UpdateHeroBackpack(bp) {
+    const promises = bp
         .filter(item => item && item.itemType !== null && item.itemId !== null)
         .map(GetItemDetails);
 }
 
 //
-function UpdateHeroEquipment(){
+async function UpdateHeroEquipment(heroData){
+    for (const key in heroData) {
+        if (key.startsWith('db')) {
+            const parsedKey = ParseEqId(key);
+            console.log(key);
+            console.log(parsedKey);
+           
+            if(heroData[key] !== null){
+                // Assuming 'type' and 'response.data.spriteURL' should come from somewhere
+                var type = ""; // Define 'type' - this might be specific to your use case
+                var response = { data: { spriteURL: "./assets/armors/armorWarrior0.gif" } }; // Define 'response' - this might be specific to your use case
 
+                var draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
+                
+                $(`#${key}`).append(draggableDiv);
+                //UpdateHeroStatLabels();
+            }
+        }
+    }
 }
 
 function ItemTypeParser(type){
