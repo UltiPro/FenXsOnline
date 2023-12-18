@@ -14,7 +14,7 @@ using Classes.Models.Game.Item.Neutral;
 using Classes.Models.Game.Item.Ring;
 using Classes.Models.Game.Item.SecondaryWeapon;
 using Classes.Models.Game.Item.Weapon;
-using Classes.Models.Game.Map;
+using Classes.Models.Game.Npc;
 using Database.Contracts;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +39,7 @@ public class NpcMenager : INpcMenager
     {
         var hero = await GetHero(accountId);
 
-        var npc = GetNpc(hero, npcId);
+        var npc = await GetNpc(hero, npcId);
 
         if (npc.IsHealer)
         {
@@ -57,7 +57,7 @@ public class NpcMenager : INpcMenager
     {
         var hero = await GetHero(accountId);
 
-        var npc = GetNpc(hero, npcId);
+        var npc = await GetNpc(hero, npcId);
 
         if (npc.IsTrader)
         {
@@ -86,11 +86,11 @@ public class NpcMenager : INpcMenager
     {
         var hero = await GetHero(accountId);
 
-        var npc = GetNpc(hero, npcId);
+        var npc = await GetNpc(hero, npcId);
 
         if (npc.IsTrader)
         {
-            var itemNpc = npc.Items.FirstOrDefault(item => item.Id == itemId);
+            var itemNpc = _context.NpcsItem.FirstOrDefault(npcItem => npcItem.DBNpc == npc && npcItem.Id == itemId);
 
             if (itemNpc is null) throw new BadRequestException("This npc do not sell item in provided slot.");
 
@@ -119,9 +119,9 @@ public class NpcMenager : INpcMenager
         return hero;
     }
 
-    private MapNPC GetNpc(DBHero hero, int npcId)
+    private async Task<DBNpc> GetNpc(DBHero hero, int npcId)
     {
-        var npc = _world.Maps[hero.MapId].NPCs.FirstOrDefault(npc => npc.Id == npcId);
+        var npc = await _context.Npcs.FirstOrDefaultAsync(npc => npc.MapId == hero.MapId && npc.Id == npcId);
 
         if (npc is null) throw new NotFoundException("NPC", npcId);
 
