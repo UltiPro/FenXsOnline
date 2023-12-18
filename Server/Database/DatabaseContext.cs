@@ -17,6 +17,11 @@ using Classes.Models.Game.Item.Neutral;
 using Classes.Models.Game.Item.QuestItem;
 using Classes.Models.Game.Mob;
 using Classes.Models.Game.Map;
+using Classes.Models.Game.Npc;
+using Database.Configuration.Game.Mob;
+using Database.Configuration.Game.Map.Mob;
+using Database.Configuration.Game.Map.Item;
+using Database.Configuration.Game.Npc;
 
 namespace Database;
 
@@ -38,10 +43,12 @@ public class DatabaseContext : IdentityDbContext<DBUser>
     public DbSet<DBNeutral> Neutrals { get; set; }
     public DbSet<DBQuestItem> QuestItems { get; set; }
     public DbSet<DBHeroEquipment> HeroesEquipments { get; set; }
+    public DbSet<DBNpc> Npcs { get; set; }
+    public DbSet<DBNpcShopItem> NpcsItem { get; set; }
     public DbSet<DBMob> Mobs { get; set; }
     public DbSet<DBMobDrop> MobsDrop { get; set; }
-    public DbSet<DBMapMob> MapMobs { get; set; }
     public DbSet<DBMapItem> MapItems { get; set; }
+    public DbSet<DBMapMob> MapMobs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -62,19 +69,32 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         modelBuilder.ApplyConfiguration(new DBNeutralConfiguration());
         modelBuilder.ApplyConfiguration(new DBQuestItemConfiguration());
 
-        modelBuilder.ApplyConfiguration(new DBMobConfiguration());
-        modelBuilder.ApplyConfiguration(new DBMobDropConfiguration());
+        modelBuilder.ApplyConfiguration(new DBNpcConfiguration());
 
-        modelBuilder.ApplyConfiguration(new DBMap1MobConfiguration());
-        modelBuilder.ApplyConfiguration(new DBMap2MobConfiguration());
+        modelBuilder.ApplyConfiguration(new DBNpc1ShopConfiguration());
+        modelBuilder.ApplyConfiguration(new DBNpc2ShopConfiguration());
+        modelBuilder.ApplyConfiguration(new DBNpc3ShopConfiguration());
+        modelBuilder.ApplyConfiguration(new DBNpc4ShopConfiguration());
+
+        modelBuilder.ApplyConfiguration(new DBMobConfiguration());
+
+        modelBuilder.ApplyConfiguration(new DBMob1DropConfiguration());
+        modelBuilder.ApplyConfiguration(new DBMob2DropConfiguration());
+        modelBuilder.ApplyConfiguration(new DBMob3DropConfiguration());
+        modelBuilder.ApplyConfiguration(new DBMob4DropConfiguration());
+        modelBuilder.ApplyConfiguration(new DBMob5DropConfiguration());
 
         modelBuilder.ApplyConfiguration(new DBMap1ItemConfiguration());
         modelBuilder.ApplyConfiguration(new DBMap2ItemConfiguration());
 
+        modelBuilder.ApplyConfiguration(new DBMap1MobConfiguration());
+        modelBuilder.ApplyConfiguration(new DBMap2MobConfiguration());
+
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
         modelBuilder.Entity<DBHeroEquipment>().HasKey(heroEquipment => new { heroEquipment.HeroId, heroEquipment.Id });
+        modelBuilder.Entity<DBNpcShopItem>().HasKey(npcShop => new { npcShop.NpcId, npcShop.Id });
         modelBuilder.Entity<DBMobDrop>().HasKey(mobDrop => new { mobDrop.MobId, mobDrop.ItemType, mobDrop.ItemId });
-        modelBuilder.Entity<DBMapMob>().HasKey(mapMob => new { mapMob.MapId, mapMob.X, mapMob.Y });
         modelBuilder.Entity<DBMapItem>().HasKey(mapItem => new { mapItem.MapId, mapItem.X, mapItem.Y });
+        modelBuilder.Entity<DBMapMob>().HasKey(mapMob => new { mapMob.MapId, mapMob.X, mapMob.Y });
     }
 }

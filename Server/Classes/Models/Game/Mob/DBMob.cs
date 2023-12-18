@@ -1,11 +1,7 @@
 ﻿namespace Classes.Models.Game.Mob;
 
-public class DBMob
+public class DBMob : MobProvider
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string SpriteUrl { get; set; }
-    public int Level { get; set; } = 1;
     public int HealthPoints { get; set; } = 100;
     public int Atack { get; set; } = 1;
     public int MagicAtack { get; set; } = 0;
