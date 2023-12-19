@@ -1,19 +1,19 @@
 let itemDetailsListBP = []; // Declare an array to store item details
 let itemDetailsListEQ = []
 
-function GetEquipmentDetails(){
+function getEquipmentDetails(){
     return itemDetailsListEQ
 }
 
-function SetEquipmentDetails(updatedItemList) {
+function setEquipmentDetails(updatedItemList) {
     itemDetailsListEq = updatedItemList;
 }
 
-function GetBackpackDetails(){
+function getBackpackDetails(){
    return itemDetailsListBP
 }
 
-function SetBackpackDetails(updatedItemList) {
+function setBackpackDetails(updatedItemList) {
     itemDetailsListBP = updatedItemList;
 }
 
@@ -33,20 +33,20 @@ function processHeroData(response) {
     const heroData = response.data;
     const bp = response.data.heroEquipment;
 
-    UpdateHeroStats(heroData);
-    UpdateHeroBackpack(bp);
-    UpdateHeroEquipment(heroData);
+    updateHeroStats(heroData);
+    updateHeroBackpack(bp);
+    updateHeroEquipment(heroData);
 }
 
-async function UpdateHeroStatLabels(){
+async function updateHeroStatLabels(){
     app.get(apiBaseUrl + "Hero/").then((response) =>{
-        UpdateHeroStats(response.data)
+        updateHeroStats(response.data)
     })
     .catch(err => {console.log("Error with updating hero statistic labels"), err})
 }
 
 //Updating stat labels
-function UpdateHeroStats(heroData) {
+function updateHeroStats(heroData) {
     $("#dmg\\.value").text(heroData.atack);
     $("#def\\.value").text(heroData.armor);
     $("#health\\.value").text(heroData.healthPoints + "/" + heroData.maxHealthPoints);
@@ -58,10 +58,10 @@ function UpdateHeroStats(heroData) {
     $("#stamina\\.value").text(heroData.stamina + "/" + heroData.maxStamina);
 }
 
-function GetItemDetails(item) {
+function getItemDetails(item) {
     return app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`)
         .then(function (response) {
-            var type = ItemTypeParser(item.itemType)
+            var type = itemTypeParser(item.itemType)
             //create div with item
             var draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
             $(`#s${item.id}`).append(draggableDiv);
@@ -71,7 +71,7 @@ function GetItemDetails(item) {
                 itemDetails: response.data,
                 slotInfo: `${item.id}`
             };
-            //console.log(itemWithSlot)
+            console.log(itemWithSlot)
             itemDetailsListBP.push(itemWithSlot);
             
             return response.data;
@@ -84,14 +84,14 @@ function GetItemDetails(item) {
 }
 
 // ForEach item get it's data
-function UpdateHeroBackpack(bp) {
+function updateHeroBackpack(bp) {
     const promises = bp
         .filter(item => item && item.itemType !== null && item.itemId !== null)
-        .map(GetItemDetails);
+        .map(getItemDetails);
 }
 
 //Loading Hero Equipment
-function UpdateHeroEquipment(heroData) {
+function updateHeroEquipment(heroData) {
     for (const key in heroData) {
         if (key.startsWith('db') && heroData[key] !== null) {
             const parsedKey = ParseEqId(key);
@@ -105,7 +105,7 @@ function UpdateHeroEquipment(heroData) {
             const spriteURL = itemWithSlot.itemDetails.spriteURL;
 
             console.log(itemType, spriteURL)
-            let type = ItemTypeParser(itemType);
+            let type = itemTypeParser(itemType);
             let response = { data: { spriteURL: spriteURL } }; 
         
             let draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
@@ -118,7 +118,7 @@ function UpdateHeroEquipment(heroData) {
     }
 }
 
-function ItemTypeParser(type){
+function itemTypeParser(type){
     switch(type){
         case 0: return "./assets/primaryWeapons/"
         case 1: return "./assets/secondaryWeapons/"
