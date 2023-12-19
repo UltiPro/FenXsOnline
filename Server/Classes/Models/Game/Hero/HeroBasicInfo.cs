@@ -7,6 +7,7 @@ public class HeroBasicInfo
     public int Id { get; set; }
     public string Name { get; set; }
     public int Level { get; set; } = 1;
+    public int Experience { get; set; } = 0;
     public Profession Profession { get; set; }
     public Sex Sex { get; set; }
     public int HealthPoints { get; set; } = 100;
