@@ -45,7 +45,6 @@ $(".bp-slot").on("drop", function (event) {
                     console.log("Error in swapItem: ", err)
                 })
 
-     
     } else if (fromId !== toId) {
         const existingItem = dropTarget.children(".item-image");
         draggedItem.after(existingItem);
@@ -58,6 +57,9 @@ $(".bp-slot").on("drop", function (event) {
     } else {
         console.log("Item moved within the same slot. No API call needed.");
     }
+    setTimeout(() => {
+        UpdateHeroStatLabels();
+    }, 2000);
 });
 
 $(".eq-slot").on("dragover", function (event) {
@@ -91,7 +93,7 @@ $(".eq-slot").on("drop", function (event) {
                         dropTarget.append(draggedItem);
                     
   
-                        const newItemDetails = UpdateItemPosition(cleanFromId, toId)
+                        UpdateItemPosition(cleanFromId, toId)
                         UpdateHeroStatLabels();
 
                     }
@@ -103,6 +105,9 @@ $(".eq-slot").on("drop", function (event) {
     } else {
         console.log("Item moved within two eq slots. No API call needed.");
     }
+    setTimeout(() => {
+        UpdateHeroStatLabels();
+    }, 2000);
 });
 
 function swapItems(fromId, toId) {
