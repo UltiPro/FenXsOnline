@@ -17,10 +17,6 @@ $(document).on("dragend", ".item-image", function () {
     $(this).css("transform", "scale(1)");
 });
 
-function showInfo() {
-    // Kod do wyświetlenia informacji o przedmiocie
-    console.log("Pokaż informacje o przedmiocie");
-}
 // Add drop event listeners to all .bp-slot elements
 $(".bp-slot").on("dragover", function (event) {
     event.preventDefault();
@@ -216,3 +212,41 @@ function parseEqId(id) {
             return 7;
     }
 }
+
+function showItemInfo(element, event) {
+    hoverTimer = setTimeout(function () {
+        showInfo(element, event);
+    }, 1000);
+}
+
+function hideItemInfo() {
+    clearTimeout(hoverTimer);
+    $("#infoDiv").remove();
+}
+
+function showInfo(element, event) {
+    if ($(element).hasClass("stat-icon")) {
+        const iconInfo = $(element).attr('icon-info');
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        const infoDiv = $(`<div id="infoDiv" class="info-box">${iconInfo}</div>`);
+        infoDiv.css({
+            position: "absolute",
+            top: mouseY + "px",
+            left: mouseX + "px",
+            backgroundColor: "black",
+            opacity: "0.8",
+            padding: "5px",
+            borderRadius: "8px",
+            border: "1px solid goldenrod",
+            fontFamily: "font_form",
+            fontSize: "14px",
+            color: "goldenrod",
+            zIndex: "9999"
+        });
+
+        $("body").append(infoDiv);
+    }
+}
+

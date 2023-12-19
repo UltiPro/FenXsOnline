@@ -23,18 +23,18 @@
                     <h6 class="text-center">Hero Statistics</h6>
                     <div id="status">
                         <div class="row">
-                        <div class="stat-icon col-2 col-sm-2" id="dmg"></div><p id="dmg.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" id="def"></div><p id="def.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" id="health"></div><p id="health.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Physical Damage" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="dmg"></div><p id="dmg.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Physical Defence" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="def"></div><p id="def.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Health Points" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="health"></div><p id="health.value" class="text-small col-2 col-sm-2"></p>
                         <div class="w-100"></div>
-                        <div class="stat-icon col-2 col-sm-2" id="m-dmg"></div><p id="m-dmg.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" id="m-def"></div><p id="m-def.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" id="mana"></div><p id="mana.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Magical Damage" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="m-dmg"></div><p id="m-dmg.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Magical Defence" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="m-def"></div><p id="m-def.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Mana is used for casting spells" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="mana"></div><p id="mana.value" class="text-small col-2 col-sm-2"></p>
                         <div class="w-100"></div>
-                        <div class="stat-icon col-2 col-sm-2" id="agility"></div><p id="agility.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" id="gold"></div><p id="gold.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" id="stamina"></div><p id="stamina.value" class="text-small col-2 col-sm-2"></p>
-                        </div>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Determines how often hero can attack" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="agility"></div><p id="agility.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Gold" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="gold"></div><p id="gold.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Stamina" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="stamina"></div><p id="stamina.value" class="text-small col-2 col-sm-2"></p>
+                    </div>
                     </div>
                     <h6 class="text-center">Equipment</h6>
                     <div id="used">
@@ -104,7 +104,7 @@
     <!-- SCRIPTS -->
     <!-- API CALLS-->
     <script src="./js/game/apiCalls/getPlayerStats.js" defer></script>
-    <script src="./js/game/Backpack.js" defer></script>
+    <script src="./js/game/Equipment.js" defer></script>
     <!-- GAME -->
     <!-- order of these have meaning -->
     <script type="text/javascript" src="./js/game/utils.js"></script>

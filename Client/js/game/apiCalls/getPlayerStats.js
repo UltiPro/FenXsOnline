@@ -71,7 +71,7 @@ function getItemDetails(item) {
                 itemDetails: response.data,
                 slotInfo: `${item.id}`
             };
-            console.log(itemWithSlot)
+            //console.log(itemWithSlot)
             itemDetailsListBP.push(itemWithSlot);
             
             return response.data;
