@@ -1,6 +1,8 @@
-﻿namespace Database.Contracts;
+﻿using Classes.Models.Game.Fight;
+
+namespace Database.Contracts;
 
 public interface IFightMenager
 {
-    Task<List<string>> FightMob(string accountId, int x, int y);
+    Task<FightMobResponse> FightMob(string accountId, int x, int y);
 }
