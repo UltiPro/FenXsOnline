@@ -7,7 +7,7 @@ class TextMessage{
 
     createElement(){
         this.element = document.createElement("div");
-        this.element.classList.add("TextMessage","bg-darkwooden");
+        this.element.classList.add("TextMessage");
 
         this.element.innerHTML = (`
         <p class="TextMessage-p">${this.text}</p>

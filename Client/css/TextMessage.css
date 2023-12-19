@@ -30,6 +30,8 @@
     padding: 4px;
     z-index: 10;
     border-radius: 5px;
+    background-color: black;
+    opacity: 0.8;
     border-top: solid black 2px;
     font-style: italic;
     color: goldenrod;
@@ -49,6 +51,7 @@
 }
 
 .TextMessage-button {
+    color: white;
     background-color: transparent;
     font-style: normal;
     border: none;
