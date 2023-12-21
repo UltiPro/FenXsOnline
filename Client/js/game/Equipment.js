@@ -252,6 +252,30 @@ function showInfo(element, event) {
         infoDivStyling(infoDiv, mouseX, mouseY);
 
         $("body").append(infoDiv);
+
+        //Adjusting placement of infoDiv if it
+        //extends beyond visibliity area of our website
+        const infoDivWidth = infoDiv.width();
+        const infoDivHeight = infoDiv.height();
+        const windowWidth = $(window).width();
+        const windowHeight = $(window).height();
+
+        const maxX = windowWidth - infoDivWidth - 10; 
+        const maxY = windowHeight - infoDivHeight - 10; 
+
+        let adjustedX = mouseX + 10; 
+        let adjustedY = mouseY + 10; 
+        if (adjustedX > maxX) {
+            adjustedX = maxX;
+        }
+        if (adjustedY > maxY) {
+            adjustedY = maxY;
+        }
+
+        infoDiv.css({
+            top: adjustedY + "px",
+            left: adjustedX + "px",
+        });
     }
 }
 
@@ -276,6 +300,7 @@ function infoDivStyling(infoDiv, mouseX, mouseY) {
         padding: "0",
     });
 }
+
 
 function parseEqId(id) {
     switch (id) {
