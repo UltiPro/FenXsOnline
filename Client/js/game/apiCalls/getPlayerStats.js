@@ -94,7 +94,7 @@ function updateHeroBackpack(bp) {
 function updateHeroEquipment(heroData) {
     for (const key in heroData) {
         if (key.startsWith('db') && heroData[key] !== null) {
-            const parsedKey = ParseEqId(key);
+            const parsedKey = parseEqId(key);
             
             const itemWithSlot = {
                 itemDetails: heroData[key],
