@@ -2,6 +2,7 @@ let hoverTimer;
 
 // Create a draggable div
 $(document).on("dragstart", ".item-image", function (event) {
+    $("#infoDiv").remove();
     if ($(this).html() !== "") {
         event.originalEvent.dataTransfer.setData("text/plain", $(this).attr("id"));
         $(this).addClass("dragging");
@@ -237,7 +238,7 @@ function showInfo(element, event) {
         <p>Magical Damage: ${info.magicAtack}</p>
         <p>Crit Hit Chance: ${info.criticalChance}</p>
         <p>Physical Defense: ${info.armor}</p>
-        <p>Magic Defense :${info.magicArmor}</p>
+        <p>Magic Defense: ${info.magicArmor}</p>
         <p>Health: ${info.healthPoints}</p>
         <p>Mana: ${info.mana}</p>
         <p>Agility: ${info.agility}</p>
