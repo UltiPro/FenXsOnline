@@ -140,6 +140,22 @@ window.OverworldMaps = {
           },
         ]
       }),
+      npc2: new Person({
+        isPlayerControlled: false, //npc shouldn't walk and they're in person class so I added a flag in the Person class
+        x: utils.withGrid(6),
+        y: utils.withGrid(3),
+        src: "./assets/heroes/mage/mageM20.gif",
+        behaviorLoop: [
+          {type: "stand", direction: "down", time: "200"},
+        ],
+        talking:[
+          {
+            events:[
+              {type: "healing", faceHero: "npc2"},
+            ]
+          },
+        ]
+      }),
     },
     //walls contains cells where collision are
     walls: {
