@@ -63,7 +63,7 @@ function getItemDetails(item) {
         .then(function (response) {
             var type = itemTypeParser(item.itemType)
             //create div with item
-            var draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
+            var draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
             $(`#s${item.id}`).append(draggableDiv);
 
             //asigning data about which slot it is in backpack
@@ -104,14 +104,14 @@ function updateHeroEquipment(heroData) {
             const itemType = itemWithSlot.itemDetails.itemType;
             const spriteURL = itemWithSlot.itemDetails.spriteURL;
 
-            console.log(itemType, spriteURL)
+            //console.log(itemType, spriteURL)
             let type = itemTypeParser(itemType);
             let response = { data: { spriteURL: spriteURL } }; 
         
-            let draggableDiv = $(`<div class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
+            let draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
             $(`#${key}`).empty().append(draggableDiv);
 
-            console.log(itemWithSlot);
+            //console.log(itemWithSlot);
             itemDetailsListEQ.push(itemWithSlot);
             //UpdateHeroStatLabels();
         }

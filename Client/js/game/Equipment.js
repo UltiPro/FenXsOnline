@@ -192,6 +192,91 @@ function Equip(fromId, toId) {
     }
 }
 
+function showItemInfo(element, event) {
+    hoverTimer = setTimeout(function () {
+        showInfo(element, event);
+    }, 1000);
+}
+
+function hideItemInfo() {
+    clearTimeout(hoverTimer);
+    $("#infoDiv").remove();
+}
+
+function showInfo(element, event) {
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+
+    if ($(element).hasClass("stat-icon")) {
+        const iconInfo = $(element).attr("icon-info");
+
+        const infoDiv = $(`<div id="infoDiv" class="info-box">${iconInfo}</div>`);
+        infoDivStyling(infoDiv, mouseX, mouseY);
+
+        $("body").append(infoDiv);
+    }
+    if ($(element).hasClass("item-image")) {
+        const slot = $(element).parent().attr("id");
+        let BPdetails = getBackpackDetails();
+        let EQdetails = getEquipmentDetails();
+        let item;
+        if($(element).parent().hasClass("bp-slot")){
+            const id = slot.replace("s", "");
+            item = BPdetails.find((item) => item.slotInfo === id);
+        }
+        if ($(element).parent().hasClass("eq-slot")) {
+            console.log(EQdetails);
+            const id = parseEqId(slot);
+            item = EQdetails.find((item) => item.slotInfo == id);
+        }
+        
+        let info = item.itemDetails;
+        console.log(info);
+        iconInfo = `<p text-center>${info.name}</p> 
+        <p>Physical Damage: ${info.atack}</p>
+        <p>Magical Damage: ${info.magicAtack}</p>
+        <p>Crit Hit Chance: ${info.criticalChance}</p>
+        <p>Physical Defense: ${info.armor}</p>
+        <p>Magic Defense :${info.magicArmor}</p>
+        <p>Health: ${info.healthPoints}</p>
+        <p>Mana: ${info.mana}</p>
+        <p>Agility: ${info.agility}</p>
+        <p>Weight: ${info.weight}</p>
+        <p>Price: ${info.price}</p>
+        <br />
+        <p>Requirements:</p>
+        <p>Level: ${info.level}</p>
+        <p>Class: ${parseProfession(info.profession)}</p>`;
+
+        const infoDiv = $(`<div id="infoDiv" class="info-box">${iconInfo}</div>`);
+        infoDivStyling(infoDiv, mouseX, mouseY);
+
+        $("body").append(infoDiv);
+    }
+}
+
+function infoDivStyling(infoDiv, mouseX, mouseY) {
+    infoDiv.css({
+        position: "absolute",
+        top: mouseY + "px",
+        left: mouseX + "px",
+        backgroundColor: "black",
+        opacity: "0.8",
+        padding: "5px",
+        borderRadius: "8px",
+        border: "1px solid goldenrod",
+        fontFamily: "font_form",
+        fontSize: "14px",
+        color: "goldenrod",
+        zIndex: "1",
+    });
+
+    infoDiv.find("p").css({
+        margin: "0",
+        padding: "0",
+    });
+}
+
 function parseEqId(id) {
     switch (id) {
         case "dbWeapon":
@@ -213,40 +298,15 @@ function parseEqId(id) {
     }
 }
 
-function showItemInfo(element, event) {
-    hoverTimer = setTimeout(function () {
-        showInfo(element, event);
-    }, 1000);
-}
-
-function hideItemInfo() {
-    clearTimeout(hoverTimer);
-    $("#infoDiv").remove();
-}
-
-function showInfo(element, event) {
-    if ($(element).hasClass("stat-icon")) {
-        const iconInfo = $(element).attr('icon-info');
-        const mouseX = event.clientX;
-        const mouseY = event.clientY;
-
-        const infoDiv = $(`<div id="infoDiv" class="info-box">${iconInfo}</div>`);
-        infoDiv.css({
-            position: "absolute",
-            top: mouseY + "px",
-            left: mouseX + "px",
-            backgroundColor: "black",
-            opacity: "0.8",
-            padding: "5px",
-            borderRadius: "8px",
-            border: "1px solid goldenrod",
-            fontFamily: "font_form",
-            fontSize: "14px",
-            color: "goldenrod",
-            zIndex: "9999"
-        });
-
-        $("body").append(infoDiv);
+function parseProfession(profession) {
+    switch (profession) {
+        case 0:
+            return "Warrior";
+        case 1:
+            return "Mage";
+        case 2:
+            return "Hunter";
+        case 3:
+            return "Paladin";
     }
 }
-
