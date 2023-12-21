@@ -66,9 +66,19 @@ class OverworldEvent {
     }
 
     healing(resolve) {
-        healPlayer();
-        resolve();
+        //during talking with npc change npc standing direction to face character position
+        if (this.event.faceHero) {
+            const obj = this.map.gameObjects[this.event.faceHero];
+            obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
+        }
+
+        const heal = new HealPlayer({
+            text: this.event.faceHero,
+            onComplete: () => resolve(),
+        });
+        heal.init(document.querySelector(".game-container"));
     }
+
 
     changeMap(resolve) {
         const sceneTransition = new SceneTransition();

@@ -140,7 +140,7 @@ window.OverworldMaps = {
           },
         ]
       }),
-      npc2: new Person({
+      healer: new Person({
         isPlayerControlled: false, //npc shouldn't walk and they're in person class so I added a flag in the Person class
         x: utils.withGrid(6),
         y: utils.withGrid(3),
@@ -151,11 +151,12 @@ window.OverworldMaps = {
         talking:[
           {
             events:[
-              {type: "healing", faceHero: "npc2"},
+              {type: "healing", faceHero: "healer"},
             ]
           },
         ]
       }),
+
     },
     //walls contains cells where collision are
     walls: {
