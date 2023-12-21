@@ -226,29 +226,28 @@ function showInfo(element, event) {
             item = BPdetails.find((item) => item.slotInfo === id);
         }
         if ($(element).parent().hasClass("eq-slot")) {
-            console.log(EQdetails);
             const id = parseEqId(slot);
             item = EQdetails.find((item) => item.slotInfo == id);
         }
         
         let info = item.itemDetails;
-        console.log(info);
-        iconInfo = `<p text-center>${info.name}</p> 
-        <p>Physical Damage: ${info.atack}</p>
-        <p>Magical Damage: ${info.magicAtack}</p>
-        <p>Crit Hit Chance: ${info.criticalChance}</p>
-        <p>Physical Defense: ${info.armor}</p>
-        <p>Magic Defense: ${info.magicArmor}</p>
-        <p>Health: ${info.healthPoints}</p>
-        <p>Mana: ${info.mana}</p>
-        <p>Agility: ${info.agility}</p>
-        <p>Weight: ${info.weight}</p>
-        <p>Price: ${info.price}</p>
-        <br />
-        <p>Requirements:</p>
-        <p>Level: ${info.level}</p>
-        <p>Class: ${parseProfession(info.profession)}</p>`;
-
+        let infoKeys = [
+            {key: info.name, label: ""},
+            {key: info.atack, label: "Physical Damage: "},
+            {key: info.magicAtack, label: "Magical Damage: "},
+            {key: info.criticalChance, label: "Ciritical Hit Chance: "},
+            {key: info.armor, label: "Physical Defence: "},
+            {key: info.magicArmor, label: "Magical Defence: "},
+            {key: info.healthPoints, label: "Health: "},
+            {key: info.mana, label: "Mana: "},
+            {key: info.agility, label: "Agility: "},
+            {key: info.weight, label: "Weight: "},
+            {key: info.price, label: "Price: "},
+            {key: info.profession, label: "Profession: "},
+            {key: info.level, label: "Level: "},
+        ]
+        let iconInfo = ``
+        iconInfo = createIconInfo(infoKeys)
         const infoDiv = $(`<div id="infoDiv" class="info-box">${iconInfo}</div>`);
         infoDivStyling(infoDiv, mouseX, mouseY);
 
@@ -278,6 +277,23 @@ function showInfo(element, event) {
             left: adjustedX + "px",
         });
     }
+}
+
+function createIconInfo(infoKeys) {
+    let message = "";
+    infoKeys.forEach(k => {
+        if (k.label === "Profession: ") {
+            let profession = parseProfession(k.key);
+            message += "<br /><p>Requirements: </p>";
+            let line = "<p>" + k.label + " " + profession + "</p>";
+            message += line;
+        } else
+        if (k.key !== undefined && k.key !== 0) {
+                let line = "<p>" + k.label + " " + k.key + "</p>";
+                message += line;
+        }
+    });
+    return message;
 }
 
 function infoDivStyling(infoDiv, mouseX, mouseY) {
