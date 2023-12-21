@@ -79,6 +79,15 @@ class OverworldEvent {
         heal.init(document.querySelector(".game-container"));
     }
 
+    selling(resolve){
+        if (this.event.faceHero) {
+            const obj = this.map.gameObjects[this.event.faceHero];
+            obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
+        }
+
+        MerchantileMenu()
+        resolve();
+    }
 
     changeMap(resolve) {
         const sceneTransition = new SceneTransition();
