@@ -3,8 +3,7 @@
 }
 
 body{
-	overflow: hidden;
-	
+	overflow: hidden;  
 }
 
 #font{
@@ -115,7 +114,7 @@ body{
 	background-image: url("");
 	z-index: 5;
 
-	cursor: move;
+	cursor: grab;
 }
 
 
@@ -154,6 +153,7 @@ body{
 
 .item-opacity{
 	opacity: 40%;
+	cursor: default;
 }
 
 /*stats styles*/
@@ -208,4 +208,5 @@ body{
 .dragging {
     opacity: 0.5; 
 	z-index: 10;
+	cursor: grabbing;
 }
