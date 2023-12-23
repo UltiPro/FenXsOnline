@@ -116,6 +116,7 @@ class Overworld {
     }
 
     placeNPC() {
+		console.log(this.mapData)
 		console.log(this.mapData.npCs)
         this.mapData.npCs.forEach((npcData) => {
             let name = npcData.name; 
@@ -167,6 +168,7 @@ class Overworld {
     async startMap(mapConfig) {
         this.map = new OverworldMap(mapConfig); //loading current map
         this.placeHero();
+		this.mapData = await this.getMapData();
         this.placeNPC();
         this.map.overworld = this;
         this.map.mountObjects(); //mounting objects collisions
@@ -189,7 +191,7 @@ class Overworld {
     //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
         this.heroData = await this.getHeroData();
-        this.mapData = await this.getMapData();
+        
         console.log(this.heroData);
 
         this.LoadMap();

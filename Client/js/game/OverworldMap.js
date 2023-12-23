@@ -109,27 +109,15 @@ window.OverworldMaps = {
         lowerSrc: "./assets/maps/home.png",
         upperSrc: "",
         gameObjects: {
-            npc1: new Person({
-                isPlayerControlled: false, //npc shouldn't walk and they're in person class so I added a flag in the Person class
-                x: utils.withGrid(10),
-                y: utils.withGrid(3),
-                src: "./assets/heroes/mage/mageM20.gif",
-                behaviorLoop: [{ type: "stand", direction: "up", time: "200" }],
-                talking: [
-                    {
-                        events: [{ type: "textMessage", text: "Why hello there, Old Sport!", faceHero: "npc1" }],
-                    },
-                ],
-            }),
-            // merchant: new Person({
+            // npc1: new Person({
             //     isPlayerControlled: false, //npc shouldn't walk and they're in person class so I added a flag in the Person class
-            //     x: utils.withGrid(1),
-            //     y: utils.withGrid(5),
+            //     x: utils.withGrid(10),
+            //     y: utils.withGrid(3),
             //     src: "./assets/heroes/mage/mageM20.gif",
-            //     behaviorLoop: [{ type: "stand", direction: "down", time: "200" }],
+            //     behaviorLoop: [{ type: "stand", direction: "up", time: "200" }],
             //     talking: [
             //         {
-            //             events: [{ type: "selling", faceHero: "merchant" }],
+            //             events: [{ type: "textMessage", text: "Why hello there, Old Sport!", faceHero: "npc1" }],
             //         },
             //     ],
             // }),

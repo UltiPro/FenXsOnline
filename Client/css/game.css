@@ -76,7 +76,7 @@ body{
 	z-index: 1;
 }
 
-.bp-slot, .eq-slot{
+.bp-slot, .eq-slot, .shop-slot{
 	position: relative;
     overflow: hidden;
 	display: flex;
@@ -94,11 +94,11 @@ body{
 	background-color: rgba(0,0,0,0.25);
 }
 
-.bp-slot:hover, .eq-slot:hover{
+.bp-slot:hover, .eq-slot:hover, .shop-slot:hover{
 	background-image: url("./../assets/ui/box/boxHover.png");
 }
 
-.bp-slot:active, .eq-slot:active{
+.bp-slot:active, .eq-slot:active, .shop-slot:active{
 	background-image: url("./../assets/ui/box/boxSelect.png");
 }
 
