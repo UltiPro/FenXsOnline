@@ -1,5 +1,6 @@
 ﻿using Classes.Exceptions;
 using Classes.Exceptions.Game;
+using Classes.Models.Game;
 using Classes.Models.Game.Fight;
 using Classes.Models.Game.Hero;
 using Classes.Models.Game.Mob;
@@ -12,12 +13,14 @@ public class FightMenager : IFightMenager
 {
     private readonly DatabaseContext _context;
     private readonly IEquipmentMenager _equipmentMenager;
+    private readonly IPromotionMenager _promotionMenager;
     private readonly Random _random;
 
-    public FightMenager(DatabaseContext _context, IEquipmentMenager _equipmentMenager)
+    public FightMenager(DatabaseContext _context, IEquipmentMenager _equipmentMenager, IPromotionMenager _promotionMenager)
     {
         this._context = _context;
         this._equipmentMenager = _equipmentMenager;
+        this._promotionMenager = _promotionMenager;
         _random = new Random();
     }
 
@@ -43,6 +46,8 @@ public class FightMenager : IFightMenager
 
         if (mob is null) throw new NotFoundException("Mob", mobProvider.MobId);
 
+        /* tutaj */
+
         int heroWeight = hero.Weight; // to
         int mobWeight = mob.Weight; // to
 
@@ -55,28 +60,39 @@ public class FightMenager : IFightMenager
         List<string> logs = new List<string>(); // to
 
         while (hero.HealthPoints > 0 && mobHP > 0)
-        { 
-            if(playerTurn) mobHP -= (hero.Atack + hero.MagicAtack);
-            else hero.HealthPoints -= (mob.Atack + mob.MagicAtack);
+        {
+            if (playerTurn)
+            {
+                mobHP -= (hero.Atack + hero.MagicAtack);
+                logs.Add($"Hero attacked with {hero.Atack + hero.MagicAtack} dmg.");
+            }
+            else
+            {
+                hero.HealthPoints -= (mob.Atack + mob.MagicAtack);
+                logs.Add($"Mob attacked with {mob.Atack + mob.MagicAtack} dmg.");
+            }
             playerTurn = !playerTurn;
         }
+        
+        /* tutaj */
 
         var playerWin = hero.HealthPoints > 0;
 
-        if (!playerWin) DeadPlayer(hero);
-        else mobProvider.Available = DateTime.Now.AddMinutes((mob.Level / 10) + 3);
+        if (playerWin)
+        {
+            mobProvider.Available = DateTime.Now.AddMinutes((mob.Level / 10) + 3);
+            logs.Add($"Winner is {hero.Name}");
+        }
+        else logs.Add($"Winner is {mob.Name}");
 
         await _context.SaveChangesAsync();
 
         return new FightResponse
         {
-            PlayerWin = playerWin,
-            HelathPoints = hero.HealthPoints,
+            Promotion = playerWin ? await _promotionMenager.Promotion(hero, mob.Level, false) : null,
             Drop = playerWin ? await DropForPlayer(hero, mob) : null,
-            MapId = hero.MapId,
-            X = hero.X,
-            Y = hero.Y,
-            Dead = playerWin ? null : hero.Dead,
+            Dead = playerWin ? null : await DeadPlayer(hero),
+            HelathPoints = hero.HealthPoints,
             Logs = logs
         };
     }
@@ -91,12 +107,22 @@ public class FightMenager : IFightMenager
         catch { return null; }
     }
 
-    private void DeadPlayer(DBHero hero)
+    private async Task<DeadResponse> DeadPlayer(DBHero hero)
     {
+        hero.HealthPoints = 1;
         hero.MapId = 1;
         hero.X = 21;
         hero.Y = 76;
-        hero.HealthPoints = 1;
         hero.Dead = DateTime.Now.AddMinutes((hero.Level / 10) + 1);
+
+        await _context.SaveChangesAsync();
+
+        return new DeadResponse
+        {
+            MapId = hero.MapId,
+            X = hero.X,
+            Y = hero.Y,
+            Dead = hero.Dead
+        };
     }
 }
