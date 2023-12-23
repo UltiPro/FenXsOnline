@@ -48,29 +48,45 @@ public class FightMenager : IFightMenager
 
         /* tutaj */
 
-        int heroWeight = hero.Weight; // to
-        int mobWeight = mob.Weight; // to
+        bool playerAdvantage = hero.Level > mob.Level;
+        int levelAdvantage = Math.Abs(hero.Level - mob.Level);
 
         int mobHP = mob.HealthPoints;
 
-        int levelDifference = hero.Level = mob.Level; // to
+        int dmg;
 
-        bool playerTurn = heroWeight <= mobWeight; // to
+        double criticalMultiplier = 1.0d;
 
-        List<string> logs = new List<string>(); // to
+        int heroArmor = hero.Armor;
+        int heroMagicArmor = hero.MagicArmor;
+
+        int mobArmor = mob.Armor;
+        int mobMagicArmor = mob.MagicArmor;
+
+        int heroWeight = hero.Weight; // ? 
+
+        int mobWeight = mob.Weight; // ? 
+
+        bool playerTurn = heroWeight <= mobWeight; // ? 
+
+        List<string> logs = new List<string>();
 
         while (hero.HealthPoints > 0 && mobHP > 0)
         {
-            if (playerTurn)
+            if(playerTurn ? mob.Agility > _random.Next(100) + 1 : hero.Agility > _random.Next(100) + 1)
             {
-                mobHP -= (hero.Atack + hero.MagicAtack);
-                logs.Add($"Hero attacked with {hero.Atack + hero.MagicAtack} dmg.");
+                logs.Add($"{(playerTurn ? mob.Name : hero.Name)} dodged.");
+                playerTurn = !playerTurn;
+                continue;
             }
-            else
-            {
-                hero.HealthPoints -= (mob.Atack + mob.MagicAtack);
-                logs.Add($"Mob attacked with {mob.Atack + mob.MagicAtack} dmg.");
-            }
+            if (playerTurn ? hero.CriticalChance > _random.Next(100) + 1 : mob.CriticalChance > _random.Next(100) + 1)
+                criticalMultiplier = 1.5d;
+            dmg = Convert.ToInt32(Math.Floor(
+                (playerTurn ? hero.Atack + hero.MagicAtack : mob.Atack + mob.MagicAtack) * criticalMultiplier));
+            if (playerTurn) mobHP -= dmg; // tutaj
+            else hero.HealthPoints -= dmg; //tutaj
+            logs.Add($"{(playerTurn ? hero.Name : mob.Name)} attacked with {dmg}{(criticalMultiplier > 1.0d ? " cricical" : "")} dmg.");
+            criticalMultiplier = 1.0d;
             playerTurn = !playerTurn;
         }
         
@@ -78,14 +94,11 @@ public class FightMenager : IFightMenager
 
         var playerWin = hero.HealthPoints > 0;
 
-        if (playerWin)
-        {
-            mobProvider.Available = DateTime.Now.AddMinutes((mob.Level / 10) + 3);
-            logs.Add($"Winner is {hero.Name}");
-        }
-        else logs.Add($"Winner is {mob.Name}");
+        if (playerWin) mobProvider.Available = DateTime.Now;//.AddMinutes((mob.Level / 10) + 3);
 
         await _context.SaveChangesAsync();
+
+        logs.Add($"Winner is {(playerWin ? hero.Name : mob.Name)}.");
 
         return new FightResponse
         {
