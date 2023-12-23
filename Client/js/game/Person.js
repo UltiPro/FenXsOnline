@@ -15,6 +15,9 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 			"right" : ["x", 1],
 		}
 		
+		this.pricePercent = this.pricePercent || 1;
+		this.isHealerNPC = false;
+		this.isTraderNPC = true;
 	}
 	
 	update(state){

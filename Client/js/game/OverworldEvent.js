@@ -71,21 +71,21 @@ class OverworldEvent {
             const obj = this.map.gameObjects[this.event.faceHero];
             obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
         }
-
-        const heal = new HealPlayer({
-            text: this.event.faceHero,
+        const heal = new DialogMessage({
+            text: this.event.text,
+            faceHero: this.event.faceHero,
             onComplete: () => resolve(),
         });
         heal.init(document.querySelector(".game-container"));
     }
 
-    selling(resolve){
+    trading(resolve){
         if (this.event.faceHero) {
             const obj = this.map.gameObjects[this.event.faceHero];
             obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
         }
 
-        MerchantileMenu()
+        //MerchantileMenu()
         resolve();
     }
 

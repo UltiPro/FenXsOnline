@@ -34,6 +34,12 @@ const utils = {
 		return "up"
 	},
 
+	capitalizeFirstLetter(string){
+		if (typeof string !== 'string' || string.length === 0) {
+			return string;
+		  }
+		  return string.charAt(0).toUpperCase() + string.slice(1);
+	},
 
 	emitEvent(name, detail){
 		const event = new CustomEvent(name, {

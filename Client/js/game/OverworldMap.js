@@ -121,30 +121,18 @@ window.OverworldMaps = {
                     },
                 ],
             }),
-            healer: new Person({
-                isPlayerControlled: false, //npc shouldn't walk and they're in person class so I added a flag in the Person class
-                x: utils.withGrid(6),
-                y: utils.withGrid(3),
-                src: "./assets/heroes/mage/mageM20.gif",
-                behaviorLoop: [{ type: "stand", direction: "down", time: "200" }],
-                talking: [
-                    {
-                        events: [{ type: "healing", faceHero: "healer" }],
-                    },
-                ],
-            }),
-            merchant: new Person({
-                isPlayerControlled: false, //npc shouldn't walk and they're in person class so I added a flag in the Person class
-                x: utils.withGrid(1),
-                y: utils.withGrid(5),
-                src: "./assets/heroes/mage/mageM20.gif",
-                behaviorLoop: [{ type: "stand", direction: "down", time: "200" }],
-                talking: [
-                    {
-                        events: [{ type: "selling", faceHero: "merchant" }],
-                    },
-                ],
-            }),
+            // merchant: new Person({
+            //     isPlayerControlled: false, //npc shouldn't walk and they're in person class so I added a flag in the Person class
+            //     x: utils.withGrid(1),
+            //     y: utils.withGrid(5),
+            //     src: "./assets/heroes/mage/mageM20.gif",
+            //     behaviorLoop: [{ type: "stand", direction: "down", time: "200" }],
+            //     talking: [
+            //         {
+            //             events: [{ type: "selling", faceHero: "merchant" }],
+            //         },
+            //     ],
+            // }),
         },
         //walls contains cells where collision are
         walls: {
@@ -284,12 +272,6 @@ window.OverworldMaps = {
         lowerSrc: "./assets/maps/fenxscity.png",
         upperSrc: "",
         gameObjects: {
-            hero: new Person({
-                isPlayerControlled: true,
-                x: utils.withGrid(6),
-                y: utils.withGrid(79),
-                src: "./assets/heroes/hunter/hunterF0.gif",
-            }),
         },
         cutsceneSpaces: {
             [utils.asGridCoord(6, 79)]: [
@@ -304,14 +286,8 @@ window.OverworldMaps = {
         id: "Cave",
         lowerSrc: "./assets/maps/nearcave.png",
         upperSrc: "",
-        // gameObjects:{
-        //   hero: new Person({
-        //     isPlayerControlled: true,
-        //     x: utils.withGrid(15),
-        //     y: utils.withGrid(28),
-        //     src: "./assets/heroes/hunter/hunterF0.gif",
-        //   })
-        // },
+        gameObjects:{
+        },
     },
 
     Ruins: {
