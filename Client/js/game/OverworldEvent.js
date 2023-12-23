@@ -65,7 +65,7 @@ class OverworldEvent {
         message.init(document.querySelector(".game-container"));
     }
 
-    healing(resolve) {
+    dialogBox(resolve) {
         //during talking with npc change npc standing direction to face character position
         if (this.event.faceHero) {
             const obj = this.map.gameObjects[this.event.faceHero];
@@ -74,6 +74,7 @@ class OverworldEvent {
         const heal = new DialogMessage({
             text: this.event.text,
             faceHero: this.event.faceHero,
+            npcId: this.event.npcId,
             onComplete: () => resolve(),
         });
         heal.init(document.querySelector(".game-container"));

@@ -1,7 +1,8 @@
 class DialogMessage {
-    constructor({ text, faceHero, onComplete }) {
+    constructor({ text, faceHero, npcId, onComplete }) {
         this.text = text;
         this.faceHero = faceHero;
+        this.npcId = npcId;
         this.onComplete = onComplete;
         this.element = null;
         this.buttons = [];
@@ -65,8 +66,10 @@ class DialogMessage {
         }
     }
 
-    heal(){
-        console.log("Heal player")
+    async heal(){
+        await app.put(apiBaseUrl + `Npc/heal?npcId=${this.npcId}`)
+        updateHeroStatLabels()
+
     }
 
     openTradeMenu(){

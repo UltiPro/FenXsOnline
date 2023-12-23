@@ -140,7 +140,7 @@ class Overworld {
 			}
 			placeNPC.talking = [
 				{
-					events: [{ type: "healing",  text: texts, faceHero: `${name}`}],
+					events: [{ type: "dialogBox",  text: texts, faceHero: `${name}`, npcId: npcData.id}],
 				},
 			];
             this.map.gameObjects[npc] = placeNPC;
