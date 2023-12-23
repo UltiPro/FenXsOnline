@@ -69,7 +69,17 @@ class Overworld{
 			console.error('Error fetching data:', error);
 		   });
 	}
-	
+
+	newMapCoords(mapConfig){
+		//console.log(mapConfig)
+		switch(mapConfig.id){
+			case 'Home' : this.heroData.x = 7; this.heroData.y = 9; break;
+			case 'City' : this.heroData.x = 6; this.heroData.y = 79; break;
+			case 'Cave' : this.heroData.x = 6; this.heroData.y = 79; break;
+			case 'Ruins' : this.heroData.x = 6; this.heroData.y = 79; break;
+		}
+	}
+
 	placeHero(){
 		let hero = 'hero';
 		let placeHero = new Person({
