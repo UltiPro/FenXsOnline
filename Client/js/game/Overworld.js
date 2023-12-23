@@ -116,8 +116,6 @@ class Overworld {
     }
 
     placeNPC() {
-		console.log(this.mapData)
-		console.log(this.mapData.npCs)
         this.mapData.npCs.forEach((npcData) => {
             let name = npcData.name; 
             let npc = name;

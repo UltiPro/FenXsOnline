@@ -17,7 +17,7 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 		
 		this.pricePercent = this.pricePercent || 1;
 		this.isHealerNPC = false;
-		this.isTraderNPC = true;
+		this.isTraderNPC = false;
 	}
 	
 	update(state){
@@ -69,6 +69,7 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 			//if it is walking progress won't be set so the walking methods won't run
 		
 			//if it's free - walk!
+			state.map.checkForNpc()
 			state.map.moveWall(this.x,this.y,this.direction);//moving hero collision to the place where he walks
 			this.movementProgressRemaining = 32; //restarting pixel movement counter
 			this.updateSprite(state);

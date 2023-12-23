@@ -15,6 +15,9 @@ class OverworldMap {
         this.upperImage.src = config.upperSrc;
 
         this.isCutscenePlaying = false;
+
+        this.displayedNPC = null;
+        this.talkButtonRef = null;
     }
 
     //drawing lower layer of the map
@@ -76,6 +79,82 @@ class OverworldMap {
             this.startCutscene(match.talking[0].events);
         }
         // console.log(match);
+    }
+
+    //check if npc is nearby
+    checkForNpc() {
+        const hero = this.gameObjects["hero"];
+        const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
+    
+        const nearbyObject = Object.values(this.gameObjects).find((object) => {
+            if (object.id !== "hero") {
+                const distance = Math.sqrt(Math.pow(object.x - nextCoords.x, 2) + Math.pow(object.y - nextCoords.y, 2));
+                if (distance <= 32) {
+                    console.log(`Hero position: (${hero.x}, ${hero.y})`);
+                    console.log(`NPC position: (${object.x}, ${object.y})`);
+                    return true; // Object is within the specified distance
+                }
+            }
+            return false;
+        });
+    
+        // Check if it's an NPC
+        if (!this.isCutscenePlaying && nearbyObject && nearbyObject.talking && nearbyObject.talking.length > 0) {
+            if (this.displayedNPC !== nearbyObject.id) {
+                const approachDirection = this.calculateApproachDirection(hero, nearbyObject);
+                this.displayedNPC = nearbyObject.id;
+                this.displayTalkButton(nearbyObject, approachDirection); // Show talk button
+            }
+        } else {
+            if (this.talkButtonRef) {
+                // Remove after walking away
+                this.removeTalkButton();
+                this.displayedNPC = null;
+            }
+        }
+    }
+    
+    calculateApproachDirection(hero, npc) {
+        const deltaX = npc.x - hero.x;
+        const deltaY = npc.y - hero.y;
+    
+        // Determine the direction based on relative positions
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            return deltaX > 0 ? "right" : "left";
+        } else {
+            return deltaY > 0 ? "down" : "up";
+        }
+    }
+
+    // Function to display the talk button
+    displayTalkButton(match, approachDirection) {
+        if (match && match.talking && match.talking.length > 0) {
+            const talkButton = document.createElement("button");
+            talkButton.innerHTML = "Talk";
+            talkButton.classList.add("talk-button");
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            talkButton.style.left = `${windowWidth / 2 - 70}px`;
+            talkButton.style.top = `${windowHeight / 2}px`;
+
+            talkButton.onclick = () => {
+            
+                this.startCutscene(match.talking[0].events);
+                this.removeTalkButton(); // Remove button after click
+                this.displayedNPC = null;
+            };
+
+            document.body.appendChild(talkButton);
+            this.talkButtonRef = talkButton; // Store a reference to the talk button
+        }
+    }
+
+    // Function to remove the talk button
+    removeTalkButton() {
+        if (this.talkButtonRef) {
+            this.talkButtonRef.remove();
+            this.talkButtonRef = null;
+        }
     }
 
     //check for event by entering specific area
@@ -259,8 +338,7 @@ window.OverworldMaps = {
         id: "City",
         lowerSrc: "./assets/maps/fenxscity.png",
         upperSrc: "",
-        gameObjects: {
-        },
+        gameObjects: {},
         cutsceneSpaces: {
             [utils.asGridCoord(6, 79)]: [
                 {
@@ -274,8 +352,7 @@ window.OverworldMaps = {
         id: "Cave",
         lowerSrc: "./assets/maps/nearcave.png",
         upperSrc: "",
-        gameObjects:{
-        },
+        gameObjects: {},
     },
 
     Ruins: {

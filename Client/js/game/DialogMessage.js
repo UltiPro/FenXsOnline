@@ -9,7 +9,6 @@ class DialogMessage {
         this.tradeMenu = null;
         this.buttons = [];
         this.currentButtonIndex = 0;
-        console.log(this.text)
     }
 
     createElement() {
@@ -31,7 +30,7 @@ class DialogMessage {
             this.handleArrowKeyPress(event);
         });
     
-        this.buttons.forEach((button) => {
+        this.buttons.forEach((button, index) => {
             button.addEventListener("click", (event) => {
                 const id = event.target.id;
                 
@@ -50,6 +49,12 @@ class DialogMessage {
                         break;
                 }
             });
+
+            button.addEventListener("mouseenter", () => {
+                this.currentButtonIndex = index;
+                button.focus();
+            });
+    
         });
     
         setTimeout(() => {

@@ -71,7 +71,6 @@ class OverworldEvent {
             const obj = this.map.gameObjects[this.event.faceHero];
             obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
         }
-        console.log(this.event.percent)
         const heal = new DialogMessage({
             text: this.event.text,
             faceHero: this.event.faceHero,

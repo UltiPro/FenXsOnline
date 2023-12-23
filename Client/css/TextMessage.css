@@ -59,3 +59,22 @@
     left: 5%; 
     /* transform: translateX(-10%);  */
 }
+
+.talk-button {
+  position: absolute;
+  background-color: black;
+  color: goldenrod;
+  opacity: 0.5;
+  padding: "10px";
+  border-radius: 8px;
+  border: "1px solid goldenrod";
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: "font_form";
+}
+
+.talk-button:hover {
+  opacity: 0.8;
+}
