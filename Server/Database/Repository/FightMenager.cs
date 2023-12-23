@@ -21,7 +21,7 @@ public class FightMenager : IFightMenager
         _random = new Random();
     }
 
-    public async Task<FightMobResponse> FightMob(string accountId, int x, int y)
+    public async Task<FightResponse> FightMob(string accountId, int x, int y)
     {
         var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame);
 
@@ -68,7 +68,7 @@ public class FightMenager : IFightMenager
 
         await _context.SaveChangesAsync();
 
-        return new FightMobResponse
+        return new FightResponse
         {
             PlayerWin = playerWin,
             HelathPoints = hero.HealthPoints,
