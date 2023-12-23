@@ -76,6 +76,8 @@ class OverworldMap {
             return `${object.x}, ${object.y}` === `${nextCoords.x}, ${nextCoords.y}`;
         });
         if (!this.isCutscenePlaying && match && match.talking.length) {
+            this.removeTalkButton()
+            this.displayedNPC = null;
             this.startCutscene(match.talking[0].events);
         }
         // console.log(match);
