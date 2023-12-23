@@ -28,22 +28,22 @@ class Overworld{
 			//update all objects
 			//drawing have to be done after updating objects
 			//so drawing methods are below
-			Object.values(this.map.gameObjects).sort((a,b) =>{
-				return a.y - b.y; //proper sprite layering
-			}).forEach(object => {
-				object.update({ //updating gameObjects
-					arrow: this.directionInput.direction, //updating movement direction
-					map: this.map, //referance to map
+			Object.values(this.map.gameObjects).forEach(object => {
+				object.update({
+				  arrow: this.directionInput.direction,
+				  map: this.map,
 				})
-			})
+			  })
 
 			//draw lower layer of the map
 			this.map.drawLowerImage(this.ctx, cameraPerson);
 			
 			//draw "center" layer, all game objects
-			Object.values(this.map.gameObjects).forEach(object => {
-				object.sprite.draw(this.ctx, cameraPerson, object.isHeroBehindObject);
-			})
+			Object.values(this.map.gameObjects).sort((a,b) => {
+				return a.y - b.y;
+			  }).forEach(object => {
+				object.sprite.draw(this.ctx, cameraPerson);
+			  })
 			
 			//draw lower layer of the map
 			this.map.drawUpperImage(this.ctx, cameraPerson);
@@ -86,7 +86,7 @@ class Overworld{
 		})
 	}
 
-	startMap(mapConfig){
+	async startMap(mapConfig){
 		this.map = new OverworldMap(mapConfig); //loading current map
 		this.map.overworld = this;
 		this.map.mountObjects(); //mounting objects collisions
@@ -114,7 +114,7 @@ class Overworld{
 		console.log(this.heroData)
 	
 		this.GetMap();
-		//this.startMap(window.OverworldMaps.Home);
+		//this.startMap(window.OverworldMaps.Cave);
 
 		this.bindActionInput(); //check for events by pressing button
 		this.bindHeroPositionCheck(); //check for events by standing in specific area
