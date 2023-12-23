@@ -86,13 +86,21 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 			const [property, change] = this.directionUpdate[this.direction];
 			this[property] += change;
 			this.movementProgressRemaining -= 1;
-
 			if(this.movementProgressRemaining === 0){
 				//Walk finished
+				const direction = this.directionUpdate[this.direction];
+				const [axis, value] = direction;
+				this.movement(axis, value);
+				
 				utils.emitEvent("PersonWalkingComplete", {
 					whoId: this.id
 				})
 			}
+	}
+
+	movement(axis, value) {
+		//console.log("You moved!",axis, value)
+		app.put(apiBaseUrl + `Movement?${axis}=${value}`)
 	}
 
 	//updating character sprite
