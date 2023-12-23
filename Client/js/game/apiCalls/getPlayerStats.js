@@ -135,3 +135,11 @@ function itemTypeParser(type){
     
 }
 
+function getHeroSpritePath(profession){
+    switch(profession){
+        case 0: return "./assets/heroes/warrior/"
+        case 1: return "./assets/heroes/mage/"
+        case 2: return "./assets/heroes/hunter/"
+        case 3: return "./assets/heroes/paladin/"
+    }
+}

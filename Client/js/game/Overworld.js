@@ -42,7 +42,7 @@ class Overworld{
 			Object.values(this.map.gameObjects).sort((a,b) => {
 				return a.y - b.y;
 			  }).forEach(object => {
-				object.sprite.draw(this.ctx, cameraPerson);
+				object.sprite.draw(this.ctx, cameraPerson, object.isHeroBehindObject);
 			  })
 			
 			//draw lower layer of the map
@@ -68,8 +68,20 @@ class Overworld{
 		  .catch(error => {
 			console.error('Error fetching data:', error);
 		   });
-	  }
+	}
 	
+	placeHero(){
+		let hero = 'hero';
+		let placeHero = new Person({
+		isPlayerControlled: true,
+		x: utils.withGrid(this.heroData.x),
+		y: utils.withGrid(this.heroData.y),
+		src: `${getHeroSpritePath(this.heroData.profession)}/${this.heroData.spriteURL}`,
+		});
+
+		this.map.gameObjects[hero] = placeHero; 
+	}
+
 	bindActionInput(){
 		new KeyPressListner("Enter", () =>{
 			//Check if there's a person to talk to
@@ -88,6 +100,7 @@ class Overworld{
 
 	async startMap(mapConfig){
 		this.map = new OverworldMap(mapConfig); //loading current map
+		this.placeHero()
 		this.map.overworld = this;
 		this.map.mountObjects(); //mounting objects collisions
 	}
