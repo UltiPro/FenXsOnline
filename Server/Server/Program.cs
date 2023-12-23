@@ -64,6 +64,7 @@ builder.Services.AddScoped<IMapMenager, MapMenager>();
 builder.Services.AddScoped<INpcMenager, NpcMenager>();
 builder.Services.AddScoped<IMobMenager, MobMenager>();
 builder.Services.AddScoped<IFightMenager, FightMenager>();
+builder.Services.AddScoped<IPromotionMenager, PromotionMenager>();
 
 builder.Services.AddAuthentication(options =>
 {
