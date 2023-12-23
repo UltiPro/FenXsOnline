@@ -1,7 +1,6 @@
-﻿using Classes.Exceptions.Game;
-using Classes.Models.Game;
+﻿using Classes.Models.Game;
+using Classes.Models.Game.Hero;
 using Database.Contracts;
-using Microsoft.EntityFrameworkCore;
 
 namespace Database.Repository;
 
@@ -16,12 +15,8 @@ public class PromotionMenager : IPromotionMenager
         this._context = _context;
     }
 
-    public async Task<PromotionResponse> Promotion(string accountId, int level, bool quest)
+    public async Task<PromotionResponse> Promotion(DBHero hero, int level, bool quest)
     {
-        var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame);
-
-        if (hero is null) throw new HeroIsNotInTheGameException();
-
         int experience;
 
         try
