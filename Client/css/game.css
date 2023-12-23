@@ -67,7 +67,7 @@ body{
 	z-index: 1;
 }
 
-#backpack{
+#backpack, #shop{
 	margin-left: 17px;
 	width: 300px;
 	display: flex;

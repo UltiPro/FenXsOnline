@@ -1,5 +1,6 @@
 class DialogMessage {
-    constructor({ text, faceHero, npcId, onComplete }) {
+    constructor({ text, faceHero, npcId, percent, onComplete }) {
+        this.percent = percent
         this.text = text;
         this.faceHero = faceHero;
         this.npcId = npcId;
@@ -8,6 +9,7 @@ class DialogMessage {
         this.tradeMenu = null;
         this.buttons = [];
         this.currentButtonIndex = 0;
+        console.log(this.text)
     }
 
     createElement() {
@@ -80,11 +82,11 @@ class DialogMessage {
 
 
         this.tradeMenu.innerHTML = (`
-            <h5 class="text-center">${this.faceHero}</h5>
-            <button onclick="this.closeTradeMenu()" id="tradeBox-close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+            <span class="text-center"><h5>${this.faceHero}</h5><h6>Selling rate: ${this.percent}</h6></span>
+            <button id="tradeBox-close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
             <path d="M.697 1.303a.75.75 0 0 1 1.06 0L8 6.94l6.243-6.637a.75.75 0 1 1 1.06 1.06L9.06 8l6.243 6.637a.75.75 0 1 1-1.06 1.06L8 9.06l-6.243 6.637a.75.75 0 1 1-1.06-1.06L6.94 8 .697 1.303z"/>
         </svg></button>
-        <div id="backpack" class="justify-content-center">
+        <div id="shop" class="justify-content-center">
         <div class="row">
             <div id="s1" class="shop-slot col-2 col-sm-2"></div>
             <div id="s2" class="shop-slot col-2 col-sm-2"></div>
@@ -138,7 +140,7 @@ class DialogMessage {
     </div>
          
         `);
-        console.log(this.tradeMenu)
+        //console.log(this.tradeMenu)
         document.querySelector(".game-container").appendChild(this.tradeMenu)
         this.tradeMenu.querySelector("#tradeBox-close").addEventListener("click", () => {
             this.closeTradeMenu();

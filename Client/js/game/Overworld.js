@@ -137,11 +137,11 @@ class Overworld {
             }
 			if(npcData.isTrader){
 				placeNPC.isTraderNPC = true;
-				texts.push({ text: "Show goods You're selling", flag: "trade" });
+				texts.push({ text: "Show goods You're selling", flag: "trade"});
 			}
 			placeNPC.talking = [
 				{
-					events: [{ type: "dialogBox",  text: texts, faceHero: `${name}`, npcId: npcData.id}],
+					events: [{ type: "dialogBox",  text: texts, faceHero: `${name}`, npcId: npcData.id, percent: npcData.pricePercent}],
 				},
 			];
             this.map.gameObjects[npc] = placeNPC;
