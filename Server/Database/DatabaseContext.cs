@@ -22,6 +22,7 @@ using Database.Configuration.Game.Mob;
 using Database.Configuration.Game.Map.Mob;
 using Database.Configuration.Game.Map.Item;
 using Database.Configuration.Game.Npc;
+using Classes.Models.Game;
 
 namespace Database;
 
