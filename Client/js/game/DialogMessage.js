@@ -1,3 +1,10 @@
+//local shop list needed for infoDiv
+let shopDetails = [];
+
+function getShopDetails(){
+    return shopDetails
+}
+
 class DialogMessage {
     constructor({ text, faceHero, npcId, percent, shopItems, onComplete }) {
         this.percent = percent;
@@ -45,7 +52,7 @@ class DialogMessage {
                         this.done();
                         break;
                     case "trade":
-                        this.openTradeMenu(this.npcId);
+                        this.openTradeMenu();
                         //this.done();
                         break;
 
@@ -86,7 +93,7 @@ class DialogMessage {
         updateHeroStatLabels();
     }
 
-    openTradeMenu(npcId) {
+    openTradeMenu() {
         this.element.remove();
         this.tradeMenu = document.createElement("div");
         this.tradeMenu.classList.add("tradeBox");
@@ -157,6 +164,7 @@ class DialogMessage {
         this.tradeMenu
             .querySelector("#tradeBox-close")
             .addEventListener("click", () => {
+                shopDetails = [];
                 this.closeTradeMenu();
             });
     }
@@ -175,6 +183,15 @@ class DialogMessage {
                 var draggableDiv = $(
                     `<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${typePath}${response.data.spriteURL}');"> </div>`
                 );
+
+                //insert into global local list of shop items
+                const itemWithSlot = {
+                    itemDetails: response.data,
+                    slotInfo: `${item.id}`
+                };
+                //console.log(itemWithSlot)
+                shopDetails.push(itemWithSlot);
+
                 //displaying that item
                 $(`#s${item.id}`).append(draggableDiv);
             })

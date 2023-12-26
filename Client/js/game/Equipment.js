@@ -273,6 +273,7 @@ function showInfo(element, event) {
         const slot = $(element).parent().attr("id");
         let BPdetails = getBackpackDetails();
         let EQdetails = getEquipmentDetails();
+        let shopDetails = getShopDetails();
         let item;
         if($(element).parent().hasClass("bp-slot")){
             const id = slot.replace("s", "");
@@ -281,6 +282,10 @@ function showInfo(element, event) {
         if ($(element).parent().hasClass("eq-slot")) {
             const id = parseEqId(slot);
             item = EQdetails.find((item) => item.slotInfo == id);
+        }
+        if($(element).parent().hasClass("shop-slot")){
+            const id = slot.replace("s", "");
+            item = shopDetails.find((item) => item.slotInfo === id);
         }
         
         let info = item.itemDetails;
