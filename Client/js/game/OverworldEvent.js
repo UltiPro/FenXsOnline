@@ -76,6 +76,7 @@ class OverworldEvent {
             faceHero: this.event.faceHero,
             npcId: this.event.npcId,
             percent: this.event.percent,
+            shopItems: this.event.shopItems,
             onComplete: () => resolve(),
         });
         heal.init(document.querySelector(".game-container"));

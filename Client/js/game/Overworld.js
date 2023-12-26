@@ -139,7 +139,7 @@ class Overworld {
 			}
 			placeNPC.talking = [
 				{
-					events: [{ type: "dialogBox",  text: texts, faceHero: `${name}`, npcId: npcData.id, percent: npcData.pricePercent}],
+					events: [{ type: "dialogBox",  text: texts, faceHero: `${name}`, npcId: npcData.id, percent: npcData.pricePercent, shopItems: npcData.shopItems}],
 				},
 			];
             this.map.gameObjects[npc] = placeNPC;

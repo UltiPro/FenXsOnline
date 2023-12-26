@@ -27,12 +27,18 @@ $(".bp-slot").on("drop", function (event) {
     event.preventDefault();
     const draggedItem = $(".item-image.dragging");
     const dropTarget = $(this);
-    const ancestor = draggedItem.closest(".eq-slot");
+    const ancestorEq = draggedItem.closest(".eq-slot");
+    const ancestorShop = draggedItem.closest(".shop-slot")
     const fromId = draggedItem.parent().attr("id");
     const toId = dropTarget.attr("id");
     const cleanToId = toId.replace("s", "");
-    //check if source parent contains .eq-slot
-    if (ancestor.length > 0) {
+    //check if item is from shop, buying item
+    if(ancestorShop.length > 0){
+        const cleanFromId = fromId.replace("s", "")
+        console.log("Item buying function running...")
+    }
+    //check if source parent contains .eq-slot, Uneqiping
+    else if (ancestorEq.length > 0) {
         const absent = $(`<div class="item-image item-opacity"></div>`);
 
         swapItems(fromId, cleanToId)
@@ -109,6 +115,49 @@ $(".eq-slot").on("drop", function (event) {
     }, 2000);
 });
 
+$(document).on("dragover", ".shop-slot", function (event) {
+    event.preventDefault();
+});
+
+//Shop-slots event listning
+$(document).on("drop", ".shop-slot", function (event) {
+    event.preventDefault();
+    const draggedItem = $(".item-image.dragging");
+    const dropTarget = $(this);
+    const ancestor = draggedItem.closest(".bp-slot");
+    const fromId = draggedItem.parent().attr("id");
+    const toId = dropTarget.attr("id");
+    const cleanFromId = fromId.replace("s", "")
+    const cleanToId = toId.replace("s", "");
+    if (draggedItem.parent().hasClass("shop-slot") && dropTarget.hasClass("shop-slot")) {
+        console.log("Both items are from shop-slot, nothing should happen");
+    }
+    else if(draggedItem.parent().hasClass("eq-slot")){
+        console.log("Item moved from eq-slot cannot be selled, move item to backack")
+    }
+    else{
+        console.log("Item from backpack moved to shop, sell item function running...")
+        //dropTarget.append(draggedItem);
+    }
+});
+
+function buyItem(){
+    let BPdetails = getBackpackDetails();
+}
+
+function sellItem(npcId, cleanFromId){
+    let BPdetails = getBackpackDetails();
+    
+    const itemIndex = BPdetails.findIndex((item) => item.slotInfo === cleanFromId);
+    if (itemIndex !== -1) {
+        // Remove the item from the BPdetails list
+        const removedItem = BPdetails.splice(itemIndex, 1)[0];
+        console.log(`Item at backpack slot: ${cleanFromId} has been removed.`);
+    } else {
+        console.log(`Item within slot: ${cleanFromId} not found in backpack.`);
+    }
+}
+
 function swapItems(fromId, toId) {
     return new Promise((resolve, reject) => {
         if (isNaN(fromId)) {
@@ -146,11 +195,13 @@ function swapItems(fromId, toId) {
     });
 }
 
+//updating local EQ,BP local lists 
 function updateItemPosition(oldId, newId) {
     let EQdetails = getEquipmentDetails();
     let BPdetails = getBackpackDetails();
     if (isNaN(oldId) || isNaN(newId)) {
         if (isNaN(oldId)) {
+            //Unequiping item, removing item from EQdetails and pushing to BPdetails
             const itemType = parseEqId(oldId);
             const alphaIndex = EQdetails.findIndex((item) => item.slotInfo === itemType);
             let itemToMove = EQdetails.splice(alphaIndex, 1)[0];
@@ -158,6 +209,7 @@ function updateItemPosition(oldId, newId) {
             itemToMove.slotInfo = newId;
             BPdetails.push(itemToMove);
         } else {
+            //Equiping item, removing item from BPdetails and pushing to EQdetails
             const itemType = parseEqId(newId);
             const betaIndex = BPdetails.findIndex((item) => item.slotInfo === oldId);
             let itemToMove = BPdetails.splice(betaIndex, 1)[0];
@@ -166,6 +218,7 @@ function updateItemPosition(oldId, newId) {
             EQdetails.push(itemToMove);
         }
     } else {
+        //Moving within backpack, updating BPdetails local list
         const alphaIndex = BPdetails.findIndex((item) => item.slotInfo === oldId);
         const betaIndex = BPdetails.findIndex((item) => item.slotInfo === newId);
         if (alphaIndex !== -1) {
