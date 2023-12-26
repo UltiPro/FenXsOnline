@@ -30,7 +30,7 @@ public class FightMenager : IFightMenager
 
         if (hero is null) throw new HeroIsNotInTheGameException();
 
-        if(hero.Dead > DateTime.Now) throw new HeroIsDeadException();
+        if (hero.Dead > DateTime.Now) throw new HeroIsDeadException();
 
         var mobProvider = await _context.MapMobs
             .FirstOrDefaultAsync(mapMob => mapMob.MapId == hero.MapId && mapMob.X == x && mapMob.Y == y);
@@ -46,55 +46,86 @@ public class FightMenager : IFightMenager
 
         if (mob is null) throw new NotFoundException("Mob", mobProvider.MobId);
 
-        /* tutaj */
+        List<string> logs = new List<string>();
 
-        bool playerAdvantage = hero.Level > mob.Level;
+        bool playerAdvantage = hero.Level >= mob.Level;
         int levelAdvantage = Math.Abs(hero.Level - mob.Level);
+        bool levelBonus = levelAdvantage > 3;
+        levelAdvantage -= 3;
 
         int mobHP = mob.HealthPoints;
 
-        int dmg;
-
+        int heroAtack = (hero.Atack != 0 && hero.MagicAtack != 0) ? hero.Atack : 10;
+        int dmg = 0;
         double criticalMultiplier = 1.0d;
 
         int heroArmor = hero.Armor;
         int heroMagicArmor = hero.MagicArmor;
-
         int mobArmor = mob.Armor;
         int mobMagicArmor = mob.MagicArmor;
+        int block = 0;
+        int magicBlock = 0;
 
-        int heroWeight = hero.Weight; // ? 
-
-        int mobWeight = mob.Weight; // ? 
-
-        bool playerTurn = heroWeight <= mobWeight; // ? 
-
-        List<string> logs = new List<string>();
+        bool playerTurn = hero.Weight <= mob.Weight;
 
         while (hero.HealthPoints > 0 && mobHP > 0)
         {
-            if(playerTurn ? mob.Agility > _random.Next(100) + 1 : hero.Agility > _random.Next(100) + 1)
+            if (playerTurn ? mob.Agility > _random.Next(100) + 1 : hero.Agility > _random.Next(100) + 1)
             {
-                logs.Add($"{(playerTurn ? mob.Name : hero.Name)} dodged.");
+                logs.Add($"{(playerTurn ? hero.Name : mob.Name)} attacked but {(playerTurn ? mob.Name : hero.Name)} dodged.");
                 playerTurn = !playerTurn;
                 continue;
             }
             if (playerTurn ? hero.CriticalChance > _random.Next(100) + 1 : mob.CriticalChance > _random.Next(100) + 1)
                 criticalMultiplier = 1.5d;
-            dmg = Convert.ToInt32(Math.Floor(
-                (playerTurn ? hero.Atack + hero.MagicAtack : mob.Atack + mob.MagicAtack) * criticalMultiplier));
-            if (playerTurn) mobHP -= dmg; // tutaj
-            else hero.HealthPoints -= dmg; //tutaj
-            logs.Add($"{(playerTurn ? hero.Name : mob.Name)} attacked with {dmg}{(criticalMultiplier > 1.0d ? " cricical" : "")} dmg.");
+            dmg = Convert.ToInt32(Math.Floor((playerTurn ? heroAtack + hero.MagicAtack : mob.Atack + mob.MagicAtack) * criticalMultiplier));
+            if (levelBonus && playerTurn == playerAdvantage) dmg = dmg + Convert.ToInt32((Convert.ToDouble(dmg) / 10) * levelAdvantage);
+            if (playerTurn)
+            {
+                if (mobArmor > 0 && heroAtack > 0)
+                {
+                    block = heroAtack <= mobArmor ? heroAtack : (heroAtack - mobArmor);
+                    mobArmor -= block;
+
+                }
+                if (mobMagicArmor > 0 && hero.MagicAtack > 0)
+                {
+                    magicBlock = hero.MagicAtack <= mobMagicArmor ? hero.MagicAtack : (hero.MagicAtack - mobMagicArmor);
+                    mobMagicArmor -= magicBlock;
+                }
+            }
+            else
+            {
+                if (heroArmor > 0 && mob.Atack > 0)
+                {
+                    block = mob.Atack <= heroArmor ? mob.Atack : (mob.Atack - heroArmor);
+                    heroArmor -= block;
+                }
+                if (heroMagicArmor > 0 && mob.MagicAtack > 0)
+                {
+                    magicBlock = mob.MagicAtack <= heroMagicArmor ? mob.MagicAtack : (mob.MagicAtack - heroMagicArmor);
+                    heroMagicArmor -= magicBlock;
+                }
+            }
+            dmg -= (block + magicBlock);
+            if (playerTurn) mobHP -= dmg;
+            else hero.HealthPoints -= dmg;
+            var message = $"{(playerTurn ? hero.Name : mob.Name)} attacked with {dmg}{(criticalMultiplier > 1.0d ? " CRITICAL" : "")} dmg ";
+            if (block > 0 || magicBlock > 0)
+                message += $"({(playerTurn ? mob.Name : hero.Name)} has blocked {block} damage and {magicBlock} magic damage) ";
+            message += $"{(playerTurn ? mob.Name : hero.Name)} left " +
+                $"{(playerTurn ? mobHP : hero.HealthPoints)} HP " +
+                $"({(playerTurn ? Convert.ToInt32((double)mobHP / mob.HealthPoints * 100) :
+                    Convert.ToInt32((double)hero.HealthPoints / hero.MaxHealthPoints * 100))}%).";
+            logs.Add(message);
             criticalMultiplier = 1.0d;
+            block = magicBlock = 0;
             playerTurn = !playerTurn;
         }
-        
-        /* tutaj */
 
         var playerWin = hero.HealthPoints > 0;
 
-        if (playerWin) mobProvider.Available = DateTime.Now;//.AddMinutes((mob.Level / 10) + 3);
+        if (playerWin) mobProvider.Available = DateTime.Now.AddMinutes((mob.Level / 10) + 3);
 
         await _context.SaveChangesAsync();
 
