@@ -14,6 +14,10 @@ const PlayChangeWindowAudio = () => changeWindowAudio.play();
 const PlayUnsuccessAudio = () => unsuccessAudio.play();
 
 $(document).ready(function () {
+  if (devicePixelRatio == 1.25) document.body.style.zoom = 0.8;
+  if (devicePixelRatio == 1.50) document.body.style.zoom = 0.667;
+  if (devicePixelRatio == 1.75) document.body.style.zoom = 0.5715;
+  if (devicePixelRatio == 2.00) document.body.style.zoom = 0.5;
   $("input").bind("focus", PlayChangeInputAudio);
   $("select").bind("click", PlayChangeInputAudio);
   $("select").bind("change", PlayChangeInputAudio);
