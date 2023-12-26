@@ -1,140 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-        <title>FenXs</title>
-        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="./css/main.css" />
-        <link rel="stylesheet" href="./css/game.css" />
-        <link rel="stylesheet" href="./css/TextMessage.css" />
-        <link rel="stylesheet" href="./css/merchant.css" />
-        <link rel="stylesheet" href="./css/trade.css" />
-        <link rel="stylesheet" href="./css/chat.css" />
-    </head>
 
-    <body onload="javascript:GameInit()">
-        <header class="text-center p-5 header-small">FenXs</header>
-        <main role="main">
-            <div id="font" class="container">
-                <div id="chat-container" class="rounded-start border border-2 border-dark d-flex flex-column">
-                    <form id="chat" method="post" class="flex-grow-1">
-                        <ul id="chat-all-messages">
-                            
-                        </ul>
-                    <form id="chat" method="post">
-                        <div class="d-flex flex-column">
-                            <input id="chat-post-message" class="mb-1" />
-                            <button type="submit" class="btn-send border border-dark">Send</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="game-container border border-2 border-dark">
-                    <canvas class="game-canvas" width="960" height="640"></canvas>
-                </div>
-                <div id="equipment-container" width="320" height="640" class="rounded-end border border-2 border-dark">
-                    <h6 class="text-center">Hero Statistics</h6>
-                    <div id="status">
-                        <div class="row">
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Physical Damage" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="dmg"></div><p id="dmg.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Physical Defence" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="def"></div><p id="def.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Health Points" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="health"></div><p id="health.value" class="text-small col-2 col-sm-2"></p>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>FenXs</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/game.css" />
+    <link rel="stylesheet" href="./css/TextMessage.css" />
+    <link rel="stylesheet" href="./css/merchant.css" />
+    <link rel="stylesheet" href="./css/trade.css" />
+    <link rel="stylesheet" href="./css/chat.css" />
+</head>
+
+<body onload="javascript:GameInit()">
+    <header class="text-center p-5 header-small">FenXs</header>
+    <main role="main">
+        <div id="font" class="container">
+            <div id="chat-container" class="rounded-start border border-2 border-dark d-flex flex-column">
+                <ul id="chat-all-messages" class="flex-grow-1">
+
+                </ul>
+                <form id="chat" method="post">
+                    <div class="d-flex flex-column">
+                        <input id="chat-post-message" class="mb-1" />
+                        <button type="submit" class="btn-send border border-dark">Send</button>
+                    </div>
+                </form>
+            </div>
+            <div class="game-container border border-2 border-dark">
+                <canvas class="game-canvas" width="960" height="640"></canvas>
+            </div>
+            <div id="equipment-container" width="320" height="640" class="rounded-end border border-2 border-dark">
+                <h6 class="text-center">Hero Statistics</h6>
+                <div id="status">
+                    <div class="row">
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Physical Damage"
+                            onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="dmg"></div>
+                        <p id="dmg.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Physical Defence"
+                            onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="def"></div>
+                        <p id="def.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Health Points"
+                            onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="health"></div>
+                        <p id="health.value" class="text-small col-2 col-sm-2"></p>
                         <div class="w-100"></div>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Magical Damage" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="m-dmg"></div><p id="m-dmg.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Magical Defence" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="m-def"></div><p id="m-def.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Mana is used for casting spells" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="mana"></div><p id="mana.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Magical Damage"
+                            onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="m-dmg"></div>
+                        <p id="m-dmg.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Magical Defence"
+                            onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="m-def"></div>
+                        <p id="m-def.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Mana is used for casting spells"
+                            onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="mana"></div>
+                        <p id="mana.value" class="text-small col-2 col-sm-2"></p>
                         <div class="w-100"></div>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Determines how often hero can attack" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="agility"></div><p id="agility.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Gold" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="gold"></div><p id="gold.value" class="text-small col-2 col-sm-2"></p>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Stamina" onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="stamina"></div><p id="stamina.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Determines how often hero can attack"
+                            onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="agility"></div>
+                        <p id="agility.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Gold" onmouseover="showItemInfo(this, event)"
+                            onmouseleave="hideItemInfo()" id="gold"></div>
+                        <p id="gold.value" class="text-small col-2 col-sm-2"></p>
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Stamina"
+                            onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="stamina"></div>
+                        <p id="stamina.value" class="text-small col-2 col-sm-2"></p>
                     </div>
-                    </div>
-                    <h6 class="text-center">Equipment</h6>
-                    <div id="used">
-                        <div class="row justify-content-center">
-                            <div id="dbHelmet" class="eq-slot col-2 col-sm-2"><div class="item-image item-opacity"></div></div>
-                            <div class="w-100"></div>
-                            <div id="dbRing" class="eq-slot col-2 col-sm-2"><div class="item-image item-opacity"></div></div>
-                            <div id="dbNecklace" class="eq-slot col-2 col-sm-2"><div class="item-image item-opacity"></div></div>
-                            <div id="dbGloves" class="eq-slot col-2 col-sm-2"><div class="item-image item-opacity"></div></div>
-                            <div class="w-100"></div>
-                            <div id="dbWeapon" class="eq-slot col-2 col-sm-2"><div class="item-image item-opacity"></div></div>
-                            <div id="dbArmor" class="eq-slot col-2 col-sm-2"><div class="item-image item-opacity"></div></div>
-                            <div id="dbSecondaryWeapon" class="eq-slot col-2 col-sm-2"><div class="item-image item-opacity"></div></div>
-                            <div class="w-100"></div>
-                            <div id="dbBoots" class="eq-slot col-2 col-sm-2"><div class="item-image item-opacity"></div></div>
+                </div>
+                <h6 class="text-center">Equipment</h6>
+                <div id="used">
+                    <div class="row justify-content-center">
+                        <div id="dbHelmet" class="eq-slot col-2 col-sm-2">
+                            <div class="item-image item-opacity"></div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div id="dbRing" class="eq-slot col-2 col-sm-2">
+                            <div class="item-image item-opacity"></div>
+                        </div>
+                        <div id="dbNecklace" class="eq-slot col-2 col-sm-2">
+                            <div class="item-image item-opacity"></div>
+                        </div>
+                        <div id="dbGloves" class="eq-slot col-2 col-sm-2">
+                            <div class="item-image item-opacity"></div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div id="dbWeapon" class="eq-slot col-2 col-sm-2">
+                            <div class="item-image item-opacity"></div>
+                        </div>
+                        <div id="dbArmor" class="eq-slot col-2 col-sm-2">
+                            <div class="item-image item-opacity"></div>
+                        </div>
+                        <div id="dbSecondaryWeapon" class="eq-slot col-2 col-sm-2">
+                            <div class="item-image item-opacity"></div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div id="dbBoots" class="eq-slot col-2 col-sm-2">
+                            <div class="item-image item-opacity"></div>
                         </div>
                     </div>
-                    <div id="backpack" class="justify-content-center">
-                        <div class="row">
-                            <div id="s1" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s2" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s3" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s4" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s5" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s6" class="bp-slot col-2 col-sm-2"></div>
-                            <div class="w-100"></div>
-                            <div id="s7" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s8" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s9" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s10" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s11" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s12" class="bp-slot col-2 col-sm-2"></div>
-                            <div class="w-100"></div>
-                            <div id="s13" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s14" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s15" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s16" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s17" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s18" class="bp-slot col-2 col-sm-2"></div>
-                            <div class="w-100"></div>
-                            <div id="s19" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s20" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s21" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s22" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s23" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s24" class="bp-slot col-2 col-sm-2"></div>
-                            <div class="w-100"></div>
-                            <div id="s25" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s26" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s27" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s28" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s29" class="bp-slot col-2 col-sm-2"></div>
-                            <div id="s30" class="bp-slot col-2 col-sm-2"></div>
-                        </div>
+                </div>
+                <div id="backpack" class="justify-content-center">
+                    <div class="row">
+                        <div id="s1" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s2" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s3" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s4" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s5" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s6" class="bp-slot col-2 col-sm-2"></div>
+                        <div class="w-100"></div>
+                        <div id="s7" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s8" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s9" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s10" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s11" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s12" class="bp-slot col-2 col-sm-2"></div>
+                        <div class="w-100"></div>
+                        <div id="s13" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s14" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s15" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s16" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s17" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s18" class="bp-slot col-2 col-sm-2"></div>
+                        <div class="w-100"></div>
+                        <div id="s19" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s20" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s21" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s22" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s23" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s24" class="bp-slot col-2 col-sm-2"></div>
+                        <div class="w-100"></div>
+                        <div id="s25" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s26" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s27" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s28" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s29" class="bp-slot col-2 col-sm-2"></div>
+                        <div id="s30" class="bp-slot col-2 col-sm-2"></div>
                     </div>
                 </div>
             </div>
-        </main>
-        <footer class="footer position-fixed bottom-0 end-0 bg-wooden text-center p-1 border-top border-start border-2 border-dark">&copy 2023 - FenXs</footer>
-    </body>
-    <script src="./node_modules/jquery/dist/jquery.min.js" defer></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="./node_modules/axios/dist/axios.min.js" defer></script>
-    <script src="./node_modules/@microsoft/signalr/dist/browser/signalr.min.js" defer></script>
-    <script src="./js/main.js" defer></script>
-    <script src="./js/game/chat.js"></script>
-    <!-- SCRIPTS -->
-    <!-- API CALLS-->
-    <script type="text/javascript" src="./js/game/apiCalls/getPlayerStats.js" defer></script>
-    <script type="text/javascript" src="./js/game/DialogMessage.js" defer></script>
-    <script type="text/javascript" src="./js/game/Merchant.js" defer></script>
-    <script src="./js/game/Equipment.js" defer></script>
-    <!-- GAME -->
-    <!-- order of these have meaning -->
-    <script type="text/javascript" src="./js/game/utils.js"></script>
-    <script type="text/javascript" src="./js/game/DirectionInput.js"></script>
-    <script type="text/javascript" src="./js/game/Overworld.js"></script>
-    <script type="text/javascript" src="./js/game/GameObject.js"></script>
-    <script type="text/javascript" src="./js/game/Person.js"></script>
-    <!-- should be loaded after gameObject.js, Person extends GameObject-->
-    <script type="text/javascript" src="./js/game/Sprite.js"></script>
-    <script type="text/javascript" src="./js/game/OverworldMap.js"></script>
-    <script type="text/javascript" src="./js/game/OverworldEvent.js"></script>
-    <script type="text/javascript" src="./js/game/TextMessage.js"></script>
-    <script type="text/javascript" src="./js/game/KeyPressListner.js"></script>
-    <script type="text/javascript" src="./js/game/SceneTransition.js"></script>
-    <script type="text/javascript" src="./js/game/init.js"></script>
-    <!-- always last -->
+        </div>
+    </main>
+    <footer
+        class="footer position-fixed bottom-0 end-0 bg-wooden text-center p-1 border-top border-start border-2 border-dark">
+        &copy 2023 - FenXs</footer>
+</body>
+<script src="./node_modules/jquery/dist/jquery.min.js" defer></script>
+<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="./node_modules/axios/dist/axios.min.js" defer></script>
+<script src="./node_modules/@microsoft/signalr/dist/browser/signalr.min.js" defer></script>
+<script src="./js/main.js" defer></script>
+<script src="./js/game/chat.js"></script>
+<!-- SCRIPTS -->
+<!-- API CALLS-->
+<script type="text/javascript" src="./js/game/apiCalls/getPlayerStats.js" defer></script>
+<script type="text/javascript" src="./js/game/DialogMessage.js" defer></script>
+<script type="text/javascript" src="./js/game/Merchant.js" defer></script>
+<script src="./js/game/Equipment.js" defer></script>
+<!-- GAME -->
+<!-- order of these have meaning -->
+<script type="text/javascript" src="./js/game/utils.js"></script>
+<script type="text/javascript" src="./js/game/DirectionInput.js"></script>
+<script type="text/javascript" src="./js/game/Overworld.js"></script>
+<script type="text/javascript" src="./js/game/GameObject.js"></script>
+<script type="text/javascript" src="./js/game/Person.js"></script>
+<!-- should be loaded after gameObject.js, Person extends GameObject-->
+<script type="text/javascript" src="./js/game/Sprite.js"></script>
+<script type="text/javascript" src="./js/game/OverworldMap.js"></script>
+<script type="text/javascript" src="./js/game/OverworldEvent.js"></script>
+<script type="text/javascript" src="./js/game/TextMessage.js"></script>
+<script type="text/javascript" src="./js/game/KeyPressListner.js"></script>
+<script type="text/javascript" src="./js/game/SceneTransition.js"></script>
+<script type="text/javascript" src="./js/game/init.js"></script>
+<!-- always last -->
+
 </html>
