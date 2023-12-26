@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="./css/TextMessage.css" />
         <link rel="stylesheet" href="./css/merchant.css" />
         <link rel="stylesheet" href="./css/trade.css" />
+        <link rel="stylesheet" href="./css/chat.css" />
         <!-- tutaj pliki css -->
     </head>
 
@@ -18,6 +19,17 @@
         <header class="text-center p-5 header-small">FenXs</header>
         <main role="main">
             <div id="font" class="container">
+                <div id="chat-container" class="rounded border border-2 border-dark d-flex flex-column">
+                    <form id="chat" method="post" class="flex-grow-1">
+                        <ul id="chat-all-messages">
+                            
+                        </ul>
+                    </form>
+                    <div class="d-flex flex-column">
+                        <input id="chat-post-message" class="mb-1" />
+                        <button type="submit" class="btn-send border border-dark">Send</button>
+                    </div>
+                </div>
                 <div class="game-container rounded border border-2 border-dark">
                     <canvas class="game-canvas" width="960" height="640"></canvas>
                 </div>

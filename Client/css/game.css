@@ -14,9 +14,8 @@ body{
 	position: relative;
 	width: 964px;
 	height: 644px;
-	margin: 0 auto;
+	margin-left: 4px;
 	transform: scale(1) translateY(0%);
-	margin-left: 10%;
 	background-image: url("./../assets/ui/greyBackground.png");
 	background-size: cover;
 }
@@ -31,7 +30,7 @@ body{
 	flex-direction: column;
 	width: 300px;
 	height: 644px;
-	margin: 0 auto;
+	/* margin: 0 auto; */
 	margin-left: 4px;
 	background-image: url("./../assets/ui/greyBackground.png");
 	color: goldenrod;
