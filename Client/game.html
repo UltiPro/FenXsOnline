@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="./css/merchant.css" />
         <link rel="stylesheet" href="./css/trade.css" />
         <link rel="stylesheet" href="./css/chat.css" />
-        <!-- tutaj pliki css -->
     </head>
 
     <body onload="javascript:GameInit()">
@@ -24,11 +23,12 @@
                         <ul id="chat-all-messages">
                             
                         </ul>
+                    <form id="chat" method="post">
+                        <div class="d-flex flex-column">
+                            <input id="chat-post-message" class="mb-1" />
+                            <button type="submit" class="btn-send border border-dark">Send</button>
+                        </div>
                     </form>
-                    <div class="d-flex flex-column">
-                        <input id="chat-post-message" class="mb-1" />
-                        <button type="submit" class="btn-send border border-dark">Send</button>
-                    </div>
                 </div>
                 <div class="game-container border border-2 border-dark">
                     <canvas class="game-canvas" width="960" height="640"></canvas>
@@ -112,9 +112,9 @@
     <script src="./node_modules/jquery/dist/jquery.min.js" defer></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="./node_modules/axios/dist/axios.min.js" defer></script>
+    <script src="./node_modules/@microsoft/signalr/dist/browser/signalr.min.js" defer></script>
     <script src="./js/main.js" defer></script>
-    <!-- tutaj są audio -->
-    <!-- tutaj pliki js -->
+    <script src="./js/game/chat.js"></script>
     <!-- SCRIPTS -->
     <!-- API CALLS-->
     <script type="text/javascript" src="./js/game/apiCalls/getPlayerStats.js" defer></script>
