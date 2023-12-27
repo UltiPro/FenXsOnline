@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Server.Middleware;
 using System.Text.Json.Serialization;
+using Server.Hubs;
 
 const string configuration = "FenXsOnline";
 
@@ -37,6 +38,8 @@ builder.Services.AddControllers().AddJsonOptions(option =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
 {
@@ -138,5 +141,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<ChatHub>("chat");
 
 app.Run();
