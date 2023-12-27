@@ -38,8 +38,8 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 				})
 			}
 			this.updateSprite(state);	
+			this.handleOpacityChange(state);
 		}
-		this.handleOpacityChange(state);
 	}
 
 	//chaging sprite opacity when hero is behind an object
