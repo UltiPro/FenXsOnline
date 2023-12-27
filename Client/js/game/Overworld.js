@@ -15,45 +15,60 @@ class Overworld {
     }
 
     //GamLoop function
+    gameLoopStepWork(delta) {
+        //Clear off the canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        //Establish the camera person
+        const cameraPerson = this.map.gameObjects.hero;
+
+        //Update all objects
+        Object.values(this.map.gameObjects).forEach((object) => {
+            object.update({
+                delta,
+                arrow: this.directionInput.direction,
+                map: this.map,
+            });
+        });
+
+        //Draw Lower layer
+        this.map.drawLowerImage(this.ctx, cameraPerson);
+
+        //Draw Game Objects
+        Object.values(this.map.gameObjects)
+            .sort((a, b) => {
+                return a.y - b.y;
+            })
+            .forEach((object) => {
+                object.sprite.draw(this.ctx, cameraPerson, object.isHeroBehindObject);
+            });
+
+        //Draw Upper layer
+        this.map.drawUpperImage(this.ctx, cameraPerson);
+    }
+
     startGameLoop() {
-        const step = () => {
-            //clearing canvas at the start of the next frame
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        let previousMs;
+        const step = 1 / 60;
 
-            //Establish the camera object
-            //For now I don't now how to resolve it in multiplayer
-            //how to detect individual players there?
-            const cameraPerson = this.map.gameObjects.hero;
-            //update all objects
-            //drawing have to be done after updating objects
-            //so drawing methods are below
-            Object.values(this.map.gameObjects).forEach((object) => {
-                object.update({
-                    arrow: this.directionInput.direction,
-                    map: this.map,
-                });
-            });
+        const stepFn = (timestampMs) => {
+            if (previousMs === undefined) {
+                previousMs = timestampMs;
+            }
 
-            //draw lower layer of the map
-            this.map.drawLowerImage(this.ctx, cameraPerson);
+            let delta = (timestampMs - previousMs) / 1000;
+            while (delta >= step) {
+                this.gameLoopStepWork(delta);
+                delta -= step;
+            }
+            previousMs = timestampMs - delta * 1000; // Make sure we don't lose unprocessed (delta) time
 
-            //draw "center" layer, all game objects
-            Object.values(this.map.gameObjects)
-                .sort((a, b) => {
-                    return a.y - b.y;
-                })
-                .forEach((object) => {
-                    object.sprite.draw(this.ctx, cameraPerson, object.isHeroBehindObject);
-                });
-
-            //draw lower layer of the map
-            this.map.drawUpperImage(this.ctx, cameraPerson);
-
-            requestAnimationFrame(() => {
-                step();
-            });
+            // Business as usual tick
+            requestAnimationFrame(stepFn);
         };
-        step();
+
+        // First tick
+        requestAnimationFrame(stepFn);
     }
 
     //fetching hero data
@@ -110,38 +125,54 @@ class Overworld {
             isPlayerControlled: true,
             x: utils.withGrid(this.heroData.x),
             y: utils.withGrid(this.heroData.y),
-            src: `${getHeroSpritePath(this.heroData.profession)}/${this.heroData.spriteURL}`,
+            src: `${getHeroSpritePath(this.heroData.profession)}/${
+                this.heroData.spriteURL
+            }`,
         });
         this.map.gameObjects[hero] = placeHero;
     }
 
     placeNPC() {
         this.mapData.npCs.forEach((npcData) => {
-            let name = npcData.name; 
+            let name = npcData.name;
             let npc = name;
-			let texts = [];
+            let texts = [];
             let placeNPC = new Person({
                 isPlayerControlled: false,
                 x: utils.withGrid(npcData.x),
                 y: utils.withGrid(npcData.y),
                 src: `./assets/npcs/${npcData.spriteURL}`,
-				behaviorLoop: [{ type: "stand", direction: "down", time: "200" }],
-				pricePercent: npcData.pricePercent
+                behaviorLoop: [
+                    { type: "stand", direction: "down", time: "200" },
+                ],
+                pricePercent: npcData.pricePercent,
             });
             //Check for healer/trader
             if (npcData.isHealer) {
                 placeNPC.isHealerNPC = true;
-				texts.push({ text: "I need healing", flag: "heal" });
+                texts.push({ text: "I need healing", flag: "heal" });
             }
-			if(npcData.isTrader){
-				placeNPC.isTraderNPC = true;
-				texts.push({ text: "Show goods You're selling", flag: "trade"});
-			}
-			placeNPC.talking = [
-				{
-					events: [{ type: "dialogBox",  text: texts, faceHero: `${name}`, npcId: npcData.id, percent: npcData.pricePercent, shopItems: npcData.shopItems}],
-				},
-			];
+            if (npcData.isTrader) {
+                placeNPC.isTraderNPC = true;
+                texts.push({
+                    text: "Show goods You're selling",
+                    flag: "trade",
+                });
+            }
+            placeNPC.talking = [
+                {
+                    events: [
+                        {
+                            type: "dialogBox",
+                            text: texts,
+                            faceHero: `${name}`,
+                            npcId: npcData.id,
+                            percent: npcData.pricePercent,
+                            shopItems: npcData.shopItems,
+                        },
+                    ],
+                },
+            ];
             this.map.gameObjects[npc] = placeNPC;
         });
     }
@@ -166,7 +197,7 @@ class Overworld {
     async startMap(mapConfig) {
         this.map = new OverworldMap(mapConfig); //loading current map
         this.placeHero();
-		this.mapData = await this.getMapData();
+        this.mapData = await this.getMapData();
         this.placeNPC();
         this.map.overworld = this;
         this.map.mountObjects(); //mounting objects collisions
@@ -181,7 +212,10 @@ class Overworld {
             3: window.OverworldMaps.Ruin,
         };
 
-        const mapConfig = this.heroData && mapIds[this.heroData.mapId] ? mapIds[this.heroData.mapId] : window.OverworldMaps.DefaultMap;
+        const mapConfig =
+            this.heroData && mapIds[this.heroData.mapId]
+                ? mapIds[this.heroData.mapId]
+                : window.OverworldMaps.DefaultMap;
 
         this.startMap(mapConfig);
     }
@@ -189,7 +223,7 @@ class Overworld {
     //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
         this.heroData = await this.getHeroData();
-        
+
         console.log(this.heroData);
 
         this.LoadMap();
