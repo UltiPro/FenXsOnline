@@ -1,4 +1,5 @@
 const apiBaseUrl = "https://localhost:7180/api/";
+const apiBaseUrl_short = "https://localhost:7180/";
 
 const app = axios.create({
   apiBaseUrl,
