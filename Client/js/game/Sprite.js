@@ -24,14 +24,13 @@ class Sprite{
 		
 		this.currentAnimation = config.currentAnimation || "idle-down";
 		this.currentAnimationFrame = 0;
-		
-		//animation
-		this.animationFrameLimit = config.animationFrameLimit || 32; //how many gameloop frames to show an animation
-		this.animationFrameProgress = this.animationFrameLimit; //time to switch animation frame
-
 
 		//Reference the game Object
 		this.gameObject = config.gameObject;
+
+		//animation
+		this.animationFrameLimit = config.animationFrameLimit || 8; //how many gameloop frames to show an animation
+		this.animationFrameProgress = this.animationFrameLimit; //time to switch animation frame
 	}
 	
 	get frame(){

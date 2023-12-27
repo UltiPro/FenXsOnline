@@ -2,6 +2,7 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 	constructor(config){
 		super(config)
 		this.movementProgressRemaining = 0;
+		this.movementSpeed = 2;
 		this.isStanding = false;
 
 		this.isHeroBehindObject = false;
@@ -88,8 +89,8 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 	
 	updatePosition(){
 			const [property, change] = this.directionUpdate[this.direction];
-			this[property] += change;
-			this.movementProgressRemaining -= 1;
+			this[property] += change * this.movementSpeed;
+			this.movementProgressRemaining -= this.movementSpeed;
 			if(this.movementProgressRemaining === 0){
 				//Walk finished
 				const direction = this.directionUpdate[this.direction];
