@@ -44,6 +44,8 @@ class Overworld {
             });
 
         //Draw Upper layer
+        //This have to be removed
+        //We use opacity system
         this.map.drawUpperImage(this.ctx, cameraPerson);
     }
 
@@ -61,9 +63,7 @@ class Overworld {
                 this.gameLoopStepWork(delta);
                 delta -= step;
             }
-            previousMs = timestampMs - delta * 1000; // Make sure we don't lose unprocessed (delta) time
-
-            // Business as usual tick
+            previousMs = timestampMs - delta * 1000; // Unproccesed delta time
             requestAnimationFrame(stepFn);
         };
 
