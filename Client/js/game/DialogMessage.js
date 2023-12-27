@@ -155,6 +155,13 @@ class DialogMessage {
                 <div id="s40" class="shop-slot col-2 col-sm-2"></div>
                 <div id="s41" class="shop-slot col-2 col-sm-2"></div>
                 <div id="s42" class="shop-slot col-2 col-sm-2"></div>
+                <div class="w-100"></div>
+                <div id="s43" class="shop-slot col-2 col-sm-2"></div>
+                <div id="s44" class="shop-slot col-2 col-sm-2"></div>
+                <div id="s45" class="shop-slot col-2 col-sm-2"></div>
+                <div id="s46" class="shop-slot col-2 col-sm-2"></div>
+                <div id="s47" class="shop-slot col-2 col-sm-2"></div>
+                <div id="s48" class="shop-slot col-2 col-sm-2"></div>
             </div>
         </div>
          
