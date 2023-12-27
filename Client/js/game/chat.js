@@ -30,5 +30,7 @@ $(document).ready(async function () {
         chatConnection.invoke("SendMessage", $("#chat-message").val()).catch(error => {
             return console.error(error.toString());
         });
+
+        $("#chat-message").val("");
     });
 });
