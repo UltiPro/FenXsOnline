@@ -10,9 +10,9 @@
     overflow-y: auto; /* Allow vertical scrolling if messages exceed container height */
 }
 
-#chat-post-message{
+#chat-post-message {
     border-radius: 5px;
-  height: 1.5rem;
+    height: 1.5rem;
 }
 
 .btn-send {
@@ -27,15 +27,15 @@
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
-  }
-  
-  .btn-send:hover {
+}
+
+.btn-send:hover {
     transition: ease-in-out 0.3s;
     color: black;
     background-color: goldenrod;
-  }
-  
-  .btn-send:active {
-    background-color: gold; 
+}
+
+.btn-send:active {
+    background-color: gold;
     transform: translateY(1px);
-  }
+}
