@@ -35,7 +35,8 @@ $(".bp-slot").on("drop", function (event) {
     //check if item is from shop, buying item
     if(ancestorShop.length > 0){
         const cleanFromId = fromId.replace("s", "")
-        console.log("Item buying function running...")
+        buyItem(cleanFromId)
+
     }
     //check if source parent contains .eq-slot, Uneqiping
     else if (ancestorEq.length > 0) {
@@ -136,15 +137,38 @@ $(document).on("drop", ".shop-slot", function (event) {
         console.log("Item moved from eq-slot cannot be selled, move item to backack")
     }
     else{
-        console.log("Item from backpack moved to shop, sell item function running...")
-        //dropTarget.append(draggedItem);
+        
     }
 });
 
-function buyItem(){
+function buyItem(cleanFromId){
     let BPdetails = getBackpackDetails();
-}
+    let shop = getShopDetails();
 
+    const firstEmptySlot = $(".bp-slot").filter(function() {
+        return $(this).children().length === 0; // Filter empty slots
+    }).first();
+    slotForBoughtItem = firstEmptySlot.attr("id").replace("s", "")
+    console.log(slotForBoughtItem)
+    
+    const itemIndex = shop.findIndex((item) => item.slotInfo === cleanFromId);
+    let itemFromShop = shop[itemIndex]
+
+    //item cloned from source
+    const draggedItemClone = $(".item-image.dragging").clone();
+
+    app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`).then((_) =>{
+        delete itemFromShop.npcId;
+        itemFromShop.slotInfo = slotForBoughtItem;
+        BPdetails.push(itemFromShop);
+        setBackpackDetails(BPdetails);
+        draggedItemClone.css("opacity", "1");
+        firstEmptySlot.append(draggedItemClone);
+    }).catch((err) => {
+        console.log("Error npc/buy endpoint", err);
+        return "ITEM_BUY_ERROR";
+    });
+}
 function sellItem(npcId, cleanFromId){
     let BPdetails = getBackpackDetails();
     
@@ -375,7 +399,6 @@ function infoDivStyling(infoDiv, mouseX, mouseY) {
         padding: "0",
     });
 }
-
 
 function parseEqId(id) {
     switch (id) {
