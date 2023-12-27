@@ -1,10 +1,12 @@
 ﻿using Database.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class NpcController : ControllerBase
 {
     private readonly IAuthMenager _authMenager;
