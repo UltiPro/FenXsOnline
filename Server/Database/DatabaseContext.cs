@@ -22,7 +22,8 @@ using Database.Configuration.Game.Mob;
 using Database.Configuration.Game.Map.Mob;
 using Database.Configuration.Game.Map.Item;
 using Database.Configuration.Game.Npc;
-using Classes.Models.Game;
+using Classes.Models.Game.Quest;
+using Database.Configuration.Game.Quest;
 
 namespace Database;
 
@@ -50,6 +51,9 @@ public class DatabaseContext : IdentityDbContext<DBUser>
     public DbSet<DBMobDrop> MobsDrop { get; set; }
     public DbSet<DBMapItem> MapItems { get; set; }
     public DbSet<DBMapMob> MapMobs { get; set; }
+    public DbSet<DBQuest> Quests { get; set; }
+    public DbSet<DBQuestStage> QuestStages { get; set; }
+    public DbSet<DBQuestReward> QuestRewards {  get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -91,11 +95,17 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         modelBuilder.ApplyConfiguration(new DBMap1MobConfiguration());
         modelBuilder.ApplyConfiguration(new DBMap2MobConfiguration());
 
+        modelBuilder.ApplyConfiguration(new DBQuestConfiguration());
+        modelBuilder.ApplyConfiguration(new DBQuestStageConfiguration());
+        modelBuilder.ApplyConfiguration(new DBQuestRewardConfiguration());
+
         modelBuilder.Entity<DBHero>().HasIndex(hero => hero.Name).IsUnique();
         modelBuilder.Entity<DBHeroEquipment>().HasKey(heroEquipment => new { heroEquipment.HeroId, heroEquipment.Id });
         modelBuilder.Entity<DBNpcShopItem>().HasKey(npcShop => new { npcShop.NpcId, npcShop.Id });
         modelBuilder.Entity<DBMobDrop>().HasKey(mobDrop => new { mobDrop.MobId, mobDrop.ItemType, mobDrop.ItemId });
         modelBuilder.Entity<DBMapItem>().HasKey(mapItem => new { mapItem.MapId, mapItem.X, mapItem.Y });
         modelBuilder.Entity<DBMapMob>().HasKey(mapMob => new { mapMob.MapId, mapMob.X, mapMob.Y });
+        modelBuilder.Entity<DBQuestStage>().HasKey(questStage => new { questStage.QuestId, questStage.Stage });
+        modelBuilder.Entity<DBQuestReward>().HasKey(questReward => new { questReward.QuestId, questReward.ItemType, questReward.ItemId });
     }
 }
