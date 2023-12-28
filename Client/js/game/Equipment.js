@@ -154,6 +154,29 @@ $(document).on("drop", ".shop-slot", function (event) {
     }
 });
 
+$("#drop").on("dragover", function (event) {
+    event.preventDefault();
+});
+
+$("#drop").on("drop", function (event) {
+    event.preventDefault();
+    const draggedItem = $(".item-image.dragging");
+    const dropTarget = $(this);
+    const ancestor = draggedItem.closest(".bp-slot");
+    const dropId = draggedItem.parent().attr("id");
+    const cleanDropId = dropId.replace("s", "")
+    if (dropTarget.attr("id") === "drop" && ancestor.length > 0) {
+        app.put(apiBaseUrl + `Map/drop?itemId=${cleanDropId}`).then((_) => {
+            draggedItem.remove(); //remove item-image
+            //get list, remove item from local list
+            let BPdetails = getBackpackDetails();
+            const betaIndex = BPdetails.findIndex((item) => item.slotInfo === cleanDropId);
+            BPdetails.splice(betaIndex, 1)[0]; 
+            setBackpackDetails(BPdetails)
+        }).catch("API PUT, cannot drop item")
+    }
+});
+
 function buyItem(cleanFromId) {
     let BPdetails = getBackpackDetails();
     let shop = getShopDetails();
