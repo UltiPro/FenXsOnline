@@ -95,7 +95,8 @@ class OverworldEvent {
     changeMap(resolve) {
         const sceneTransition = new SceneTransition();
         sceneTransition.init(document.querySelector(".game-container"), () => {
-            this.map.overworld.newMapCoords(window.OverworldMaps[this.event.map]);
+            this.map.overworld.newMapCoords(window.OverworldMaps[this.event.map],this.event.x,this.event.y);
+            console.log(this.event.x, this.event.y)
             this.map.overworld.startMap(window.OverworldMaps[this.event.map]);
             resolve();
 
