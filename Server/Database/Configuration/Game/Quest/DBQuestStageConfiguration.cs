@@ -20,7 +20,7 @@ public class DBQuestStageConfiguration : IEntityTypeConfiguration<DBQuestStage>
             Bring = true,
             ItemType = ItemType.ToQuest,
             ItemId = 5,
-            Ammount = 1
+            Quantity = 1
         }, new DBQuestStage
         {
             QuestId = 2,
@@ -28,7 +28,7 @@ public class DBQuestStageConfiguration : IEntityTypeConfiguration<DBQuestStage>
             Description = "Kill 30 rabbits.",
             Kill = true,
             MobId = 1,
-            Ammount = 30
+            Quantity = 30
         }, new DBQuestStage
         {
             QuestId = 2,
@@ -45,7 +45,7 @@ public class DBQuestStageConfiguration : IEntityTypeConfiguration<DBQuestStage>
             Description = "Kill 30 spiders.",
             Kill = true,
             MobId = 2,
-            Ammount = 30
+            Quantity = 30
         }, new DBQuestStage
         {
             QuestId = 3,
@@ -66,7 +66,7 @@ public class DBQuestStageConfiguration : IEntityTypeConfiguration<DBQuestStage>
             Bring = true,
             ItemType = ItemType.Consumables,
             ItemId = 10,
-            Ammount = 3
+            Quantity = 3
         }, new DBQuestStage
         {
             QuestId = 5,
@@ -78,7 +78,7 @@ public class DBQuestStageConfiguration : IEntityTypeConfiguration<DBQuestStage>
             Bring = true,
             ItemType = ItemType.Consumables,
             ItemId = 12,
-            Ammount = 5
+            Quantity = 5
         });
     }
 }
