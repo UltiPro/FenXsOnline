@@ -148,7 +148,7 @@ $(document).on("drop", ".shop-slot", function (event) {
     }
 });
 
-function buyItem(cleanFromId){
+function buyItem(cleanFromId) {
     let BPdetails = getBackpackDetails();
     let shop = getShopDetails();
     console.log(cleanFromId)
@@ -162,9 +162,17 @@ function buyItem(cleanFromId){
     const itemIndex = shop.findIndex((item) => item.slotInfo === cleanFromId);
     let itemFromShop = shop[itemIndex]
 
-    //item cloned from source
-    let draggedItemClone = $(".item-image.dragging").clone();
+    // Check if there is a cloned item already present and remove it
+    $('#infoDiv').remove(); // Remove any existing infoDiv
 
+    const existingClone = $(".item-image.dragging-clone");
+    if (existingClone.length > 0) {
+        existingClone.remove();
+    }
+
+    // Item cloned from source
+    const draggedItemClone = $(".item-image.dragging").clone().addClass('dragging-clone'); // Add a unique class
+    console.log(draggedItemClone)
     app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`).then((_) =>{
         delete itemFromShop.npcId;
         itemFromShop.slotInfo = slotForBoughtItem;
@@ -178,6 +186,7 @@ function buyItem(cleanFromId){
         return "ITEM_BUY_ERROR";
     });
 }
+
 
 function sellItem(cleanFromId) {
     let BPdetails = getBackpackDetails();
@@ -384,8 +393,10 @@ function createIconInfo(infoKeys) {
         if (k.label === "Profession: ") {
             let profession = parseProfession(k.key);
             message += "<br /><p>Requirements: </p>";
-            let line = "<p>" + k.label + " " + profession + "</p>";
-            message += line;
+            if(profession !== undefined){
+                let line = "<p>" + k.label + " " + profession + "</p>";
+                message += line;
+            }
         } else
         if (k.key !== undefined && k.key !== 0) {
                 let line = "<p>" + k.label + " " + k.key + "</p>";
