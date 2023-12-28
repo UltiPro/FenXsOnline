@@ -52,7 +52,7 @@ class DialogMessage {
                         this.done();
                         break;
                     case "trade":
-                        this.openTradeMenu();
+                        this.openTradeMenu(this.npcId);
                         //this.done();
                         break;
 
@@ -93,15 +93,15 @@ class DialogMessage {
         updateHeroStatLabels();
     }
 
-    openTradeMenu() {
+    async openTradeMenu(npcId) {
         this.element.remove();
         this.tradeMenu = document.createElement("div");
         this.tradeMenu.classList.add("tradeBox");
-
-        this.fetchShopItems();
+        console.log(this.shopItems)
+        this.fetchShopItems(npcId);
 
         this.tradeMenu.innerHTML = `
-            <span class="text-center"><h5 class="mt-2">${this.faceHero}</h5><h6>Selling rate: ${this.percent}</h6></span>
+            <span id="${npcId}" class="text-center"><h5 class="mt-2">${this.faceHero}</h5><h6>Selling rate: ${this.percent}</h6></span>
             <button id="tradeBox-close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
             <path d="M.697 1.303a.75.75 0 0 1 1.06 0L8 6.94l6.243-6.637a.75.75 0 1 1 1.06 1.06L9.06 8l6.243 6.637a.75.75 0 1 1-1.06 1.06L8 9.06l-6.243 6.637a.75.75 0 1 1-1.06-1.06L6.94 8 .697 1.303z"/>
         </svg></button>
@@ -176,39 +176,49 @@ class DialogMessage {
             });
     }
 
-    async fetchShopItems() {
-        //console.log(this.shopItems)
-        this.shopItems.forEach(item => {
-            //console.log(`Item Type: ${item.itemType}, Item ID: ${item.itemId}`);
-            return app
-            .get(
-                apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`
-            )
-            .then(function (response) {
-                var typePath = itemTypeParser(item.itemType);
-                //create div with item
-                var draggableDiv = $(
-                    `<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${typePath}${response.data.spriteURL}');"> </div>`
-                );
-
-                //insert into global local list of shop items
+    async fetchShopItems(npcId) {
+        try {
+            const fetchItemPromises = this.shopItems.map(async (item) => {
+                const response = await app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`);
+                const typePath = await this.itemTypeParser(item.itemType);
+    
+                const draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${typePath}${response.data.spriteURL}');"> </div>`);
+    
                 const itemWithSlot = {
                     itemDetails: response.data,
-                    slotInfo: `${item.id}`
+                    slotInfo: `${item.id}`,
+                    npcId: npcId
                 };
-                //console.log(itemWithSlot)
+    
                 shopDetails.push(itemWithSlot);
-
-                //displaying that item
                 $(`#s${item.id}`).append(draggableDiv);
-            })
-            .catch(function (error) {
-                console.error("Error fetching item details:", error);
-                throw error;
+                
             });
-        });
-        
+    
+            await Promise.all(fetchItemPromises);
+        } catch (error) {
+            console.error("Error fetching item details:", error);
+            throw error;
+        }
     }
+    
+    async itemTypeParser(type) {
+        switch(type) {
+            case 0: return "./assets/primaryWeapons/";
+            case 1: return "./assets/secondaryWeapons/";
+            case 2: return "./assets/armors/";
+            case 3: return "./assets/helmets/";
+            case 4: return "./assets/boots/";
+            case 5: return "./assets/gloves/";
+            case 6: return "./assets/necklaces/";
+            case 7: return "./assets/rings/";
+            case 8: return "./assets/consumables/";
+            case 9: return "./assets/neutrals/";
+            case 10: return "./assets/quest/";
+            default: return "";
+        }
+    }
+    
 
     closeTradeMenu() {
         this.tradeMenu.remove();
