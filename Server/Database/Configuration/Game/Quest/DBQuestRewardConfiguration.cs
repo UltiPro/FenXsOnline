@@ -28,12 +28,8 @@ public class DBQuestRewardConfiguration : IEntityTypeConfiguration<DBQuestReward
         {
             QuestId = 5,
             ItemType = ItemType.Neutral,
-            ItemId = 11
-        }, new DBQuestReward
-        {
-            QuestId = 5,
-            ItemType = ItemType.Neutral,
-            ItemId = 11
+            ItemId = 11,
+            Quantity = 2
         });
     }
 }
