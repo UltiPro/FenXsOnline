@@ -25,7 +25,7 @@ $(".bp-slot").on("dragover", function (event) {
 
 $(".bp-slot").on("drop", function (event) {
     event.preventDefault();
-    const draggedItem = $(".item-image.dragging");
+    let draggedItem = $(".item-image.dragging");
     const dropTarget = $(this);
     const ancestorEq = draggedItem.closest(".eq-slot");
     const ancestorShop = draggedItem.closest(".shop-slot")
@@ -36,6 +36,9 @@ $(".bp-slot").on("drop", function (event) {
     if(ancestorShop.length > 0){
         const cleanFromId = fromId.replace("s", "")
         buyItem(cleanFromId)
+        setTimeout(() => {
+            updateHeroStatLabels();
+        }, 2000);
 
     }
     //check if source parent contains .eq-slot, Uneqiping
@@ -129,7 +132,6 @@ $(document).on("drop", ".shop-slot", function (event) {
     const fromId = draggedItem.parent().attr("id");
     const toId = dropTarget.attr("id");
     const cleanFromId = fromId.replace("s", "")
-    const cleanToId = toId.replace("s", "");
     if (draggedItem.parent().hasClass("shop-slot") && dropTarget.hasClass("shop-slot")) {
         console.log("Both items are from shop-slot, nothing should happen");
     }
@@ -137,13 +139,19 @@ $(document).on("drop", ".shop-slot", function (event) {
         console.log("Item moved from eq-slot cannot be selled, move item to backack")
     }
     else{
-        
+        sellItem(cleanFromId);
+        console.log(ancestor)
+        $(ancestor).empty();
+        setTimeout(() => { //making sure stats were refreashed
+            updateHeroStatLabels();
+        }, 2000);
     }
 });
 
 function buyItem(cleanFromId){
     let BPdetails = getBackpackDetails();
     let shop = getShopDetails();
+    console.log(cleanFromId)
 
     const firstEmptySlot = $(".bp-slot").filter(function() {
         return $(this).children().length === 0; // Filter empty slots
@@ -155,7 +163,7 @@ function buyItem(cleanFromId){
     let itemFromShop = shop[itemIndex]
 
     //item cloned from source
-    const draggedItemClone = $(".item-image.dragging").clone();
+    let draggedItemClone = $(".item-image.dragging").clone();
 
     app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`).then((_) =>{
         delete itemFromShop.npcId;
@@ -164,21 +172,30 @@ function buyItem(cleanFromId){
         setBackpackDetails(BPdetails);
         draggedItemClone.css("opacity", "1");
         firstEmptySlot.append(draggedItemClone);
+        updateHeroStatLabels();
     }).catch((err) => {
         console.log("Error npc/buy endpoint", err);
         return "ITEM_BUY_ERROR";
     });
 }
-function sellItem(npcId, cleanFromId){
+
+function sellItem(cleanFromId) {
     let BPdetails = getBackpackDetails();
-    
-    const itemIndex = BPdetails.findIndex((item) => item.slotInfo === cleanFromId);
+    const itemIndex = BPdetails.findIndex((item) => item.slotInfo === cleanFromId); //finding item ID
     if (itemIndex !== -1) {
-        // Remove the item from the BPdetails list
-        const removedItem = BPdetails.splice(itemIndex, 1)[0];
-        console.log(`Item at backpack slot: ${cleanFromId} has been removed.`);
+        const itemToSell = BPdetails[itemIndex]; //selecting item from backpack
+        app.put(apiBaseUrl + `Npc/sell?npcId=1&itemId=${itemToSell.slotInfo}`)
+            .then((_) => {
+                BPdetails.splice(itemIndex, 1);
+                setBackpackDetails(BPdetails); //removing item from backpack local list
+                updateHeroStatLabels(); //gold UI update
+                console.log(`Item sold successfully.`);
+            })
+            .catch((error) => {
+                console.error("Error selling item:", error);
+            });
     } else {
-        console.log(`Item within slot: ${cleanFromId} not found in backpack.`);
+        console.log("Item not found in the hero's backpack.");
     }
 }
 
