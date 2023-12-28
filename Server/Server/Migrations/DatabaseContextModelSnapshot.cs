@@ -2105,7 +2105,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 16,
                             Y = 94,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(1919),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(6537),
                             ItemId = 10,
                             ItemType = 8
                         },
@@ -2114,7 +2114,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 15,
                             Y = 69,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(1985),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(6608),
                             ItemId = 10,
                             ItemType = 8
                         },
@@ -2123,7 +2123,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 3,
                             Y = 49,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(1989),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(6612),
                             ItemId = 10,
                             ItemType = 8
                         },
@@ -2132,7 +2132,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 43,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(1993),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(6616),
                             ItemId = 10,
                             ItemType = 8
                         },
@@ -2141,7 +2141,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 20,
                             Y = 12,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2140),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(6741),
                             ItemId = 12,
                             ItemType = 8
                         },
@@ -2150,7 +2150,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 1,
                             Y = 2,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2145),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(6746),
                             ItemId = 12,
                             ItemType = 8
                         });
@@ -2183,7 +2183,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 12,
                             Y = 88,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2461),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7060),
                             MobId = 1
                         },
                         new
@@ -2191,7 +2191,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 16,
                             Y = 89,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2468),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7066),
                             MobId = 1
                         },
                         new
@@ -2199,7 +2199,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 19,
                             Y = 83,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2471),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7070),
                             MobId = 1
                         },
                         new
@@ -2207,7 +2207,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 5,
                             Y = 86,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2474),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7073),
                             MobId = 1
                         },
                         new
@@ -2215,7 +2215,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 26,
                             Y = 91,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2478),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7077),
                             MobId = 1
                         },
                         new
@@ -2223,7 +2223,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 29,
                             Y = 94,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2481),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7080),
                             MobId = 1
                         },
                         new
@@ -2231,7 +2231,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 9,
                             Y = 66,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2485),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7083),
                             MobId = 1
                         },
                         new
@@ -2239,7 +2239,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 1,
                             Y = 43,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2488),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7087),
                             MobId = 1
                         },
                         new
@@ -2247,7 +2247,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 3,
                             Y = 39,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2491),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7090),
                             MobId = 1
                         },
                         new
@@ -2255,7 +2255,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 6,
                             Y = 46,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2495),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7094),
                             MobId = 1
                         },
                         new
@@ -2263,7 +2263,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 1,
                             Y = 50,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2498),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7097),
                             MobId = 1
                         },
                         new
@@ -2271,7 +2271,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 6,
                             Y = 51,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2502),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7100),
                             MobId = 1
                         },
                         new
@@ -2279,7 +2279,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 1,
                             Y = 61,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2505),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7104),
                             MobId = 1
                         },
                         new
@@ -2287,7 +2287,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 40,
                             Y = 93,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2508),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7107),
                             MobId = 1
                         },
                         new
@@ -2295,7 +2295,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 40,
                             Y = 89,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2512),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7111),
                             MobId = 1
                         },
                         new
@@ -2303,7 +2303,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 57,
                             Y = 94,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2515),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7114),
                             MobId = 1
                         },
                         new
@@ -2311,7 +2311,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 54,
                             Y = 92,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2519),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7118),
                             MobId = 1
                         },
                         new
@@ -2319,7 +2319,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 53,
                             Y = 94,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2522),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7121),
                             MobId = 1
                         },
                         new
@@ -2327,7 +2327,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 47,
                             Y = 92,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2525),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7124),
                             MobId = 1
                         },
                         new
@@ -2335,7 +2335,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 48,
                             Y = 88,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2529),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7128),
                             MobId = 1
                         },
                         new
@@ -2343,7 +2343,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 42,
                             Y = 73,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2532),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7131),
                             MobId = 1
                         },
                         new
@@ -2351,7 +2351,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 47,
                             Y = 73,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2536),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7135),
                             MobId = 1
                         },
                         new
@@ -2359,7 +2359,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 51,
                             Y = 75,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2539),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7138),
                             MobId = 1
                         },
                         new
@@ -2367,7 +2367,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 58,
                             Y = 67,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2542),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7142),
                             MobId = 1
                         },
                         new
@@ -2375,7 +2375,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 53,
                             Y = 65,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2546),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7145),
                             MobId = 1
                         },
                         new
@@ -2383,7 +2383,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 65,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2549),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7148),
                             MobId = 1
                         },
                         new
@@ -2391,7 +2391,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 61,
                             Y = 62,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2553),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7152),
                             MobId = 1
                         },
                         new
@@ -2399,7 +2399,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 58,
                             Y = 63,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2556),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7155),
                             MobId = 1
                         },
                         new
@@ -2407,7 +2407,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 63,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2560),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7159),
                             MobId = 1
                         },
                         new
@@ -2415,7 +2415,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 52,
                             Y = 60,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2563),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7162),
                             MobId = 1
                         },
                         new
@@ -2423,7 +2423,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 57,
                             Y = 61,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2566),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7166),
                             MobId = 1
                         },
                         new
@@ -2431,7 +2431,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 61,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2570),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7169),
                             MobId = 1
                         },
                         new
@@ -2439,7 +2439,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 61,
                             Y = 60,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2573),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7173),
                             MobId = 1
                         },
                         new
@@ -2447,7 +2447,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 62,
                             Y = 57,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2577),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7176),
                             MobId = 1
                         },
                         new
@@ -2455,7 +2455,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 58,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2580),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7179),
                             MobId = 1
                         },
                         new
@@ -2463,7 +2463,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 53,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2584),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7183),
                             MobId = 1
                         },
                         new
@@ -2471,7 +2471,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 59,
                             Y = 27,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2587),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7187),
                             MobId = 1
                         },
                         new
@@ -2479,7 +2479,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 25,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2590),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7190),
                             MobId = 1
                         },
                         new
@@ -2487,7 +2487,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 53,
                             Y = 26,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2594),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7193),
                             MobId = 1
                         },
                         new
@@ -2495,7 +2495,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 62,
                             Y = 20,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2636),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7197),
                             MobId = 1
                         },
                         new
@@ -2503,7 +2503,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 19,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2640),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7200),
                             MobId = 1
                         },
                         new
@@ -2511,7 +2511,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 53,
                             Y = 12,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2643),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7204),
                             MobId = 1
                         },
                         new
@@ -2519,7 +2519,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 55,
                             Y = 13,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2647),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7207),
                             MobId = 1
                         },
                         new
@@ -2527,7 +2527,7 @@ namespace Server.Migrations
                             MapId = 1,
                             X = 57,
                             Y = 9,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2650),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7210),
                             MobId = 1
                         },
                         new
@@ -2535,7 +2535,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 15,
                             Y = 25,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2816),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7354),
                             MobId = 2
                         },
                         new
@@ -2543,7 +2543,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 6,
                             Y = 22,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2820),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7359),
                             MobId = 2
                         },
                         new
@@ -2551,7 +2551,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 2,
                             Y = 21,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2824),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7362),
                             MobId = 2
                         },
                         new
@@ -2559,7 +2559,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 4,
                             Y = 18,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2827),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7365),
                             MobId = 2
                         },
                         new
@@ -2567,7 +2567,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 7,
                             Y = 17,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2830),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7369),
                             MobId = 2
                         },
                         new
@@ -2575,7 +2575,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 9,
                             Y = 20,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2834),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7372),
                             MobId = 2
                         },
                         new
@@ -2583,7 +2583,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 23,
                             Y = 24,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2837),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7375),
                             MobId = 2
                         },
                         new
@@ -2591,7 +2591,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 24,
                             Y = 22,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2841),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7379),
                             MobId = 2
                         },
                         new
@@ -2599,7 +2599,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 23,
                             Y = 19,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2844),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7382),
                             MobId = 2
                         },
                         new
@@ -2607,7 +2607,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 22,
                             Y = 14,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2847),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7386),
                             MobId = 2
                         },
                         new
@@ -2615,7 +2615,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 17,
                             Y = 12,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2851),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7389),
                             MobId = 2
                         },
                         new
@@ -2623,7 +2623,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 16,
                             Y = 19,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2854),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7392),
                             MobId = 2
                         },
                         new
@@ -2631,7 +2631,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 24,
                             Y = 10,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2858),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7396),
                             MobId = 2
                         },
                         new
@@ -2639,7 +2639,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 22,
                             Y = 7,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2861),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7399),
                             MobId = 2
                         },
                         new
@@ -2647,7 +2647,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 27,
                             Y = 9,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2864),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7402),
                             MobId = 2
                         },
                         new
@@ -2655,7 +2655,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 17,
                             Y = 5,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2868),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7406),
                             MobId = 2
                         },
                         new
@@ -2663,7 +2663,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 19,
                             Y = 8,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2871),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7409),
                             MobId = 2
                         },
                         new
@@ -2671,7 +2671,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 13,
                             Y = 4,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2875),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7412),
                             MobId = 2
                         },
                         new
@@ -2679,7 +2679,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 8,
                             Y = 6,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2878),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7416),
                             MobId = 2
                         },
                         new
@@ -2687,7 +2687,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 7,
                             Y = 11,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2881),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7460),
                             MobId = 2
                         },
                         new
@@ -2695,7 +2695,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 4,
                             Y = 8,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2885),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7464),
                             MobId = 2
                         },
                         new
@@ -2703,7 +2703,7 @@ namespace Server.Migrations
                             MapId = 2,
                             X = 2,
                             Y = 9,
-                            Available = new DateTime(2023, 12, 29, 0, 22, 1, 198, DateTimeKind.Local).AddTicks(2888),
+                            Available = new DateTime(2023, 12, 29, 0, 32, 37, 654, DateTimeKind.Local).AddTicks(7468),
                             MobId = 2
                         });
                 });
@@ -3682,6 +3682,36 @@ namespace Server.Migrations
                     b.HasKey("QuestId", "ItemType", "ItemId");
 
                     b.ToTable("QuestRewards");
+
+                    b.HasData(
+                        new
+                        {
+                            QuestId = 1,
+                            ItemType = 8,
+                            ItemId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            QuestId = 4,
+                            ItemType = 9,
+                            ItemId = 8,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            QuestId = 5,
+                            ItemType = 9,
+                            ItemId = 10,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            QuestId = 5,
+                            ItemType = 9,
+                            ItemId = 11,
+                            Quantity = 2
+                        });
                 });
 
             modelBuilder.Entity("Classes.Models.Game.Quest.DBQuestStage", b =>
@@ -3921,19 +3951,19 @@ namespace Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "638a254c-651a-498f-af13-22cfd564d6a5",
+                            Id = "7a2b45d7-307f-4b15-b0a9-a7caeb586382",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "a1d16f8f-8326-4de9-a197-1f1488f7d529",
+                            Id = "7dd85e51-52a4-4838-af0f-d8cff510739b",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "f64804d8-e1cc-44b7-a892-606d9b5cff9e",
+                            Id = "38f917db-5462-433b-9542-810eb4f530a0",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
