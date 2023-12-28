@@ -96,13 +96,19 @@ $(".eq-slot").on("drop", function (event) {
     //check if source parent contains .bp-slot
     else if (ancestor.length > 0) {
         const DoesEqSlotFitsItemType = Equip(cleanFromId, toId);
-        if (DoesEqSlotFitsItemType === true) {
+        if (DoesEqSlotFitsItemType === 1 || DoesEqSlotFitsItemType === 2) {
             swapItems(cleanFromId, toId)
                 .then((flag) => {
                     if (flag === true) {
-                        existingItem.removeClass();
-                        dropTarget.append(draggedItem);
-
+                        if (DoesEqSlotFitsItemType === 2)
+                        {
+                            draggedItem.remove();
+                        }else{
+                            existingItem.removeClass();
+                            dropTarget.append(draggedItem);
+                        }
+                        
+                        
                         updateItemPosition(cleanFromId, toId);
                         updateHeroStatLabels();
                     }
@@ -289,10 +295,13 @@ function Equip(fromId, toId) {
     let BPdetails = getBackpackDetails();
     const x = BPdetails.find((item) => item.slotInfo === fromId);
     let type = parseEqId(toId);
-    if (x.itemDetails.itemType === type) {
-        return true;
+    if (x.itemDetails.itemType === type || x.itemDetails.itemType === 8) {
+        if(x.itemDetails.itemType === 8){
+            return 2;
+        }
+        return 1;
     } else {
-        return false;
+        return -1;
     }
 }
 
