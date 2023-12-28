@@ -12,4 +12,5 @@ public class DBQuestReward
     public DBQuest DBQuest { get; set; }
     public ItemType ItemType { get; set; }
     public int ItemId { get; set; }
+    public int Quantity { get; set; } = 1;
 }
