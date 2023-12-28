@@ -23,5 +23,5 @@ public class DBQuestStage
     public bool Bring { get; set; } = false;
     public ItemType? ItemType { get; set; } = null;
     public int? ItemId { get; set; } = null;
-    public int? Ammount { get; set; } = null; // For kill and bring
+    public int? Quantity { get; set; } = null; // For kill and bring
 }
