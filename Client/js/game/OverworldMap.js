@@ -81,22 +81,51 @@ class OverworldMap {
     //check for event for ex. talking
     checkForAction() {
         const hero = this.gameObjects["hero"]; //current player
-        const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction); //npc
-        const match = Object.values(this.gameObjects).find((object) => {
+        const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction); //check if hero is next to an npc
+        const matchNPC = Object.values(this.gameObjects).find((object) => {
             return (
                 `${object.x}, ${object.y}` ===
                 `${nextCoords.x}, ${nextCoords.y}`
             );
         });
-        if (!this.isCutscenePlaying && match && match.talking.length) {
+        //talking event
+        if (!this.isCutscenePlaying && matchNPC && matchNPC.talking.length) {
             this.removeTalkButton();
             this.displayedNPC = null;
-            this.startCutscene(match.talking[0].events);
+            this.startCutscene(matchNPC.talking[0].events);
         }
-        if (!this.isCutscenePlaying && match && match.isItem) {
-            console.log("There's item on the ground");
+        //check for the same position as item 
+        const matchItem = Object.values(this.gameObjects).find((object) => {
+            return (
+                object !== hero &&
+                object.x === hero.x &&
+                object.y === hero.y
+            );
+        });
+        //pickUp item event
+        if (!this.isCutscenePlaying && matchItem && matchItem.isItem) {
+            let wasItPicked = matchItem.grab(matchItem);
+            if (wasItPicked) {
+                this.removeGameObject(matchItem.id);
+            }
         }
         // console.log(match);
+    }
+
+    //adding game object
+    addGameObject(gameObject) {
+        this.gameObjects[gameObject.id] = gameObject;
+        gameObject.mount(this);
+    }
+
+    //removing game object
+    removeGameObject(id) {
+        if (this.gameObjects[id]) {
+            delete this.gameObjects[id];
+            console.log(`GameObject with ID ${id} removed.`);
+        } else {
+            console.log(`GameObject with ID ${id} not found.`);
+        }
     }
 
     //check if npc is nearby
@@ -105,7 +134,7 @@ class OverworldMap {
         const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
 
         const nearbyObject = Object.values(this.gameObjects).find((object) => {
-            if (object.id !== "hero") {
+            if (object.id !== "hero" && !(object instanceof Item)) {
                 const distance = Math.sqrt(
                     Math.pow(object.x - nextCoords.x, 2) +
                         Math.pow(object.y - nextCoords.y, 2)

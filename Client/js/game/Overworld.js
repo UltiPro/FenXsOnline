@@ -34,13 +34,29 @@ class Overworld {
         //Draw Lower layer
         this.map.drawLowerImage(this.ctx, cameraPerson);
 
-        //Draw Game Objects
+        // Draw items first
+        Object.values(this.map.gameObjects).forEach((object) => {
+            if (object instanceof Item) {
+                object.sprite.draw(
+                    this.ctx,
+                    cameraPerson,
+                    object.isBehindObject
+                );
+            }
+        });
+
+        // Draw the rest of gameObjects
         Object.values(this.map.gameObjects)
+            .filter((object) => !(object instanceof Item))
             .sort((a, b) => {
                 return a.y - b.y;
             })
             .forEach((object) => {
-                object.sprite.draw(this.ctx, cameraPerson, object.isHeroBehindObject);
+                object.sprite.draw(
+                    this.ctx,
+                    cameraPerson,
+                    object.isHeroBehindObject
+                );
             });
 
         //Draw Upper layer
@@ -97,7 +113,7 @@ class Overworld {
             });
     }
 
-    newMapCoords(mapConfig,eventX,eventY) {
+    newMapCoords(mapConfig, eventX, eventY) {
         this.heroData.x = eventX;
         this.heroData.y = eventY;
     }
@@ -160,6 +176,27 @@ class Overworld {
         });
     }
 
+    placeItems() {
+        //console.log(this.mapData.items);
+        let counter = 1;
+        this.mapData.items.forEach((item) => {
+            let name = "item" + counter;
+            let itemId = name;
+            let placeItem = new Item({
+                isPlayerControlled: false,
+                x: utils.withGrid(item.x),
+                y: utils.withGrid(item.y),
+                itemId: item.itemId,
+                itemType: item.itemType,
+                //change sprite
+                src: `./assets/ui/eq/gold.png`,
+            });
+            this.map.gameObjects[itemId] = placeItem;
+            counter++;
+        });
+    }
+
+    //Action key listner
     bindActionInput() {
         new KeyPressListner("Enter", () => {
             //Check if there's a person to talk to
@@ -167,6 +204,7 @@ class Overworld {
         });
     }
 
+    //area events
     bindHeroPositionCheck() {
         document.addEventListener("PersonWalkingComplete", (e) => {
             if (e.detail.whoId === "hero") {
@@ -177,11 +215,13 @@ class Overworld {
         });
     }
 
+    //loading new map
     async startMap(mapConfig) {
         this.map = new OverworldMap(mapConfig); //loading current map
         this.placeHero();
-        this.mapData = await this.getMapData();
+        this.mapData = await this.getMapData(); //fetching heroes, npc, items
         this.placeNPC();
+        this.placeItems();
         this.map.overworld = this;
         this.map.mountObjects(); //mounting objects collisions
     }
@@ -203,6 +243,7 @@ class Overworld {
         this.startMap(mapConfig);
     }
 
+    //initializing game
     //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
         this.heroData = await this.getHeroData();

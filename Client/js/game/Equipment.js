@@ -154,10 +154,13 @@ $(document).on("drop", ".shop-slot", function (event) {
     }
 });
 
+
+//drop slot
 $("#drop").on("dragover", function (event) {
     event.preventDefault();
 });
 
+//dropping item from backpack
 $("#drop").on("drop", function (event) {
     event.preventDefault();
     const draggedItem = $(".item-image.dragging");
@@ -176,6 +179,38 @@ $("#drop").on("drop", function (event) {
         }).catch("API PUT, cannot drop item")
     }
 });
+
+async function showGrabbedItem(item) {
+    try {
+        let BPdetails = getBackpackDetails();
+        const response = await app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`);
+        const firstEmptySlot = $(".bp-slot").filter(function() {
+            return $(this).children().length === 0; // Filter empty slots
+        }).first();
+
+        if (firstEmptySlot.length > 0) {
+            slot = firstEmptySlot.attr("id").replace("s", "") //extracting slot info from bp.slot div
+            
+            //updating local list
+            const itemLocal = {
+                itemDetails: response.data,
+                slotInfo: slot,
+            }; 
+            BPdetails.push(itemLocal);
+            setBackpackDetails(BPdetails)
+
+            let type = itemTypeParser(item.itemType); //parsing type for path
+            let draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
+            firstEmptySlot.append(draggableDiv); //showing item
+        } else {
+            console.log('No empty slot found');
+        }
+
+        console.log(item.itemId, item.itemType);
+    } catch (error) {
+        console.error("Error in showGrabbedItem:", error);
+    }
+}
 
 function buyItem(cleanFromId) {
     let BPdetails = getBackpackDetails();
