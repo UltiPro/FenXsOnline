@@ -173,9 +173,14 @@ $("#drop").on("drop", function (event) {
             draggedItem.remove(); //remove item-image
             //get list, remove item from local list
             let BPdetails = getBackpackDetails();
-            const betaIndex = BPdetails.findIndex((item) => item.slotInfo === cleanDropId);
-            BPdetails.splice(betaIndex, 1)[0]; 
+            const index = BPdetails.findIndex((item) => item.slotInfo === cleanDropId);
+            BPdetails.splice(index, 1)[0]; 
             setBackpackDetails(BPdetails)
+            const overworldInstance = window.overworldInstance;
+            const droppedItem = BPdetails[index];
+            if (overworldInstance) {
+                overworldInstance.map.drop(droppedItem);
+            }
         }).catch("API PUT, cannot drop item")
     }
 });

@@ -3,6 +3,7 @@ function GameInit(){
 			element: document.querySelector(".game-container")
 		});
 		overworld.init();
+		window.overworldInstance = overworld;
 }
 
 /* this function initiate the game

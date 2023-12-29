@@ -112,6 +112,33 @@ class OverworldMap {
         // console.log(match);
     }
 
+    //dropping item
+    drop(item) {
+        const hero = this.gameObjects["hero"];
+        const path = itemTypeParser(item.itemDetails.itemType);
+        
+        let counter = 1;
+        let name = `item${counter}`;
+    
+        // Check for existing names and increment counter if needed
+        while (this.gameObjects[name]) {
+            counter++;
+            name = `item${counter}`;
+        }
+    
+        let placeItem = new Item({
+            isPlayerControlled: false,
+            x: hero.x,
+            y: hero.y,
+            itemId: item.itemDetails.id,
+            itemType: item.itemDetails.itemType,
+            //change sprite
+            src: `${path}/${item.itemDetails.spriteURL}`,
+        });
+        this.gameObjects[name] = placeItem;
+
+    }
+
     //adding game object
     addGameObject(gameObject) {
         this.gameObjects[gameObject.id] = gameObject;
@@ -236,6 +263,23 @@ class OverworldMap {
         this.removeWall(OldX, OldY); //removing wall
         const { x, y } = utils.nextPosition(OldX, OldY, direction); //offset of direction, getting new position of the wall
         this.addWall(x, y); //creating the new wall
+    }
+    
+    itemTypeParser(type){
+        switch(type){
+            case 0: return "./assets/primaryWeapons/"
+            case 1: return "./assets/secondaryWeapons/"
+            case 2: return "./assets/armors/"
+            case 3: return "./assets/helmets/"
+            case 4: return "./assets/boots/"
+            case 5: return "./assets/gloves/"
+            case 6: return "./assets/necklaces/"
+            case 7: return "./assets/rings/"
+            case 8: return "./assets/consumables/"
+            case 9: return "./assets/neutrals/"
+            case 10: return "./assets/quest/"
+        }
+        
     }
 }
 //maps configuration

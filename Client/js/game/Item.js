@@ -16,7 +16,7 @@ class Item extends GameObject {
         this.sprite.setAnimation("idle-" + this.direction);
     }
 
-    mount(map) {
+    mount() {
         this.isMounted = true;
     }
 
