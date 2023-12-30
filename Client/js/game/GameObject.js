@@ -35,7 +35,8 @@ class GameObject{
 
 	async doBehaviorEvent(map){
 		//if there's something more important going on break
-		if(map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding){
+		//remove isCutscenePlaying if map freezes
+		if(this.behaviorLoop.length === 0 || this.isStanding){
 			return;
 		} 
 		//Setting up eventt with relevant info
