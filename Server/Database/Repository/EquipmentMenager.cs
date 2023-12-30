@@ -354,16 +354,16 @@ public class EquipmentMenager : IEquipmentMenager
     private void UpdateWeapon(DBHero hero, DBWeapon item, int plus)
     {
         hero.Weight += plus * item.Weight;
-        hero.Atack += plus * item.Atack;
-        hero.MagicAtack += plus * item.MagicAtack;
+        hero.Attack += plus * item.Attack;
+        hero.MagicAttack += plus * item.MagicAttack;
         hero.CriticalChance += plus * item.CriticalChance;
     }
 
     private void UpdateSecondaryWeapon(DBHero hero, DBSecondaryWeapon item, int plus)
     {
         hero.Weight += plus * item.Weight;
-        hero.Atack += plus * item.Atack;
-        hero.MagicAtack += plus * item.MagicAtack;
+        hero.Attack += plus * item.Attack;
+        hero.MagicAttack += plus * item.MagicAttack;
         hero.CriticalChance += plus * item.CriticalChance;
         hero.Armor += plus * item.Armor;
         hero.MagicArmor += plus * item.MagicArmor;

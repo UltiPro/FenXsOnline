@@ -121,6 +121,17 @@ public class HeroMenager : GenericRepository<DBHero>, IHeroMenager
         await _context.SaveChangesAsync();
     }
 
+    public async Task Leave(string accountId)
+    {
+        var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame);
+
+        if (hero is null) throw new HeroIsNotInTheGameException();
+
+        hero.InGame = false;
+
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<DBHero> GetInGameHero(string accountId)
     {
         return await _context.Heroes

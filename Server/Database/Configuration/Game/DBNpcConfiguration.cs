@@ -15,7 +15,7 @@ public class DBNpcConfiguration : IEntityTypeConfiguration<DBNpc>
             Name = "Adelaide",
             X = 36,
             Y = 49,
-            SpriteURL = "adelide.gif",
+            SpriteURL = "adelaide.gif",
             IsHealer = true,
             IsTrader = true,
             PricePercent = 0.75

@@ -11,10 +11,13 @@ namespace Server.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly IAuthMenager _authMenager;
+    private readonly IHeroMenager _heroMenager;
     private readonly IConfiguration _configuration;
-    public AccountController(IAuthMenager _authMenager, IConfiguration configuration)
+
+    public AccountController(IAuthMenager _authMenager, IHeroMenager _heroMenager, IConfiguration configuration)
     {
         this._authMenager = _authMenager;
+        this._heroMenager = _heroMenager;
         _configuration = configuration;
     }
 
@@ -88,8 +91,14 @@ public class AccountController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public ActionResult Logout()
+    public async Task<ActionResult> Logout()
     {
+        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
+
+        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
+
+        await _heroMenager.Leave(cookieId);
+
         SetHttpOnlyCookie(new AuthResponse
         {
             Id = "",

@@ -16,7 +16,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 5,
             Price = 10,
             SpriteURL = "primaryWarrior0.gif",
-            Atack = 20,
+            Attack = 20,
             Profession = Profession.Warrior
         }, new DBWeapon
         {
@@ -25,7 +25,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 3,
             Price = 10,
             SpriteURL = "primaryHunter0.gif",
-            Atack = 10,
+            Attack = 10,
             Profession = Profession.Hunter
         }, new DBWeapon
         {
@@ -34,7 +34,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 4,
             Price = 10,
             SpriteURL = "primaryMage0.gif",
-            MagicAtack = 15,
+            MagicAttack = 15,
             Profession = Profession.Mage
         }, new DBWeapon
         {
@@ -43,8 +43,8 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 5,
             Price = 10,
             SpriteURL = "primaryPaladin0.gif",
-            Atack = 15,
-            MagicAtack = 5,
+            Attack = 15,
+            MagicAttack = 5,
             Profession = Profession.Paladin
         }, new DBWeapon
         {
@@ -54,7 +54,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 7,
             Price = 50,
             SpriteURL = "primaryWarrior10.gif",
-            Atack = 40,
+            Attack = 40,
             Profession = Profession.Warrior
         }, new DBWeapon
         {
@@ -64,7 +64,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 4,
             Price = 50,
             SpriteURL = "primaryHunter10.gif",
-            Atack = 25,
+            Attack = 25,
             CriticalChance = 5,
             Profession = Profession.Hunter
         }, new DBWeapon
@@ -75,7 +75,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 5,
             Price = 50,
             SpriteURL = "primaryMage10.gif",
-            MagicAtack = 30,
+            MagicAttack = 30,
             CriticalChance = 2,
             Profession = Profession.Mage
         }, new DBWeapon
@@ -86,8 +86,8 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 8,
             Price = 50,
             SpriteURL = "primaryPaladin10.gif",
-            Atack = 30,
-            MagicAtack = 15,
+            Attack = 30,
+            MagicAttack = 15,
             Profession = Profession.Paladin
         }, new DBWeapon
         {
@@ -97,7 +97,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 8,
             Price = 150,
             SpriteURL = "primaryWarrior20.gif",
-            Atack = 80,
+            Attack = 80,
             CriticalChance = 2,
             Profession = Profession.Warrior
         }, new DBWeapon
@@ -108,7 +108,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 5,
             Price = 150,
             SpriteURL = "primaryHunter20.gif",
-            Atack = 55,
+            Attack = 55,
             CriticalChance = 10,
             Profession = Profession.Hunter
         }, new DBWeapon
@@ -119,7 +119,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 7,
             Price = 150,
             SpriteURL = "primaryMage20.gif",
-            MagicAtack = 60,
+            MagicAttack = 60,
             CriticalChance = 5,
             Profession = Profession.Mage
         }, new DBWeapon
@@ -130,8 +130,8 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 9,
             Price = 150,
             SpriteURL = "primaryPaladin20.gif",
-            Atack = 70,
-            MagicAtack = 5,
+            Attack = 70,
+            MagicAttack = 5,
             CriticalChance = 5,
             Profession = Profession.Paladin
         }, new DBWeapon
@@ -142,7 +142,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 8,
             Price = 350,
             SpriteURL = "primaryWarrior30.gif",
-            Atack = 120,
+            Attack = 120,
             CriticalChance = 5,
             Profession = Profession.Warrior
         }, new DBWeapon
@@ -153,7 +153,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 6,
             Price = 350,
             SpriteURL = "primaryHunter30.gif",
-            Atack = 70,
+            Attack = 70,
             CriticalChance = 15,
             Profession = Profession.Hunter
         }, new DBWeapon
@@ -164,7 +164,7 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 7,
             Price = 350,
             SpriteURL = "primaryMage30.gif",
-            MagicAtack = 90,
+            MagicAttack = 90,
             CriticalChance = 5,
             Profession = Profession.Mage
         }, new DBWeapon
@@ -175,8 +175,8 @@ public class DBWeaponConfiguration : IEntityTypeConfiguration<DBWeapon>
             Weight = 8,
             Price = 350,
             SpriteURL = "primaryPaladin30.gif",
-            Atack = 110,
-            MagicAtack = 40,
+            Attack = 110,
+            MagicAttack = 40,
             Profession = Profession.Paladin
         });
     }

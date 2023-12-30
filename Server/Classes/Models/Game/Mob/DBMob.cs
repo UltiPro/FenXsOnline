@@ -3,8 +3,8 @@
 public class DBMob : MobProvider
 {
     public int HealthPoints { get; set; } = 100;
-    public int Atack { get; set; } = 1;
-    public int MagicAtack { get; set; } = 0;
+    public int Attack { get; set; } = 1;
+    public int MagicAttack { get; set; } = 0;
     public int CriticalChance { get; set; } = 0;
     public int Armor { get; set; } = 0;
     public int MagicArmor { get; set; } = 0;

@@ -55,7 +55,7 @@ public class FightMenager : IFightMenager
 
         int mobHP = mob.HealthPoints;
 
-        int heroAtack = (hero.Atack != 0 && hero.MagicAtack != 0) ? hero.Atack : 10;
+        int heroAtack = (hero.Attack != 0 && hero.MagicAttack != 0) ? hero.Attack : 10;
         int dmg = 0;
         double criticalMultiplier = 1.0d;
 
@@ -78,7 +78,7 @@ public class FightMenager : IFightMenager
             }
             if (playerTurn ? hero.CriticalChance > _random.Next(100) + 1 : mob.CriticalChance > _random.Next(100) + 1)
                 criticalMultiplier = 1.5d;
-            dmg = Convert.ToInt32(Math.Floor((playerTurn ? heroAtack + hero.MagicAtack : mob.Atack + mob.MagicAtack) * criticalMultiplier));
+            dmg = Convert.ToInt32(Math.Floor((playerTurn ? heroAtack + hero.MagicAttack : mob.Attack + mob.MagicAttack) * criticalMultiplier));
             if (levelBonus && playerTurn == playerAdvantage) dmg = dmg + Convert.ToInt32((Convert.ToDouble(dmg) / 10) * levelAdvantage);
             if (playerTurn)
             {
@@ -88,22 +88,22 @@ public class FightMenager : IFightMenager
                     mobArmor -= block;
 
                 }
-                if (mobMagicArmor > 0 && hero.MagicAtack > 0)
+                if (mobMagicArmor > 0 && hero.MagicAttack > 0)
                 {
-                    magicBlock = hero.MagicAtack <= mobMagicArmor ? hero.MagicAtack : (hero.MagicAtack - mobMagicArmor);
+                    magicBlock = hero.MagicAttack <= mobMagicArmor ? hero.MagicAttack : (hero.MagicAttack - mobMagicArmor);
                     mobMagicArmor -= magicBlock;
                 }
             }
             else
             {
-                if (heroArmor > 0 && mob.Atack > 0)
+                if (heroArmor > 0 && mob.Attack > 0)
                 {
-                    block = mob.Atack <= heroArmor ? mob.Atack : (mob.Atack - heroArmor);
+                    block = mob.Attack <= heroArmor ? mob.Attack : (mob.Attack - heroArmor);
                     heroArmor -= block;
                 }
-                if (heroMagicArmor > 0 && mob.MagicAtack > 0)
+                if (heroMagicArmor > 0 && mob.MagicAttack > 0)
                 {
-                    magicBlock = mob.MagicAtack <= heroMagicArmor ? mob.MagicAtack : (mob.MagicAtack - heroMagicArmor);
+                    magicBlock = mob.MagicAttack <= heroMagicArmor ? mob.MagicAttack : (mob.MagicAttack - heroMagicArmor);
                     heroMagicArmor -= magicBlock;
                 }
             }
