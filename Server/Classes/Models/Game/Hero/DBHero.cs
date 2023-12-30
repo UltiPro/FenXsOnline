@@ -6,6 +6,7 @@ using Classes.Models.Game.Item.Necklace;
 using Classes.Models.Game.Item.Ring;
 using Classes.Models.Game.Item.SecondaryWeapon;
 using Classes.Models.Game.Item.Weapon;
+using Classes.Models.Game.Quest;
 using Classes.Models.User;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -76,4 +77,5 @@ public class DBHero : HeroBasicInfo
     public DBWeapon? DBWeapon { get; set; } = null;
 
     public ICollection<DBHeroEquipment>? HeroEquipment { get; set; }
+    public ICollection<DBHeroQuest>? HeroQuest { get; set; }
 }
