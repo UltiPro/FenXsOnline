@@ -15,7 +15,7 @@ public class DBMobConfiguration : IEntityTypeConfiguration<DBMob>
             SpriteUrl = "rabbit.gif",
             Level = 1,
             HealthPoints = 100,
-            Atack = 5,
+            Attack = 5,
             Agility = 15
         }, new DBMob
         {
@@ -24,7 +24,7 @@ public class DBMobConfiguration : IEntityTypeConfiguration<DBMob>
             SpriteUrl = "spider.gif",
             Level = 5,
             HealthPoints = 100,
-            Atack = 10,
+            Attack = 10,
             CriticalChance = 5,
             Agility = 5,
             DropChance = 25
@@ -35,7 +35,7 @@ public class DBMobConfiguration : IEntityTypeConfiguration<DBMob>
             SpriteUrl = "wolf.gif",
             Level = 10,
             HealthPoints = 150,
-            Atack = 15,
+            Attack = 15,
             CriticalChance = 20,
             Agility = 10,
             Weight = 10,
@@ -47,7 +47,7 @@ public class DBMobConfiguration : IEntityTypeConfiguration<DBMob>
             SpriteUrl = "boar.gif",
             Level = 15,
             HealthPoints = 200,
-            Atack = 25,
+            Attack = 25,
             CriticalChance = 20,
             Armor = 10,
             Agility = 10,
@@ -60,8 +60,8 @@ public class DBMobConfiguration : IEntityTypeConfiguration<DBMob>
             SpriteUrl = "apparition.gif",
             Level = 20,
             HealthPoints = 350,
-            Atack = 25,
-            MagicAtack = 25,
+            Attack = 25,
+            MagicAttack = 25,
             CriticalChance = 15,
             Armor = 50,
             MagicArmor = 100,

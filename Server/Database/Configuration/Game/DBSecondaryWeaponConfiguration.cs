@@ -25,7 +25,7 @@ public class DBSecondaryWeaponConfiguration : IEntityTypeConfiguration<DBSeconda
             Weight = 1,
             Price = 1,
             SpriteURL = "secondaryHunter0.gif",
-            Atack = 5,
+            Attack = 5,
             Profession = Profession.Hunter
         }, new DBSecondaryWeapon
         {
@@ -65,7 +65,7 @@ public class DBSecondaryWeaponConfiguration : IEntityTypeConfiguration<DBSeconda
             Weight = 1,
             Price = 2,
             SpriteURL = "secondaryHunter10.gif",
-            Atack = 10,
+            Attack = 10,
             CriticalChance = 5,
             Profession = Profession.Hunter
         }, new DBSecondaryWeapon
@@ -76,7 +76,7 @@ public class DBSecondaryWeaponConfiguration : IEntityTypeConfiguration<DBSeconda
             Weight = 2,
             Price = 10,
             SpriteURL = "secondaryMage10.gif",
-            MagicAtack = 5,
+            MagicAttack = 5,
             CriticalChance = 7,
             Profession = Profession.Mage
         }, new DBSecondaryWeapon
@@ -110,7 +110,7 @@ public class DBSecondaryWeaponConfiguration : IEntityTypeConfiguration<DBSeconda
             Weight = 1,
             Price = 20,
             SpriteURL = "secondaryHunter20.gif",
-            Atack = 25,
+            Attack = 25,
             CriticalChance = 5,
             Profession = Profession.Hunter
         }, new DBSecondaryWeapon
@@ -121,7 +121,7 @@ public class DBSecondaryWeaponConfiguration : IEntityTypeConfiguration<DBSeconda
             Weight = 3,
             Price = 100,
             SpriteURL = "secondaryMage20.gif",
-            MagicAtack = 50,
+            MagicAttack = 50,
             CriticalChance = 2,
             Profession = Profession.Mage
         }, new DBSecondaryWeapon

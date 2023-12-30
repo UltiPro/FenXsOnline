@@ -14,8 +14,8 @@ namespace Classes.Models.Game.Hero;
 
 public class DBHero : HeroBasicInfo
 {
-    public int Atack { get; set; } = 0;
-    public int MagicAtack { get; set; } = 0;
+    public int Attack { get; set; } = 0;
+    public int MagicAttack { get; set; } = 0;
     public int CriticalChance { get; set; } = 0;
     public int Armor { get; set; } = 0;
     public int MagicArmor { get; set; } = 0;
