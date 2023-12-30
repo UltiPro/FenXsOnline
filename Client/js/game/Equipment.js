@@ -87,15 +87,14 @@ $(".eq-slot").on("drop", function (event) {
     const toId = dropTarget.attr("id");
     const cleanFromId = fromId.replace("s", "");
     let existingItem = dropTarget.children(".item-image");
-
+    const DoesEqSlotFitsItemType = CanBeEquipped(cleanFromId, toId);
     //if hero will meet al requirements for item, but already have
     //item equipped at this slot break equipping another item
-    if (!dropTarget.children().hasClass("item-opacity")) {
+    if (!dropTarget.children().hasClass("item-opacity") && DoesEqSlotFitsItemType !== 2) {
         console.log("Hero has already equipped item of this type");
     }
     //check if source parent contains .bp-slot
     else if (ancestor.length > 0) {
-        const DoesEqSlotFitsItemType = Equip(cleanFromId, toId);
         if (DoesEqSlotFitsItemType === 1 || DoesEqSlotFitsItemType === 2) {
             swapItems(cleanFromId, toId)
                 .then((flag) => {
@@ -354,7 +353,7 @@ function updateItemPosition(oldId, newId) {
     }
 }
 
-function Equip(fromId, toId) {
+function CanBeEquipped(fromId, toId) {
     let BPdetails = getBackpackDetails();
     const x = BPdetails.find((item) => item.slotInfo === fromId);
     let type = parseEqId(toId);
@@ -526,9 +525,9 @@ function parseProfession(profession) {
         case 0:
             return "Warrior";
         case 1:
-            return "Mage";
-        case 2:
             return "Hunter";
+        case 2:
+            return "Mage";
         case 3:
             return "Paladin";
     }
