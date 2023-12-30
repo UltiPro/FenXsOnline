@@ -107,5 +107,6 @@ public class DatabaseContext : IdentityDbContext<DBUser>
         modelBuilder.Entity<DBMapMob>().HasKey(mapMob => new { mapMob.MapId, mapMob.X, mapMob.Y });
         modelBuilder.Entity<DBQuestStage>().HasKey(questStage => new { questStage.QuestId, questStage.Stage });
         modelBuilder.Entity<DBQuestReward>().HasKey(questReward => new { questReward.QuestId, questReward.ItemType, questReward.ItemId });
+        modelBuilder.Entity<DBHeroQuest>().HasKey(heroQuest => new { heroQuest.HeroId, heroQuest.QuestId });
     }
 }
