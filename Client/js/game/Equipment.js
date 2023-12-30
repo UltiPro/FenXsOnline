@@ -257,20 +257,28 @@ function buyItem(cleanFromId) {
 
 
 function sellItem(cleanFromId) {
+    $("#infoDiv").remove();
     let BPdetails = getBackpackDetails();
     const itemIndex = BPdetails.findIndex((item) => item.slotInfo === cleanFromId); //finding item ID
     if (itemIndex !== -1) {
         const itemToSell = BPdetails[itemIndex]; //selecting item from backpack
-        app.put(apiBaseUrl + `Npc/sell?npcId=1&itemId=${itemToSell.slotInfo}`)
+
+        const shop = document.querySelector(`[id^="seller"]`); 
+        if (shop) {
+          // Extracting shop ID
+            const spanId = shop.id;
+            let npcId = spanId.replace('seller', '');
+            app.put(apiBaseUrl + `Npc/sell?npcId=${npcId}&itemId=${itemToSell.slotInfo}`)
             .then((_) => {
                 BPdetails.splice(itemIndex, 1);
                 setBackpackDetails(BPdetails); //removing item from backpack local list
                 updateHeroStatLabels(); //gold UI update
                 console.log(`Item sold successfully.`);
-            })
-            .catch((error) => {
-                console.error("Error selling item:", error);
-            });
+          })
+          .catch((error) => {
+              console.error("Error selling item:", error);
+          });
+        }
     } else {
         console.log("Item not found in the hero's backpack.");
     }

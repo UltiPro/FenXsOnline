@@ -101,7 +101,7 @@ class DialogMessage {
         this.fetchShopItems(npcId);
 
         this.tradeMenu.innerHTML = `
-            <span id="${npcId}" class="text-center"><h5 class="mt-2">${this.faceHero}</h5><h6>Selling rate: ${this.percent}</h6></span>
+            <span id="seller${this.npcId}" class="text-center"><h5 class="mt-2">${this.faceHero}</h5><h6>Selling rate: ${this.percent}</h6></span>
             <button id="tradeBox-close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
             <path d="M.697 1.303a.75.75 0 0 1 1.06 0L8 6.94l6.243-6.637a.75.75 0 1 1 1.06 1.06L9.06 8l6.243 6.637a.75.75 0 1 1-1.06 1.06L8 9.06l-6.243 6.637a.75.75 0 1 1-1.06-1.06L6.94 8 .697 1.303z"/>
         </svg></button>

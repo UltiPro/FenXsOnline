@@ -47,10 +47,10 @@ async function updateHeroStatLabels(){
 
 //Updating stat labels
 function updateHeroStats(heroData) {
-    $("#dmg\\.value").text(heroData.atack);
+    $("#dmg\\.value").text(heroData.attack);
     $("#def\\.value").text(heroData.armor);
     $("#health\\.value").text(heroData.healthPoints + "/" + heroData.maxHealthPoints);
-    $("#m-dmg\\.value").text(heroData.magicAtack);
+    $("#m-dmg\\.value").text(heroData.magicAttack);
     $("#m-def\\.value").text(heroData.magicArmor);
     $("#mana\\.value").text(heroData.mana + "/" + heroData.maxMana);
     $("#agility\\.value").text(heroData.agility);
@@ -84,10 +84,10 @@ function getItemDetails(item) {
 }
 
 // ForEach item get it's data
-function updateHeroBackpack(bp) {
+async function updateHeroBackpack(bp) {
     const promises = bp
         .filter(item => item && item.itemType !== null && item.itemId !== null)
-        .map(getItemDetails);
+        .map(await getItemDetails);
 }
 
 //Loading Hero Equipment
