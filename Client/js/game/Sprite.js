@@ -65,8 +65,12 @@ class Sprite{
 
 
 	draw(ctx, cameraPerson, isBehindObject){
+		let height_cut = 15
+		if(this.gameObject.isItem){
+			height_cut = 0;
+		}
 		const x = this.gameObject.x - 0 + utils.withGrid(14) - cameraPerson.x; // x and y -> current object position
-		const y = this.gameObject.y - 15 + utils.withGrid(10) - cameraPerson.y; // x/y - smth -> smth is the pixel correction for placement 
+		const y = this.gameObject.y - height_cut + utils.withGrid(10) - cameraPerson.y; // x/y - smth -> smth is the pixel correction for placement 
 		// + utils - cameraPerson -> taking gridbased movement and subtracting cameraObject placement
 		//7-> 14 grid tiles / 2 ; 5 -> 10 tiles / 2
 		//when canvas dimentions are changed those values have to be changed too based on this math
@@ -78,6 +82,7 @@ class Sprite{
 			ctx.globalAlpha = 0.3;
 			// ctx.fillStyle = 'black';
 			// ctx.fillRect(x, y + 32, 32, 32); 
+			
 		}
 		
 		this.isLoaded && ctx.drawImage(this.image,
