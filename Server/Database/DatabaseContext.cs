@@ -54,6 +54,7 @@ public class DatabaseContext : IdentityDbContext<DBUser>
     public DbSet<DBQuest> Quests { get; set; }
     public DbSet<DBQuestStage> QuestStages { get; set; }
     public DbSet<DBQuestReward> QuestRewards {  get; set; }
+    public DbSet<DBHeroQuest> HeroQuests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
