@@ -19,6 +19,7 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 		this.pricePercent = this.pricePercent || 1;
 		this.isHealerNPC = false;
 		this.isTraderNPC = false;
+		this.isDead = config.isDead || false;
 	}
 	
 	update(state){
@@ -37,7 +38,7 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 					direction: state.arrow
 				})
 			}
-			this.updateSprite(state);	
+			this.updateSprite(state);
 			this.handleOpacityChange(state);
 		}
 	}

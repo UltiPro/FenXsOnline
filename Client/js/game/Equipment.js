@@ -159,30 +159,48 @@ $("#drop").on("dragover", function (event) {
     event.preventDefault();
 });
 
-//dropping item from backpack
 $("#drop").on("drop", function (event) {
     event.preventDefault();
     const draggedItem = $(".item-image.dragging");
     const dropTarget = $(this);
     const ancestor = draggedItem.closest(".bp-slot");
     const dropId = draggedItem.parent().attr("id");
-    const cleanDropId = dropId.replace("s", "")
+    const cleanDropId = dropId.replace("s", "");
     if (dropTarget.attr("id") === "drop" && ancestor.length > 0) {
-        app.put(apiBaseUrl + `Map/drop?itemId=${cleanDropId}`).then((_) => {
-            draggedItem.remove(); //remove item-image
-            //get list, remove item from local list
-            let BPdetails = getBackpackDetails();
-            const index = BPdetails.findIndex((item) => item.slotInfo === cleanDropId);
-            BPdetails.splice(index, 1)[0]; 
-            setBackpackDetails(BPdetails)
-            const overworldInstance = window.overworldInstance;
-            const droppedItem = BPdetails[index];
-            if (overworldInstance) {
-                overworldInstance.map.drop(droppedItem);
-            }
-        }).catch("API PUT, cannot drop item")
+        app.put(apiBaseUrl + `Map/drop?itemId=${cleanDropId}`)
+            .then((_) => {
+                draggedItem.remove(); // Remove item-image
+                // Fetch updated backpack details after the successful drop
+                getUpdatedBackpackDetails(cleanDropId); // Pass cleanDropId to function
+            })
+            .catch((error) => {
+                console.error("API PUT error:", error);
+            });
     }
 });
+
+// Function to get updated backpack details after drop
+function getUpdatedBackpackDetails(cleanDropId) {
+    let BPdetails = getBackpackDetails();
+    console.log(BPdetails);
+
+    const droppedItemIndex = BPdetails.findIndex((item) => item.slotInfo === cleanDropId);
+    if (droppedItemIndex !== -1) {
+        const droppedItem = BPdetails.splice(droppedItemIndex, 1)[0];
+
+        const overworldInstance = window.overworldInstance;
+        if (overworldInstance && droppedItem) {
+            overworldInstance.map.drop(droppedItem);
+        }
+
+        // Update the local backpack details after removing the dropped item
+        setBackpackDetails(BPdetails);
+    } else {
+        console.error("Dropped item not found in backpack details.");
+    }
+}
+
+
 
 async function showGrabbedItem(item) {
     try {
@@ -199,7 +217,8 @@ async function showGrabbedItem(item) {
             const itemLocal = {
                 itemDetails: response.data,
                 slotInfo: slot,
-            }; 
+            };
+
             BPdetails.push(itemLocal);
             setBackpackDetails(BPdetails)
 
@@ -257,20 +276,28 @@ function buyItem(cleanFromId) {
 
 
 function sellItem(cleanFromId) {
+    $("#infoDiv").remove();
     let BPdetails = getBackpackDetails();
     const itemIndex = BPdetails.findIndex((item) => item.slotInfo === cleanFromId); //finding item ID
     if (itemIndex !== -1) {
         const itemToSell = BPdetails[itemIndex]; //selecting item from backpack
-        app.put(apiBaseUrl + `Npc/sell?npcId=1&itemId=${itemToSell.slotInfo}`)
+
+        const shop = document.querySelector(`[id^="seller"]`); 
+        if (shop) {
+          // Extracting shop ID
+            const spanId = shop.id;
+            let npcId = spanId.replace('seller', '');
+            app.put(apiBaseUrl + `Npc/sell?npcId=${npcId}&itemId=${itemToSell.slotInfo}`)
             .then((_) => {
                 BPdetails.splice(itemIndex, 1);
                 setBackpackDetails(BPdetails); //removing item from backpack local list
                 updateHeroStatLabels(); //gold UI update
                 console.log(`Item sold successfully.`);
-            })
-            .catch((error) => {
-                console.error("Error selling item:", error);
-            });
+          })
+          .catch((error) => {
+              console.error("Error selling item:", error);
+          });
+        }
     } else {
         console.log("Item not found in the hero's backpack.");
     }
