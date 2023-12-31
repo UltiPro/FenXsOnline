@@ -15,8 +15,8 @@ class Overworld {
         this.refreshedMap = null;
 
         //Map refresh
-        this.lastRefreshTime = Date.now(); 
-        this.refreshInterval = 1000; 
+        this.lastRefreshTime = Date.now();
+        this.refreshInterval = 1000;
         this.isRefreshed = false;
     }
 
@@ -96,16 +96,16 @@ class Overworld {
     //fire api call and assign to variable so it can be passed and proccessed
     async refreshMap() {
         const updatedMapData = await this.fetchRefreshedMap(); //fetching data
-        this.refreshedMap = updatedMapData; 
+        this.refreshedMap = updatedMapData;
         //console.log(this.refreshedMap);
     }
 
     //api call
-    fetchRefreshedMap(){
-        return app.get(apiBaseUrl + "Map/refresh").then(response => {
+    fetchRefreshedMap() {
+        return app.get(apiBaseUrl + "Map/refresh").then((response) => {
             const data = response.data;
             return data;
-        })
+        });
     }
 
     //Run timer for map refresh
@@ -126,7 +126,6 @@ class Overworld {
             console.log("Refreshed");
         }
     }
-
 
     //fetching hero data
     getHeroData() {
@@ -241,8 +240,29 @@ class Overworld {
     }
 
     //creating monsters objects
-    placeMonsters(){
+    placeMonsters() {
         let counter = 1;
+        this.mapData.mobs.forEach((mob) => {
+            let name = "mob" + counter;
+            let objName = name;
+            let placeMob = new Monster({
+                x: utils.withGrid(mob.x),
+                y: utils.withGrid(mob.y),
+                mobId: mob.mobId,
+                src: `./assets/mobs/rabbit.gif`,
+                talking: [
+                    {
+                        events: [
+                            {
+                                type: "fight",
+                            },
+                        ],
+                    },
+                ],
+            });
+            this.map.gameObjects[objName] = placeMob;
+            counter++;
+        });
     }
 
     //Action key listner
@@ -271,6 +291,7 @@ class Overworld {
         this.mapData = await this.getMapData(); //fetching heroes, npc, items
         this.placeNPC();
         this.placeItems();
+        this.placeMonsters();
         this.map.overworld = this;
         this.map.mountObjects(); //mounting objects collisions
     }
