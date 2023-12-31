@@ -119,13 +119,13 @@ public class NpcMenager : INpcMenager
         return hero;
     }
 
-    private async Task<DBNpc> GetNpc(DBHero hero, int npcId)
+    public async Task<DBNpc> GetNpc(DBHero hero, int npcId)
     {
-        var npc = await _context.Npcs.FirstOrDefaultAsync(npc => npc.MapId == hero.MapId && npc.Id == npcId);
+        var npc = await _context.Npcs.FirstOrDefaultAsync(npc => npc.Id == npcId);
 
         if (npc is null) throw new NotFoundException("NPC", npcId);
 
-        if (Math.Sqrt(Math.Pow(npc.X - hero.X, 2) + Math.Pow(npc.Y - hero.Y, 2)) > 2)
+        if (npc.MapId != hero.MapId || Math.Sqrt(Math.Pow(npc.X - hero.X, 2) + Math.Pow(npc.Y - hero.Y, 2)) > 2)
             throw new HeroIsTooFarAwayException();
 
         return npc;
