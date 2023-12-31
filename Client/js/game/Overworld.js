@@ -18,6 +18,8 @@ class Overworld {
         this.lastRefreshTime = Date.now();
         this.refreshInterval = 1000;
         this.isRefreshed = false;
+
+        this.monstersCache = null;
     }
 
     //GamLoop function
@@ -245,11 +247,12 @@ class Overworld {
         this.mapData.mobs.forEach((mob) => {
             let name = "mob" + counter;
             let objName = name;
+            const monsterDetails = this.monstersCache[mob.mobId];
             let placeMob = new Monster({
                 x: utils.withGrid(mob.x),
                 y: utils.withGrid(mob.y),
                 mobId: mob.mobId,
-                src: `./assets/mobs/rabbit.gif`,
+                src: `./assets/mobs/${monsterDetails.spriteUrl}`,
                 talking: [
                     {
                         events: [
@@ -263,6 +266,36 @@ class Overworld {
             this.map.gameObjects[objName] = placeMob;
             counter++;
         });
+    }
+
+    async cacheMonsterDetails() {
+        if (!this.monstersCache) {
+            this.monstersCache = {};
+        }
+    
+        for (const mob of this.mapData.mobs) {
+            const mobId = mob.mobId;
+
+            if (!this.monstersCache[mobId]) {
+                try {
+                    const monsterDetails = await this.getMonsterDetails(mobId);
+                    this.monstersCache[mobId] = monsterDetails;
+                } catch (error) {
+                    console.error('Error fetching monster details:', error);
+                }
+            }
+        }
+    }
+    
+    async getMonsterDetails(mobId) {
+        try {
+            const response = await app.get(apiBaseUrl + `Mob?id=${mobId}`);
+            const monsterDetails = response.data;
+            return monsterDetails;
+        } catch (error) {
+            console.error('Error fetching monster details:', error);
+            return null;
+        }
     }
 
     //Action key listner
@@ -289,8 +322,10 @@ class Overworld {
         this.map = new OverworldMap(mapConfig); //loading current map
         this.placeHero();
         this.mapData = await this.getMapData(); //fetching heroes, npc, items
+        console.log(this.mapData);
         this.placeNPC();
         this.placeItems();
+        await this.cacheMonsterDetails(); // Fetch and cache monsters
         this.placeMonsters();
         this.map.overworld = this;
         this.map.mountObjects(); //mounting objects collisions

@@ -2,6 +2,7 @@ class Monster extends GameObject{
     constructor(config){
         super(config)
         this.isMonster = true;
+        this.mobId = config.mobId;
         this.isDead = config.isDead || false;
 
     }
