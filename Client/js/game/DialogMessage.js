@@ -29,7 +29,7 @@ class DialogMessage {
             ${this.text
                 .map(
                     (textObj, index) => `
-                <button class="TextMessage-button" id="${textObj.flag}"">${textObj.text}</button><br />
+                <button class="TextMessage-button" id="${textObj.flag}">${textObj.text}</button><br />
             `
                 )
                 .join("")}
@@ -179,7 +179,7 @@ class DialogMessage {
     async fetchShopItems(npcId) {
         try {
             const fetchItemPromises = this.shopItems.map(async (item) => {
-                const response = await app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`);
+                const response = await app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`)
                 const typePath = await this.itemTypeParser(item.itemType);
     
                 const draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${typePath}${response.data.spriteURL}');"> </div>`);

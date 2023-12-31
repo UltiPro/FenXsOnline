@@ -12,9 +12,9 @@ class Overworld {
         this.map = null;
         this.heroData = null; //hero data fetched from database
         this.mapData = null;
-        this.refreashedMap = null;
+        this.refreshedMap = null;
 
-        //Map refreash
+        //Map refresh
         this.lastRefreshTime = Date.now(); 
         this.refreshInterval = 1000; 
         this.isRefreshed = false;
@@ -93,31 +93,30 @@ class Overworld {
         requestAnimationFrame(stepFn);
     }
 
-
-    //fire api call and proccess data
+    //fire api call and assign to variable so it can be passed and proccessed
     async refreshMap() {
-        const updatedMapData = await this.fetchRefreashedMap(); // Assuming this method fetches updated map data
-        this.refreashedMap = updatedMapData;
-        //console.log(this.refreashedMap);
+        const updatedMapData = await this.fetchRefreshedMap(); //fetching data
+        this.refreshedMap = updatedMapData; 
+        //console.log(this.refreshedMap);
     }
 
     //api call
-    fetchRefreashedMap(){
+    fetchRefreshedMap(){
         return app.get(apiBaseUrl + "Map/refresh").then(response => {
             const data = response.data;
             return data;
         })
     }
 
-    //Run timer for map refreash
-    initRefreash() {
+    //Run timer for map refresh
+    initRefresh() {
         setInterval(() => {
-            this.checkForRefreash();
+            this.checkForRefresh();
         }, this.refreshInterval);
     }
 
     //check if time elapsed
-    async checkForRefreash() {
+    async checkForRefresh() {
         const currentTime = Date.now();
         const elapsedTimeSinceLastRefresh = currentTime - this.lastRefreshTime;
 
@@ -243,7 +242,7 @@ class Overworld {
 
     //creating monsters objects
     placeMonsters(){
-
+        let counter = 1;
     }
 
     //Action key listner
@@ -293,10 +292,6 @@ class Overworld {
         this.startMap(mapConfig);
     }
 
-    dropItem(item) {
-        this.map.drop(item);
-    }
-
     // Add a method to add and mount a gameObject
     addAndMountGameObject(gameObject) {
         this.map.addGameObject(gameObject);
@@ -320,7 +315,7 @@ class Overworld {
         this.directionInput.init(); //running movement function
 
         this.startGameLoop();
-        this.initRefreash();
+        this.initRefresh(); //starting timer for refreshMap
 
         this.map.startCutscene([
             //{type: "textMessage", text: "Samouczek dla gracza"}
