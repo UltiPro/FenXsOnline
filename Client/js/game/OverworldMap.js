@@ -234,7 +234,13 @@ class OverworldMap {
     displayTalkButton(match, approachDirection) {
         if (match && match.talking && match.talking.length > 0) {
             const talkButton = document.createElement("button");
-            talkButton.innerHTML = "Talk";
+            //if() /*here i wanna check */
+            const eventType = match.talking[0]?.events[0]?.type;
+            if (eventType === "fight") {
+                talkButton.innerHTML = "Fight";
+            } else {
+                talkButton.innerHTML = "Talk";
+            }
             talkButton.classList.add("talk-button");
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
@@ -3737,10 +3743,14 @@ window.OverworldMaps = {
             [utils.asGridCoord(13, 67)]: true,
             [utils.asGridCoord(13, 68)]: true,
             [utils.asGridCoord(13, 69)]: true,
+            [utils.asGridCoord(13, 89)]: true,
+            [utils.asGridCoord(13, 90)]: true,
             [utils.asGridCoord(14, 66)]: true,
             [utils.asGridCoord(14, 67)]: true,
             [utils.asGridCoord(14, 68)]: true,
             [utils.asGridCoord(14, 69)]: true,
+            [utils.asGridCoord(14, 89)]: true,
+            [utils.asGridCoord(14, 90)]: true,
             [utils.asGridCoord(15, 66)]: true,
             [utils.asGridCoord(15, 67)]: true,
             [utils.asGridCoord(15, 68)]: true,
