@@ -1,6 +1,7 @@
 class Monster extends GameObject{
     constructor(config){
         super(config)
+        this.isMonster = true;
         this.isDead = config.isDead || false;
 
     }
@@ -16,10 +17,6 @@ class Monster extends GameObject{
 
     updateSprite() {
         this.sprite.setAnimation("idle-" + this.direction);
-    }
-
-    mount() {
-        this.isMounted = true;
     }
 
     //chaging sprite opacity when hero is behind an object

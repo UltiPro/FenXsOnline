@@ -62,11 +62,12 @@ class Sprite{
 		}
 	}
 
-
-
 	draw(ctx, cameraPerson, isBehindObject){
+		const spriteWidth = this.image.width;
+		const spriteHeight = this.image.height;
+
 		let height_cut = 15
-		if(this.gameObject.isItem){
+		if(this.gameObject.isItem || this.gameObject.isMonster){
 			height_cut = 0;
 		}
 		const x = this.gameObject.x - 0 + utils.withGrid(14) - cameraPerson.x; // x and y -> current object position
@@ -75,8 +76,11 @@ class Sprite{
 		//7-> 14 grid tiles / 2 ; 5 -> 10 tiles / 2
 		//when canvas dimentions are changed those values have to be changed too based on this math
 		
-		const[frameX, frameY] = this.frame; //getting appropriate frame to cute from spritesheet
-		
+		// Centering the sprite for monsters within a 32x32 square
+		const drawX = x + (32 - spriteWidth) / 2;
+		const drawY = y + (32 - spriteHeight) / 2;
+
+		const[frameX, frameY] = this.frame; //getting appropriate frame to cut from spritesheet
 		//chaging hero opacity behind object
 		if (isBehindObject) {
 			ctx.globalAlpha = 0.3;
@@ -85,12 +89,17 @@ class Sprite{
 			
 		}
 		
-		this.isLoaded && ctx.drawImage(this.image,
-		frameX * 32, frameY * 48,
-		32,48,
-		x,y,
-		32,48
-		)
+		if(this.gameObject.isMonster){
+			this.isLoaded && ctx.drawImage(this.image, drawX, drawY); //draw monster full size sprite in the center
+		}
+		else{ //draw other objects
+			this.isLoaded && ctx.drawImage(this.image,
+			frameX * 32, frameY * 48,
+			32,48,
+			x,y,
+			32,48
+			)
+		}
 		ctx.globalAlpha = 1;
 		this.updateAnimationProgress();
 	}
