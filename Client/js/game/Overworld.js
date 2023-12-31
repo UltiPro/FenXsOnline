@@ -12,6 +12,12 @@ class Overworld {
         this.map = null;
         this.heroData = null; //hero data fetched from database
         this.mapData = null;
+        this.refreashedMap = null;
+
+        //Map refreash
+        this.lastRefreshTime = Date.now(); 
+        this.refreshInterval = 1000; 
+        this.isRefreshed = false;
     }
 
     //GamLoop function
@@ -87,6 +93,42 @@ class Overworld {
         requestAnimationFrame(stepFn);
     }
 
+
+    //fire api call and proccess data
+    async refreshMap() {
+        const updatedMapData = await this.fetchRefreashedMap(); // Assuming this method fetches updated map data
+        this.refreashedMap = updatedMapData;
+        //console.log(this.refreashedMap);
+    }
+
+    //api call
+    fetchRefreashedMap(){
+        return app.get(apiBaseUrl + "Map/refresh").then(response => {
+            const data = response.data;
+            return data;
+        })
+    }
+
+    //Run timer for map refreash
+    initRefreash() {
+        setInterval(() => {
+            this.checkForRefreash();
+        }, this.refreshInterval);
+    }
+
+    //check if time elapsed
+    async checkForRefreash() {
+        const currentTime = Date.now();
+        const elapsedTimeSinceLastRefresh = currentTime - this.lastRefreshTime;
+
+        if (elapsedTimeSinceLastRefresh >= this.refreshInterval) {
+            await this.refreshMap();
+            this.lastRefreshTime = currentTime; // Update the last refresh time
+            console.log("Refreshed");
+        }
+    }
+
+
     //fetching hero data
     getHeroData() {
         return app
@@ -118,6 +160,7 @@ class Overworld {
         this.heroData.y = eventY;
     }
 
+    //creating player object
     placeHero() {
         let hero = "hero";
         let placeHero = new Person({
@@ -131,6 +174,7 @@ class Overworld {
         this.map.gameObjects[hero] = placeHero;
     }
 
+    //creating npc objects
     placeNPC() {
         this.mapData.npCs.forEach((npcData) => {
             let name = npcData.name;
@@ -176,6 +220,7 @@ class Overworld {
         });
     }
 
+    //creating item objects
     placeItems() {
         //console.log(this.mapData.items);
         let counter = 1;
@@ -194,6 +239,11 @@ class Overworld {
             this.map.gameObjects[itemId] = placeItem;
             counter++;
         });
+    }
+
+    //creating monsters objects
+    placeMonsters(){
+
     }
 
     //Action key listner
@@ -243,6 +293,16 @@ class Overworld {
         this.startMap(mapConfig);
     }
 
+    dropItem(item) {
+        this.map.drop(item);
+    }
+
+    // Add a method to add and mount a gameObject
+    addAndMountGameObject(gameObject) {
+        this.map.addGameObject(gameObject);
+        gameObject.mount(this.map);
+    }
+
     //initializing game
     //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
@@ -260,6 +320,7 @@ class Overworld {
         this.directionInput.init(); //running movement function
 
         this.startGameLoop();
+        this.initRefreash();
 
         this.map.startCutscene([
             //{type: "textMessage", text: "Samouczek dla gracza"}
