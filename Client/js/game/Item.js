@@ -8,12 +8,7 @@ class Item extends GameObject {
     }
 
     update(state) {
-        this.updateSprite(state);
         this.handleOpacityChange(state);
-    }
-
-    updateSprite() {
-        this.sprite.setAnimation("idle-" + this.direction);
     }
 
     mount() {
