@@ -232,9 +232,11 @@ class OverworldMap {
 
     // Function to display the talk button
     displayTalkButton(match, approachDirection) {
+        const canvas = document.getElementById('game-canvas');
+        const canvasRect = canvas.getBoundingClientRect();
+        
         if (match && match.talking && match.talking.length > 0) {
             const talkButton = document.createElement("button");
-            //if() /*here i wanna check */
             const eventType = match.talking[0]?.events[0]?.type;
             if (eventType === "fight") {
                 talkButton.innerHTML = "Fight";
@@ -242,21 +244,20 @@ class OverworldMap {
                 talkButton.innerHTML = "Talk";
             }
             talkButton.classList.add("talk-button");
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            talkButton.style.left = `${windowWidth / 2 - 70}px`;
-            talkButton.style.top = `${windowHeight / 2}px`;
-
+            talkButton.style.left = `${canvasRect.left + canvasRect.width / 2 - 35}px`;
+            talkButton.style.top = `${canvasRect.top + canvasRect.height / 2 - 40}px`;
+    
             talkButton.onclick = () => {
                 this.startCutscene(match.talking[0].events);
                 this.removeTalkButton(); // Remove button after click
                 this.displayedNPC = null;
             };
-
+    
             document.body.appendChild(talkButton);
             this.talkButtonRef = talkButton; // Store a reference to the talk button
         }
     }
+    
 
     // Function to remove the talk button
     removeTalkButton() {
