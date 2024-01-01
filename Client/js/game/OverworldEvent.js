@@ -46,7 +46,7 @@ class OverworldEvent {
             if (e.detail.whoId === this.event.who) {
                 document.removeEventListener("PersonWalkingComplete", completeHandler);
                 resolve();
-            }
+            }   
         };
         document.addEventListener("PersonWalkingComplete", completeHandler);
     }
@@ -71,7 +71,7 @@ class OverworldEvent {
             const obj = this.map.gameObjects[this.event.faceHero];
             obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
         }
-        const heal = new DialogMessage({
+        const dialog = new DialogMessage({
             text: this.event.text,
             faceHero: this.event.faceHero,
             npcId: this.event.npcId,
@@ -79,7 +79,31 @@ class OverworldEvent {
             shopItems: this.event.shopItems,
             onComplete: () => resolve(),
         });
-        heal.init(document.querySelector(".game-container"));
+        dialog.init(document.querySelector(".game-container"));
+    }
+
+    fight(resolve){
+        const obj = this.map.gameObjects[this.event.who]; //contains gameObject id, which monster should be removed
+        const battle = new Battle({
+            x: this.event.x,
+            y: this.event.y,
+            mobName: this.event.mobName,
+            who: obj,
+            onComplete: (isHeroDead) => {
+                if (isHeroDead === null) {
+                     //Player won the battle
+                    console.log("You won!", isHeroDead)
+                    resolve();
+                } else {
+                    // Player lost the battle
+                    //this.handleHeroLoss();
+                    console.log("You lost...", isHeroDead)
+                    resolve();
+                }
+            },
+        });
+        battle.init(document.querySelector(".game-container"))
+
     }
 
     changeMap(resolve) {
@@ -99,4 +123,9 @@ class OverworldEvent {
             this[this.event.type](resolve);
         });
     }
+
+    async handleHeroLoss() {
+        console.log("You died...")
+    }
+
 }

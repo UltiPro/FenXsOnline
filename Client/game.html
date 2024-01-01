@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/TextMessage.css" />
     <link rel="stylesheet" href="./css/trade.css" />
     <link rel="stylesheet" href="./css/chat.css" />
+    <link rel="stylesheet" href="./css/battle.css" />
 </head>
 
 <body onload="javascript:GameInit()">
@@ -155,9 +156,8 @@
 <script src="./js/main.js" defer></script>
 <script src="./js/game/chat.js" defer></script>
 <!-- SCRIPTS -->
-<!-- API CALLS-->
+<!-- EQUIPMENT-->
 <script type="text/javascript" src="./js/game/apiCalls/getPlayerStats.js" defer></script>
-<script type="text/javascript" src="./js/game/DialogMessage.js" defer></script>
 <script src="./js/game/Equipment.js" defer></script>
 <!-- GAME -->
 <!-- order of these have meaning -->
@@ -168,7 +168,9 @@
 <script type="text/javascript" src="./js/game/Person.js"></script>
 <script type="text/javascript" src="./js/game/Item.js"></script>
 <script type="text/javascript" src="./js/game/Monster.js"></script>
-<!-- should be loaded after gameObject.js, Person extends GameObject-->
+<!-- should be loaded after gameObject.js, Person, Item, Monster extend GameObject-->
+<script type="text/javascript" src="./js/game/DialogMessage.js" defer></script>
+<script type="text/javascript" src="./js/game/Battle.js" defer></script>
 <script type="text/javascript" src="./js/game/Sprite.js"></script>
 <script type="text/javascript" src="./js/game/OverworldMap.js"></script>
 <script type="text/javascript" src="./js/game/OverworldEvent.js"></script>

@@ -1,6 +1,6 @@
  .tradeBox {
     border-radius: 5px;
-    border: solid goldenrod 2px;
+    border: solid black 2px;
     color: goldenrod;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     position: absolute;

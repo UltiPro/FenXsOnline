@@ -1,0 +1,63 @@
+.battle {
+    border-radius: 5px;
+    border: solid black 2px;
+    color: goldenrod;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 31%;
+    height: 75%;
+    transform: translate(-50%, -50%);
+    background-image: url("./../assets/ui/greyBackground.png");
+    font-size: 12px;
+    padding: 10px;
+    overflow: hidden; /* Hide overflow content */
+}
+
+#logList {
+    list-style: none;
+    padding: 0;
+    overflow-y: auto;
+    max-height: calc(100% - 70px);
+    padding-right: 15px; /* movign scrollbar to the right */
+    margin-right: -5px; /* keeping it inside the box*/
+    scrollbar-width: thin; 
+    scrollbar-color: goldenrod #303030; 
+    overflow-y: scroll;
+}
+
+#logList li {
+    margin-bottom: 8px;
+    font-size: 12px;  
+}
+
+#logList::-webkit-scrollbar {
+width: 8px; 
+border-radius: 10px; 
+}
+
+#logList::-webkit-scrollbar-track {
+background: #303030; 
+border-radius: 10px; 
+}
+
+#logList::-webkit-scrollbar-thumb {
+background-color: goldenrod; 
+border-radius: 10px; 
+}
+
+#battle-close {
+    border-radius: 5px;
+    color: inherit;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 30px;
+    height: 30px;
+    background-color: #303030;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

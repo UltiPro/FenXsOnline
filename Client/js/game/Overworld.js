@@ -20,6 +20,7 @@ class Overworld {
         this.isRefreshed = false;
 
         this.monstersCache = null;
+        this.itemsCache = null;
     }
 
     //GamLoop function
@@ -258,6 +259,10 @@ class Overworld {
                         events: [
                             {
                                 type: "fight",
+                                x: mob.x,
+                                y: mob.y,
+                                mobName: monsterDetails.name,
+                                who: objName,
                             },
                         ],
                     },
@@ -358,11 +363,9 @@ class Overworld {
     //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
         this.heroData = await this.getHeroData();
-
         console.log(this.heroData);
 
         this.LoadMap();
-        //this.startMap(window.OverworldMaps.Cave);
 
         this.bindActionInput(); //check for events by pressing button
         this.bindHeroPositionCheck(); //check for events by standing in specific area
