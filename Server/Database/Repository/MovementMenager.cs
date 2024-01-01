@@ -10,7 +10,7 @@ namespace Database.Repository;
 public class MovementMenager : IMovementMenager
 {
     private readonly DatabaseContext _context;
-    private readonly World _world = World.GetInstance();;
+    private readonly World _world = World.GetInstance();
 
     public MovementMenager(DatabaseContext _context)
     {
