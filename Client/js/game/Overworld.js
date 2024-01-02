@@ -228,6 +228,8 @@ class Overworld {
         this.mapData.items.forEach((item) => {
             let name = "item" + counter;
             let itemId = name;
+            const itemDetails = this.itemsCache[`${item.itemType}_${item.itemId}`];
+            const path = itemTypeParser(itemDetails.itemType)
             let placeItem = new Item({
                 isPlayerControlled: false,
                 x: utils.withGrid(item.x),
@@ -235,7 +237,7 @@ class Overworld {
                 itemId: item.itemId,
                 itemType: item.itemType,
                 //change sprite
-                src: `./assets/ui/eq/gold.png`,
+                src: `${path}${itemDetails.spriteURL}`,
             });
             this.map.gameObjects[itemId] = placeItem;
             counter++;
@@ -278,18 +280,24 @@ class Overworld {
             this.monstersCache = {};
         }
     
-        for (const mob of this.mapData.mobs) {
+        const monsterPromises = this.mapData.mobs.map(mob => {
             const mobId = mob.mobId;
-
+    
             if (!this.monstersCache[mobId]) {
-                try {
-                    const monsterDetails = await this.getMonsterDetails(mobId);
-                    this.monstersCache[mobId] = monsterDetails;
-                } catch (error) {
-                    console.error('Error fetching monster details:', error);
-                }
+                return this.getMonsterDetails(mobId)
+                    .then(monsterDetails => {
+                        this.monstersCache[mobId] = monsterDetails;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching monster details:', error);
+                    });
+            } else {
+                return Promise.resolve(); // Resolve with an empty promise for already cached monsters
             }
-        }
+        });
+    
+        // Wait for all promises to resolve before continuing
+        await Promise.all(monsterPromises);
     }
     
     async getMonsterDetails(mobId) {
@@ -302,6 +310,49 @@ class Overworld {
             return null;
         }
     }
+    
+
+    async cacheItemsDetails() {
+        if (!this.itemsCache) {
+            this.itemsCache = {};
+        }
+    
+        const itemPromises = this.mapData.items.map(item => {
+            const compositeKey = `${item.itemType}_${item.itemId}`;
+    
+            if (!this.itemsCache[compositeKey]) {
+                return this.getItemDetails(item.itemType, item.itemId)
+                    .then(itemDetails => {
+                        this.itemsCache[compositeKey] = itemDetails;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching item details:', error);
+                    });
+            } else {
+                return Promise.resolve(); // Resolve with an empty promise for already cached items
+            }
+        });
+    
+        // Wait for all promises to resolve before continuing
+        await Promise.all(itemPromises);
+    }
+    
+    
+    getItemDetails(itemType, itemId) {
+        return new Promise((resolve, reject) => {
+            app.get(apiBaseUrl + `Item?itemType=${itemType}&id=${itemId}`)
+                .then(response => {
+                    const details = response.data;
+                    resolve(details); // Resolve the promise with the fetched details
+                })
+                .catch(error => {
+                    console.error('Error fetching item details:', error);
+                    reject(error); // Reject the promise if there's an error
+                });
+        });
+    }
+    
+    
 
     //Action key listner
     bindActionInput() {
@@ -329,8 +380,10 @@ class Overworld {
         this.mapData = await this.getMapData(); //fetching heroes, npc, items
         console.log(this.mapData);
         this.placeNPC();
-        this.placeItems();
         await this.cacheMonsterDetails(); // Fetch and cache monsters
+        await this.cacheItemsDetails(); // Fetch and cache items
+        console.log(this.itemsCache)
+        this.placeItems()
         this.placeMonsters();
         this.map.overworld = this;
         this.map.mountObjects(); //mounting objects collisions
@@ -362,7 +415,6 @@ class Overworld {
     //initializing game
     //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
-        
         this.heroData = await this.getHeroData();
         console.log(this.heroData);
 
