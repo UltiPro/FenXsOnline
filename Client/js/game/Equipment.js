@@ -201,7 +201,7 @@ function getUpdatedBackpackDetails(cleanDropId) {
 }
 
 
-
+//grabbing item/looting
 async function showGrabbedItem(item) {
     try {
         let BPdetails = getBackpackDetails();

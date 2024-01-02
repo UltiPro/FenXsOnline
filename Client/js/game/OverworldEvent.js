@@ -96,15 +96,16 @@ class OverworldEvent {
                     if (drop === null) {
                         console.log("No loot :(")
                     } else {
-                        console.log("Loot! :3")
+                        console.log("Loot! :3", drop)
+                        showGrabbedItem(drop); //getting loot
                     }
                     resolve();
                 } else {
                     // Player lost the battle
                     //removing hero old collision
-                    const heroX = this.event.x
-                    const heroY = this.event.y
-                    delete this.map.walls[`${heroX}, ${heroY}`]
+                    const heroX = this.map.gameObjects["hero"].x
+                    const heroY = this.map.gameObjects["hero"].y
+                    delete this.map.walls[`${heroX},${heroY}`]
                     //counting respawn time
                     await this.respawnDelay(deathInfo);
                     //teleporting player to the respawn place
@@ -185,5 +186,7 @@ class OverworldEvent {
         console.log('Time delay elapsed!');
     }
     
-    
+    async getLoot(){
+        
+    }
 }
