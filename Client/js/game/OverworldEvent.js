@@ -92,11 +92,10 @@ class OverworldEvent {
             onComplete: async (deathInfo, drop) => {
                 if (deathInfo === null) {
                     //Player won the battle
-                    console.log("You won!", deathInfo)
                     if (drop === null) {
-                        console.log("No loot :(")
+                        // console.log("No loot :(")
                     } else {
-                        console.log("Loot! :3", drop)
+                        // console.log("Loot! :3", drop)
                         showGrabbedItem(drop); //getting loot
                     }
                     resolve();

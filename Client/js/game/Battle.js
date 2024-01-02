@@ -56,12 +56,14 @@ class Battle{
 
     done() {
         this.element.remove();
+        $('#equipment-container').css('pointer-events', 'auto');
         this.onComplete(this.dead, this.drop);
     }
 
     async init(container) {
         await this.fetchBattleLogs();
         await updateHeroStatLabels()
+        $('#equipment-container').css('pointer-events', 'none');
         this.createElement();
         container.appendChild(this.element);
     }
