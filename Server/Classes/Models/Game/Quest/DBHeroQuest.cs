@@ -12,4 +12,5 @@ public class DBHeroQuest
     [ForeignKey("QuestId")]
     public DBQuest DBQuest { get; set; }
     public bool Done { get; set; } = false;
+    public int Stage { get; set; } = 1;
 }
