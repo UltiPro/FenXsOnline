@@ -89,18 +89,33 @@ class OverworldEvent {
             y: this.event.y,
             mobName: this.event.mobName,
             who: obj,
-            onComplete: (isHeroDead) => {
-                if (isHeroDead === null) {
-                     //Player won the battle
-                    console.log("You won!", isHeroDead)
+            onComplete: async (deathInfo, drop) => {
+                if (deathInfo === null) {
+                    //Player won the battle
+                    console.log("You won!", deathInfo)
+                    if (drop === null) {
+                        console.log("No loot :(")
+                    } else {
+                        console.log("Loot! :3")
+                    }
                     resolve();
                 } else {
                     // Player lost the battle
-                    //this.handleHeroLoss();
-                    console.log("You lost...", isHeroDead)
+                    //removing hero old collision
+                    const heroX = this.event.x
+                    const heroY = this.event.y
+                    delete this.map.walls[`${heroX}, ${heroY}`]
+                    //counting respawn time
+                    await this.respawnDelay(deathInfo);
+                    //teleporting player to the respawn place
+                    const keys = Object.keys(window.OverworldMaps); //all map IDs
+                    const respawn = keys[deathInfo.mapId]; //map to be respawned at
+                    this.map.overworld.newMapCoords(window.OverworldMaps[respawn], deathInfo.x, deathInfo.y);
+                    this.map.overworld.startMap(window.OverworldMaps[respawn]);
                     resolve();
                 }
             },
+            
         });
         battle.init(document.querySelector(".game-container"))
 
@@ -110,7 +125,7 @@ class OverworldEvent {
         const sceneTransition = new SceneTransition();
         sceneTransition.init(document.querySelector(".game-container"), () => {
             this.map.overworld.newMapCoords(window.OverworldMaps[this.event.map],this.event.x,this.event.y);
-            console.log(this.event.x, this.event.y)
+            console.log(this.event.map, this.event.x, this.event.y)
             this.map.overworld.startMap(window.OverworldMaps[this.event.map]);
             resolve();
 
@@ -124,8 +139,51 @@ class OverworldEvent {
         });
     }
 
-    async handleHeroLoss() {
-        console.log("You died...")
+    async respawnDelay(deathInfo) {
+        $('#equipment-container').css('pointer-events', 'none'); //disabling Equipment
+        const blackOverlay = $('<div></div>').addClass('black-overlay');
+        $('.game-container').append(blackOverlay);
+        blackOverlay.css('opacity', 1);
+    
+        // Get the stored death time from localStorage
+        const storedDeathTime = localStorage.getItem('deathTime');
+        let deathTime;
+    
+        if (storedDeathTime) {
+            deathTime = parseInt(storedDeathTime, 10);
+        } else {
+            // Set a new death time if not already stored
+            deathTime = new Date(deathInfo.dead).getTime();
+            localStorage.setItem('deathTime', deathTime);
+        }
+    
+        const countdownElement = $('<div></div>').addClass('countdown');
+        blackOverlay.append(countdownElement);
+    
+        const countdownInterval = setInterval(() => {
+            const remainingTime = Math.ceil((deathTime - new Date().getTime()) / 1000);
+            countdownElement.text(`Respawn in ${remainingTime}s`);
+        }, 1000);
+    
+        const currentTime = new Date().getTime();
+        const delay = deathTime - currentTime;
+    
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                clearInterval(countdownInterval);
+                blackOverlay.css('transition', 'opacity 0.5s ease-out').css('opacity', 0);
+    
+                setTimeout(() => {
+                    blackOverlay.remove();
+                    localStorage.removeItem('deathTime'); // Clear the stored death time
+                    $('#equipment-container').css('pointer-events', 'auto'); //enabling equipment
+                    resolve();
+                }, 500);
+            }, delay);
+        });
+    
+        console.log('Time delay elapsed!');
     }
-
+    
+    
 }

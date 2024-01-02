@@ -61,3 +61,24 @@ border-radius: 10px;
     justify-content: center;
     align-items: center;
 }
+
+/* Styling for the black overlay */
+.black-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 9999; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling for the countdown text */
+.countdown {
+    font-size: 24px; 
+    color: goldenrod; 
+    text-align: center; 
+}

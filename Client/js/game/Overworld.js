@@ -362,6 +362,7 @@ class Overworld {
     //initializing game
     //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
+        
         this.heroData = await this.getHeroData();
         console.log(this.heroData);
 

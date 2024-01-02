@@ -7,6 +7,7 @@ class Battle{
         this.onComplete = onComplete;
         this.text = [];
         this.dead = null;
+        this.drop = null;
        
     }
 
@@ -47,6 +48,7 @@ class Battle{
         return app.put(apiBaseUrl + `Fight/mob?x=${this.x}&y=${this.y}`).then((response) =>{
             this.text = response.data.logs;
             this.dead = response.data.dead;
+            this.drop = response.data.drop;
             console.log(response.data)
             return this.text
         }).catch((err) => {console.log("fetchBattleLogs error", err)})
@@ -54,7 +56,7 @@ class Battle{
 
     done() {
         this.element.remove();
-        this.onComplete(this.dead);
+        this.onComplete(this.dead, this.drop);
     }
 
     async init(container) {

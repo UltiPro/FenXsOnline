@@ -439,8 +439,8 @@ function showInfo(element, event) {
         let info = item.itemDetails;
         let infoKeys = [
             {key: info.name, label: ""},
-            {key: info.atack, label: "Physical Damage: "},
-            {key: info.magicAtack, label: "Magical Damage: "},
+            {key: info.attack, label: "Physical Damage: "},
+            {key: info.magicAttack, label: "Magical Damage: "},
             {key: info.criticalChance, label: "Ciritical Hit Chance: "},
             {key: info.armor, label: "Physical Defence: "},
             {key: info.magicArmor, label: "Magical Defence: "},
