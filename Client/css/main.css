@@ -1,3 +1,11 @@
+*{
+    cursor: url("./../assets/ui/cursorSmall.png"), auto;
+}
+
+input {
+    cursor: inherit;
+}
+
 @font-face {
     font-family: font_page;
     src: url("./../font/page.ttf");
@@ -141,4 +149,8 @@ a:hover {
 
 #alert-error {
     text-shadow: -1px 0 lightcoral, 0 1px lightcoral, 1px 0 lightcoral, 0 -1px lightcoral;
+}
+
+button{
+    cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
 }

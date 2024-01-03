@@ -20,7 +20,12 @@
 
 #selector-login,
 #selector-register {
-    cursor: pointer;
+    cursor: url("./../assets/ui/pointerSmall.png"), auto;
+}
+
+#selector-login *,
+#selector-register * {
+    cursor: inherit;
 }
 
 .server-responses {
@@ -35,3 +40,8 @@
 .menu-form {
     height: 270px;
 }
+
+button{
+    cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
+}
+

@@ -19,8 +19,11 @@ $(document).ready(function () {
   if (devicePixelRatio == 1.50) document.body.style.zoom = 0.667;
   if (devicePixelRatio == 1.75) document.body.style.zoom = 0.5715;
   if (devicePixelRatio == 2.00) document.body.style.zoom = 0.5;
+  $('input').attr('autocomplete','off');
   $("input").bind("focus", PlayChangeInputAudio);
   $("select").bind("click", PlayChangeInputAudio);
   $("select").bind("change", PlayChangeInputAudio);
   $(".character-slot").bind("click", PlayChangeInputAudio);
 });
+
+

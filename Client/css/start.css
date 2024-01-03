@@ -34,6 +34,11 @@
     height: 307px;
 }
 
+.character-slot, .profession-image{
+    cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
+}
+
+
 .menu-tab {
     height: 602px;
 }

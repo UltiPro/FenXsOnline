@@ -101,10 +101,12 @@ body{
     height: 70%;
 	background-image: url("");
 	z-index: 5;
-
-	cursor: grab;
+	cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
 }
 
+.item-image.dragging {
+    cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
+}
 
 /*eq slot styles*/
 #dbHelmet .item-image{
