@@ -154,3 +154,27 @@ a:hover {
 button{
     cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
 }
+
+#muteButton {
+    font-family: font_form;
+    font-size: 0.8rem;
+    background-color: rgb(var(--wooden));
+    background-image: url("./../img/background_wood_dark.png");
+    color: black;
+    padding: 0;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    width: 3rem;
+    height: 2rem;
+}
+
+#muteButton:hover {
+    font-family: font_form;
+    background-color: rgb(var(--dark-wooden));
+    background-image: url("./../img/background_wood_dark.png");
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    font-size: 2px;
+}

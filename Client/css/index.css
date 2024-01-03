@@ -40,8 +40,3 @@
 .menu-form {
     height: 270px;
 }
-
-button{
-    cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
-}
-
