@@ -1,4 +1,5 @@
-﻿using Classes.Exceptions;
+﻿using AutoMapper;
+using Classes.Exceptions;
 using Classes.Exceptions.Game;
 using Classes.Models.Game.Hero;
 using Classes.Models.Game.Quest;
@@ -10,11 +11,13 @@ namespace Database.Repository;
 public class QuestMenager : IQuestMenager
 {
     private readonly DatabaseContext _context;
+    private readonly IMapper _mapper;
     private readonly INpcMenager _npcMenager;
 
-    public QuestMenager(DatabaseContext _context, INpcMenager _npcMenager)
+    public QuestMenager(DatabaseContext _context, IMapper _mapper, INpcMenager _npcMenager)
     {
         this._context = _context;
+        this._mapper = _mapper;
         this._npcMenager = _npcMenager;
     }
 
@@ -42,6 +45,30 @@ public class QuestMenager : IQuestMenager
         await _context.SaveChangesAsync();
     }
 
+    public async Task<List<QuestStageResponse>> GetQuestsInfo(string accountId)
+    {
+        var hero = await GetHero(accountId);
+
+        var questsIDs = _context.HeroesQuests.Where(heroQuest => heroQuest.DBHero == hero && !heroQuest.Done).Select(heroQuest => heroQuest.QuestId);
+
+        var quests = _mapper.Map<List<QuestStageResponse>>(_context.Quests.Where(quest => questsIDs.Contains(quest.Id)));
+
+        DBHeroQuest? heroQuest;
+        DBQuestStage? questStage;
+
+        quests.ForEach(quest =>
+        {
+            heroQuest = _context.HeroesQuests.FirstOrDefault(heroQuest => heroQuest.DBHero == hero && heroQuest.QuestId == quest.Id);
+            questStage = _context.QuestStages.FirstOrDefault(questStage => questStage.QuestId == quest.Id && questStage.Stage == heroQuest.Stage);
+            if (questStage != null)
+                quest.Description = questStage.Description;
+            if (questStage.Kill)
+                quest.Description += $" (Killed: {heroQuest.Quantity}/{questStage.Quantity})";
+        });
+
+        return quests;
+    }
+
     public async Task DoQuest(string accountId, int questId)
     {
         var hero = await GetHero(accountId);
@@ -64,7 +91,7 @@ public class QuestMenager : IQuestMenager
             throw new NotImplementedException();
     }
 
-    private async Task Talk(DBHero hero, DBHeroQuest heroQuest ,DBQuestStage questStage)
+    /*private async Task Talk(DBHero hero, DBHeroQuest heroQuest ,DBQuestStage questStage)
     {
         if (questStage.NpcId is null) return;
 
@@ -96,7 +123,7 @@ public class QuestMenager : IQuestMenager
     private async Task GetReward()
     {
 
-    }
+    }*/
 
     private async Task<DBHero> GetHero(string accountId)
     {

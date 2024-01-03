@@ -4,10 +4,7 @@ namespace Database.Contracts;
 
 public interface IQuestMenager
 {
-    /*Task TakeQuest(string accountId, int questId);
+    Task TakeQuest(string accountId, int questId);
+    Task<List<QuestStageResponse>> GetQuestsInfo(string accountId);
     Task DoQuest(string accountId, int questId);
-    Task Talk(string accountId, int questId);
-    Task Bring(string accountId, int questId);
-    Task Kill(string accountId, int questId);
-    Task<List<QuestResponse>> GetQuestsInfo(string accountId);*/
 }
