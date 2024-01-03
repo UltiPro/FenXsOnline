@@ -6,6 +6,8 @@ using Classes.Models.Game.Map;
 using Classes.Enums.Game;
 using Database.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Classes.Models.Game.Npc;
+using Classes.Models.Game.Quest;
 
 namespace Database.Repository;
 
@@ -30,7 +32,19 @@ public class MapMenager : IMapMenager
 
         var mapDataResponse = _mapper.Map<MapDataResponse>(_world.Maps[hero.MapId]);
 
-        mapDataResponse.NPCs = await _context.Npcs.Include(npc => npc.ShopItems).Where(npc => npc.MapId == hero.MapId).ToListAsync();
+        var npcs = _mapper.Map<List<NpcQuestResponse>>(await _context.Npcs.Include(npc => npc.ShopItems).Where(npc => npc.MapId == hero.MapId).ToListAsync());
+
+        var ignoreQuestsIDs = _context.HeroesQuests.Where(heroQuest => heroQuest.DBHero == hero).Select(heroQuest => heroQuest.QuestId);
+
+        npcs.ForEach(npc =>
+        {
+            npc.Quests = _mapper.Map<List<QuestResponse>>(
+                _context.Quests.Where(
+                    quest => quest.NpcId == npc.Id && quest.Level <= hero.Level && !ignoreQuestsIDs.Contains(quest.Id))
+                .ToList());
+        });
+
+        mapDataResponse.NPCs = npcs;
         mapDataResponse.Mobs = await _context.MapMobs.Where(mapMob => mapMob.MapId == hero.MapId && mapMob.Available < DateTime.Now).ToListAsync();
         mapDataResponse.Items = await _context.MapItems.Where(mapItem => mapItem.MapId == hero.MapId && (mapItem.Available < DateTime.Now || mapItem.Available == null)).ToListAsync();
         mapDataResponse.Heroes = _mapper.Map<List<MapHero>>(await _context.Heroes.Where(h => h.InGame && h.MapId == hero.MapId && h != hero).ToListAsync());
