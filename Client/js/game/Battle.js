@@ -26,10 +26,23 @@ class Battle{
         `;
 
         const logList = this.element.querySelector("#logList");
-
-        this.text.forEach((log) => {
+        let lastLogIndex = this.text.length - 1;
+    
+        this.text.forEach((log, index) => {
             const li = document.createElement("li");
-            li.textContent = log;
+            const logText = log.trim();
+            let textColor = index % 2 === 0 ? "goldenrod" : "silver";
+    
+            if (index === lastLogIndex) {
+                if (logText.startsWith(`Winner is ${this.name}`)) {
+                    textColor = "red";
+                } else {
+                    textColor = "green";
+                }
+            }
+    
+            li.textContent = logText;
+            li.style.color = textColor;
             logList.appendChild(li);
         });
         
