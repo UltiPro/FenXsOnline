@@ -14,13 +14,15 @@ public class FightMenager : IFightMenager
     private readonly DatabaseContext _context;
     private readonly IEquipmentMenager _equipmentMenager;
     private readonly IPromotionMenager _promotionMenager;
+    private readonly IQuestMenager _questMenager;
     private readonly Random _random;
 
-    public FightMenager(DatabaseContext _context, IEquipmentMenager _equipmentMenager, IPromotionMenager _promotionMenager)
+    public FightMenager(DatabaseContext _context, IEquipmentMenager _equipmentMenager, IPromotionMenager _promotionMenager, IQuestMenager _questMenager)
     {
         this._context = _context;
         this._equipmentMenager = _equipmentMenager;
         this._promotionMenager = _promotionMenager;
+        this._questMenager = _questMenager;
         _random = new Random();
     }
 
@@ -125,7 +127,11 @@ public class FightMenager : IFightMenager
 
         var playerWin = hero.HealthPoints > 0;
 
-        if (playerWin) mobProvider.Available = DateTime.Now.AddMinutes((mob.Level / 10) + 3);
+        if (playerWin)
+        {
+            mobProvider.Available = DateTime.Now.AddMinutes((mob.Level / 10) + 3);
+            await _questMenager.Kill(hero, mob.Id);
+        }
 
         await _context.SaveChangesAsync();
 

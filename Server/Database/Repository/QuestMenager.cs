@@ -5,6 +5,7 @@ using Classes.Models.Game.Hero;
 using Classes.Models.Game.Quest;
 using Database.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace Database.Repository;
 
@@ -91,36 +92,47 @@ public class QuestMenager : IQuestMenager
             throw new NotImplementedException();
     }
 
-    /*private async Task Talk(DBHero hero, DBHeroQuest heroQuest ,DBQuestStage questStage)
+    private async Task Talk(DBHero hero, int questId)
     {
-        if (questStage.NpcId is null) return;
-
-        await _npcMenager.GetNpc(hero, (int)questStage.NpcId);
-
-        await DoneStage(heroQuest, questStage);
+        
     }
 
-    public Task Bring(DBHero hero)
+    /*public Task Bring(DBHero hero)
     {
         throw new NotImplementedException();
+    }*/
+
+    public async Task Kill(DBHero hero, int mobId)
+    {
+        var heroQuests = await _context.HeroesQuests.Where(heroQuest => heroQuest.DBHero == hero && !heroQuest.Done).ToListAsync();
+
+        heroQuests.ForEach(heroQuest =>
+        {
+            var questStage = _context.QuestStages.FirstOrDefault(questStage => 
+                questStage.QuestId == heroQuest.QuestId && questStage.Stage == heroQuest.Stage);
+            if (questStage.Kill && questStage.MobId == mobId)
+            {
+                heroQuest.Quantity += 1;
+                if (heroQuest.Quantity >= questStage.Quantity) DoneStage(heroQuest, questStage);
+            }
+        });
     }
 
-    public Task Kill(DBHero hero)
+    private bool DoneStage(DBHeroQuest heroQuest, DBQuestStage _questStage) /* to */
     {
-        throw new NotImplementedException();
-    }
-
-    private async Task DoneStage(DBHeroQuest heroQuest, DBQuestStage questStage)
-    {
-        if (await _context.QuestStages.AnyAsync(qS => qS.QuestId == questStage.QuestId && qS.Stage == (questStage.Stage + 1)))
-            heroQuest.Stage += 1;
+        if (_context.QuestStages.Any(questStage => 
+            questStage.QuestId == _questStage.QuestId && questStage.Stage == (_questStage.Stage + 1))) 
+                heroQuest.Stage += 1;
         else
             heroQuest.Done = true;
 
-        await _context.SaveChangesAsync();
+        _context.SaveChanges();
+
+        if (heroQuest.Done) return true;
+        else return false;
     }
 
-    private async Task GetReward()
+    /*private async Task GetReward()
     {
 
     }*/
