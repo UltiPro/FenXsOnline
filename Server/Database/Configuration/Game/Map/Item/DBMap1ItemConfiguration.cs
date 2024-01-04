@@ -41,6 +41,14 @@ public class DBMap1ItemConfiguration : IEntityTypeConfiguration<DBMapItem>
             X = 55,
             Y = 43,
             Available = DateTime.Now
+        }, new DBMapItem
+        {
+            MapId = 1,
+            ItemType = ItemType.ToQuest,
+            ItemId = 5,
+            X = 56,
+            Y = 71,
+            Available = DateTime.Now
         });
     }
 }
