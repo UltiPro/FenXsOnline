@@ -8,6 +8,8 @@ using Database.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Classes.Models.Game.Npc;
 using Classes.Models.Game.Quest;
+using Classes.Exceptions.Game.Hero;
+using Classes.Exceptions.Game.Item;
 
 namespace Database.Repository;
 
