@@ -23,5 +23,6 @@ public class MapperConfiguration : Profile
         CreateMap<NpcQuestResponse, DBNpc>().ReverseMap();
         CreateMap<QuestResponse, DBQuest>().ReverseMap();
         CreateMap<QuestStageResponse, DBQuest>().ReverseMap();
+        CreateMap<QuestNpcMessage, DBQuestStage>().ReverseMap();
     }
 }
