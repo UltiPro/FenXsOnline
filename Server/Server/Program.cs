@@ -21,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString(configuration), b => b.MigrationsAssembly("Server"));
-});
+}, ServiceLifetime.Transient);
 
 builder.Services.AddIdentityCore<DBUser>(model =>
 {
