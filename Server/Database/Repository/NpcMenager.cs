@@ -1,6 +1,7 @@
 ﻿using Classes.Enums.Game;
 using Classes.Exceptions;
-using Classes.Exceptions.Game;
+using Classes.Exceptions.Game.Hero;
+using Classes.Exceptions.Game.Item;
 using Classes.Models.Game;
 using Classes.Models.Game.Hero;
 using Classes.Models.Game.Item;
@@ -110,15 +111,6 @@ public class NpcMenager : INpcMenager
         throw new BadRequestException("This NPC is not a trader.");
     }
 
-    private async Task<DBHero> GetHero(string accountId)
-    {
-        var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame);
-
-        if (hero is null) throw new HeroIsNotInTheGameException();
-
-        return hero;
-    }
-
     public async Task<DBNpc> GetNpc(DBHero hero, int npcId)
     {
         var npc = await _context.Npcs.FirstOrDefaultAsync(npc => npc.Id == npcId);
@@ -129,6 +121,15 @@ public class NpcMenager : INpcMenager
             throw new HeroIsTooFarAwayException();
 
         return npc;
+    }
+
+    private async Task<DBHero> GetHero(string accountId)
+    {
+        var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.UserId == accountId && hero.InGame);
+
+        if (hero is null) throw new HeroIsNotInTheGameException();
+
+        return hero;
     }
 
     private async Task<BaseItem> GetBaseItem(ItemType itemType, int itemId)
