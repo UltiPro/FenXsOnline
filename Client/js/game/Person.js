@@ -7,7 +7,6 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 		this.removalKey = "heroes"
 		this.isHeroBehindObject = false;
 		this.isPlayerControlled = config.isPlayerControlled || false; //making sure disired player moves
-		this.isOtherPlayer = config.isOtherPlayer || false;
 
 		this.directionUpdate = {
 			"up" : ["y", -1],

@@ -18,7 +18,7 @@ class Overworld {
         this.oldMap = null;
         this.refreshDifference = null;
         this.lastRefreshTime = Date.now();
-        this.refreshInterval = 1000;
+        this.refreshInterval = 100;
         this.isRefreshed = false;
 
         this.monstersCache = null;
@@ -175,6 +175,7 @@ class Overworld {
                     }
                     if(key === "heroes"){
                         const heroesArray = [addedElem];
+                        this.placeOtherPlayers(heroesArray)
                     }
                 });
             }
@@ -358,6 +359,27 @@ class Overworld {
         });
     }
     
+    placeOtherPlayers(heroes){
+        let counter = 1;
+        heroes.forEach((playerData) => {
+            let name = `player${counter}`;
+            while (this.map.gameObjects[name]) {
+                counter++;
+                name = `player${counter}`;
+            }
+            let objName = name;
+            let placePlayer = new Person({
+                isPlayerControlled: false,
+                x: utils.withGrid(playerData.x),
+                y: utils.withGrid(playerData.y),
+                src: `${getHeroSpritePath(playerData.profession)}/${
+                    playerData.spriteURL
+                }`,
+                isOtherPlayer: true,
+            });
+            this.map.gameObjects[objName] = placePlayer;
+        });
+    }
 
     async cacheMonsterDetails() {
         if (!this.monstersCache) {
