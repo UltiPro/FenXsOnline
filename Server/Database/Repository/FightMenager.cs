@@ -1,5 +1,6 @@
 ﻿using Classes.Exceptions;
 using Classes.Exceptions.Game;
+using Classes.Exceptions.Game.Hero;
 using Classes.Models.Game;
 using Classes.Models.Game.Fight;
 using Classes.Models.Game.Hero;

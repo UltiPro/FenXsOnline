@@ -1,6 +1,7 @@
 ﻿using Classes.Enums.Game;
 using Classes.Exceptions;
-using Classes.Exceptions.Game;
+using Classes.Exceptions.Game.Hero;
+using Classes.Exceptions.Game.Item;
 using Classes.Models.Game.Hero;
 using Classes.Models.Game.Item;
 using Classes.Models.Game.Item.Armor;

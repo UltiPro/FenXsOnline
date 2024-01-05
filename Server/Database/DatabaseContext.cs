@@ -11,7 +11,6 @@ using Classes.Models.Game.Item.Necklace;
 using Classes.Models.Game.Item.Ring;
 using Classes.Models.Game.Item.SecondaryWeapon;
 using Classes.Models.Game.Item.Weapon;
-using Database.Configuration.Game;
 using Classes.Models.Game.Item.Consumables;
 using Classes.Models.Game.Item.Neutral;
 using Classes.Models.Game.Item.QuestItem;
@@ -24,6 +23,9 @@ using Database.Configuration.Game.Map.Item;
 using Database.Configuration.Game.Npc;
 using Classes.Models.Game.Quest;
 using Database.Configuration.Game.Quest;
+using Database.Configuration.Game.Item;
+using Database.Configuration.Game.Npc.Shop;
+using Database.Configuration.Game.Mob.Drop;
 
 namespace Database;
 
