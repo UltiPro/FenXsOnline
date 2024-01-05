@@ -4,6 +4,9 @@ const apiBaseUrl_short = "https://localhost:7180/";
 const app = axios.create({
     apiBaseUrl,
     withCredentials: true,
+    headers: {
+        'Cache-Control': 'no-cache',
+    },
 });
 
 const changeInputAudio = new Audio("./audio/input.wav");
