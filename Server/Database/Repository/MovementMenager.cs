@@ -1,5 +1,5 @@
 ﻿using Classes.Exceptions;
-using Classes.Exceptions.Game;
+using Classes.Exceptions.Game.Hero;
 using Classes.Models.Game;
 using Classes.Models.Game.Map;
 using Database.Contracts;
