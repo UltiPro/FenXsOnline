@@ -17,7 +17,6 @@ public class DBQuestStageConfiguration : IEntityTypeConfiguration<DBQuestStage>
             NpcId = 1,
             NpcMessage = "I found your necklace.",
             NpcAnswear = "Thank you very much, here is your reward.",
-            Bring = true,
             ItemType = ItemType.ToQuest,
             ItemId = 5,
             Quantity = 1
@@ -63,7 +62,6 @@ public class DBQuestStageConfiguration : IEntityTypeConfiguration<DBQuestStage>
             NpcId = 1,
             NpcMessage = "I brought you three apples.",
             NpcAnswear = "Thank you very much, here is your reward.",
-            Bring = true,
             ItemType = ItemType.Consumables,
             ItemId = 10,
             Quantity = 3
@@ -75,7 +73,6 @@ public class DBQuestStageConfiguration : IEntityTypeConfiguration<DBQuestStage>
             NpcId = 3,
             NpcMessage = "I brought you five night mashrooms.",
             NpcAnswear = "Thank you very much, here is your reward.",
-            Bring = true,
             ItemType = ItemType.Consumables,
             ItemId = 12,
             Quantity = 5
