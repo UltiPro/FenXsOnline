@@ -34,14 +34,24 @@ public class MapMenager : IMapMenager
 
         var npcs = _mapper.Map<List<NpcQuestResponse>>(await _context.Npcs.Include(npc => npc.ShopItems).Where(npc => npc.MapId == hero.MapId).ToListAsync());
 
-        var ignoreQuestsIDs = _context.HeroesQuests.Where(heroQuest => heroQuest.DBHero == hero).Select(heroQuest => heroQuest.QuestId);
+        var heroQuests = _context.HeroesQuests.Where(heroQuest => heroQuest.DBHero == hero);
 
         npcs.ForEach(npc =>
         {
             npc.Quests = _mapper.Map<List<QuestResponse>>(
                 _context.Quests.Where(
-                    quest => quest.NpcId == npc.Id && quest.Level <= hero.Level && !ignoreQuestsIDs.Contains(quest.Id))
+                    quest => quest.NpcId == npc.Id && quest.Level <= hero.Level && !heroQuests.Select(heroQuest => heroQuest.QuestId).Contains(quest.Id))
                 .ToList());
+        });
+
+        heroQuests = heroQuests.Where(heroQuest => !heroQuest.Done);
+
+        heroQuests.ToList().ForEach(heroQuest =>
+        {
+            var questStage = _context.QuestStages.FirstOrDefault(questStage => questStage.QuestId == heroQuest.QuestId && questStage.Stage == heroQuest.Stage && questStage.Talk);
+
+            if (questStage != null)
+                npcs.Find(npc => npc.Id == questStage.NpcId).QuestsStage.Add(_mapper.Map<QuestNpcMessage>(questStage));
         });
 
         mapDataResponse.NPCs = npcs;
