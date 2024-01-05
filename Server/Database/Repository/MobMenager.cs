@@ -17,17 +17,6 @@ public class MobMenager : IMobMenager
         this._mapper = _mapper;
     }
 
-    public async Task<DBMob> Get(int id)
-    {
-        var mob = await _context.Mobs
-            .Include(mob => mob.DropItems)
-            .FirstOrDefaultAsync(mob => mob.Id == id);
-
-        if (mob is null) throw new NotFoundException("Mob", id);
-
-        return mob;
-    }
-
     public async Task<MobProvider> GetInfo(int id)
     {
         var mob = await _context.Mobs.FirstOrDefaultAsync(mob => mob.Id == id);
