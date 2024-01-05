@@ -98,6 +98,19 @@ public class EquipmentMenager : IEquipmentMenager
         await _context.SaveChangesAsync();
     }
 
+    public void FindItemForQuest(DBHero hero, ItemProvider itemProvider)
+    {
+        var heroEquipment = _context.HeroesEquipments.FirstOrDefault(heroEquipment => heroEquipment.DBHero == hero
+            && heroEquipment.ItemType == itemProvider.ItemType && heroEquipment.ItemId == heroEquipment.ItemId);
+
+        if (heroEquipment is null) throw new HeroHasNotRequiredItemsException();
+
+        heroEquipment.ItemType = null;
+        heroEquipment.ItemId = null;
+
+        _context.Update(heroEquipment);
+    }
+
     public async Task<DBHero> UseItem(string accountId, int slotId)
     {
         if (slotId < 1) throw new BadRequestException("Slot id needs to be larger than 0.");

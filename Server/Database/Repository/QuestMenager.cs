@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using Classes.Enums.Game;
 using Classes.Exceptions;
 using Classes.Exceptions.Game;
 using Classes.Models.Game.Hero;
+using Classes.Models.Game.Item;
 using Classes.Models.Game.Quest;
 using Database.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 
 namespace Database.Repository;
 
@@ -14,12 +15,16 @@ public class QuestMenager : IQuestMenager
     private readonly DatabaseContext _context;
     private readonly IMapper _mapper;
     private readonly INpcMenager _npcMenager;
+    private readonly IPromotionMenager _promotionMenager;
+    private readonly IEquipmentMenager _equipmentMenager;
 
-    public QuestMenager(DatabaseContext _context, IMapper _mapper, INpcMenager _npcMenager)
+    public QuestMenager(DatabaseContext _context, IMapper _mapper, INpcMenager _npcMenager, IPromotionMenager _promotionMenager, IEquipmentMenager _equipmentMenager)
     {
         this._context = _context;
         this._mapper = _mapper;
         this._npcMenager = _npcMenager;
+        this._promotionMenager = _promotionMenager;
+        this._equipmentMenager = _equipmentMenager;
     }
 
     public async Task TakeQuest(string accountId, int questId)
@@ -70,37 +75,61 @@ public class QuestMenager : IQuestMenager
         return quests;
     }
 
-    public async Task DoQuest(string accountId, int questId)
+    public async Task<QuestCompletedResponse> TalkOrBring(string accountId, int questId)
     {
         var hero = await GetHero(accountId);
+
+        var quest = await _context.Quests.FirstOrDefaultAsync(quest => quest.Id == questId);
 
         var heroQuest = await _context.HeroesQuests.FirstOrDefaultAsync(heroQuest => heroQuest.DBHero == hero && heroQuest.QuestId == questId);
 
         if (heroQuest is null) throw new HeroDidNotTakeThisQuestException();
 
-        if(heroQuest.Done) throw new HeroHasDoneThisQuestException();
+        if (heroQuest.Done) throw new HeroHasDoneThisQuestException();
 
         var questStage = await _context.QuestStages.FirstOrDefaultAsync(questStage => questStage.QuestId == questId && questStage.Stage == heroQuest.Stage);
 
         if (questStage is null) throw new NotFoundException("Quest stage", $"{questId}, stage: {heroQuest.Stage}");
 
-        if (questStage.Talk)
-            throw new NotImplementedException();
-        else if(questStage.Bring)
-            throw new NotImplementedException();
-        else if(questStage.Kill)
-            throw new NotImplementedException();
-    }
+        if (questStage.NpcId is null) throw new NotFoundException("Npc quest stage", $"{questId}, stage: {heroQuest.Stage}");
 
-    private async Task Talk(DBHero hero, int questId)
-    {
-        
-    }
+        var npc = await _npcMenager.GetNpc(hero, (int)questStage.NpcId);
 
-    /*public Task Bring(DBHero hero)
-    {
-        throw new NotImplementedException();
-    }*/
+        if (questStage.ItemType != null && questStage.ItemId != null)
+        {
+            _equipmentMenager.FindItemForQuest(hero, new ItemProvider
+            {
+                ItemType = (ItemType)questStage.ItemType,
+                ItemId = (int)questStage.ItemId
+            });
+        }
+
+        if (DoneStage(heroQuest, questStage))
+        {
+            var questRewards = await _context.QuestRewards.Where(questReward => questReward.QuestId == questId).ToListAsync();
+
+            List<DBHeroEquipment> equipmentRewards = new List<DBHeroEquipment>();
+
+            try
+            {
+                questRewards.ForEach(async questReward =>
+                {
+                    equipmentRewards.Add(await _equipmentMenager.AddItem(hero, questReward));
+                });
+            }
+            catch { }
+
+            await _context.SaveChangesAsync();
+
+            return new QuestCompletedResponse
+            {
+                PromotionResponse = await _promotionMenager.Promotion(hero, quest.Level, true),
+                HeroEquipmentRewards = equipmentRewards
+            };
+        }
+
+        return null;
+    }
 
     public async Task Kill(DBHero hero, int mobId)
     {
@@ -108,7 +137,7 @@ public class QuestMenager : IQuestMenager
 
         heroQuests.ForEach(heroQuest =>
         {
-            var questStage = _context.QuestStages.FirstOrDefault(questStage => 
+            var questStage = _context.QuestStages.FirstOrDefault(questStage =>
                 questStage.QuestId == heroQuest.QuestId && questStage.Stage == heroQuest.Stage);
             if (questStage.Kill && questStage.MobId == mobId)
             {
@@ -118,24 +147,18 @@ public class QuestMenager : IQuestMenager
         });
     }
 
-    private bool DoneStage(DBHeroQuest heroQuest, DBQuestStage _questStage) /* to */
+    private bool DoneStage(DBHeroQuest heroQuest, DBQuestStage _questStage)
     {
-        if (_context.QuestStages.Any(questStage => 
-            questStage.QuestId == _questStage.QuestId && questStage.Stage == (_questStage.Stage + 1))) 
-                heroQuest.Stage += 1;
+        if (_context.QuestStages.Any(questStage =>
+            questStage.QuestId == _questStage.QuestId && questStage.Stage == (_questStage.Stage + 1)))
+            heroQuest.Stage += 1;
         else
             heroQuest.Done = true;
 
         _context.SaveChanges();
 
-        if (heroQuest.Done) return true;
-        else return false;
+        return heroQuest.Done;
     }
-
-    /*private async Task GetReward()
-    {
-
-    }*/
 
     private async Task<DBHero> GetHero(string accountId)
     {

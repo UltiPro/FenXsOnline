@@ -11,6 +11,7 @@ public interface IEquipmentMenager
     Task<DBHeroEquipment> AddItem(DBHero hero, ItemProvider itemProvider);
     Task MoveItem(string accountId, int fromSlotId, int toSlotId);
     Task RemoveItem(string accountId, int slotId);
+    void FindItemForQuest(DBHero hero, ItemProvider itemProvider);
     Task<DBHero> UseItem(string accountId, int slotId);
     Task<DBHero> UnuseItem(string accountId, ItemType itemType, int slotId);
 }
