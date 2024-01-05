@@ -169,10 +169,23 @@ class Overworld {
     
             // Find elements that are in newList but not in oldList
             const added = newList.filter(newItem => !oldList.some(oldItem => _.isEqual(newItem, oldItem)));
-    
             if (added.length > 0) {
-                console.log(`Added elements:`, added);
+                //console.log(`Added elements:`, added);
+                added.forEach(addedElem => {
+                    //console.log(`Adding wall for element with key '${key}' and coordinates (${addedElem.x}, ${addedElem.y})`);
+                    if (key === "items") {
+                        const itemsArray = [addedElem];
+                        this.placeItems(itemsArray);
+                    }
+                    if (key === "mobs") {
+                        const mobsArray = [addedElem];
+                        this.placeMonsters(mobsArray);
+                        this.map.addWall(addedElem.x * 32, addedElem.y * 32);
+                    }
+                });
             }
+            
+            
     
             // Find elements that are in oldList but not in newList
             const removed = oldList.filter(oldItem => !newList.some(newItem => _.isEqual(newItem, oldItem)));
@@ -295,14 +308,17 @@ class Overworld {
     }
 
     //creating item objects
-    placeItems() {
-        //console.log(this.mapData.items);
+    placeItems(items) {
         let counter = 1;
-        this.mapData.items.forEach((item) => {
-            let name = "item" + counter;
-            let itemId = name;
+        items.forEach((item) => {
+            let name = `item${counter}`;
+            while (this.map.gameObjects[name]) {
+                counter++;
+                name = `item${counter}`;
+            }
+            const itemId = name;
             const itemDetails = this.itemsCache[`${item.itemType}_${item.itemId}`];
-            const path = itemTypeParser(itemDetails.itemType)
+            const path = itemTypeParser(itemDetails.itemType);
             let placeItem = new Item({
                 isPlayerControlled: false,
                 x: utils.withGrid(item.x),
@@ -316,13 +332,18 @@ class Overworld {
             counter++;
         });
     }
+    
 
     //creating monsters objects
-    placeMonsters() {
+    placeMonsters(mobs) {
         let counter = 1;
-        this.mapData.mobs.forEach((mob) => {
-            let name = "mob" + counter;
-            let objName = name;
+        mobs.forEach((mob) => {
+            let name = `mob${counter}`;
+            while (this.map.gameObjects[name]) {
+                counter++;
+                name = `mob${counter}`;
+            }
+            const objName = name;
             const monsterDetails = this.monstersCache[mob.mobId];
             let placeMob = new Monster({
                 x: utils.withGrid(mob.x),
@@ -347,6 +368,7 @@ class Overworld {
             counter++;
         });
     }
+    
 
     async cacheMonsterDetails() {
         if (!this.monstersCache) {
@@ -456,8 +478,8 @@ class Overworld {
         await this.cacheMonsterDetails(); // Fetch and cache monsters
         await this.cacheItemsDetails(); // Fetch and cache items
         console.log(this.itemsCache)
-        this.placeItems()
-        this.placeMonsters();
+        this.placeItems(this.mapData.items)
+        this.placeMonsters(this.mapData.mobs);
         this.map.overworld = this;
         this.map.mountObjects(); //mounting objects collisions
     }

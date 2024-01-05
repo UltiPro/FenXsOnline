@@ -113,9 +113,9 @@ class OverworldMap {
         //pickUp item event
         if (!this.isCutscenePlaying && matchItem && matchItem.isItem) {
             let wasItPicked = matchItem.grab(matchItem);
-            if (wasItPicked) {
-                this.removeGameObject(matchItem.id);
-            }
+            // if (wasItPicked) {
+            //     this.removeGameObject(matchItem.id);
+            // }
         }
         // console.log(match);
     }
@@ -149,7 +149,7 @@ class OverworldMap {
                 isMounted: true,
             });
             // Add the new item to the game objects
-            this.gameObjects[name] = placeItem;
+            //this.gameObjects[name] = placeItem;
             const compositeKey = `${item.itemDetails.itemType}_${item.itemDetails.id}`;
             //Check if this item is in client's cache
             if (!this.overworld.itemsCache[compositeKey]) {
