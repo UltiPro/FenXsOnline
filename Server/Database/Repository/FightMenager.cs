@@ -153,7 +153,7 @@ public class FightMenager : IFightMenager
 
         var possibleDrops = await _context.MobsDrop.Where(m => m.DBMob == mob).ToListAsync();
 
-        try { return await _equipmentMenager.AddItem(hero.UserId, possibleDrops[_random.Next(possibleDrops.Count)]); }
+        try { return await _equipmentMenager.AddItem(hero, possibleDrops[_random.Next(possibleDrops.Count)]); }
         catch { return null; }
     }
 

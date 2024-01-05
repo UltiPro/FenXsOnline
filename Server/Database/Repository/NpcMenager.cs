@@ -98,7 +98,7 @@ public class NpcMenager : INpcMenager
 
             if (hero.Gold < item.Price) throw new HeroHasNotEnoughGoldException();
 
-            var itemEq = await _equipmentMenager.AddItem(accountId, itemNpc);
+            var itemEq = await _equipmentMenager.AddItem(hero, itemNpc);
 
             hero.Gold -= item.Price;
 

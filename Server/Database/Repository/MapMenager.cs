@@ -105,7 +105,7 @@ public class MapMenager : IMapMenager
 
         if (item is null || item.Available > DateTime.Now) return null;
 
-        var itemEq = await _equipmentMenager.AddItem(accountId, item);
+        var itemEq = await _equipmentMenager.AddItem(hero, item);
 
         if (item.Available != null) item.Available = DateTime.Now.AddMinutes(10);
         else _context.MapItems.Remove(item);

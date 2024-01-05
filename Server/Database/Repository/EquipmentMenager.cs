@@ -45,10 +45,8 @@ public class EquipmentMenager : IEquipmentMenager
         _context.HeroesEquipments.RemoveRange(await _context.HeroesEquipments.Where(heroEquipment => heroEquipment.HeroId == heroId).ToListAsync());
     }
 
-    public async Task<DBHeroEquipment> AddItem(string accountId, ItemProvider itemProvider)
+    public async Task<DBHeroEquipment> AddItem(DBHero hero, ItemProvider itemProvider)
     {
-        var hero = await GetInGameHero(accountId);
-
         var freeSlot = await _context.HeroesEquipments.FirstOrDefaultAsync(heroEquipment =>
             heroEquipment.DBHero == hero &&
             heroEquipment.ItemType == null &&
