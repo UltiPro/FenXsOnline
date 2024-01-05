@@ -1,4 +1,4 @@
-﻿namespace Classes.Exceptions.Game;
+﻿namespace Classes.Exceptions.Game.Hero;
 
 public class HeroDidNotTakeThisQuestException : Exception
 {

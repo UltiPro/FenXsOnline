@@ -1,4 +1,4 @@
-﻿namespace Classes.Exceptions.Game;
+﻿namespace Classes.Exceptions.Game.Item;
 
 public class ItemIsNotWornableException : Exception
 {

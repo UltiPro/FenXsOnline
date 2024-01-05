@@ -4,7 +4,7 @@ namespace Classes.Models.Game.Fight;
 
 public class FightResponse
 {
-    public int HelathPoints { get; set; }
+    public int HealthPoints { get; set; }
     public PromotionResponse? Promotion { get; set; }
     public DBHeroEquipment? Drop { get; set; }
     public DeadResponse? Dead { get; set; }
