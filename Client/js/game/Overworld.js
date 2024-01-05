@@ -18,7 +18,7 @@ class Overworld {
         this.oldMap = null;
         this.refreshDifference = null;
         this.lastRefreshTime = Date.now();
-        this.refreshInterval = 500;
+        this.refreshInterval = 1000;
         this.isRefreshed = false;
 
         this.monstersCache = null;
@@ -150,16 +150,7 @@ class Overworld {
         }
     
         this.refreshDifference = differences;
-        //await this.refreshMapWithDifferences();
     }
-    // refreshMapWithDifferences() {
-    //     if (this.refreshDifference && Object.keys(this.refreshDifference).length > 0) {
-    //         for (const key in this.refreshDifference) {
-    //             this.refreshedMap[key] = this.refreshDifference[key].new;
-    //         }
-    //     }
-    // }
-    // Get the specific difference
     getSpecificDifference() {
         for (const key in this.refreshDifference) {
             console.log(`Difference in object with key '${key}':`);
@@ -182,10 +173,11 @@ class Overworld {
                         this.placeMonsters(mobsArray);
                         this.map.addWall(addedElem.x * 32, addedElem.y * 32);
                     }
+                    if(key === "heroes"){
+                        const heroesArray = [addedElem];
+                    }
                 });
             }
-            
-            
     
             // Find elements that are in oldList but not in newList
             const removed = oldList.filter(oldItem => !newList.some(newItem => _.isEqual(newItem, oldItem)));
@@ -197,17 +189,14 @@ class Overworld {
                 removed.forEach(removedElem => {
                     for (const objectId in this.map.gameObjects) {
                         const obj = this.map.gameObjects[objectId];
-                        if (obj.x === removedElem.x * 32 && obj.y === removedElem.y * 32) {
+                        if (obj.x === removedElem.x * 32 && obj.y === removedElem.y * 32 && obj.removalKey === key) {
                             //if it's monster - remove collision
                             if (obj.isMonster) {
                                 this.map.removeWall(removedElem.x * 32, removedElem.y * 32);
                             }
-                            //remove gameObject
-                            if (obj.isOtherPlayer || obj.isPlayerControlled) {
-                                continue; //skip players
+                            if (!(obj.isOtherPlayer || obj.isPlayerControlled)) {
+                                delete this.map.gameObjects[objectId];
                             }
-                            // Remove gameObject
-                            delete this.map.gameObjects[objectId];
                         }
                     }
                 });

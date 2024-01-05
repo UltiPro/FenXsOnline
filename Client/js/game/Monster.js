@@ -4,7 +4,7 @@ class Monster extends GameObject{
         this.isMonster = true;
         this.mobId = config.mobId;
         this.isDead = config.isDead || false;
-
+        this.removalKey = "mobs"
     }
 
     killed(){

@@ -5,6 +5,7 @@ class Item extends GameObject {
         this.isBehindObject = false;
         this.itemId = config.itemId;
         this.itemType = config.itemType;
+        this.removalKey = "items"
     }
 
     update(state) {

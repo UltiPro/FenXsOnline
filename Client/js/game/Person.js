@@ -4,7 +4,7 @@ class Person extends GameObject{ //I wanna make sure that only player is moving,
 		this.movementProgressRemaining = 0;
 		this.movementSpeed = 2;
 		this.isStanding = false;
-
+		this.removalKey = "heroes"
 		this.isHeroBehindObject = false;
 		this.isPlayerControlled = config.isPlayerControlled || false; //making sure disired player moves
 		this.isOtherPlayer = config.isOtherPlayer || false;
