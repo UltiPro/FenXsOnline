@@ -13,7 +13,7 @@ public class QuestController : ControllerBase
     private readonly IAuthMenager _authMenager;
     private readonly IQuestMenager _questMenager;
 
-    public QuestController(IConfiguration _configuration, IAuthMenager _authMenager ,IQuestMenager _questMenager)
+    public QuestController(IConfiguration _configuration, IAuthMenager _authMenager, IQuestMenager _questMenager)
     {
         this._configuration = _configuration;
         this._authMenager = _authMenager;
@@ -49,5 +49,21 @@ public class QuestController : ControllerBase
         await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
 
         return Ok(await _questMenager.GetQuestsInfo(cookieId));
+    }
+
+    [HttpPost]
+    [Route("talk")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult> Talk(int questId)
+    {
+        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
+
+        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
+
+        return Ok(await _questMenager.TalkOrBring(cookieId, questId));
     }
 }
