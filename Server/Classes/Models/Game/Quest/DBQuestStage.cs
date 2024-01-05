@@ -20,8 +20,7 @@ public class DBQuestStage
     public string? NpcAnswear { get; set; } = null;
     public bool Kill { get; set; } = false;
     public int? MobId { get; set; } = null;
-    public bool Bring { get; set; } = false;
-    public ItemType? ItemType { get; set; } = null;
-    public int? ItemId { get; set; } = null;
+    public ItemType? ItemType { get; set; } = null; // For bring
+    public int? ItemId { get; set; } = null; // For bring
     public int? Quantity { get; set; } = null; // For kill and bring
 }
