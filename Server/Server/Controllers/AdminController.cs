@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
-using Classes.Models;
 
 namespace Server.Controllers;
 
@@ -11,6 +10,7 @@ namespace Server.Controllers;
 public class AdminController : ControllerBase
 {
     private readonly IAdminMenager _adminMenager;
+
     public AdminController(IAdminMenager _adminMenager)
     {
         this._adminMenager = _adminMenager;

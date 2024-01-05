@@ -10,15 +10,15 @@ namespace Server.Controllers;
 [Authorize]
 public class EquipmentController : ControllerBase
 {
-    private readonly IEquipmentMenager _equipmentMenager;
-    private readonly IAuthMenager _authMenager;
     private readonly IConfiguration _configuration;
+    private readonly IAuthMenager _authMenager;
+    private readonly IEquipmentMenager _equipmentMenager;
 
-    public EquipmentController(IEquipmentMenager _equipmentMenager, IAuthMenager _authMenager, IConfiguration _configuration)
+    public EquipmentController(IConfiguration _configuration, IAuthMenager _authMenager, IEquipmentMenager _equipmentMenager)
     {
-        this._equipmentMenager = _equipmentMenager;
-        this._authMenager = _authMenager;
         this._configuration = _configuration;
+        this._authMenager = _authMenager;
+        this._equipmentMenager = _equipmentMenager;
     }
 
     [HttpPut]
