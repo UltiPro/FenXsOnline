@@ -102,9 +102,11 @@ public class QuestMenager : IQuestMenager
                 ItemType = (ItemType)questStage.ItemType,
                 ItemId = (int)questStage.ItemId
             });
+
+            await _context.SaveChangesAsync();
         }
 
-        if (DoneStage(heroQuest, questStage))
+        if (await DoneStage(heroQuest, questStage))
         {
             var questRewards = await _context.QuestRewards.Where(questReward => questReward.QuestId == questId).ToListAsync();
 
@@ -112,10 +114,13 @@ public class QuestMenager : IQuestMenager
 
             try
             {
-                questRewards.ForEach(async questReward =>
+                for(int i = 0; i< questRewards.Count; i++ )
                 {
-                    equipmentRewards.Add(await _equipmentMenager.AddItem(hero, questReward));
-                });
+                    for (int j = 0; j< questRewards[i].Quantity; j++ )
+                    {
+                        equipmentRewards.Add(await _equipmentMenager.AddItem(hero, questRewards[i]));
+                    }
+                }
             }
             catch { }
 
@@ -147,7 +152,7 @@ public class QuestMenager : IQuestMenager
         });
     }
 
-    private bool DoneStage(DBHeroQuest heroQuest, DBQuestStage _questStage)
+    private async Task<bool> DoneStage(DBHeroQuest heroQuest, DBQuestStage _questStage)
     {
         if (_context.QuestStages.Any(questStage =>
             questStage.QuestId == _questStage.QuestId && questStage.Stage == (_questStage.Stage + 1)))
@@ -155,7 +160,7 @@ public class QuestMenager : IQuestMenager
         else
             heroQuest.Done = true;
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return heroQuest.Done;
     }
