@@ -114,9 +114,9 @@ public class QuestMenager : IQuestMenager
 
             try
             {
-                for(int i = 0; i< questRewards.Count; i++ )
+                for (int i = 0; i < questRewards.Count; i++)
                 {
-                    for (int j = 0; j< questRewards[i].Quantity; j++ )
+                    for (int j = 0; j < questRewards[i].Quantity; j++)
                     {
                         equipmentRewards.Add(await _equipmentMenager.AddItem(hero, questRewards[i]));
                     }
