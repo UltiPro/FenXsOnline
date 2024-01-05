@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configuration.Game;
+namespace Database.Configuration.Game.Item;
 
 public class DBConsumablesConfiguration : IEntityTypeConfiguration<DBConsumables>
 {

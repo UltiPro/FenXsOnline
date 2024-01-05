@@ -3,7 +3,7 @@ using Classes.Models.Game.Item.Gloves;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configuration.Game;
+namespace Database.Configuration.Game.Item;
 
 public class DBGlovesConfiguration : IEntityTypeConfiguration<DBGloves>
 {

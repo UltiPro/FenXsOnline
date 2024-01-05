@@ -3,7 +3,7 @@ using Classes.Models.Game.Npc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configuration.Game.Npc;
+namespace Database.Configuration.Game.Npc.Shop;
 
 public class DBNpc2ShopConfiguration : IEntityTypeConfiguration<DBNpcShopItem>
 {

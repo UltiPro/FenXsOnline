@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configuration.Game;
+namespace Database.Configuration.Game.Npc;
 
 public class DBNpcConfiguration : IEntityTypeConfiguration<DBNpc>
 {

@@ -142,7 +142,7 @@ public class FightMenager : IFightMenager
             Promotion = playerWin ? await _promotionMenager.Promotion(hero, mob.Level, false) : null,
             Drop = playerWin ? await DropForPlayer(hero, mob) : null,
             Dead = playerWin ? null : await DeadPlayer(hero),
-            HelathPoints = hero.HealthPoints,
+            HealthPoints = hero.HealthPoints,
             Logs = logs
         };
     }

@@ -3,7 +3,7 @@ using Classes.Models.Game.Mob;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configuration.Game.Mob;
+namespace Database.Configuration.Game.Mob.Drop;
 
 public class DBMob3DropConfiguration : IEntityTypeConfiguration<DBMobDrop>
 {

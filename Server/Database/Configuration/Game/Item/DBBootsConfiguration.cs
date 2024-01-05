@@ -3,7 +3,7 @@ using Classes.Models.Game.Item.Boots;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Database.Configuration.Game;
+namespace Database.Configuration.Game.Item;
 
 public class DBBootsConfiguration : IEntityTypeConfiguration<DBBoots>
 {
