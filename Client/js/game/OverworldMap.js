@@ -123,7 +123,7 @@ class OverworldMap {
     //dropping item
     drop(item) {
         const hero = this.gameObjects["hero"];
-        console.log(item)
+        console.log("drop itemDetails: ",item)
         // Ensure the item and its details are defined
         if (item && item.itemDetails) {
             const path = itemTypeParser(item.itemDetails.itemType);
@@ -136,7 +136,7 @@ class OverworldMap {
                 counter++;
                 name = `item${counter}`;
             }
-    
+           
             const placeItem = new Item({
                 isPlayerControlled: false,
                 id: name,
@@ -150,6 +150,13 @@ class OverworldMap {
             });
             // Add the new item to the game objects
             this.gameObjects[name] = placeItem;
+            const compositeKey = `${item.itemDetails.itemType}_${item.itemDetails.id}`;
+            //Check if this item is in client's cache
+            if (!this.overworld.itemsCache[compositeKey]) {
+                // If not, add it to the itemsCache
+                this.overworld.itemsCache[compositeKey] = item.itemDetails;
+                console.log(`Added item ${compositeKey} to itemsCache.`);
+            }
         }
         else{
             console.log("itemDetails not exists?")
