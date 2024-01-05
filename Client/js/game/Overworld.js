@@ -12,11 +12,13 @@ class Overworld {
         this.map = null;
         this.heroData = null; //hero data fetched from database
         this.mapData = null;
-        this.refreshedMap = null;
 
         //Map refresh
+        this.refreshedMap = null;
+        this.oldMap = null;
+        this.refreshDifference = null;
         this.lastRefreshTime = Date.now();
-        this.refreshInterval = 1000;
+        this.refreshInterval = 500;
         this.isRefreshed = false;
 
         this.monstersCache = null;
@@ -99,6 +101,7 @@ class Overworld {
     //fire api call and assign to variable so it can be passed and proccessed
     async refreshMap() {
         const updatedMapData = await this.fetchRefreshedMap(); //fetching data
+        this.oldMap = this.refreshedMap ? { ...this.refreshedMap } : null;
         this.refreshedMap = updatedMapData;
         //console.log(this.refreshedMap);
     }
@@ -127,9 +130,46 @@ class Overworld {
             await this.refreshMap();
             this.lastRefreshTime = currentTime; // Update the last refresh time
             console.log("Refreshed");
+            this.compareRefreshedMaps();
         }
     }
-
+    //comparing refreshed maps to remove/add lacking gameObjects
+    compareRefreshedMaps() {
+        const differences = {};
+    
+        if (this.oldMap && this.refreshedMap) {
+            // Check for differences between oldMap and refreshedMap
+            for (const key in this.oldMap) {
+                if (JSON.stringify(this.oldMap[key]) !== JSON.stringify(this.refreshedMap[key])) {
+                    differences[key] = {
+                        old: this.oldMap[key],
+                        new: this.refreshedMap[key]
+                    };
+                }
+            }
+        }
+    
+        this.refreshDifference = differences; // Store the differences in refreshDifference
+        console.log(differences);
+        this.refreshMapWithDifferences();
+    }
+    
+    refreshMapWithDifferences() {
+        if (this.refreshDifference && Object.keys(this.refreshDifference).length > 0) {
+            for (const key in this.refreshDifference) {
+                this.refreshedMap[key] = this.refreshDifference[key].new;
+            }
+        }
+    }
+    
+    // Get the specific difference
+    getSpecificDifference() {
+        for (const key in this.refreshDifference) {
+            console.log(`Difference in object with key '${key}':`, this.refreshDifference[key]);
+            // Do something with this.refreshDifference[key]
+        }
+    }
+      
     //fetching hero data
     getHeroData() {
         return app
@@ -411,7 +451,6 @@ class Overworld {
         this.map.addGameObject(gameObject);
         gameObject.mount(this.map);
     }
-
     //initializing game
     //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
