@@ -137,7 +137,7 @@ class OverworldMap {
                 name = `item${counter}`;
             }
     
-            let placeItem = new Item({
+            const placeItem = new Item({
                 isPlayerControlled: false,
                 id: name,
                 x: hero.x,

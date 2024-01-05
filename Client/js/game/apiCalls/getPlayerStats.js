@@ -61,9 +61,9 @@ function updateHeroStats(heroData) {
 function getItemDetails(item) {
     return app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`)
         .then(function (response) {
-            var type = itemTypeParser(item.itemType)
+            const type = itemTypeParser(item.itemType)
             //create div with item
-            var draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
+            const draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
             $(`#s${item.id}`).append(draggableDiv);
 
             //asigning data about which slot it is in backpack

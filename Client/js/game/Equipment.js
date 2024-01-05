@@ -222,8 +222,8 @@ async function showGrabbedItem(item) {
             BPdetails.push(itemLocal);
             setBackpackDetails(BPdetails)
 
-            let type = itemTypeParser(item.itemType); //parsing type for path
-            let draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
+            const type = itemTypeParser(item.itemType); //parsing type for path
+            const draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${type}${response.data.spriteURL}');"> </div>`);
             firstEmptySlot.append(draggableDiv); //showing item
         } else {
             console.log('No empty slot found');
@@ -286,7 +286,7 @@ function sellItem(cleanFromId) {
         if (shop) {
           // Extracting shop ID
             const spanId = shop.id;
-            let npcId = spanId.replace('seller', '');
+            const npcId = spanId.replace('seller', '');
             app.put(apiBaseUrl + `Npc/sell?npcId=${npcId}&itemId=${itemToSell.slotInfo}`)
             .then((_) => {
                 BPdetails.splice(itemIndex, 1);
@@ -383,7 +383,7 @@ function updateItemPosition(oldId, newId) {
 function CanBeEquipped(fromId, toId) {
     let BPdetails = getBackpackDetails();
     const x = BPdetails.find((item) => item.slotInfo === fromId);
-    let type = parseEqId(toId);
+    const type = parseEqId(toId);
     if (x.itemDetails.itemType === type || x.itemDetails.itemType === 8) {
         if(x.itemDetails.itemType === 8){
             return 2;

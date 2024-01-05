@@ -96,7 +96,7 @@ class OverworldEvent {
                         // console.log("No loot :(")
                     } else {
                         // console.log("Loot! :3", drop)
-                        showGrabbedItem(drop); //getting loot
+                        await showGrabbedItem(drop); //getting loot
                     }
                     resolve();
                 } else {
