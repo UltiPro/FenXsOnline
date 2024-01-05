@@ -131,16 +131,16 @@ class Overworld {
             this.lastRefreshTime = currentTime; // Update the last refresh time
             console.log("Refreshed");
             this.compareRefreshedMaps();
+            this.getSpecificDifference()
         }
     }
     //comparing refreshed maps to remove/add lacking gameObjects
-    compareRefreshedMaps() {
+    async compareRefreshedMaps() {
         const differences = {};
     
         if (this.oldMap && this.refreshedMap) {
-            // Check for differences between oldMap and refreshedMap
             for (const key in this.oldMap) {
-                if (JSON.stringify(this.oldMap[key]) !== JSON.stringify(this.refreshedMap[key])) {
+                if (!_.isEqual(this.oldMap[key], this.refreshedMap[key])) {
                     differences[key] = {
                         old: this.oldMap[key],
                         new: this.refreshedMap[key]
@@ -149,26 +149,59 @@ class Overworld {
             }
         }
     
-        this.refreshDifference = differences; // Store the differences in refreshDifference
-        console.log(differences);
-        this.refreshMapWithDifferences();
+        this.refreshDifference = differences;
+        //await this.refreshMapWithDifferences();
     }
+    // refreshMapWithDifferences() {
+    //     if (this.refreshDifference && Object.keys(this.refreshDifference).length > 0) {
+    //         for (const key in this.refreshDifference) {
+    //             this.refreshedMap[key] = this.refreshDifference[key].new;
+    //         }
+    //     }
+    // }
+    // Get the specific difference
+    getSpecificDifference() {
+        for (const key in this.refreshDifference) {
+            console.log(`Difference in object with key '${key}':`);
     
-    refreshMapWithDifferences() {
-        if (this.refreshDifference && Object.keys(this.refreshDifference).length > 0) {
-            for (const key in this.refreshDifference) {
-                this.refreshedMap[key] = this.refreshDifference[key].new;
+            const oldList = this.refreshDifference[key].old;
+            const newList = this.refreshDifference[key].new;
+    
+            // Find elements that are in newList but not in oldList
+            const added = newList.filter(newItem => !oldList.some(oldItem => _.isEqual(newItem, oldItem)));
+    
+            if (added.length > 0) {
+                console.log(`Added elements:`, added);
+            }
+    
+            // Find elements that are in oldList but not in newList
+            const removed = oldList.filter(oldItem => !newList.some(newItem => _.isEqual(newItem, oldItem)));
+    
+            if (removed.length > 0) {
+                console.log(`Removed elements:`, removed);
+                // Same coords are removed
+                // Check later if the player is not staying here too
+                removed.forEach(removedElem => {
+                    for (const objectId in this.map.gameObjects) {
+                        const obj = this.map.gameObjects[objectId];
+                        if (obj.x === removedElem.x * 32 && obj.y === removedElem.y * 32) {
+                            //if it's monster - remove collision
+                            if (obj.isMonster) {
+                                this.map.removeWall(removedElem.x * 32, removedElem.y * 32);
+                            }
+                            //remove gameObject
+                            if (obj.isOtherPlayer || obj.isPlayerControlled) {
+                                continue; //skip players
+                            }
+                            // Remove gameObject
+                            delete this.map.gameObjects[objectId];
+                        }
+                    }
+                });
             }
         }
     }
     
-    // Get the specific difference
-    getSpecificDifference() {
-        for (const key in this.refreshDifference) {
-            console.log(`Difference in object with key '${key}':`, this.refreshDifference[key]);
-            // Do something with this.refreshDifference[key]
-        }
-    }
       
     //fetching hero data
     getHeroData() {
