@@ -9,8 +9,8 @@ namespace Server.Controllers;
 [Authorize]
 public class NpcController : ControllerBase
 {
-    private readonly IAuthMenager _authMenager;
     private readonly IConfiguration _configuration;
+    private readonly IAuthMenager _authMenager;
     private readonly INpcMenager _npcMenager;
 
     public NpcController(IConfiguration _configuration, IAuthMenager _authMenager, INpcMenager _npcMenager)
