@@ -185,7 +185,9 @@ class OverworldMap {
     checkForNpc() {
         const hero = this.gameObjects["hero"];
         const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
-
+    
+        let displayedNPCChanged = false;
+    
         const nearbyObject = Object.values(this.gameObjects).find((object) => {
             if (object.id !== "hero" && !(object instanceof Item)) {
                 const distance = Math.sqrt(
@@ -200,30 +202,38 @@ class OverworldMap {
             }
             return false;
         });
-
-        // // Check if it's an NPC
-        // if (
-        //     !this.isCutscenePlaying &&
-        //     nearbyObject &&
-        //     nearbyObject.talking &&
-        //     nearbyObject.talking.length > 0
-        // ) {
-        //     if (this.displayedNPC !== nearbyObject.id) {
-        //         const approachDirection = this.calculateApproachDirection(
-        //             hero,
-        //             nearbyObject
-        //         );
-        //         this.displayedNPC = nearbyObject.id;
-        //         this.displayTalkButton(nearbyObject, approachDirection); // Show talk button
-        //     }
-        // } else {
-        //     if (this.talkButtonRef) {
-        //         // Remove after walking away
-        //         this.removeTalkButton();
-        //         this.displayedNPC = null;
-        //     }
-        // }
+    
+        // Check if it's an NPC
+        if (
+            !this.isCutscenePlaying &&
+            nearbyObject &&
+            nearbyObject.talking &&
+            nearbyObject.talking.length > 0
+        ) {
+            if (this.displayedNPC !== nearbyObject.id) {
+                const approachDirection = this.calculateApproachDirection(
+                    hero,
+                    nearbyObject
+                );
+                this.displayedNPC = nearbyObject.id;
+    
+                // Remove old button if it exists
+                if (this.talkButtonRef) {
+                    this.removeTalkButton();
+                }
+    
+                this.displayTalkButton(nearbyObject, approachDirection); // Show talk button
+                displayedNPCChanged = true;
+            }
+        }
+    
+        if (!displayedNPCChanged && this.talkButtonRef) {
+            // Remove button after walking away if no new NPC is displayed
+            this.removeTalkButton();
+            this.displayedNPC = null;
+        }
     }
+    
 
     calculateApproachDirection(hero, npc) {
         const deltaX = npc.x - hero.x;
