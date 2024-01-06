@@ -56,7 +56,7 @@ body{
 }
 
 #backpack, #shop{
-	margin-left: 17px;
+	margin-left: 19px;
 	width: 300px;
 	display: flex;
 	flex-wrap: wrap;
@@ -65,7 +65,7 @@ body{
 }
 
 #questList{
-	margin-left: 17px;
+	margin-left: 19px;
 	width: 1200px;
 	display: flex;
 	flex-wrap: wrap;
@@ -163,7 +163,7 @@ body{
     background-repeat: no-repeat;
 	background-image: url("./../assets/ui/box/boxNormal.png");
 	position: absolute;
-	margin-left: 12rem;
+	margin-left: 12.2rem;
 }
 
 #drop .item-image{
@@ -171,7 +171,6 @@ body{
 }
 
 #questListButtonContainer {
-    position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
