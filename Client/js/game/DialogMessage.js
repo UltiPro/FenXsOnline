@@ -1,12 +1,12 @@
 //local shop list needed for infoDiv
 let shopDetails = [];
 
-function getShopDetails(){
-    return shopDetails
+function getShopDetails() {
+    return shopDetails;
 }
 
 class DialogMessage {
-    constructor({ text, faceHero, npcId, percent, shopItems, quests, questsStage, onComplete }) {
+    constructor({ text, faceHero, npcId, percent, shopItems, quests, questsStage, mapRef, onComplete }) {
         this.percent = percent;
         this.text = text;
         this.faceHero = faceHero;
@@ -14,6 +14,7 @@ class DialogMessage {
         this.shopItems = shopItems;
         this.quests = quests;
         this.questsStage = questsStage;
+        this.map = mapRef;
         this.onComplete = onComplete;
         this.element = null;
         this.tradeMenu = null;
@@ -22,10 +23,11 @@ class DialogMessage {
     }
 
     createElement() {
-        console.log("questStages:",this.questsStage)
+        console.log(this.map.gameObjects[this.faceHero].talking[0].events[0].quests[0]);
+        console.log("questStages:", this.questsStage);
+        console.log("quests: ", this.quests);
         this.element = document.createElement("div");
         this.element.classList.add("TextMessage");
-        console.log("quests: ",this.quests)
         this.element.innerHTML = `
             <h4 class="TextMessage-p">${this.faceHero}</h4>
             <p id="dialog" class="TextMessage-p">Greetings traveler!</p>
@@ -36,6 +38,7 @@ class DialogMessage {
             `
                 )
                 .join("")}
+                
             <button id="close" class="TextMessage-button">I gotta go</button>
         `;
 
@@ -63,7 +66,15 @@ class DialogMessage {
                         console.log(this.quests[0]);
                         npcMessage.textContent = this.quests[0].npcMessage;
                         this.questProgress();
-                        document.getElementById('quest').remove();
+                        document.getElementById("quest").remove();
+                        //removing quest in npc after talking about it
+                        // Check for the npc
+                        break;
+                    case "questStage":
+                        this.talkQuest();
+                        document.getElementById("questStage").remove();
+                        //removing quest in npc after talking about it
+                        // Check for the npc
                         break;
                     default:
                         this.done();
@@ -85,20 +96,13 @@ class DialogMessage {
     handleArrowKeyPress(event) {
         if (event.key === "ArrowDown" || event.key === "ArrowRight") {
             event.preventDefault();
-            this.currentButtonIndex =
-                (this.currentButtonIndex + 1) % this.buttons.length;
+            this.currentButtonIndex = (this.currentButtonIndex + 1) % this.buttons.length;
             this.buttons[this.currentButtonIndex].focus();
         } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
             event.preventDefault();
-            this.currentButtonIndex =
-                (this.currentButtonIndex - 1 + this.buttons.length) %
-                this.buttons.length;
+            this.currentButtonIndex = (this.currentButtonIndex - 1 + this.buttons.length) % this.buttons.length;
             this.buttons[this.currentButtonIndex].focus();
         }
-    }
-
-    async questProgress(){
-        await app.post(apiBaseUrl + `Quest/?questId=${this.quests[0].id}`)
     }
 
     async heal() {
@@ -106,11 +110,19 @@ class DialogMessage {
         updateHeroStatLabels();
     }
 
+    async questProgress() {
+        await app.post(apiBaseUrl + `Quest/?questId=${this.quests[0].id}`);
+    }
+
+    async talkQuest(){
+        await app.post(apiBaseUrl + `Quest/talk/?questId=${this.questsStage[0].questId}`);
+    }
+
     async openTradeMenu(npcId) {
         this.element.remove();
         this.tradeMenu = document.createElement("div");
         this.tradeMenu.classList.add("tradeBox");
-        console.log(this.shopItems)
+        console.log(this.shopItems);
         this.fetchShopItems(npcId);
 
         this.tradeMenu.innerHTML = `
@@ -181,57 +193,65 @@ class DialogMessage {
         `;
         //console.log(this.tradeMenu)
         document.querySelector(".game-container").appendChild(this.tradeMenu);
-        this.tradeMenu
-            .querySelector("#tradeBox-close")
-            .addEventListener("click", () => {
-                shopDetails = [];
-                this.closeTradeMenu();
-            });
+        this.tradeMenu.querySelector("#tradeBox-close").addEventListener("click", () => {
+            shopDetails = [];
+            this.closeTradeMenu();
+        });
     }
 
     async fetchShopItems(npcId) {
         try {
             const fetchItemPromises = this.shopItems.map(async (item) => {
-                const response = await app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`)
+                const response = await app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`);
                 const typePath = await this.itemTypeParser(item.itemType);
-    
+
                 const draggableDiv = $(`<div onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" class="item-image" draggable="true" style="background-image: url('${typePath}${response.data.spriteURL}');"> </div>`);
-    
+
                 const itemWithSlot = {
                     itemDetails: response.data,
                     slotInfo: `${item.id}`,
-                    npcId: npcId
+                    npcId: npcId,
                 };
-    
+
                 shopDetails.push(itemWithSlot);
                 $(`#s${item.id}`).append(draggableDiv);
-                
             });
-    
+
             await Promise.all(fetchItemPromises);
         } catch (error) {
             console.error("Error fetching item details:", error);
             throw error;
         }
     }
-    
+
     async itemTypeParser(type) {
-        switch(type) {
-            case 0: return "./assets/primaryWeapons/";
-            case 1: return "./assets/secondaryWeapons/";
-            case 2: return "./assets/armors/";
-            case 3: return "./assets/helmets/";
-            case 4: return "./assets/boots/";
-            case 5: return "./assets/gloves/";
-            case 6: return "./assets/necklaces/";
-            case 7: return "./assets/rings/";
-            case 8: return "./assets/consumables/";
-            case 9: return "./assets/neutrals/";
-            case 10: return "./assets/quest/";
-            default: return "";
+        switch (type) {
+            case 0:
+                return "./assets/primaryWeapons/";
+            case 1:
+                return "./assets/secondaryWeapons/";
+            case 2:
+                return "./assets/armors/";
+            case 3:
+                return "./assets/helmets/";
+            case 4:
+                return "./assets/boots/";
+            case 5:
+                return "./assets/gloves/";
+            case 6:
+                return "./assets/necklaces/";
+            case 7:
+                return "./assets/rings/";
+            case 8:
+                return "./assets/consumables/";
+            case 9:
+                return "./assets/neutrals/";
+            case 10:
+                return "./assets/quest/";
+            default:
+                return "";
         }
     }
-    
 
     closeTradeMenu() {
         this.tradeMenu.remove();

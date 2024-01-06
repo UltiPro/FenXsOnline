@@ -67,10 +67,10 @@ class OverworldEvent {
 
     dialogBox(resolve) {
         //during talking with npc change npc standing direction to face character position
-        if (this.event.faceHero) {
-            const obj = this.map.gameObjects[this.event.faceHero];
-            obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
-        }
+        // if (this.event.faceHero) {
+        //     const obj = this.map.gameObjects[this.event.faceHero];
+        //     obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
+        // }
         const dialog = new DialogMessage({
             text: this.event.text,
             faceHero: this.event.faceHero,
@@ -79,6 +79,7 @@ class OverworldEvent {
             shopItems: this.event.shopItems,
             quests: this.event.quests,
             questsStage: this.event.questsStage,
+            mapRef: this.map,
             onComplete: () => resolve(),
         });
         dialog.init(document.querySelector(".game-container"));
@@ -96,24 +97,32 @@ class OverworldEvent {
                     //Player won the battle
                     if (drop === null) {
                         // console.log("No loot :(")
+                        resolve();
                     } else {
                         // console.log("Loot! :3", drop)
                         await showGrabbedItem(drop); //getting loot
+                        resolve();
                     }
-                    resolve();
                 } else {
                     // Player lost the battle
                     //removing hero old collision
                     const heroX = this.map.gameObjects["hero"].x
                     const heroY = this.map.gameObjects["hero"].y
-                    delete this.map.walls[`${heroX},${heroY}`]
-                    //counting respawn time
-                    await this.respawnDelay(deathInfo);
-                    //teleporting player to the respawn place
-                    const keys = Object.keys(window.OverworldMaps); //all map IDs
-                    const respawn = keys[deathInfo.mapId]; //map to be respawned at
-                    this.map.overworld.newMapCoords(window.OverworldMaps[respawn], deathInfo.x, deathInfo.y);
-                    this.map.overworld.startMap(window.OverworldMaps[respawn]);
+                    if(this.map.walls[`${heroX},${heroY}`]){
+                        delete this.map.walls[`${heroX},${heroY}`]
+                          //counting respawn time
+                        await this.respawnDelay(deathInfo);
+                        //teleporting player to the respawn place
+                        const keys = Object.keys(window.OverworldMaps); //all map IDs
+                        const respawn = keys[deathInfo.mapId]; //map to be respawned at
+                        this.map.overworld.newMapCoords(window.OverworldMaps[respawn], deathInfo.x, deathInfo.y);
+                        this.map.overworld.startMap(window.OverworldMaps[respawn]);
+                        console.log("respawn, resolve event")
+                        resolve();
+                    }
+                    else{
+                        resolve();
+                    }
                     resolve();
                 }
             },
@@ -183,11 +192,6 @@ class OverworldEvent {
                 }, 500);
             }, delay);
         });
-    
         console.log('Time delay elapsed!');
-    }
-    
-    async getLoot(){
-        
     }
 }

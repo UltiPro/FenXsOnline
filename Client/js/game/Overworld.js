@@ -265,6 +265,15 @@ class Overworld {
                 src: `./assets/npcs/${npcData.spriteURL}`,
                 pricePercent: npcData.pricePercent,
             });
+            //check for npc quest stages
+            if (npcData.questsStage && npcData.questsStage.length > 0) {
+                npcData.questsStage.forEach((stage) => {
+                    texts.push({
+                        text: stage.npcMessage, 
+                        flag: `questStage`,
+                    });
+                });
+            }
             //check for npc quest
             if (npcData.quests && npcData.quests.length > 0) {
                 npcData.quests.forEach(quest => {
@@ -274,7 +283,7 @@ class Overworld {
                     });
                 });
             }
-            //Check for healer/trader
+            //check for healer/trader
             if (npcData.isHealer) {
                 placeNPC.isHealerNPC = true;
                 texts.push({ text: "I need healing", flag: "heal" });
