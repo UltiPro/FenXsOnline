@@ -201,28 +201,28 @@ class OverworldMap {
             return false;
         });
 
-        // Check if it's an NPC
-        if (
-            !this.isCutscenePlaying &&
-            nearbyObject &&
-            nearbyObject.talking &&
-            nearbyObject.talking.length > 0
-        ) {
-            if (this.displayedNPC !== nearbyObject.id) {
-                const approachDirection = this.calculateApproachDirection(
-                    hero,
-                    nearbyObject
-                );
-                this.displayedNPC = nearbyObject.id;
-                this.displayTalkButton(nearbyObject, approachDirection); // Show talk button
-            }
-        } else {
-            if (this.talkButtonRef) {
-                // Remove after walking away
-                this.removeTalkButton();
-                this.displayedNPC = null;
-            }
-        }
+        // // Check if it's an NPC
+        // if (
+        //     !this.isCutscenePlaying &&
+        //     nearbyObject &&
+        //     nearbyObject.talking &&
+        //     nearbyObject.talking.length > 0
+        // ) {
+        //     if (this.displayedNPC !== nearbyObject.id) {
+        //         const approachDirection = this.calculateApproachDirection(
+        //             hero,
+        //             nearbyObject
+        //         );
+        //         this.displayedNPC = nearbyObject.id;
+        //         this.displayTalkButton(nearbyObject, approachDirection); // Show talk button
+        //     }
+        // } else {
+        //     if (this.talkButtonRef) {
+        //         // Remove after walking away
+        //         this.removeTalkButton();
+        //         this.displayedNPC = null;
+        //     }
+        // }
     }
 
     calculateApproachDirection(hero, npc) {
@@ -238,7 +238,7 @@ class OverworldMap {
     }
 
     // Function to display the talk button
-    displayTalkButton(match, approachDirection) {
+    async displayTalkButton(match, approachDirection) {
         const canvas = document.getElementById('game-canvas');
         const canvasRect = canvas.getBoundingClientRect();
         
@@ -254,10 +254,12 @@ class OverworldMap {
             talkButton.style.left = `${canvasRect.left + canvasRect.width / 2 - 35}px`;
             talkButton.style.top = `${canvasRect.top + canvasRect.height / 2 - 40}px`;
     
-            talkButton.onclick = () => {
-                this.startCutscene(match.talking[0].events);
+            talkButton.onclick = (e) => {
                 this.removeTalkButton(); // Remove button after click
                 this.displayedNPC = null;
+                this.startCutscene(match.talking[0].events);
+                e.stopPropagation();
+                e.preventDefault();
             };
     
             document.body.appendChild(talkButton);
