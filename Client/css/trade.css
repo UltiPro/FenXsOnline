@@ -1,4 +1,4 @@
- .tradeBox {
+ .tradeBox{
     border-radius: 5px;
     border: solid black 2px;
     color: goldenrod;
@@ -10,7 +10,6 @@
     height: 75%;
     transform: translate(-50%, -50%);
     background-image: url("./../assets/ui/greyBackground.png");
-    /* Add other styles as needed */
 } 
 
 #tradeBox-close {

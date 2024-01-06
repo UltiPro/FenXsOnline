@@ -1,0 +1,67 @@
+.questBox{
+    border-radius: 5px;
+    border: solid black 2px;
+    color: goldenrod;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 85%;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("./../assets/ui/greyBackground.png");
+    z-index: 6;
+}
+
+#questBox-close{
+    border-radius: 5px;
+    color: inherit;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 30px;
+    height: 30px;
+    background-color: #303030;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#questList{
+    position: relative;
+    width: 94%;
+}
+
+#questListTitles {
+    position: absolute;
+    padding: 10px;
+    width: 100%; 
+    height: 65%;
+    border: solid goldenrod 1px;
+    border-radius: 5px;
+}
+
+#questListDesc {
+    position: relative;
+    padding: 10px;
+    background-color: black;
+    opacity: 70%;
+    border: solid goldenrod 1px;
+    border-radius: 5px;
+    width: 100%; 
+    height: 7rem;
+    margin-top: 60%; 
+}
+
+.questTitle{
+    color: goldenrod;
+    cursor: url("./../assets/ui/pointerSmall.png"), auto;
+}
+
+.questTitle.active:hover,
+.questTitle.active:active {
+    color: white !important;
+}

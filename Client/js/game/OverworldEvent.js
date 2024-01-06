@@ -77,6 +77,8 @@ class OverworldEvent {
             npcId: this.event.npcId,
             percent: this.event.percent,
             shopItems: this.event.shopItems,
+            quests: this.event.quests,
+            questsStage: this.event.questsStage,
             onComplete: () => resolve(),
         });
         dialog.init(document.querySelector(".game-container"));

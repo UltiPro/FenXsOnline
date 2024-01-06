@@ -64,6 +64,15 @@ body{
 	z-index: 1;
 }
 
+#questList{
+	margin-left: 17px;
+	width: 1200px;
+	display: flex;
+	flex-wrap: wrap;
+    gap: 4px;
+	z-index: 1;
+}
+
 .bp-slot, .eq-slot, .shop-slot{
 	position: relative;
     overflow: hidden;
@@ -158,6 +167,44 @@ body{
 }
 
 #drop .item-image{
+	background-image: url("./../assets/ui/eq/drop.png");
+}
+
+#questListButtonContainer {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    color: goldenrod;
+    width: 48px;
+    height: 48px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("./../assets/ui/box/boxNormal.png");
+    position: absolute;
+    margin-right: 12rem;
+}
+
+#questListButton {
+	color: goldenrod;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("./../assets/ui/eq/questBook.png");
+    font-size: 14px;
+    width: 70%;
+    height: 70%; 
+    margin: 0; 
+}
+#questListButton:hover{
+	color: white;
+}
+
+.item-image{
 	background-image: url("./../assets/ui/eq/drop.png");
 }
 

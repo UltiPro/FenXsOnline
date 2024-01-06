@@ -257,16 +257,23 @@ class Overworld {
             let name = npcData.name;
             let npc = name;
             let texts = [];
+            console.log(npcData.quests)
             let placeNPC = new Person({
                 isPlayerControlled: false,
                 x: utils.withGrid(npcData.x),
                 y: utils.withGrid(npcData.y),
                 src: `./assets/npcs/${npcData.spriteURL}`,
-                behaviorLoop: [
-                    { type: "stand", direction: "down", time: "200" },
-                ],
                 pricePercent: npcData.pricePercent,
             });
+            //check for npc quest
+            if (npcData.quests && npcData.quests.length > 0) {
+                npcData.quests.forEach(quest => {
+                    texts.push({
+                        text: quest.title,
+                        flag: "quest",
+                    });
+                });
+            }
             //Check for healer/trader
             if (npcData.isHealer) {
                 placeNPC.isHealerNPC = true;
@@ -289,6 +296,8 @@ class Overworld {
                             npcId: npcData.id,
                             percent: npcData.pricePercent,
                             shopItems: npcData.shopItems,
+                            quests: npcData.quests,
+                            questsStage: npcData.questsStage
                         },
                     ],
                 },
@@ -458,7 +467,10 @@ class Overworld {
         });
     }
     
-    
+    async questUpdate(){
+        this.mapData = await this.getMapData();
+        this.placeNPC();
+    }
 
     //Action key listner
     bindActionInput() {

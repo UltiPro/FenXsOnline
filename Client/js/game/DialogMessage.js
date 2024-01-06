@@ -6,12 +6,14 @@ function getShopDetails(){
 }
 
 class DialogMessage {
-    constructor({ text, faceHero, npcId, percent, shopItems, onComplete }) {
+    constructor({ text, faceHero, npcId, percent, shopItems, quests, questsStage, onComplete }) {
         this.percent = percent;
         this.text = text;
         this.faceHero = faceHero;
         this.npcId = npcId;
         this.shopItems = shopItems;
+        this.quests = quests;
+        this.questsStage = questsStage;
         this.onComplete = onComplete;
         this.element = null;
         this.tradeMenu = null;
@@ -20,12 +22,13 @@ class DialogMessage {
     }
 
     createElement() {
+        console.log("questStages:",this.questsStage)
         this.element = document.createElement("div");
         this.element.classList.add("TextMessage");
-
+        console.log("quests: ",this.quests)
         this.element.innerHTML = `
             <h4 class="TextMessage-p">${this.faceHero}</h4>
-            <p class="TextMessage-p">Greetings traveler!</p>
+            <p id="dialog" class="TextMessage-p">Greetings traveler!</p>
             ${this.text
                 .map(
                     (textObj, index) => `
@@ -55,7 +58,13 @@ class DialogMessage {
                         this.openTradeMenu(this.npcId);
                         //this.done();
                         break;
-
+                    case "quest":
+                        const npcMessage = document.getElementById("dialog");
+                        console.log(this.quests[0]);
+                        npcMessage.textContent = this.quests[0].npcMessage;
+                        this.questProgress();
+                        document.getElementById('quest').remove();
+                        break;
                     default:
                         this.done();
                         break;
@@ -86,6 +95,10 @@ class DialogMessage {
                 this.buttons.length;
             this.buttons[this.currentButtonIndex].focus();
         }
+    }
+
+    async questProgress(){
+        await app.post(apiBaseUrl + `Quest/?questId=${this.quests[0].id}`)
     }
 
     async heal() {
