@@ -530,9 +530,9 @@ namespace Server.Migrations
                 name: "QuestRewards",
                 columns: table => new
                 {
-                    QuestId = table.Column<int>(type: "int", nullable: false),
                     ItemType = table.Column<int>(type: "int", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false),
+                    QuestId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -559,7 +559,6 @@ namespace Server.Migrations
                     NpcAnswear = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Kill = table.Column<bool>(type: "bit", nullable: false),
                     MobId = table.Column<int>(type: "int", nullable: true),
-                    Bring = table.Column<bool>(type: "bit", nullable: false),
                     ItemType = table.Column<int>(type: "int", nullable: true),
                     ItemId = table.Column<int>(type: "int", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: true)
@@ -687,6 +686,33 @@ namespace Server.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "HeroesQuests",
+                columns: table => new
+                {
+                    HeroId = table.Column<int>(type: "int", nullable: false),
+                    QuestId = table.Column<int>(type: "int", nullable: false),
+                    Done = table.Column<bool>(type: "bit", nullable: false),
+                    Stage = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HeroesQuests", x => new { x.HeroId, x.QuestId });
+                    table.ForeignKey(
+                        name: "FK_HeroesQuests_Heroes_HeroId",
+                        column: x => x.HeroId,
+                        principalTable: "Heroes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HeroesQuests_Quests_QuestId",
+                        column: x => x.QuestId,
+                        principalTable: "Quests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Armors",
                 columns: new[] { "Id", "Agility", "Armor", "HealthPoints", "ItemType", "Level", "MagicArmor", "Name", "Price", "Profession", "SpriteURL", "Weight" },
@@ -711,9 +737,9 @@ namespace Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "09485e5e-1449-4120-95af-67b0eed235d9", null, "User", "USER" },
-                    { "184b784b-6d82-4b1e-bb7d-dda3f1b8ae29", null, "Administrator", "ADMINISTRATOR" },
-                    { "5e21304d-b184-43a0-991a-a08391b0ef6d", null, "Moderator", "MODERATOR" }
+                    { "358269f1-1849-47b8-beae-3c53ff5cd0ea", null, "Administrator", "ADMINISTRATOR" },
+                    { "9696b9d3-aafc-4412-b98e-54defa081bd9", null, "User", "USER" },
+                    { "de4b723b-d2ad-4361-a258-97f95a81b2d9", null, "Moderator", "MODERATOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -786,12 +812,13 @@ namespace Server.Migrations
                 columns: new[] { "MapId", "X", "Y", "Available", "ItemId", "ItemType" },
                 values: new object[,]
                 {
-                    { 1, 3, 49, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(131), 10, 8 },
-                    { 1, 15, 69, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(128), 10, 8 },
-                    { 1, 16, 94, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(68), 10, 8 },
-                    { 1, 55, 43, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(133), 10, 8 },
-                    { 2, 1, 2, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(215), 12, 8 },
-                    { 2, 20, 12, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(211), 12, 8 }
+                    { 1, 3, 49, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8370), 10, 8 },
+                    { 1, 15, 69, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8367), 10, 8 },
+                    { 1, 16, 94, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8318), 10, 8 },
+                    { 1, 55, 43, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8372), 10, 8 },
+                    { 1, 56, 71, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8373), 5, 10 },
+                    { 2, 1, 2, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8433), 12, 8 },
+                    { 2, 20, 12, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8430), 12, 8 }
                 });
 
             migrationBuilder.InsertData(
@@ -799,72 +826,72 @@ namespace Server.Migrations
                 columns: new[] { "MapId", "X", "Y", "Available", "MobId" },
                 values: new object[,]
                 {
-                    { 1, 1, 43, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(428), 1 },
-                    { 1, 1, 50, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(434), 1 },
-                    { 1, 1, 61, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(438), 1 },
-                    { 1, 3, 39, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(430), 1 },
-                    { 1, 5, 86, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(419), 1 },
-                    { 1, 6, 46, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(432), 1 },
-                    { 1, 6, 51, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(436), 1 },
-                    { 1, 9, 66, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(426), 1 },
-                    { 1, 12, 88, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(412), 1 },
-                    { 1, 16, 89, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(415), 1 },
-                    { 1, 19, 83, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(417), 1 },
-                    { 1, 26, 91, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(422), 1 },
-                    { 1, 29, 94, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(424), 1 },
-                    { 1, 40, 89, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(442), 1 },
-                    { 1, 40, 93, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(440), 1 },
-                    { 1, 42, 73, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(455), 1 },
-                    { 1, 47, 73, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(457), 1 },
-                    { 1, 47, 92, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(451), 1 },
-                    { 1, 48, 88, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(453), 1 },
-                    { 1, 51, 75, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(459), 1 },
-                    { 1, 52, 60, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(510), 1 },
-                    { 1, 53, 12, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(534), 1 },
-                    { 1, 53, 26, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(528), 1 },
-                    { 1, 53, 65, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(463), 1 },
-                    { 1, 53, 94, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(449), 1 },
-                    { 1, 54, 92, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(447), 1 },
-                    { 1, 55, 13, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(536), 1 },
-                    { 1, 55, 19, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(533), 1 },
-                    { 1, 55, 25, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(526), 1 },
-                    { 1, 55, 63, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(472), 1 },
-                    { 1, 57, 9, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(539), 1 },
-                    { 1, 57, 61, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(512), 1 },
-                    { 1, 57, 94, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(445), 1 },
-                    { 1, 58, 63, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(470), 1 },
-                    { 1, 58, 67, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(461), 1 },
-                    { 1, 59, 27, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(524), 1 },
-                    { 1, 59, 53, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(522), 1 },
-                    { 1, 59, 58, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(520), 1 },
-                    { 1, 59, 61, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(514), 1 },
-                    { 1, 59, 65, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(465), 1 },
-                    { 1, 61, 60, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(516), 1 },
-                    { 1, 61, 62, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(468), 1 },
-                    { 1, 62, 20, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(530), 1 },
-                    { 1, 62, 57, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(518), 1 },
-                    { 2, 2, 9, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(675), 2 },
-                    { 2, 2, 21, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(636), 2 },
-                    { 2, 4, 8, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(673), 2 },
-                    { 2, 4, 18, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(638), 2 },
-                    { 2, 6, 22, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(634), 2 },
-                    { 2, 7, 11, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(671), 2 },
-                    { 2, 7, 17, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(640), 2 },
-                    { 2, 8, 6, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(669), 2 },
-                    { 2, 9, 20, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(642), 2 },
-                    { 2, 13, 4, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(667), 2 },
-                    { 2, 15, 25, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(631), 2 },
-                    { 2, 16, 19, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(654), 2 },
-                    { 2, 17, 5, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(662), 2 },
-                    { 2, 17, 12, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(652), 2 },
-                    { 2, 19, 8, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(665), 2 },
-                    { 2, 22, 7, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(658), 2 },
-                    { 2, 22, 14, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(650), 2 },
-                    { 2, 23, 19, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(648), 2 },
-                    { 2, 23, 24, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(644), 2 },
-                    { 2, 24, 10, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(656), 2 },
-                    { 2, 24, 22, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(646), 2 },
-                    { 2, 27, 9, new DateTime(2023, 12, 30, 19, 43, 51, 22, DateTimeKind.Local).AddTicks(660), 2 }
+                    { 1, 1, 43, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8608), 1 },
+                    { 1, 1, 50, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8612), 1 },
+                    { 1, 1, 61, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8615), 1 },
+                    { 1, 3, 39, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8609), 1 },
+                    { 1, 5, 86, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8602), 1 },
+                    { 1, 6, 46, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8611), 1 },
+                    { 1, 6, 51, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8614), 1 },
+                    { 1, 9, 66, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8606), 1 },
+                    { 1, 12, 88, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8595), 1 },
+                    { 1, 16, 89, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8599), 1 },
+                    { 1, 19, 83, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8601), 1 },
+                    { 1, 26, 91, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8604), 1 },
+                    { 1, 29, 94, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8605), 1 },
+                    { 1, 40, 89, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8618), 1 },
+                    { 1, 40, 93, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8616), 1 },
+                    { 1, 42, 73, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8655), 1 },
+                    { 1, 47, 73, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8656), 1 },
+                    { 1, 47, 92, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8652), 1 },
+                    { 1, 48, 88, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8653), 1 },
+                    { 1, 51, 75, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8658), 1 },
+                    { 1, 52, 60, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8667), 1 },
+                    { 1, 53, 12, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8683), 1 },
+                    { 1, 53, 26, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8679), 1 },
+                    { 1, 53, 65, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8660), 1 },
+                    { 1, 53, 94, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8650), 1 },
+                    { 1, 54, 92, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8620), 1 },
+                    { 1, 55, 13, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8685), 1 },
+                    { 1, 55, 19, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8682), 1 },
+                    { 1, 55, 25, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8678), 1 },
+                    { 1, 55, 63, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8666), 1 },
+                    { 1, 57, 9, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8686), 1 },
+                    { 1, 57, 61, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8669), 1 },
+                    { 1, 57, 94, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8619), 1 },
+                    { 1, 58, 63, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8664), 1 },
+                    { 1, 58, 67, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8659), 1 },
+                    { 1, 59, 27, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8677), 1 },
+                    { 1, 59, 53, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8675), 1 },
+                    { 1, 59, 58, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8674), 1 },
+                    { 1, 59, 61, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8670), 1 },
+                    { 1, 59, 65, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8662), 1 },
+                    { 1, 61, 60, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8671), 1 },
+                    { 1, 61, 62, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8663), 1 },
+                    { 1, 62, 20, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8681), 1 },
+                    { 1, 62, 57, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8673), 1 },
+                    { 2, 2, 9, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8783), 2 },
+                    { 2, 2, 21, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8756), 2 },
+                    { 2, 4, 8, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8782), 2 },
+                    { 2, 4, 18, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8757), 2 },
+                    { 2, 6, 22, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8754), 2 },
+                    { 2, 7, 11, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8781), 2 },
+                    { 2, 7, 17, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8759), 2 },
+                    { 2, 8, 6, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8779), 2 },
+                    { 2, 9, 20, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8760), 2 },
+                    { 2, 13, 4, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8778), 2 },
+                    { 2, 15, 25, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8752), 2 },
+                    { 2, 16, 19, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8770), 2 },
+                    { 2, 17, 5, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8775), 2 },
+                    { 2, 17, 12, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8768), 2 },
+                    { 2, 19, 8, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8776), 2 },
+                    { 2, 22, 7, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8772), 2 },
+                    { 2, 22, 14, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8767), 2 },
+                    { 2, 23, 19, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8766), 2 },
+                    { 2, 23, 24, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8762), 2 },
+                    { 2, 24, 10, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8771), 2 },
+                    { 2, 24, 22, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8763), 2 },
+                    { 2, 27, 9, new DateTime(2024, 1, 6, 23, 37, 54, 922, DateTimeKind.Local).AddTicks(8774), 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -1117,16 +1144,16 @@ namespace Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "QuestStages",
-                columns: new[] { "QuestId", "Stage", "Bring", "Description", "ItemId", "ItemType", "Kill", "MobId", "NpcAnswear", "NpcId", "NpcMessage", "Quantity", "Talk" },
+                columns: new[] { "QuestId", "Stage", "Description", "ItemId", "ItemType", "Kill", "MobId", "NpcAnswear", "NpcId", "NpcMessage", "Quantity", "Talk" },
                 values: new object[,]
                 {
-                    { 1, 1, true, "Find the healer's necklace and bring it to her.", 5, 10, false, null, "Thank you very much, here is your reward.", 1, "I found your necklace.", 1, false },
-                    { 2, 1, false, "Kill 30 rabbits.", null, null, true, 1, null, null, null, 30, false },
-                    { 2, 2, false, "Tell Eldrik that you have killed enough rabbits.", null, null, false, null, "Thank you very much, here is your reward.", 2, "I killed rabbits.", null, true },
-                    { 3, 1, false, "Kill 30 spiders.", null, null, true, 2, null, null, null, 30, false },
-                    { 3, 2, false, "Tell Franko that you have killed enough spiders.", null, null, false, null, "Thank you very much, here is your reward.", 4, "I killed spiders.", null, true },
-                    { 4, 1, true, "Bring 3 apples for cake to Adelaide.", 10, 8, false, null, "Thank you very much, here is your reward.", 1, "I brought you three apples.", 3, false },
-                    { 5, 1, true, "Bring 5 night mashroom to Gustaf.", 12, 8, false, null, "Thank you very much, here is your reward.", 3, "I brought you five night mashrooms.", 5, false }
+                    { 1, 1, "Find the healer's necklace and bring it to her.", 5, 10, false, null, "Thank you very much, here is your reward.", 1, "I found your necklace.", 1, true },
+                    { 2, 1, "Kill 30 rabbits.", null, null, true, 1, null, null, null, 30, false },
+                    { 2, 2, "Tell Eldrik that you have killed enough rabbits.", null, null, false, null, "Thank you very much, here is your reward.", 2, "I killed rabbits.", null, true },
+                    { 3, 1, "Kill 30 spiders.", null, null, true, 2, null, null, null, 30, false },
+                    { 3, 2, "Tell Franko that you have killed enough spiders.", null, null, false, null, "Thank you very much, here is your reward.", 4, "I killed spiders.", null, true },
+                    { 4, 1, "Bring 3 apples for cake to Adelaide.", 10, 8, false, null, "Thank you very much, here is your reward.", 1, "I brought you three apples.", 3, true },
+                    { 5, 1, "Bring 5 night mashroom to Gustaf.", 12, 8, false, null, "Thank you very much, here is your reward.", 3, "I brought you five night mashrooms.", 5, true }
                 });
 
             migrationBuilder.CreateIndex(
@@ -1218,6 +1245,11 @@ namespace Server.Migrations
                 name: "IX_Heroes_WeaponId",
                 table: "Heroes",
                 column: "WeaponId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HeroesQuests_QuestId",
+                table: "HeroesQuests",
+                column: "QuestId");
         }
 
         /// <inheritdoc />
@@ -1243,6 +1275,9 @@ namespace Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "HeroesEquipments");
+
+            migrationBuilder.DropTable(
+                name: "HeroesQuests");
 
             migrationBuilder.DropTable(
                 name: "MapItems");
