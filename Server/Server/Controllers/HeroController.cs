@@ -1,5 +1,4 @@
 ﻿using Classes.Exceptions;
-using Classes.Exceptions.Game;
 using Classes.Exceptions.Game.Hero;
 using Classes.Models.Game.Hero;
 using Database.Contracts;
@@ -15,14 +14,14 @@ namespace Server.Controllers;
 public class HeroController : ControllerBase
 {
     private readonly IConfiguration _configuration;
-    private readonly IHeroMenager _heroMenager;
     private readonly IAuthMenager _authMenager;
+    private readonly IHeroMenager _heroMenager;
 
-    public HeroController(IHeroMenager _heroMenager, IAuthMenager _authMenager, IConfiguration _configuration)
+    public HeroController(IConfiguration _configuration, IAuthMenager _authMenager, IHeroMenager _heroMenager)
     {
-        this._heroMenager = _heroMenager;
-        this._authMenager = _authMenager;
         this._configuration = _configuration;
+        this._authMenager = _authMenager;
+        this._heroMenager = _heroMenager;
     }
 
     [HttpGet]
@@ -86,7 +85,6 @@ public class HeroController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetAll()
     {
