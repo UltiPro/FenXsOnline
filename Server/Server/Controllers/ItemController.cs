@@ -20,6 +20,7 @@ namespace Server.Controllers;
 public class ItemController : ControllerBase
 {
     private readonly IItemMenager _itemMenager;
+
     public ItemController(IItemMenager _itemMenager)
     {
         this._itemMenager = _itemMenager;
