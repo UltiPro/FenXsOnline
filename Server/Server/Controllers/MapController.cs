@@ -18,7 +18,6 @@ public class MapController : ControllerBase
         this._configuration = _configuration;
         this._authMenager = _authMenager;
         this._mapMenager = _mapMenager;
-
     }
 
     [HttpGet]

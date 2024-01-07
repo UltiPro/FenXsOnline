@@ -10,15 +10,15 @@ namespace Server.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
+    private readonly IConfiguration _configuration;
     private readonly IAuthMenager _authMenager;
     private readonly IHeroMenager _heroMenager;
-    private readonly IConfiguration _configuration;
 
-    public AccountController(IAuthMenager _authMenager, IHeroMenager _heroMenager, IConfiguration configuration)
+    public AccountController(IConfiguration _configuration, IAuthMenager _authMenager, IHeroMenager _heroMenager)
     {
+        this._configuration = _configuration;
         this._authMenager = _authMenager;
         this._heroMenager = _heroMenager;
-        _configuration = configuration;
     }
 
     [HttpPost]

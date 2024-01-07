@@ -9,15 +9,15 @@ namespace Server.Controllers;
 [Authorize]
 public class MovementController : ControllerBase
 {
-    private readonly IMovementMenager _movementMenager;
-    private readonly IAuthMenager _authMenager;
     private readonly IConfiguration _configuration;
+    private readonly IAuthMenager _authMenager;
+    private readonly IMovementMenager _movementMenager;
 
-    public MovementController(IMovementMenager _movementMenager, IAuthMenager _authMenager, IConfiguration _configuration)
+    public MovementController(IConfiguration _configuration, IAuthMenager _authMenager, IMovementMenager _movementMenager)
     {
-        this._movementMenager = _movementMenager;
-        this._authMenager = _authMenager;
         this._configuration = _configuration;
+        this._authMenager = _authMenager;
+        this._movementMenager = _movementMenager;
     }
 
     [HttpPut]

@@ -5,7 +5,7 @@ using Classes.Enums.Game;
 using Database.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Classes.Statics.Game;
-using Classes.Exceptions.Game;
+using Classes.Exceptions.Game.Hero;
 
 namespace Database.Repository;
 

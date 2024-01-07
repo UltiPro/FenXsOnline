@@ -1,5 +1,6 @@
 ﻿using Classes.Exceptions;
 using Classes.Exceptions.Game;
+using Classes.Exceptions.Game.Hero;
 using Classes.Models.Game;
 using Classes.Models.Game.Fight;
 using Classes.Models.Game.Hero;
@@ -142,7 +143,7 @@ public class FightMenager : IFightMenager
             Promotion = playerWin ? await _promotionMenager.Promotion(hero, mob.Level, false) : null,
             Drop = playerWin ? await DropForPlayer(hero, mob) : null,
             Dead = playerWin ? null : await DeadPlayer(hero),
-            HelathPoints = hero.HealthPoints,
+            HealthPoints = hero.HealthPoints,
             Logs = logs
         };
     }

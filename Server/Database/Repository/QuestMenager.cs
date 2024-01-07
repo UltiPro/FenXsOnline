@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Classes.Enums.Game;
 using Classes.Exceptions;
-using Classes.Exceptions.Game;
+using Classes.Exceptions.Game.Hero;
 using Classes.Models.Game.Hero;
 using Classes.Models.Game.Item;
 using Classes.Models.Game.Quest;
