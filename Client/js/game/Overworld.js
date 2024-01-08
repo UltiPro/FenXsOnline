@@ -71,7 +71,7 @@ class Overworld {
             });
 
         //Draw Upper layer
-        //This have to be removed
+        //This have to be removed/empty image have to be used
         //We use opacity system
         this.map.drawUpperImage(this.ctx, cameraPerson);
     }
@@ -148,9 +148,9 @@ class Overworld {
                 }
             }
         }
-    
         this.refreshDifference = differences;
     }
+    //placing/removing objects based on refreshed map data
     getSpecificDifference() {
         for (const key in this.refreshDifference) {
             console.log(`Difference in object with key '${key}':`);
@@ -220,6 +220,7 @@ class Overworld {
             });
     }
 
+    //fetching map data
     getMapData() {
         return app
             .get(apiBaseUrl + "Map")
@@ -232,6 +233,7 @@ class Overworld {
             });
     }
 
+    //coords change after map change/lost battle
     newMapCoords(mapConfig, eventX, eventY) {
         this.heroData.x = eventX;
         this.heroData.y = eventY;
@@ -340,7 +342,6 @@ class Overworld {
             counter++;
         });
     }
-    
 
     //creating monsters objects
     placeMonsters(mobs) {
@@ -377,6 +378,7 @@ class Overworld {
         });
     }
     
+    //placing human players
     placeOtherPlayers(heroes){
         let counter = 1;
         heroes.forEach((playerData) => {
@@ -399,6 +401,7 @@ class Overworld {
         });
     }
 
+    //caching for monsters
     async cacheMonsterDetails() {
         if (!this.monstersCache) {
             this.monstersCache = {};
@@ -424,6 +427,7 @@ class Overworld {
         await Promise.all(monsterPromises);
     }
     
+    //fetch info if monster ID is absent in cache
     async getMonsterDetails(mobId) {
         try {
             const response = await app.get(apiBaseUrl + `Mob?id=${mobId}`);
@@ -435,7 +439,7 @@ class Overworld {
         }
     }
     
-
+    //caching itemDetails
     async cacheItemsDetails() {
         if (!this.itemsCache) {
             this.itemsCache = {};
@@ -461,7 +465,7 @@ class Overworld {
         await Promise.all(itemPromises);
     }
     
-    
+    //fetching item details if it's absent in itemsCache
     getItemDetails(itemType, itemId) {
         return new Promise((resolve, reject) => {
             app.get(apiBaseUrl + `Item?itemType=${itemType}&id=${itemId}`)
@@ -484,7 +488,7 @@ class Overworld {
     //Action key listner
     bindActionInput() {
         new KeyPressListner("Enter", () => {
-            //Check if there's a person to talk to
+            //Check if there's a person to talk to/monster to fight/item to grab
             this.map.checkForAction();
         });
     }
@@ -539,7 +543,6 @@ class Overworld {
         gameObject.mount(this.map);
     }
     //initializing game
-    //async to fetch the data with getHero(), otherwise this.heroData will be null
     async init() {
         this.heroData = await this.getHeroData();
         console.log(this.heroData);
