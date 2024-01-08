@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/start.css" />
-    <!-- tutaj pliki css -->
 </head>
 
 <body>
@@ -19,26 +18,29 @@
     <main role="main">
         <div id="menu" class="container">
             <div id="messages">
-                <div id="alert-hero-created" class="alert alert-dismissible bg-success border border-2 border-dark shadow-lg"
-                role="alert" style="display:none;">
-                     <div id="hero-created-message"></div>
+                <div id="alert-hero-created"
+                    class="alert alert-dismissible bg-success border border-2 border-dark shadow-lg" role="alert"
+                    style="display:none;">
+                    <div id="hero-created-message"></div>
                     <button type="button" class="btn-close position-absolute top-50 translate-middle-y"
-                                aria-label="Close"></button>
+                        aria-label="Close"></button>
                 </div>
-                <div id="alert-nick-exists" class="alert alert-dismissible bg-danger border border-2 border-dark shadow-lg"
-                role="alert" style="display:none;">
-                     <div id="nick-exists-message"></div>
+                <div id="alert-nick-exists"
+                    class="alert alert-dismissible bg-danger border border-2 border-dark shadow-lg" role="alert"
+                    style="display:none;">
+                    <div id="nick-exists-message"></div>
                     <button type="button" class="btn-close position-absolute top-50 translate-middle-y"
-                                aria-label="Close"></button>
+                        aria-label="Close"></button>
                 </div>
-                <div id="alert-hero-delete" class="alert alert-dismissible bg-danger border border-2 border-dark shadow-lg"
-                role="alert" style="display:none;">
-                     <div id="hero-delete-message"></div>
+                <div id="alert-hero-delete"
+                    class="alert alert-dismissible bg-danger border border-2 border-dark shadow-lg" role="alert"
+                    style="display:none;">
+                    <div id="hero-delete-message"></div>
                     <button type="button" class="btn-close position-absolute top-50 translate-middle-y"
-                                aria-label="Close"></button>
+                        aria-label="Close"></button>
                 </div>
             </div>
-             <!--kreator postaci-->
+            <!--kreator postaci-->
             <div class="row">
                 <div class="col-1 text-center d-flex flex-column">
                     <div id="selector-slot-1"
@@ -74,54 +76,59 @@
                             </div>
                             <div class="col">
                                 <form id="form-play" method="post">
-                                <input type='hidden' name='hero.id' value='' />
-                                <div class="form-group mt-3">
-                                    <div id="readNick"></div>
-                                </div>
-                                <div class="form-group mt-2">
-                                    <div id="readProfession"></div>
-                                </div>
-                                <div class="form-group mt-2">
-                                    <div id="readSex"></div>
-                                </div>
-                                <div class="form-group mt-2">
-                                    <div id="readLevel"></div>
-                                </div>
-                                <div class="form-group mt-2">
-                                    <div id="readHealth"></div>
-                                </div>
-                                <div class="form-group mt-2">
-                                    <div id="readStamina"></div>
-                                </div>
-                                <div class="form-group mt-2">
-                                    <div id="readMana"></div>
-                                </div>
-                            </div>
-                                <div class="form-group mt-2">
-                                    <button type="submit"
-                                        class="btn btn-success btn-sm w-100 border border-dark">Play</button>
-                                </div>
-                                </form>
-                                <form id="form-delete-hero" method="post">
                                     <input type='hidden' name='hero.id' value='' />
-                                    <button type="submit"
-                                    class="btn btn-danger btn-sm w-100 border border-dark">Delete hero</button>
-                                </form>
-                           
+                                    <div class="form-group mt-3">
+                                        <div id="readNick"></div>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <div id="readProfession"></div>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <div id="readSex"></div>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <div id="readLevel"></div>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <div id="readHealth"></div>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <div id="readStamina"></div>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <div id="readMana"></div>
+                                    </div>
+                            </div>
+                            <div class="form-group mt-2">
+                                <button type="submit"
+                                    class="btn btn-success btn-sm w-100 border border-dark">Play</button>
+                            </div>
+                            </form>
+                            <form id="form-delete-hero" method="post">
+                                <input type='hidden' name='hero.id' value='' />
+                                <button type="submit" class="btn btn-danger btn-sm w-100 border border-dark">Delete
+                                    hero</button>
+                            </form>
+
                         </div>
                     </div>
                     <!--Empty slot-->
                     <div id="menu-character-creation" style="display: none;">
                         <div class="row menu-form text-center">
                             <div class="desc-area">
-                                <span id="character-desc" class="text-small p-1 small text-justify p-1 ps-3">Profession description will appear here.</span>
+                                <span id="character-desc" class="text-small p-1 small text-justify p-1 ps-3">Profession
+                                    description will appear here.</span>
                             </div>
                             <div id="hero-preview" class="row">
                                 <div id="profession-info" class="text-small row">
-                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Paladin" src="./img/hero_preview/paladin_male.gif" alt="Paladin Image">
-                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Warrior" src="./img/hero_preview/warrior_male.gif" alt="Warrior Image">
-                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Mage" src="./img/hero_preview/mage_male.gif" alt="Mage Image">
-                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Hunter" src="./img/hero_preview/hunter_male.gif" alt="Hunter Image">
+                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Paladin"
+                                        src="./img/hero_preview/paladin_male.gif" alt="Paladin Image">
+                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Warrior"
+                                        src="./img/hero_preview/warrior_male.gif" alt="Warrior Image">
+                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Mage"
+                                        src="./img/hero_preview/mage_male.gif" alt="Mage Image">
+                                    <img class="col-2 mx-auto d-block profession-image" data-profession="Hunter"
+                                        src="./img/hero_preview/hunter_male.gif" alt="Hunter Image">
                                 </div>
                             </div>
                             <div id="hero-conf" class="row">
@@ -160,7 +167,6 @@
                                             hero</button>
                                     </div>
                                 </form>
-                                <!-- <button id="testdata">testdata</button> -->
                             </div>
                         </div>
                     </div>
@@ -176,9 +182,9 @@
 <script src="./node_modules/jquery/dist/jquery.min.js" defer></script>
 <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
 <script src="./node_modules/axios/dist/axios.min.js" defer></script>
-<script src="./js/validators.js" defer></script> <!-- tutaj będzie walidacja nicku po froncie -->
-<script src="./js/main.js" defer></script> <!-- tutaj są audio -->
-<!-- tutaj pliki js -->
+<script src="./js/validators.js" defer></script>
+<script src="./js/main.js" defer></script>
 <script src="./js/start.js" defer></script>
+<script src="./js/auth/unlogged.js" defer></script>
 
 </html>
