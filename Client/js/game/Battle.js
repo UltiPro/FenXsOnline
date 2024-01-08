@@ -62,7 +62,7 @@ class Battle{
             this.text = response.data.logs;
             this.dead = response.data.dead;
             this.drop = response.data.drop;
-            console.log(response.data)
+            // console.log(response.data)
             return this.text
         }).catch((err) => {console.log("fetchBattleLogs error", err)})
     }
