@@ -194,6 +194,7 @@ a:hover {
     border-radius: 5px;
     border: solid black 2px;
     background-image: url("./../img/background_wood_dark.png"), none;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     background-size: cover;
     background-position: center;
     background-clip: border-box;
