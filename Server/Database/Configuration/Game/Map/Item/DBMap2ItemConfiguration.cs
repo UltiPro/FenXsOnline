@@ -20,8 +20,8 @@ public class DBMap2ItemConfiguration : IEntityTypeConfiguration<DBMapItem>
         }, new DBMapItem
         {
             MapId = 2,
-            X = 1,
-            Y = 2,
+            X = 5,
+            Y = 7,
             ItemType = ItemType.Consumables,
             ItemId = 12,
             Available = DateTime.Now
