@@ -128,6 +128,7 @@ public class EquipmentMenager : IEquipmentMenager
                 var armor = await CheckItem<DBArmor>(hero, slot);
                 if (hero.DBArmor != null)
                 {
+                    UpdateArmor(hero, hero.DBArmor, -1);
                     slot.ItemType = hero.DBArmor.ItemType;
                     slot.ItemId = hero.DBArmor.Id;
                 }
@@ -139,6 +140,7 @@ public class EquipmentMenager : IEquipmentMenager
                 var boots = await CheckItem<DBBoots>(hero, slot);
                 if (hero.DBBoots != null)
                 {
+                    UpdateArmor(hero, hero.DBBoots, -1);
                     slot.ItemType = hero.DBBoots.ItemType;
                     slot.ItemId = hero.DBBoots.Id;
                 }
@@ -150,6 +152,7 @@ public class EquipmentMenager : IEquipmentMenager
                 var gloves = await CheckItem<DBGloves>(hero, slot);
                 if (hero.DBGloves != null)
                 {
+                    UpdateArmor(hero, hero.DBGloves, -1);
                     slot.ItemType = hero.DBGloves.ItemType;
                     slot.ItemId = hero.DBGloves.Id;
                 }
@@ -161,6 +164,7 @@ public class EquipmentMenager : IEquipmentMenager
                 var helmet = await CheckItem<DBHelmet>(hero, slot);
                 if (hero.DBHelmet != null)
                 {
+                    UpdateArmor(hero, hero.DBHelmet, -1);
                     slot.ItemType = hero.DBHelmet.ItemType;
                     slot.ItemId = hero.DBHelmet.Id;
                 }
@@ -172,6 +176,7 @@ public class EquipmentMenager : IEquipmentMenager
                 var necklace = await CheckItem<DBNecklace>(hero, slot);
                 if (hero.DBNecklace != null)
                 {
+                    UpdateJewelry(hero, hero.DBNecklace, -1);
                     slot.ItemType = hero.DBNecklace.ItemType;
                     slot.ItemId = hero.DBNecklace.Id;
                 }
@@ -183,6 +188,7 @@ public class EquipmentMenager : IEquipmentMenager
                 var ring = await CheckItem<DBRing>(hero, slot);
                 if (hero.DBRing != null)
                 {
+                    UpdateJewelry(hero, hero.DBRing, -1);
                     slot.ItemType = hero.DBRing.ItemType;
                     slot.ItemId = hero.DBRing.Id;
                 }
@@ -194,6 +200,7 @@ public class EquipmentMenager : IEquipmentMenager
                 var secondaryWeapon = await CheckItem<DBSecondaryWeapon>(hero, slot);
                 if (hero.DBSecondaryWeapon != null)
                 {
+                    UpdateSecondaryWeapon(hero, hero.DBSecondaryWeapon, -1);
                     slot.ItemType = hero.DBSecondaryWeapon.ItemType;
                     slot.ItemId = hero.DBSecondaryWeapon.Id;
                 }
@@ -205,6 +212,7 @@ public class EquipmentMenager : IEquipmentMenager
                 var weapon = await CheckItem<DBWeapon>(hero, slot);
                 if (hero.DBWeapon != null)
                 {
+                    UpdateWeapon(hero, hero.DBWeapon, -1);
                     slot.ItemType = hero.DBWeapon.ItemType;
                     slot.ItemId = hero.DBWeapon.Id;
                 }
