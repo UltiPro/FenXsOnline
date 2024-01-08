@@ -48,7 +48,7 @@ function ClearAlerts() {
     $("#alert-error").hide();
     $("#alert-error-message").text("");
     $("#alert-success").hide();
-    $("#alert-success-message").hide();
+    $("#alert-success-message").text("");
 }
 
 function SetCookie(name) {
@@ -58,6 +58,26 @@ function SetCookie(name) {
 function GetCookie(name) {
     const parts = `; ${document.cookie}`.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+function ErrorMessage(error, login = false) {
+    let message = "";
+    if (error.response.data.errors) {
+        for (const key of Object.keys(error.response.data.errors)) {
+            for (const errorMessage of error.response.data.errors[key]) message += "\n" + errorMessage;
+        }
+        $("#alert-error-message").text(message);
+    } else if (error.response.data.Message) {
+        message = error.response.data.Message;
+    } else if (error.response.data) {
+        for (const key of Object.keys(error.response.data)) {
+            for (const errorMessage of error.response.data[key]) message += "\n" + errorMessage;
+        }
+    } else if (error.response.status == 401 && login) {
+        message = "Incorrect Login or Password.";
+    } else message = "Internal server error. Please try again later.";
+    $("#alert-error-message").text(message);
+    $("#alert-error").show();
 }
 
 $(document).ready(function () {
@@ -83,64 +103,26 @@ $(document).ready(function () {
     $("#form-register").bind("submit", function (e) {
         e.preventDefault();
         if (!ValidateRegister()) return;
-        //ClearAlerts();
-        axios
-            .post(apiBaseUrl + "Account/register", {
-                Login: $("input[id='r.login']").val(),
-                Email: $("input[id='r.email']").val(),
-                Password: $("input[id='r.password']").val(),
-            })
-            .then(
-                (_) => {
-                    $("#alert-success-message").text("Your account has been created.");
-                    $("#alert-success").show();
-                },
-                (error) => {
-                    let message = "";
-                    if (error.response.data.errors) {
-                        for (const key of Object.keys(error.response.data.errors)) {
-                            for (const errorMessage of error.response.data.errors[key]) message += "\n" + errorMessage;
-                        }
-                        $("#alert-error-message").text(message);
-                    } else if (error.response.data) {
-                        for (const key of Object.keys(error.response.data)) {
-                            for (const errorMessage of error.response.data[key]) message += "\n" + errorMessage;
-                        }
-                    } else message = "Internal server error. Please try again later.";
-                    $("#alert-error-message").text(message);
-                    $("#alert-error").show();
-                }
-            );
+        ClearAlerts();
+        axios.post(apiBaseUrl + "Account/register", {
+            Login: $("input[id='r.login']").val(),
+            Email: $("input[id='r.email']").val(),
+            Password: $("input[id='r.password']").val(),
+        }).then(_ => {
+            $("#alert-success-message").text("Your account has been created.");
+            $("#alert-success").show();
+        }, error => ErrorMessage(error));
     });
     $("#form-login").bind("submit", function (e) {
         e.preventDefault();
         if (!ValidateLogin()) return;
         ClearAlerts();
-        app.post(
-            apiBaseUrl + "Account/login",
-            {
-                Login: $("input[id='l.login']").val(),
-                Password: $("input[id='l.password']").val(),
-            },
-            { withCredentials: true }
-        ).then(
-            (_) => {
-                SetCookie("whereLogged");
-                window.location.replace("./start.html");
-            },
-            (error) => {
-                let message = "";
-                if (error.response.data.errors) {
-                    for (const key of Object.keys(error.response.data.errors)) {
-                        for (const errorMessage of error.response.data.errors[key]) message += "\n" + errorMessage;
-                    }
-                    $("#alert-error-message").text(message);
-                } else if (error.response.status == 401) {
-                    message = "Incorrect Login or Password.";
-                } else message = "Internal server error. Please try again later.";
-                $("#alert-error-message").text(message);
-                $("#alert-error").show();
-            }
-        );
+        app.post(apiBaseUrl + "Account/login", {
+            Login: $("input[id='l.login']").val(),
+            Password: $("input[id='l.password']").val(),
+        }).then(_ => {
+            SetCookie("whereLogged");
+            window.location.replace("./start.html");
+        }, error => ErrorMessage(error, true));
     });
 });
