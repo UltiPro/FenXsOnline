@@ -1,12 +1,12 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "MMORPG Game",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Patryk Wójtowicz and Dawid Majewski",
   "license": "ISC",
   "dependencies": {
     "@microsoft/signalr": "^8.0.0",
