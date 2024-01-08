@@ -249,30 +249,25 @@ function buyItem(cleanFromId) {
     const itemIndex = shop.findIndex((item) => item.slotInfo === cleanFromId);
     let itemFromShop = shop[itemIndex]
 
-    // Check if there is a cloned item already present and remove it
-    $('#infoDiv').remove(); // Remove any existing infoDiv
-
-    const existingClone = $(".item-image.dragging-clone");
-    if (existingClone.length > 0) {
-        existingClone.remove();
-    }
-
-    // Item cloned from source
-    const draggedItemClone = $(".item-image.dragging").clone().addClass('dragging-clone'); // Add a unique class
-    console.log(draggedItemClone)
     app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`).then((_) =>{
         delete itemFromShop.npcId;
         itemFromShop.slotInfo = slotForBoughtItem;
         BPdetails.push(itemFromShop);
         setBackpackDetails(BPdetails);
+
+        // Cloning item from shop
+        const draggedItemClone = $(`#s${cleanFromId}`).children().clone();
+        draggedItemClone.removeClass('dragging'); // Remove 'dragging' class to avoid conflicts
         draggedItemClone.css("opacity", "1");
         firstEmptySlot.append(draggedItemClone);
+        
         updateHeroStatLabels();
     }).catch((err) => {
         console.log("Error npc/buy endpoint", err);
         return "ITEM_BUY_ERROR";
     });
 }
+
 
 
 function sellItem(cleanFromId) {
