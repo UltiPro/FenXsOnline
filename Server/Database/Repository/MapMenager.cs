@@ -53,7 +53,11 @@ public class MapMenager : IMapMenager
             var questStage = _context.QuestStages.FirstOrDefault(questStage => questStage.QuestId == heroQuest.QuestId && questStage.Stage == heroQuest.Stage && questStage.Talk);
 
             if (questStage != null)
-                npcs.Find(npc => npc.Id == questStage.NpcId).QuestsStage.Add(_mapper.Map<QuestNpcMessage>(questStage));
+            {
+                var npc = npcs.Find(npc => npc.Id == questStage.NpcId);
+
+                if (npc != null) npc.QuestsStage.Add(_mapper.Map<QuestNpcMessage>(questStage));
+            }
         });
 
         mapDataResponse.NPCs = npcs;
