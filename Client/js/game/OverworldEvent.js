@@ -108,7 +108,6 @@ class OverworldEvent {
                     //removing hero old collision
                     const heroX = this.map.gameObjects["hero"].x
                     const heroY = this.map.gameObjects["hero"].y
-                    if(this.map.walls[`${heroX},${heroY}`]){
                         delete this.map.walls[`${heroX},${heroY}`]
                           //counting respawn time
                         await this.respawnDelay(deathInfo);
@@ -119,12 +118,9 @@ class OverworldEvent {
                         this.map.overworld.startMap(window.OverworldMaps[respawn]);
                         console.log("respawn, resolve event")
                         resolve();
-                    }
-                    else{
-                        resolve();
-                    }
-                    resolve();
+                 
                 }
+                resolve();
             },
             
         });
@@ -156,14 +152,12 @@ class OverworldEvent {
         $('.game-container').append(blackOverlay);
         blackOverlay.css('opacity', 1);
     
-        // Get the stored death time from localStorage
         const storedDeathTime = localStorage.getItem('deathTime');
         let deathTime;
     
         if (storedDeathTime) {
             deathTime = parseInt(storedDeathTime, 10);
         } else {
-            // Set a new death time if not already stored
             deathTime = new Date(deathInfo.dead).getTime();
             localStorage.setItem('deathTime', deathTime);
         }
@@ -171,27 +165,27 @@ class OverworldEvent {
         const countdownElement = $('<div></div>').addClass('countdown');
         blackOverlay.append(countdownElement);
     
+        let delay;
         const countdownInterval = setInterval(() => {
             const remainingTime = Math.ceil((deathTime - new Date().getTime()) / 1000);
             countdownElement.text(`Respawn in ${remainingTime}s`);
         }, 1000);
     
         const currentTime = new Date().getTime();
-        const delay = deathTime - currentTime;
+        delay = deathTime - currentTime;
     
-        await new Promise((resolve) => {
-            setTimeout(() => {
-                clearInterval(countdownInterval);
-                blackOverlay.css('transition', 'opacity 0.5s ease-out').css('opacity', 0);
+        await new Promise(resolve => setTimeout(resolve, delay));
     
-                setTimeout(() => {
-                    blackOverlay.remove();
-                    localStorage.removeItem('deathTime'); // Clear the stored death time
-                    $('#equipment-container').css('pointer-events', 'auto'); //enabling equipment
-                    resolve();
-                }, 500);
-            }, delay);
-        });
+        clearInterval(countdownInterval);
+        blackOverlay.css('transition', 'opacity 0.5s ease-out').css('opacity', 0);
+    
+        setTimeout(() => {
+            blackOverlay.remove();
+            localStorage.removeItem('deathTime'); // Clear the stored death time
+            $('#equipment-container').css('pointer-events', 'auto'); //enabling equipment
+        }, 500);
+    
         console.log('Time delay elapsed!');
     }
+    
 }

@@ -70,6 +70,7 @@ class Battle{
     done() {
         this.element.remove();
         $('#equipment-container').css('pointer-events', 'auto');
+        this.actionListner.unbind();
         this.onComplete(this.dead, this.drop);
     }
 
