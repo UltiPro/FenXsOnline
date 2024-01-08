@@ -59,6 +59,7 @@ function updateHeroStats(heroData) {
     $("#agility\\.value").text(heroData.agility);
     $("#gold\\.value").text(heroData.gold);
     $("#stamina\\.value").text(heroData.stamina + "/" + heroData.maxStamina);
+    $("#name-and-level").text(heroData.name + " lvl: " + heroData.level)
 }
 
 function getItemDetails(item) {

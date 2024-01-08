@@ -36,7 +36,7 @@
                 <canvas id="game-canvas" class="game-canvas" width="960" height="640"></canvas>
             </div>
             <div id="equipment-container" width="320" height="640" class="rounded-end border border-2 border-dark">
-                <h6 class="text-center">Hero Statistics</h6>
+                <h6 id="name-and-level" class="text-center"></h6>
                 <div id="status">
                     <div class="row">
                         <div class="stat-icon col-2 col-sm-2" icon-info="Physical Damage"
@@ -59,7 +59,7 @@
                             onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="mana"></div>
                         <p id="mana.value" class="text-small col-2 col-sm-2"></p>
                         <div class="w-100"></div>
-                        <div class="stat-icon col-2 col-sm-2" icon-info="Determines how often hero can attack"
+                        <div class="stat-icon col-2 col-sm-2" icon-info="Agile fighers can dodge attacks more often"
                             onmouseover="showItemInfo(this, event)" onmouseleave="hideItemInfo()" id="agility"></div>
                         <p id="agility.value" class="text-small col-2 col-sm-2"></p>
                         <div class="stat-icon col-2 col-sm-2" icon-info="Gold" onmouseover="showItemInfo(this, event)"
