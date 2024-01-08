@@ -158,6 +158,9 @@ $(document).ready(function () {
             (_) => {
                 $("#hero-created-message").text("Your hero has just been created! You're one step ahead of your adventure!");
                 $("#alert-hero-created").show();
+                setTimeout(function () {
+                    $("#alert-hero-created").hide();
+                }, 3000);
                 $(".profession-image").removeClass("clicked");
                 $("input[id='hero.nick']").val('');
                 $("select[id='hero.profession']").val('');
@@ -190,6 +193,9 @@ $(document).ready(function () {
                     console.log("Item deleted:", response.data);
                     $("#hero-delete-message").text("This character has just been deleted.");
                     $("#alert-hero-delete").show();
+                    setTimeout(function () {
+                        $("#alert-hero-delete").hide();
+                    }, 3000);
                     $(".profession-image").removeClass("clicked");
                     $("input[id='hero.nick']").val('');
                     $("select[id='hero.profession']").val('');
