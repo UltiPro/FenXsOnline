@@ -155,7 +155,11 @@ button{
     cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
 }
 
-#muteButton {
+button i {
+    cursor: inherit;
+}
+
+.mute-button {
     font-family: font_form;
     font-size: 0.8rem;
     background-color: rgb(var(--wooden));
@@ -163,15 +167,48 @@ button{
     color: black;
     padding: 0;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    width: 3rem;
+    width: 2rem;
     height: 2rem;
 }
 
-#muteButton:hover {
+.mute-button:hover {
     font-family: font_form;
     background-color: rgb(var(--dark-wooden));
     background-image: url("./../img/background_wood_dark.png");
+    background-color: #643b09;
 }
+
+#leave-button {
+    /* Your existing styles for button */
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: solid black 2px;
+    background-image: url("./../img/background_wood_dark.png"), none;
+    background-size: cover;
+    background-position: center;
+    background-clip: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem; /* Adjust font size as needed */
+}
+
+#leave-button:hover {
+    background-color: #643b09;
+}
+
+#leave-button .fas {
+    color: black; /* Change icon color */
+}
+
+#leave-button:hover {
+    background-color: #643b09;
+}
+
 
 .volume-control {
     display: flex;
