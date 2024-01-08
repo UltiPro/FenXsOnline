@@ -1,3 +1,6 @@
 $('#leave-button').bind("click", () =>{
-    window.location.replace("./start.html")
+    app.get(apiBaseUrl + "Hero/leave").then(
+        window.location.replace("./start.html")
+    )
+  
 });
