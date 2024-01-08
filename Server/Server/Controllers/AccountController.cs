@@ -97,7 +97,11 @@ public class AccountController : ControllerBase
 
         await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
 
-        await _heroMenager.Leave(cookieId);
+        try
+        {
+            await _heroMenager.Leave(cookieId);
+        }
+        catch { }
 
         SetHttpOnlyCookie(new AuthResponse
         {
