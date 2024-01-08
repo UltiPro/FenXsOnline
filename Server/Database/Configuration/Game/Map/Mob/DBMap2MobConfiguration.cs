@@ -79,7 +79,7 @@ public class DBMap2MobConfiguration : IEntityTypeConfiguration<DBMapMob>
             MapId = 2,
             MobId = 2,
             X = 16,
-            Y = 19
+            Y = 9
         }, new DBMapMob
         {
             MapId = 2,
