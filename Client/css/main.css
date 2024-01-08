@@ -1,11 +1,3 @@
-*{
-    cursor: url("./../assets/ui/cursorSmall.png"), auto;
-}
-
-input {
-    cursor: inherit;
-}
-
 @font-face {
     font-family: font_page;
     src: url("./../font/page.ttf");
@@ -24,6 +16,10 @@ input {
 @font-face {
     font-family: font_anchor;
     src: url("./../font/anchor.ttf");
+}
+
+* {
+    cursor: url("./../assets/ui/cursorSmall.png"), auto;
 }
 
 :root {
@@ -78,9 +74,21 @@ form {
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
+input {
+    cursor: inherit;
+}
+
 input[type]:focus {
     box-shadow: none;
     outline: 1px solid whitesmoke;
+}
+
+button {
+    cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
+}
+
+button i {
+    cursor: inherit;
 }
 
 a,
@@ -143,20 +151,10 @@ a:hover {
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
-#alert-success {
-    text-shadow: -1px 0 lightgreen, 0 1px lightgreen, 1px 0 lightgreen, 0 -1px lightgreen;
-}
-
-#alert-error {
-    text-shadow: -1px 0 lightcoral, 0 1px lightcoral, 1px 0 lightcoral, 0 -1px lightcoral;
-}
-
-button{
-    cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
-}
-
-button i {
-    cursor: inherit;
+.volume-control {
+    display: flex;
+    align-items: center;
+    font-size: 2px;
 }
 
 .mute-button {
@@ -178,6 +176,14 @@ button i {
     background-color: #643b09;
 }
 
+#alert-success {
+    text-shadow: -1px 0 lightgreen, 0 1px lightgreen, 1px 0 lightgreen, 0 -1px lightgreen;
+}
+
+#alert-error {
+    text-shadow: -1px 0 lightcoral, 0 1px lightcoral, 1px 0 lightcoral, 0 -1px lightcoral;
+}
+
 #leave-button {
     /* Your existing styles for button */
     position: absolute;
@@ -194,7 +200,8 @@ button i {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem; /* Adjust font size as needed */
+    font-size: 1.5rem;
+    /* Adjust font size as needed */
 }
 
 #leave-button:hover {
@@ -202,16 +209,10 @@ button i {
 }
 
 #leave-button .fas {
-    color: black; /* Change icon color */
+    color: black;
+    /* Change icon color */
 }
 
 #leave-button:hover {
     background-color: #643b09;
-}
-
-
-.volume-control {
-    display: flex;
-    align-items: center;
-    font-size: 2px;
 }

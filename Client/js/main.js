@@ -1,5 +1,5 @@
 const apiBaseUrl = "https://localhost:7180/api/";
-const apiBaseUrl_short = "https://localhost:7180/";
+const apiBaseUrlShort = "https://localhost:7180/";
 
 const app = axios.create({
     apiBaseUrl,
@@ -12,8 +12,9 @@ const app = axios.create({
 const changeInputAudio = new Audio("./audio/input.wav");
 const changeWindowAudio = new Audio("./audio/window.wav");
 const unsuccessAudio = new Audio("./audio/unsuccess.wav");
-const music = new Audio("./audio/relaxingGreenNature.mp3")
-let musicState = false
+const music = new Audio("./audio/relaxingGreenNature.mp3");
+
+let musicState = false;
 
 const PlayChangeInputAudio = () => changeInputAudio.play();
 const PlayChangeWindowAudio = () => changeWindowAudio.play();
@@ -38,7 +39,7 @@ $(document).ready(function () {
             playButton.html('<i class="fas fa-play"></i>');
         }
     });
-    music.addEventListener('ended', function() {
+    music.addEventListener('ended', function () {
         music.currentTime = 0;
         music.play();
     });
