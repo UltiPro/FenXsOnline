@@ -38,6 +38,10 @@ $(document).ready(function () {
             playButton.html('<i class="fas fa-play"></i>');
         }
     });
+    music.addEventListener('ended', function() {
+        music.currentTime = 0;
+        music.play();
+    });
     $("input").attr("autocomplete", "off");
     $("input").bind("focus", PlayChangeInputAudio);
     $("select").bind("click", PlayChangeInputAudio);
