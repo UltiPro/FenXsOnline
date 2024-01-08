@@ -29,7 +29,6 @@ $(document).ready(function () {
 
         $(".profession-image").removeClass("clicked");
         $('.profession-image[data-profession="' + selectedProfession + '"]').addClass("clicked");
-        console.log(selectedSex, selectedProfession);
     });
 
     //zmiana opisu po najechaniu myszą na sprite
@@ -63,7 +62,6 @@ $(document).ready(function () {
         var selectedSex = $(this).val();
         var selectedProfession = $("#hero\\.profession").val();
         updateProfessionImages(selectedSex, selectedProfession);
-        console.log(selectedSex, selectedProfession);
     });
 
     function handleSlotClick(clickedElement) {
@@ -75,11 +73,9 @@ $(document).ready(function () {
             (response) => {
                 let heroInfo = response.data[parseInt(slotId.slice(-1)) - 1];
                 if (heroInfo === undefined) {
-                    console.log("Slot is empty!");
                     $("#menu-character-present").toggle(!slotId.startsWith("selector"));
                     $("#menu-character-creation").toggle(slotId.startsWith("selector"));
                 } else {
-                    console.log("Slot is not empty!");
                     $("input[name='hero.id']").val(heroInfo.id);
                     $("#readNick").text(heroInfo.name);
                     $("#readProfession").text(professionParser(heroInfo.profession));
@@ -134,7 +130,6 @@ $(document).ready(function () {
         let valid = true;
         valid = Validation(nicknameRegex, $("input[id='hero.nick']"), valid);
         if (!valid) PlayUnsuccessAudio();
-        console.log(valid);
         return valid;
     }
 
@@ -166,12 +161,11 @@ $(document).ready(function () {
                 $("select[id='hero.profession']").val('');
                 $("select[id='hero.sex']").val('');
                 handleSlotClick($(".character-slot.selected"));
-                console.log("Character has been created!");
             },
             (error) => {
                 $("#nick-exists-message").text("Hero with this nickname already exists!");
                 $("#alert-nick-exists").show();
-                console.log("Error post!");
+                console.log("Error create hero!");
             }
         );
     });
@@ -190,7 +184,6 @@ $(document).ready(function () {
         if (deleteId) {
             app.delete(apiBaseUrl + "Hero?id=" + deleteId)
                 .then((response) => {
-                    console.log("Item deleted:", response.data);
                     $("#hero-delete-message").text("This character has just been deleted.");
                     $("#alert-hero-delete").show();
                     setTimeout(function () {
@@ -218,11 +211,9 @@ $(document).ready(function () {
     $("#form-play").on("submit", function (e) {
         e.preventDefault();
         var playId = $("input[name='hero.id']").val();
-        console.log(playId);
 
         app.put(apiBaseUrl + "Hero/play?id=" + playId)
             .then((response) => {
-                console.log("Hero with id: " + playId + " enters the game");
                 sessionStorage.setItem("heroId", playId);
                 window.location.replace("./game.html");
             })
@@ -255,15 +246,4 @@ $(document).ready(function () {
                 return 0;
         }
     }
-
-    //test function
-    $("#testdata").click(function () {
-        var sex, profession;
-        sex = CreationConvertSex($("select[id='hero.sex']").val());
-        profession = CreationConvertProfession($("select[id='hero.profession']").val());
-        CreationConvertSex(sex);
-        CreationConvertProfession(profession);
-        console.log(sex, profession);
-        console.log($("input[id='hero.nick']").val(), $("select[id='hero.profession']").val(), $("select[id='hero.sex']").val());
-    });
 });
