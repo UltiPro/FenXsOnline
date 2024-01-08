@@ -253,7 +253,7 @@ function buyItem(cleanFromId) {
         delete itemFromShop.npcId;
         itemFromShop.slotInfo = slotForBoughtItem;
 
-        //copying element to buy
+        // Skopiuj element ze sklepu, a nie usuwaj go
         const draggedItem = $(`#s${cleanFromId}`).children().clone();
         draggedItem.css("opacity", "1");
         firstEmptySlot.append(draggedItem);
@@ -267,6 +267,8 @@ function buyItem(cleanFromId) {
         return "ITEM_BUY_ERROR";
     });
 }
+
+
 
 function sellItem(cleanFromId) {
     $("#infoDiv").remove();

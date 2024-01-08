@@ -68,7 +68,16 @@ class DialogMessage {
                         this.questProgress();
                         document.getElementById("quest").remove();
                         //removing quest in npc after talking about it
-                        // Check for the npc
+                        //check for the npc quest
+                        if(this.map.gameObjects[this.faceHero].talking[0].events[0].quests[0] !== undefined){
+                            delete this.map.gameObjects[this.faceHero].talking[0].events[0].quests[0]
+                        }
+                        //remove flag
+                        for (let i = 0; i < this.text.length; i++) {
+                            if (this.text[i].flag === "quest") {
+                                this.text.splice(i, 1)[0];
+                            }
+                        }
                         break;
                     case "questStage":
                         this.talkQuest();
@@ -115,7 +124,12 @@ class DialogMessage {
     }
 
     async talkQuest(){
-        await app.post(apiBaseUrl + `Quest/talk/?questId=${this.questsStage[0].questId}`);
+        await app.post(apiBaseUrl + `Quest/talk/?questId=${this.questsStage[0].questId}`).then(response => {
+            console.log(response.data)
+            if (response.data.heroEquipmentRewards && response.data.heroEquipmentRewards.length > 0){
+                refreshHeroData();
+            }
+        });
     }
 
     async openTradeMenu(npcId) {

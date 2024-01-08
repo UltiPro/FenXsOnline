@@ -1,6 +1,5 @@
 let itemDetailsListBP = []; // Declare an array to store item details
 let itemDetailsListEQ = [];
-let questListDet = [];
 
 function getEquipmentDetails() {
     return itemDetailsListEQ;
@@ -18,14 +17,6 @@ function setBackpackDetails(updatedItemList) {
     itemDetailsListBP = updatedItemList;
 }
 
-function getQuestDetails(){
-    return questListDet;
-}
-
-function setQuestDetails(updatedQuestList) {
-    questListDet = updatedQuestList;
-}
-
 $(document).ready(function () {
     fetchHeroData();
 });
@@ -36,6 +27,17 @@ function fetchHeroData() {
         .catch(function (error) {
             console.error("Error fetching hero stats:", error);
         });
+}
+
+//refreshing after quest
+function refreshHeroData(){
+    const backpackSlots = $(".bp-slot");
+    backpackSlots.each(function () {
+        $(this).empty();
+        itemDetailsListBP = [];
+        itemDetailsListEQ = [];
+        fetchHeroData();
+    });
 }
 
 function processHeroData(response) {
