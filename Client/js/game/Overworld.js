@@ -18,7 +18,7 @@ class Overworld {
         this.oldMap = null;
         this.refreshDifference = null;
         this.lastRefreshTime = Date.now();
-        this.refreshInterval = 100;
+        this.refreshInterval = 200;
         this.isRefreshed = false;
 
         this.monstersCache = null;
