@@ -112,18 +112,14 @@ class OverworldMap {
         });
         //pickUp item event
         if (!this.isCutscenePlaying && matchItem && matchItem.isItem) {
-            let wasItPicked = matchItem.grab(matchItem);
-            // if (wasItPicked) {
-            //     this.removeGameObject(matchItem.id);
-            // }
+            matchItem.grab(matchItem);
         }
-        // console.log(match);
     }
 
     //dropping item
     drop(item) {
         const hero = this.gameObjects["hero"];
-        console.log("drop itemDetails: ",item)
+        // console.log("drop itemDetails: ",item)
         // Ensure the item and its details are defined
         if (item && item.itemDetails) {
             const path = itemTypeParser(item.itemDetails.itemType);
@@ -148,14 +144,12 @@ class OverworldMap {
                 src: `${path}/${item.itemDetails.spriteURL}`,
                 isMounted: true,
             });
-            // Add the new item to the game objects
-            //this.gameObjects[name] = placeItem;
             const compositeKey = `${item.itemDetails.itemType}_${item.itemDetails.id}`;
             //Check if this item is in client's cache
             if (!this.overworld.itemsCache[compositeKey]) {
                 // If not, add it to the itemsCache
                 this.overworld.itemsCache[compositeKey] = item.itemDetails;
-                console.log(`Added item ${compositeKey} to itemsCache.`);
+                // console.log(`Added item ${compositeKey} to itemsCache.`);
             }
         }
         else{
@@ -195,8 +189,8 @@ class OverworldMap {
                         Math.pow(object.y - nextCoords.y, 2)
                 );
                 if (distance <= 32) {
-                    console.log(`Hero position: (${hero.x}, ${hero.y})`);
-                    console.log(`NPC position: (${object.x}, ${object.y})`);
+                    // console.log(`Hero position: (${hero.x}, ${hero.y})`);
+                    // console.log(`NPC position: (${object.x}, ${object.y})`);
                     return true; // Object is within the specified distance
                 }
             }
@@ -233,7 +227,27 @@ class OverworldMap {
             this.displayedNPC = null;
         }
     }
+    //check if item is on the same field
+    checkForItem() {
+        const hero = this.gameObjects["hero"];
+
+        const matchItem = Object.values(this.gameObjects).find((object) => {
+            if (object !== hero && object.isItem) {
+                if (object.x === hero.x && object.y === hero.y) {
+                    // console.log(`Hero position: (${hero.x}, ${hero.y})`);
+                    // console.log(`Item position: (${object.x}, ${object.y})`);
+                    return true;
+                }
+            }
+            return false;
+        });
     
+        // if (matchItem) {
+        //     this.displayItemPickupButton(); 
+        // } else {
+        //     this.removeItemPickupButton(); 
+        // }
+    }
 
     calculateApproachDirection(hero, npc) {
         const deltaX = npc.x - hero.x;
