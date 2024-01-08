@@ -238,37 +238,46 @@ async function showGrabbedItem(item) {
 function buyItem(cleanFromId) {
     let BPdetails = getBackpackDetails();
     let shop = getShopDetails();
-    console.log(cleanFromId)
 
     const firstEmptySlot = $(".bp-slot").filter(function() {
         return $(this).children().length === 0; // Filter empty slots
     }).first();
-    slotForBoughtItem = firstEmptySlot.attr("id").replace("s", "")
-    console.log(slotForBoughtItem)
-    
+    slotForBoughtItem = firstEmptySlot.attr("id").replace("s", "");
+
     const itemIndex = shop.findIndex((item) => item.slotInfo === cleanFromId);
-    let itemFromShop = shop[itemIndex]
+    let itemFromShop = shop[itemIndex];
 
-    app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`).then((_) =>{
-        delete itemFromShop.npcId;
-        itemFromShop.slotInfo = slotForBoughtItem;
+    if (itemFromShop) {
+        const buyItemFromShop = () => {
+            app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`)
+                .then((response) => {
+                    delete itemFromShop.npcId;
+                    itemFromShop.slotInfo = slotForBoughtItem;
 
-        // Skopiuj element ze sklepu, a nie usuwaj go
-        const draggedItem = $(`#s${cleanFromId}`).children().clone();
-        draggedItem.css("opacity", "1");
-        firstEmptySlot.append(draggedItem);
+                    const draggedItem = $(`#s${cleanFromId}`).children().clone();
+                    draggedItem.css("opacity", "1");
+                    firstEmptySlot.append(draggedItem);
 
-        BPdetails.push(itemFromShop);
-        setBackpackDetails(BPdetails);
-        
-        updateHeroStatLabels();
-    }).catch((err) => {
-        console.log("Error npc/buy endpoint", err);
-        return "ITEM_BUY_ERROR";
-    });
+                    BPdetails.push(itemFromShop);
+                    setBackpackDetails(BPdetails);
+
+                    updateHeroStatLabels();
+                })
+                .catch((err) => {
+                    console.log("Error npc/buy endpoint", err);
+                    return "ITEM_BUY_ERROR";
+                });
+        };
+
+        // Call the function to buy the item multiple times if needed
+        const purchaseCount = 1; // Define the number of times to buy the item
+        for (let i = 0; i < purchaseCount; i++) {
+            buyItemFromShop();
+        }
+    } else {
+        console.log("Item not found in the shop inventory.");
+    }
 }
-
-
 
 function sellItem(cleanFromId) {
     $("#infoDiv").remove();
