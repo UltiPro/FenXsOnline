@@ -14,7 +14,7 @@ gameCanvas.addEventListener('keydown', (event) => {
 });
 
 $(document).ready(async function () {
-    const chatConnection = new signalR.HubConnectionBuilder().withUrl(apiBaseUrl_short + "chat").build();
+    const chatConnection = new signalR.HubConnectionBuilder().withUrl(apiBaseUrlShort + "chat").build();
 
     await chatConnection.start().catch(error => console.error(error.toString()));
 
