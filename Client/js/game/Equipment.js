@@ -252,14 +252,14 @@ function buyItem(cleanFromId) {
     app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`).then((_) =>{
         delete itemFromShop.npcId;
         itemFromShop.slotInfo = slotForBoughtItem;
+
+        //copying element to buy
+        const draggedItem = $(`#s${cleanFromId}`).children().clone();
+        draggedItem.css("opacity", "1");
+        firstEmptySlot.append(draggedItem);
+
         BPdetails.push(itemFromShop);
         setBackpackDetails(BPdetails);
-
-        // Cloning item from shop
-        const draggedItemClone = $(`#s${cleanFromId}`).children().clone();
-        draggedItemClone.removeClass('dragging'); // Remove 'dragging' class to avoid conflicts
-        draggedItemClone.css("opacity", "1");
-        firstEmptySlot.append(draggedItemClone);
         
         updateHeroStatLabels();
     }).catch((err) => {
@@ -267,8 +267,6 @@ function buyItem(cleanFromId) {
         return "ITEM_BUY_ERROR";
     });
 }
-
-
 
 function sellItem(cleanFromId) {
     $("#infoDiv").remove();
