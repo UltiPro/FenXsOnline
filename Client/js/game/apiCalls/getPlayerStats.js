@@ -1,5 +1,6 @@
 let itemDetailsListBP = []; // Declare an array to store item details
 let itemDetailsListEQ = [];
+let questListDet = [];
 
 function getEquipmentDetails() {
     return itemDetailsListEQ;
@@ -15,6 +16,14 @@ function getBackpackDetails() {
 
 function setBackpackDetails(updatedItemList) {
     itemDetailsListBP = updatedItemList;
+}
+
+function getQuestDetails(){
+    return questListDet;
+}
+
+function setQuestDetails(updatedQuestList) {
+    questListDet = updatedQuestList;
 }
 
 $(document).ready(function () {
@@ -59,7 +68,7 @@ function updateHeroStats(heroData) {
     $("#agility\\.value").text(heroData.agility);
     $("#gold\\.value").text(heroData.gold);
     $("#stamina\\.value").text(heroData.stamina + "/" + heroData.maxStamina);
-    $("#name-and-level").text(heroData.name + " lvl: " + heroData.level)
+    $("#name-level-profession").text(heroData.name + " lvl: " + heroData.level + " " +parseProfession(heroData.profession))
 }
 
 function getItemDetails(item) {
