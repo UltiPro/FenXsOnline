@@ -38,6 +38,8 @@ builder.Services.AddControllers().AddJsonOptions(option =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
@@ -112,6 +114,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHealthChecks("/healthcheck");
 
 app.UseMiddleware<ExceptionMiddleware>();
 
