@@ -93,6 +93,12 @@ class DialogMessage {
                                 if (this.map.gameObjects[this.faceHero].talking[0].events[0].questsStage[0] !== undefined) {
                                     delete this.map.gameObjects[this.faceHero].talking[0].events[0].questsStage[0];
                                 }
+                                for (let i = 0; i < this.text.length; i++) {
+                                    if (this.text[i].flag === "questStage") {
+                                        this.text.splice(i, 1);
+                                        break; //exit loop if found
+                                    }
+                                }
                                 this.alreadyDone = true;
                             }
                             if (success === false) {
