@@ -131,7 +131,7 @@ public class FightMenager : IFightMenager
         if (playerWin)
         {
             mobProvider.Available = DateTime.Now.AddMinutes((mob.Level / 10) + 3);
-            await _questMenager.Kill(hero, mob.Id);
+            _questMenager.Kill(hero, mob.Id);
         }
 
         await _context.SaveChangesAsync();
@@ -140,7 +140,7 @@ public class FightMenager : IFightMenager
 
         return new FightResponse
         {
-            Promotion = playerWin ? _promotionMenager.Promotion(hero, mob.Level, false) : null,
+            Promotion = playerWin ? await _promotionMenager.Promotion(hero.Id, mob.Level, false) : null,
             Drop = playerWin ? await DropForPlayer(hero, mob) : null,
             Dead = playerWin ? null : await DeadPlayer(hero),
             HealthPoints = hero.HealthPoints,
