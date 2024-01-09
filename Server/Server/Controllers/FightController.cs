@@ -33,8 +33,6 @@ public class FightController : ControllerBase
 
         await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
 
-        var logs = await _fightMenager.FightMob(cookieId, x, y);
-
-        return Ok(logs);
+        return Ok(await _fightMenager.FightMob(cookieId, x, y));
     }
 }
