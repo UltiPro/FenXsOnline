@@ -15,7 +15,7 @@ public class PromotionMenager : IPromotionMenager
         this._context = _context;
     }
 
-    public async Task<PromotionResponse> Promotion(DBHero hero, int level, bool quest)
+    public PromotionResponse Promotion(DBHero hero, int level, bool quest)
     {
         int experience;
 
@@ -37,7 +37,7 @@ public class PromotionMenager : IPromotionMenager
             nextLeveLExperience = LevelExperience(hero.Level);
         }
 
-        await _context.SaveChangesAsync();
+        _context.Update(hero);
 
         return new PromotionResponse
         {
