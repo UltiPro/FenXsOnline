@@ -140,7 +140,7 @@ public class FightMenager : IFightMenager
 
         return new FightResponse
         {
-            Promotion = playerWin ? await _promotionMenager.Promotion(hero, mob.Level, false) : null,
+            Promotion = playerWin ? _promotionMenager.Promotion(hero, mob.Level, false) : null,
             Drop = playerWin ? await DropForPlayer(hero, mob) : null,
             Dead = playerWin ? null : await DeadPlayer(hero),
             HealthPoints = hero.HealthPoints,
