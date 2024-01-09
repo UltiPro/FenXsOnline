@@ -1,22 +1,19 @@
 ﻿using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Extensions;
 
 namespace Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class QuestController : ControllerBase
+public class QuestController : AuthBaseController
 {
-    private readonly IConfiguration _configuration;
-    private readonly IAuthMenager _authMenager;
     private readonly IQuestMenager _questMenager;
 
-    public QuestController(IConfiguration _configuration, IAuthMenager _authMenager, IQuestMenager _questMenager)
+    public QuestController(IConfiguration _configuration, IAuthMenager _authMenager, IQuestMenager _questMenager) : base(_configuration, _authMenager)
     {
-        this._configuration = _configuration;
-        this._authMenager = _authMenager;
         this._questMenager = _questMenager;
     }
 
@@ -28,11 +25,7 @@ public class QuestController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> TakeQuest(int questId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        await _questMenager.TakeQuest(cookieId, questId);
+        await _questMenager.TakeQuest(await GetCookieUserId(), questId);
 
         return NoContent();
     }
@@ -44,11 +37,7 @@ public class QuestController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetQuestsInfo()
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _questMenager.GetQuestsInfo(cookieId));
+        return Ok(await _questMenager.GetQuestsInfo(await GetCookieUserId()));
     }
 
     [HttpPost]
@@ -60,10 +49,6 @@ public class QuestController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Talk(int questId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _questMenager.TalkOrBring(cookieId, questId));
+        return Ok(await _questMenager.TalkOrBring(await GetCookieUserId(), questId));
     }
 }

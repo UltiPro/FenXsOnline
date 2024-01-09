@@ -1,22 +1,19 @@
 ﻿using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Extensions;
 
 namespace Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class MovementController : ControllerBase
+public class MovementController : AuthBaseController
 {
-    private readonly IConfiguration _configuration;
-    private readonly IAuthMenager _authMenager;
     private readonly IMovementMenager _movementMenager;
 
-    public MovementController(IConfiguration _configuration, IAuthMenager _authMenager, IMovementMenager _movementMenager)
+    public MovementController(IConfiguration _configuration, IAuthMenager _authMenager, IMovementMenager _movementMenager) : base(_configuration, _authMenager)
     {
-        this._configuration = _configuration;
-        this._authMenager = _authMenager;
         this._movementMenager = _movementMenager;
     }
 
@@ -29,11 +26,7 @@ public class MovementController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Move(int x, int y)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        var newPosition = await _movementMenager.Move(cookieId, x, y);
+        var newPosition = await _movementMenager.Move(await GetCookieUserId(), x, y);
 
         if (newPosition is null) return Forbid();
 

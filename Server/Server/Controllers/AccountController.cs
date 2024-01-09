@@ -3,21 +3,18 @@ using Classes.Models.User;
 using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Extensions;
 
 namespace Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController : ControllerBase
+public class AccountController : AuthBaseController
 {
-    private readonly IConfiguration _configuration;
-    private readonly IAuthMenager _authMenager;
     private readonly IHeroMenager _heroMenager;
 
-    public AccountController(IConfiguration _configuration, IAuthMenager _authMenager, IHeroMenager _heroMenager)
+    public AccountController(IConfiguration _configuration, IAuthMenager _authMenager, IHeroMenager _heroMenager) : base(_configuration, _authMenager)
     {
-        this._configuration = _configuration;
-        this._authMenager = _authMenager;
         this._heroMenager = _heroMenager;
     }
 
@@ -93,13 +90,9 @@ public class AccountController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Logout()
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
         try
         {
-            await _heroMenager.Leave(cookieId);
+            await _heroMenager.Leave(await GetCookieUserId());
         }
         catch { }
 

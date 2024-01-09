@@ -1,22 +1,19 @@
 ﻿using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Extensions;
 
 namespace Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class NpcController : ControllerBase
+public class NpcController : AuthBaseController
 {
-    private readonly IConfiguration _configuration;
-    private readonly IAuthMenager _authMenager;
     private readonly INpcMenager _npcMenager;
 
-    public NpcController(IConfiguration _configuration, IAuthMenager _authMenager, INpcMenager _npcMenager)
+    public NpcController(IConfiguration _configuration, IAuthMenager _authMenager, INpcMenager _npcMenager) : base(_configuration, _authMenager)
     {
-        this._configuration = _configuration;
-        this._authMenager = _authMenager;
         this._npcMenager = _npcMenager;
     }
 
@@ -30,11 +27,7 @@ public class NpcController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Heal(int npcId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        await _npcMenager.Heal(cookieId, npcId);
+        await _npcMenager.Heal(await GetCookieUserId(), npcId);
 
         return NoContent();
     }
@@ -49,11 +42,7 @@ public class NpcController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Sell(int npcId, int itemId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _npcMenager.Sell(cookieId, npcId, itemId));
+        return Ok(await _npcMenager.Sell(await GetCookieUserId(), npcId, itemId));
     }
 
     [HttpPut]
@@ -66,10 +55,6 @@ public class NpcController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Buy(int npcId, int itemId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _npcMenager.Buy(cookieId, npcId, itemId));
+        return Ok(await _npcMenager.Buy(await GetCookieUserId(), npcId, itemId));
     }
 }

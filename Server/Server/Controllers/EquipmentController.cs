@@ -2,22 +2,19 @@
 using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Extensions;
 
 namespace Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class EquipmentController : ControllerBase
+public class EquipmentController : AuthBaseController
 {
-    private readonly IConfiguration _configuration;
-    private readonly IAuthMenager _authMenager;
     private readonly IEquipmentMenager _equipmentMenager;
 
-    public EquipmentController(IConfiguration _configuration, IAuthMenager _authMenager, IEquipmentMenager _equipmentMenager)
+    public EquipmentController(IConfiguration _configuration, IAuthMenager _authMenager, IEquipmentMenager _equipmentMenager) : base(_configuration, _authMenager)
     {
-        this._configuration = _configuration;
-        this._authMenager = _authMenager;
         this._equipmentMenager = _equipmentMenager;
     }
 
@@ -31,11 +28,7 @@ public class EquipmentController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> MoveItem(int fromId, int toId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        await _equipmentMenager.MoveItem(cookieId, fromId, toId);
+        await _equipmentMenager.MoveItem(await GetCookieUserId(), fromId, toId);
 
         return NoContent();
     }
@@ -50,11 +43,7 @@ public class EquipmentController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> RemoveItem(int slotId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        await _equipmentMenager.RemoveItem(cookieId, slotId);
+        await _equipmentMenager.RemoveItem(await GetCookieUserId(), slotId);
 
         return NoContent();
     }
@@ -69,11 +58,7 @@ public class EquipmentController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> UseItem(int slotId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        var hero = await _equipmentMenager.UseItem(cookieId, slotId);
+        var hero = await _equipmentMenager.UseItem(await GetCookieUserId(), slotId);
 
         return Ok(hero);
     }
@@ -88,11 +73,7 @@ public class EquipmentController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> UnuseItem(ItemType itemType, int slotId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        var hero = await _equipmentMenager.UnuseItem(cookieId, itemType, slotId);
+        var hero = await _equipmentMenager.UnuseItem(await GetCookieUserId(), itemType, slotId);
 
         return Ok(hero);
     }

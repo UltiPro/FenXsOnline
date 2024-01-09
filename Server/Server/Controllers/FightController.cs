@@ -1,22 +1,19 @@
 ﻿using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Extensions;
 
 namespace Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class FightController : ControllerBase
+public class FightController : AuthBaseController
 {
-    private readonly IConfiguration _configuration;
-    private readonly IAuthMenager _authMenager;
     private readonly IFightMenager _fightMenager;
 
-    public FightController(IConfiguration _configuration, IAuthMenager _authMenager, IFightMenager _fightMenager)
+    public FightController(IConfiguration _configuration, IAuthMenager _authMenager, IFightMenager _fightMenager) : base(_configuration, _authMenager)
     {
-        this._configuration = _configuration;
-        this._authMenager = _authMenager;
         this._fightMenager = _fightMenager;
     }
 
@@ -29,10 +26,6 @@ public class FightController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> FightMob(int x, int y)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _fightMenager.FightMob(cookieId, x, y));
+        return Ok(await _fightMenager.FightMob(await GetCookieUserId(), x, y));
     }
 }

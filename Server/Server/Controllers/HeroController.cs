@@ -4,6 +4,7 @@ using Classes.Models.Game.Hero;
 using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Extensions;
 using System.Text.RegularExpressions;
 
 namespace Server.Controllers;
@@ -11,16 +12,12 @@ namespace Server.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class HeroController : ControllerBase
+public class HeroController : AuthBaseController
 {
-    private readonly IConfiguration _configuration;
-    private readonly IAuthMenager _authMenager;
     private readonly IHeroMenager _heroMenager;
 
-    public HeroController(IConfiguration _configuration, IAuthMenager _authMenager, IHeroMenager _heroMenager)
+    public HeroController(IConfiguration _configuration, IAuthMenager _authMenager, IHeroMenager _heroMenager) : base(_configuration, _authMenager)
     {
-        this._configuration = _configuration;
-        this._authMenager = _authMenager;
         this._heroMenager = _heroMenager;
     }
 
@@ -49,9 +46,7 @@ public class HeroController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Create([FromBody] HeroCreate heroCreate)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
+        var cookieId = await GetCookieUserId();
 
         if (await _heroMenager.IsHeroLimitReached(cookieId)) throw new HeroLimitReachedException();
         if (!await _heroMenager.IsAvailableNickname(heroCreate.Name)) return Conflict("This nickname is already taken.");
@@ -67,11 +62,7 @@ public class HeroController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Delete(int id)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        if (await _heroMenager.IsHeroThisUser(cookieId, id))
+        if (await _heroMenager.IsHeroThisUser(await GetCookieUserId(), id))
         {
             await _heroMenager.DeleteHero(id);
             return NoContent();
@@ -88,11 +79,7 @@ public class HeroController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetAll()
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _heroMenager.GetHeroes(cookieId));
+        return Ok(await _heroMenager.GetHeroes(await GetCookieUserId()));
     }
 
     [HttpPut]
@@ -104,11 +91,7 @@ public class HeroController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> ChangeSprite(int heroId, int spriteLevel)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        if (await _heroMenager.IsHeroThisUser(cookieId, heroId))
+        if (await _heroMenager.IsHeroThisUser(await GetCookieUserId(), heroId))
         {
             await _heroMenager.ChangeSprite(heroId, spriteLevel);
             return NoContent();
@@ -126,11 +109,7 @@ public class HeroController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Play(int id)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        await _heroMenager.Play(cookieId, id);
+        await _heroMenager.Play(await GetCookieUserId(), id);
 
         return NoContent();
     }
@@ -144,11 +123,7 @@ public class HeroController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Leave()
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        await _heroMenager.Leave(cookieId);
+        await _heroMenager.Leave(await GetCookieUserId());
 
         return NoContent();
     }
@@ -161,10 +136,6 @@ public class HeroController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetInGameHero()
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _heroMenager.GetInGameHero(cookieId));
+        return Ok(await _heroMenager.GetInGameHero(await GetCookieUserId()));
     }
 }

@@ -1,22 +1,19 @@
 ﻿using Database.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Extensions;
 
 namespace Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class MapController : ControllerBase
+public class MapController : AuthBaseController
 {
-    private readonly IConfiguration _configuration;
-    private readonly IAuthMenager _authMenager;
     private readonly IMapMenager _mapMenager;
 
-    public MapController(IConfiguration _configuration, IAuthMenager _authMenager, IMapMenager _mapMenager)
+    public MapController(IConfiguration _configuration, IAuthMenager _authMenager, IMapMenager _mapMenager) : base(_configuration, _authMenager)
     {
-        this._configuration = _configuration;
-        this._authMenager = _authMenager;
         this._mapMenager = _mapMenager;
     }
 
@@ -28,11 +25,7 @@ public class MapController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Get()
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _mapMenager.Get(cookieId));
+        return Ok(await _mapMenager.Get(await GetCookieUserId()));
     }
 
     [HttpGet]
@@ -44,11 +37,7 @@ public class MapController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetRefresh()
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        return Ok(await _mapMenager.GetRefresh(cookieId));
+        return Ok(await _mapMenager.GetRefresh(await GetCookieUserId()));
     }
 
     [HttpPut]
@@ -61,11 +50,7 @@ public class MapController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Drop(int itemId)
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        var result = await _mapMenager.DropItem(cookieId, itemId);
+        var result = await _mapMenager.DropItem(await GetCookieUserId(), itemId);
 
         if (result is null) return NoContent();
         else return Ok(result);
@@ -81,11 +66,7 @@ public class MapController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Grab()
     {
-        var cookieId = HttpContext.Request.Cookies[_configuration["JwtSettings:IdCookie"]] ?? "";
-
-        await _authMenager.VerifyId(cookieId, HttpContext.Request.Cookies[_configuration["JwtSettings:TokenCookie"]] ?? "");
-
-        var result = await _mapMenager.GrabItem(cookieId);
+        var result = await _mapMenager.GrabItem(await GetCookieUserId());
 
         if (result is null) return NoContent();
         else return Ok(result);
