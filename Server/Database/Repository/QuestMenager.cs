@@ -128,7 +128,7 @@ public class QuestMenager : IQuestMenager
 
             return new QuestCompletedResponse
             {
-                PromotionResponse = await _promotionMenager.Promotion(hero, quest.Level, true),
+                PromotionResponse = _promotionMenager.Promotion(hero, quest.Level, true),
                 HeroEquipmentRewards = equipmentRewards
             };
         }
@@ -140,16 +140,18 @@ public class QuestMenager : IQuestMenager
     {
         var heroQuests = await _context.HeroesQuests.Where(heroQuest => heroQuest.DBHero == hero && !heroQuest.Done).ToListAsync();
 
-        heroQuests.ForEach(heroQuest =>
+        heroQuests.ForEach(async heroQuest =>
         {
             var questStage = _context.QuestStages.FirstOrDefault(questStage =>
                 questStage.QuestId == heroQuest.QuestId && questStage.Stage == heroQuest.Stage);
             if (questStage.Kill && questStage.MobId == mobId)
             {
                 heroQuest.Quantity += 1;
-                if (heroQuest.Quantity >= questStage.Quantity) DoneStage(heroQuest, questStage);
+                if (heroQuest.Quantity >= questStage.Quantity) await DoneStage(heroQuest, questStage);
             }
         });
+
+        await _context.SaveChangesAsync();
     }
 
     private async Task<bool> DoneStage(DBHeroQuest heroQuest, DBQuestStage _questStage)
