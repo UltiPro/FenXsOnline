@@ -12,7 +12,7 @@
     background-image: url("./../assets/ui/greyBackground.png");
     font-size: 12px;
     padding: 10px;
-    overflow: hidden; /* Hide overflow content */
+    overflow: hidden;
 }
 
 #logList {
@@ -62,7 +62,6 @@ border-radius: 10px;
     align-items: center;
 }
 
-/* Styling for the black overlay */
 .black-overlay {
     position: fixed;
     top: 0;
@@ -76,7 +75,6 @@ border-radius: 10px;
     align-items: center;
 }
 
-/* Styling for the countdown text */
 .countdown {
     font-size: 24px; 
     color: goldenrod; 
