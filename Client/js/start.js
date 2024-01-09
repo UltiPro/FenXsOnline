@@ -222,6 +222,16 @@ $(document).ready(function () {
             });
     });
 
+    $('#logout-button').bind("click", () => {
+        app.post(apiBaseUrl + "Account/logout")
+            .then(() => {
+                window.location.replace("./index.html");
+            })
+            .catch((error) => {
+                console.error("Error logging out:", error);
+            });
+    });
+
     //sex: string -> int
     function CreationConvertSex(sex) {
         if (sex == "Male") {
