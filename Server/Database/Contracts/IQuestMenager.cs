@@ -8,5 +8,5 @@ public interface IQuestMenager
     Task TakeQuest(string accountId, int questId);
     Task<List<QuestStageResponse>> GetQuestsInfo(string accountId);
     Task<QuestCompletedResponse> TalkOrBring(string accountId, int questId);
-    Task Kill(DBHero hero, int mobId);
+    void Kill(DBHero hero, int mobId);
 }
