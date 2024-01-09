@@ -106,7 +106,7 @@ public class QuestMenager : IQuestMenager
             await _context.SaveChangesAsync();
         }
 
-        if (await DoneStage(heroQuest, questStage))
+        if (DoneStage(heroQuest, questStage))
         {
             var questRewards = await _context.QuestRewards.Where(questReward => questReward.QuestId == questId).ToListAsync();
 
@@ -128,7 +128,7 @@ public class QuestMenager : IQuestMenager
 
             return new QuestCompletedResponse
             {
-                PromotionResponse = _promotionMenager.Promotion(hero, quest.Level, true),
+                PromotionResponse = await _promotionMenager.Promotion(hero.Id, quest.Level, true),
                 HeroEquipmentRewards = equipmentRewards
             };
         }
@@ -136,33 +136,31 @@ public class QuestMenager : IQuestMenager
         return null;
     }
 
-    public async Task Kill(DBHero hero, int mobId)
+    public void Kill(DBHero hero, int mobId)
     {
-        var heroQuests = await _context.HeroesQuests.Where(heroQuest => heroQuest.DBHero == hero && !heroQuest.Done).ToListAsync();
+        var heroQuests = _context.HeroesQuests.Where(heroQuest => heroQuest.DBHero == hero && !heroQuest.Done).ToList();
 
-        heroQuests.ForEach(async heroQuest =>
+        heroQuests.ForEach(heroQuest =>
         {
             var questStage = _context.QuestStages.FirstOrDefault(questStage =>
                 questStage.QuestId == heroQuest.QuestId && questStage.Stage == heroQuest.Stage);
             if (questStage.Kill && questStage.MobId == mobId)
             {
                 heroQuest.Quantity += 1;
-                if (heroQuest.Quantity >= questStage.Quantity) await DoneStage(heroQuest, questStage);
+                if (heroQuest.Quantity >= questStage.Quantity) DoneStage(heroQuest, questStage);
             }
         });
 
-        await _context.SaveChangesAsync();
+        _context.SaveChanges();
     }
 
-    private async Task<bool> DoneStage(DBHeroQuest heroQuest, DBQuestStage _questStage)
+    private bool DoneStage(DBHeroQuest heroQuest, DBQuestStage _questStage)
     {
         if (_context.QuestStages.Any(questStage =>
             questStage.QuestId == _questStage.QuestId && questStage.Stage == (_questStage.Stage + 1)))
             heroQuest.Stage += 1;
         else
             heroQuest.Done = true;
-
-        await _context.SaveChangesAsync();
 
         return heroQuest.Done;
     }
