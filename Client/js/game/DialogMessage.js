@@ -20,6 +20,7 @@ class DialogMessage {
         this.tradeMenu = null;
         this.buttons = [];
         this.currentButtonIndex = 0;
+        this.alreadyDone = false;
     }
 
     createElement() {
@@ -65,25 +66,39 @@ class DialogMessage {
                         const npcMessage = document.getElementById("dialog");
                         console.log(this.quests[0]);
                         npcMessage.textContent = this.quests[0].npcMessage;
-                        this.questProgress();
-                        document.getElementById("quest").remove();
-                        //removing quest in npc after talking about it
-                        //check for the npc quest
-                        if(this.map.gameObjects[this.faceHero].talking[0].events[0].quests[0] !== undefined){
-                            delete this.map.gameObjects[this.faceHero].talking[0].events[0].quests[0]
-                        }
-                        //remove flag
-                        for (let i = 0; i < this.text.length; i++) {
-                            if (this.text[i].flag === "quest") {
-                                this.text.splice(i, 1)[0];
-                            }
-                        }
+                        this.questProgress()
+                            .then((finished) => {
+                                if (finished === true) {
+                                    if (this.map.gameObjects[this.faceHero].talking[0].events[0].quests[0] !== undefined) {
+                                        delete this.map.gameObjects[this.faceHero].talking[0].events[0].quests[0];
+                                    }
+                                    // Remove flag
+                                    for (let i = 0; i < this.text.length; i++) {
+                                        if (this.text[i].flag === "quest") {
+                                            this.text.splice(i, 1);
+                                            break; //exit loop if found
+                                        }
+                                    }
+                                }
+                            })
+                            .catch((error) => {
+                                console.error("Error in handling quest progress:", error);
+                            });
                         break;
                     case "questStage":
-                        this.talkQuest();
-                        document.getElementById("questStage").remove();
-                        //removing quest in npc after talking about it
-                        // Check for the npc
+                        this.talkQuest().then((success) => {
+                            const npcMessage = document.getElementById("dialog");
+                            if (success === true || alreadyDone === true) {
+                                npcMessage.textContent = "Thank You very much, here is your reward.";
+                                if (this.map.gameObjects[this.faceHero].talking[0].events[0].questsStage[0] !== undefined) {
+                                    delete this.map.gameObjects[this.faceHero].talking[0].events[0].questsStage[0];
+                                }
+                                this.alreadyDone = true;
+                            }
+                            if (success === false) {
+                                npcMessage.textContent = "This is not what I asked You for, come back here when You complete the task.";
+                            }
+                        });
                         break;
                     default:
                         this.done();
@@ -120,16 +135,67 @@ class DialogMessage {
     }
 
     async questProgress() {
-        await app.post(apiBaseUrl + `Quest/?questId=${this.quests[0].id}`);
+        try {
+            await app.post(apiBaseUrl + `Quest/?questId=${this.quests[0].id}`);
+            return true;
+        } catch (error) {
+            console.error("Error in quest progress:", error);
+            return false;
+        }
     }
 
-    async talkQuest(){
-        await app.post(apiBaseUrl + `Quest/talk/?questId=${this.questsStage[0].questId}`).then(response => {
-            console.log(response.data)
-            if (response.data.heroEquipmentRewards && response.data.heroEquipmentRewards.length > 0){
+    async talkQuest() {
+        try {
+            const response = await app.post(apiBaseUrl + `Quest/talk/?questId=${this.questsStage[0].questId}`);
+            console.log(response.data);
+            if (response.data.heroEquipmentRewards && response.data.heroEquipmentRewards.length > 0) {
                 refreshHeroData();
+                return true;
+            } else {
+                return false;
             }
-        });
+        } catch (error) {
+            console.error("Error talking to NPC:", error);
+            return false;
+        }
+    }
+
+    async questRefresh() {
+        try {
+            const response = await app.get(apiBaseUrl + "Map");
+            let npcs = response.data.npCs;
+            const thisNpc = npcs.find((npc) => npc.name === `${this.faceHero}`);
+
+            if (thisNpc && thisNpc.quests && thisNpc.quests.length > 0) {
+                thisNpc.quests.forEach((quest) => {
+                    const isNewQuest = !this.quests.some((existingQuest) => existingQuest.title === quest.title);
+
+                    if (isNewQuest) {
+                        this.quests.push(quest);
+                        this.text.push({
+                            text: quest.title,
+                            flag: "quest",
+                        });
+                    }
+                });
+            }
+
+            if (thisNpc && thisNpc.questsStage && thisNpc.questsStage.length > 0) {
+                thisNpc.questsStage.forEach((stage) => {
+                    const isNewStage = !this.questsStage.some((existingStage) => existingStage.npcMessage === stage.npcMessage);
+
+                    if (isNewStage) {
+                        this.questsStage.push(stage);
+                        this.text.push({
+                            text: stage.npcMessage,
+                            flag: "questStage",
+                        });
+                    }
+                });
+            }
+        } catch (error) {
+            console.error("Error with refreshing NPCs quest:", error);
+        }
     }
 
     async openTradeMenu(npcId) {
@@ -215,7 +281,7 @@ class DialogMessage {
 
     async fetchShopItems(npcId) {
         try {
-            const fetchItemPromises = this.shopItems.map(async (item) => {
+            for (const item of this.shopItems) {
                 const response = await app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`);
                 const typePath = await this.itemTypeParser(item.itemType);
 
@@ -229,9 +295,16 @@ class DialogMessage {
 
                 shopDetails.push(itemWithSlot);
                 $(`#s${item.id}`).append(draggableDiv);
-            });
 
-            await Promise.all(fetchItemPromises);
+                // Here, you might need to adjust the logic to add the item to the shopDetails list
+                // using separate copies for each item in the shop.
+                // Something like:
+                for (let i = 0; i < 10; i++) {
+                    // For example, adding 10 copies of each item to the shop
+                    const clonedItem = { ...itemWithSlot };
+                    shopDetails.push(clonedItem);
+                }
+            }
         } catch (error) {
             console.error("Error fetching item details:", error);
             throw error;
@@ -277,8 +350,9 @@ class DialogMessage {
         this.onComplete();
     }
 
-    init(container) {
+    async init(container) {
         this.createElement();
+        await this.questRefresh();
         container.appendChild(this.element);
     }
 }
