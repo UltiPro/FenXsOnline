@@ -259,7 +259,6 @@ class Overworld {
             let name = npcData.name;
             let npc = name;
             let texts = [];
-            console.log(npcData.quests)
             let placeNPC = new Person({
                 isPlayerControlled: false,
                 x: utils.withGrid(npcData.x),
@@ -513,7 +512,6 @@ class Overworld {
         this.placeNPC();
         await this.cacheMonsterDetails(); // Fetch and cache monsters
         await this.cacheItemsDetails(); // Fetch and cache items
-        console.log(this.itemsCache)
         this.placeItems(this.mapData.items)
         this.placeMonsters(this.mapData.mobs);
         this.map.overworld = this;

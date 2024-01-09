@@ -24,9 +24,6 @@ class DialogMessage {
     }
 
     createElement() {
-        console.log(this.map.gameObjects[this.faceHero].talking[0].events[0].quests[0]);
-        console.log("questStages:", this.questsStage);
-        console.log("quests: ", this.quests);
         this.element = document.createElement("div");
         this.element.classList.add("TextMessage");
         this.element.innerHTML = `
@@ -64,7 +61,6 @@ class DialogMessage {
                         break;
                     case "quest":
                         const npcMessage = document.getElementById("dialog");
-                        console.log(this.quests[0]);
                         npcMessage.textContent = this.quests[0].npcMessage;
                         this.questProgress()
                             .then((finished) => {
@@ -153,7 +149,6 @@ class DialogMessage {
     async talkQuest() {
         try {
             const response = await app.post(apiBaseUrl + `Quest/talk/?questId=${this.questsStage[0].questId}`);
-            console.log(response.data);
             if (response.data.heroEquipmentRewards && response.data.heroEquipmentRewards.length > 0) {
                 refreshHeroData();
                 return true;
@@ -208,7 +203,6 @@ class DialogMessage {
         this.element.remove();
         this.tradeMenu = document.createElement("div");
         this.tradeMenu.classList.add("tradeBox");
-        console.log(this.shopItems);
         this.fetchShopItems(npcId);
 
         this.tradeMenu.innerHTML = `
@@ -277,7 +271,6 @@ class DialogMessage {
         </div>
          
         `;
-        //console.log(this.tradeMenu)
         document.querySelector(".game-container").appendChild(this.tradeMenu);
         this.tradeMenu.querySelector("#tradeBox-close").addEventListener("click", () => {
             shopDetails = [];
