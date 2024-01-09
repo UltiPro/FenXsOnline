@@ -1,6 +1,7 @@
-﻿using Classes.Models.Game;
-using Classes.Models.Game.Hero;
+﻿using Classes.Exceptions;
+using Classes.Models.Game;
 using Database.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Database.Repository;
 
@@ -15,8 +16,12 @@ public class PromotionMenager : IPromotionMenager
         this._context = _context;
     }
 
-    public PromotionResponse Promotion(DBHero hero, int level, bool quest)
+    public async Task<PromotionResponse> Promotion(int heroId, int level, bool quest)
     {
+        var hero = await _context.Heroes.FirstOrDefaultAsync(hero => hero.Id == heroId);
+
+        if (hero is null) throw new NotFoundException("Hero", heroId);
+
         int experience;
 
         try
@@ -37,7 +42,7 @@ public class PromotionMenager : IPromotionMenager
             nextLeveLExperience = LevelExperience(hero.Level);
         }
 
-        _context.Update(hero);
+        await _context.SaveChangesAsync();
 
         return new PromotionResponse
         {
