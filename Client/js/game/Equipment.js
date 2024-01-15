@@ -248,7 +248,6 @@ function buyItem(cleanFromId) {
     let itemFromShop = shop[itemIndex];
 
     if (itemFromShop) {
-        const buyItemFromShop = () => {
             app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`)
                 .then((response) => {
                     delete itemFromShop.npcId;
@@ -267,13 +266,6 @@ function buyItem(cleanFromId) {
                     console.log("Error npc/buy endpoint", err);
                     return "ITEM_BUY_ERROR";
                 });
-        };
-
-        // Call the function to buy the item multiple times if needed
-        const purchaseCount = 1; // Define the number of times to buy the item
-        for (let i = 0; i < purchaseCount; i++) {
-            buyItemFromShop();
-        }
     } else {
         console.log("Item not found in the shop inventory.");
     }
