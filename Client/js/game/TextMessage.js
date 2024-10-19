@@ -1,11 +1,11 @@
-class TextMessage{
-    constructor({text, onComplete}){
+class TextMessage {
+    constructor({ text, onComplete }) {
         this.text = text;
         this.onComplete = onComplete;
         this.element = null;
     }
 
-    createElement(){
+    createElement() {
         this.element = document.createElement("div");
         this.element.classList.add("TextMessage");
 
@@ -15,7 +15,7 @@ class TextMessage{
         `)
 
         this.element.querySelector("button").addEventListener("click", () => {
-           this.done(); //Close text message
+            this.done(); //Close text message
         });
         //Closing on pressing enter
         this.actionListner = new KeyPressListner("Enter", () => {
@@ -24,12 +24,12 @@ class TextMessage{
         })
     }
 
-    done(){
+    done() {
         this.element.remove();
         this.onComplete();
     }
 
-    init(container){
+    init(container) {
         this.createElement();
         container.appendChild(this.element)
     }

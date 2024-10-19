@@ -1,5 +1,5 @@
-class Battle{
-    constructor({ x,y, mobName, who ,onComplete }) {
+class Battle {
+    constructor({ x, y, mobName, who, onComplete }) {
         this.x = x;
         this.y = y;
         this.name = mobName;
@@ -8,7 +8,6 @@ class Battle{
         this.text = [];
         this.dead = null;
         this.drop = null;
-       
     }
 
     createElement() {
@@ -27,12 +26,12 @@ class Battle{
 
         const logList = this.element.querySelector("#logList");
         let lastLogIndex = this.text.length - 1;
-    
+
         this.text.forEach((log, index) => {
             const li = document.createElement("li");
             const logText = log.trim();
             let textColor = index % 2 === 0 ? "goldenrod" : "silver";
-    
+
             if (index === lastLogIndex) {
                 if (logText.startsWith(`Winner is ${this.name}`)) {
                     textColor = "red";
@@ -40,31 +39,31 @@ class Battle{
                     textColor = "green";
                 }
             }
-    
+
             li.textContent = logText;
             li.style.color = textColor;
             logList.appendChild(li);
         });
-        
+
 
         this.element.querySelector("button").addEventListener("click", () => {
             this.done(); //Close text message
-         });
-         //Closing on pressing enter
-         this.actionListner = new KeyPressListner("Enter", () => {
-             this.actionListner.unbind();
-             this.done();
-         })
+        });
+        //Closing on pressing enter
+        this.actionListner = new KeyPressListner("Enter", () => {
+            this.actionListner.unbind();
+            this.done();
+        })
     }
 
     async fetchBattleLogs() {
-        return app.put(apiBaseUrl + `Fight/mob?x=${this.x}&y=${this.y}`).then((response) =>{
+        return app.put(apiBaseUrl + `Fight/mob?x=${this.x}&y=${this.y}`).then((response) => {
             this.text = response.data.logs;
             this.dead = response.data.dead;
             this.drop = response.data.drop;
             // console.log(response.data)
             return this.text
-        }).catch((err) => {console.log("fetchBattleLogs error", err)})
+        }).catch((err) => { console.log("fetchBattleLogs error", err) })
     }
 
     done() {

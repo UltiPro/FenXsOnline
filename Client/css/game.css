@@ -1,16 +1,16 @@
-*{
+* {
 	box-sizing: border-box;
 }
 
-body{
-	overflow: hidden;  
+body {
+	overflow: hidden;
 }
 
-#font{
+#font {
 	font-family: font_form;
 }
 
-.game-container{
+.game-container {
 	position: relative;
 	width: 964px;
 	height: 644px;
@@ -20,11 +20,11 @@ body{
 	background-size: cover;
 }
 
-.game-container canvas{
+.game-container canvas {
 	image-rendering: pixelated;
-}	
+}
 
-#equipment-container{
+#equipment-container {
 	position: relative;
 	display: block;
 	flex-direction: column;
@@ -37,11 +37,11 @@ body{
 	z-index: 1;
 }
 
-.container{
+.container {
 	display: flex;
 }
 
-#status{
+#status {
 	margin-left: 20px;
 	display: flex;
 	width: 300px;
@@ -49,33 +49,36 @@ body{
 	z-index: 1;
 }
 
-#used{
+#used {
 	width: 300px;
 	display: flex;
 	z-index: 1;
 }
 
-#backpack, #shop{
+#backpack,
+#shop {
 	margin-left: 19px;
 	width: 300px;
 	display: flex;
 	flex-wrap: wrap;
-    gap: 4px;
+	gap: 4px;
 	z-index: 1;
 }
 
-#questList{
+#questList {
 	margin-left: 19px;
 	width: 1200px;
 	display: flex;
 	flex-wrap: wrap;
-    gap: 4px;
+	gap: 4px;
 	z-index: 1;
 }
 
-.bp-slot, .eq-slot, .shop-slot{
+.bp-slot,
+.eq-slot,
+.shop-slot {
 	position: relative;
-    overflow: hidden;
+	overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -83,76 +86,80 @@ body{
 	width: 48px;
 	height: 48px;
 	background-size: contain;
-    background-repeat: no-repeat;
+	background-repeat: no-repeat;
 	background-image: url("./../assets/ui/box/boxNormal.png");
 }
 
-.eq-slot::before{
-	background-color: rgba(0,0,0,0.25);
+.eq-slot::before {
+	background-color: rgba(0, 0, 0, 0.25);
 }
 
-.bp-slot:hover, .eq-slot:hover, .shop-slot:hover{
+.bp-slot:hover,
+.eq-slot:hover,
+.shop-slot:hover {
 	background-image: url("./../assets/ui/box/boxHover.png");
 }
 
-.bp-slot:active, .eq-slot:active, .shop-slot:active{
+.bp-slot:active,
+.eq-slot:active,
+.shop-slot:active {
 	background-image: url("./../assets/ui/box/boxSelect.png");
 }
 
-.item-image{
+.item-image {
 	position: relative;
 	background-size: contain;
-    background-repeat: no-repeat;
+	background-repeat: no-repeat;
 	position: absolute;
-    top: 7px;
-    left: 7px; 
-    width: 70%;
-    height: 70%;
+	top: 7px;
+	left: 7px;
+	width: 70%;
+	height: 70%;
 	background-image: url("");
 	z-index: 5;
 	cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
 }
 
 .item-image.dragging {
-    cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
+	cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
 }
 
 /*eq slot styles*/
-#dbHelmet .item-image{
+#dbHelmet .item-image {
 	background-image: url("./../assets/ui/eq/helmet.png");
 }
 
-#dbRing .item-image{
+#dbRing .item-image {
 	background-image: url("./../assets/ui/eq/ring.png");
 }
 
-#dbNecklace .item-image{
+#dbNecklace .item-image {
 	background-image: url("./../assets/ui/eq/necklace.png");
 }
 
-#dbGloves .item-image{
+#dbGloves .item-image {
 	background-image: url("./../assets/ui/eq/gloves.png");
 }
 
-#dbWeapon .item-image{
+#dbWeapon .item-image {
 	background-image: url("./../assets/ui/eq/primary.png");
 }
 
-#dbArmor .item-image{
+#dbArmor .item-image {
 	background-image: url("./../assets/ui/eq/armor.png");
 }
 
-#dbSecondaryWeapon .item-image{
+#dbSecondaryWeapon .item-image {
 	background-image: url("./../assets/ui/eq/secondary.png");
 }
 
-#dbBoots .item-image{
+#dbBoots .item-image {
 	background-image: url("./../assets/ui/eq/boots.png");
 }
 
-#drop{
+#drop {
 	position: relative;
-    overflow: hidden;
+	overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -160,62 +167,63 @@ body{
 	width: 48px;
 	height: 48px;
 	background-size: contain;
-    background-repeat: no-repeat;
+	background-repeat: no-repeat;
 	background-image: url("./../assets/ui/box/boxNormal.png");
 	position: absolute;
 	margin-left: 12.2rem;
 }
 
-#drop .item-image{
+#drop .item-image {
 	background-image: url("./../assets/ui/eq/drop.png");
 }
 
 #questListButtonContainer {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    color: goldenrod;
-    width: 48px;
-    height: 48px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url("./../assets/ui/box/boxNormal.png");
-    position: absolute;
-    margin-right: 12rem;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 2;
+	color: goldenrod;
+	width: 48px;
+	height: 48px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-image: url("./../assets/ui/box/boxNormal.png");
+	position: absolute;
+	margin-right: 12rem;
 }
 
 #questListButton {
 	color: goldenrod;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url("./../assets/ui/eq/questBook.png");
-    font-size: 14px;
-    width: 70%;
-    height: 70%; 
-    margin: 0; 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-image: url("./../assets/ui/eq/questBook.png");
+	font-size: 14px;
+	width: 70%;
+	height: 70%;
+	margin: 0;
 }
-#questListButton:hover{
+
+#questListButton:hover {
 	color: white;
 }
 
-.item-image{
+.item-image {
 	background-image: url("./../assets/ui/eq/drop.png");
 }
 
-.item-opacity{
+.item-opacity {
 	opacity: 40%;
 	cursor: default;
 }
 
 /*stats styles*/
-.stat-icon{
+.stat-icon {
 	position: relative;
-    overflow: hidden;
+	overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -223,46 +231,47 @@ body{
 	width: 32px;
 	height: 32px;
 	background-size: contain;
-    background-repeat: no-repeat;
+	background-repeat: no-repeat;
 }
-#dmg{
+
+#dmg {
 	background-image: url("./../assets/ui/eq/Dmg.png");
 }
 
-#m-dmg{
+#m-dmg {
 	background-image: url("./../assets/ui/eq/MagicDmg.png");
 }
 
-#def{
+#def {
 	background-image: url("./../assets/ui/eq/defence.png");
 }
 
-#m-def{
+#m-def {
 	background-image: url("./../assets/ui/eq/MagicDefence.png");
 }
 
-#health{
+#health {
 	background-image: url("./../assets/ui/eq/health.png");
 }
 
-#mana{
+#mana {
 	background-image: url("./../assets/ui/eq/mana.png");
 }
 
-#agility{
+#agility {
 	background-image: url("./../assets/ui/eq/agility.png");
 }
 
-#gold{
+#gold {
 	background-image: url("./../assets/ui/eq/gold.png");
 }
 
-#stamina{
+#stamina {
 	background-image: url("./../assets/ui/eq/stamina.png");
 }
 
 .dragging {
-    opacity: 0.5; 
+	opacity: 0.5;
 	z-index: 10;
 	cursor: grabbing;
 }

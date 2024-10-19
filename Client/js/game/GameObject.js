@@ -1,5 +1,5 @@
-class GameObject{
-	constructor(config){
+class GameObject {
+	constructor(config) {
 		this.id = config.id || null;
 		this.isMounted = false;
 		this.x = config.x || 0;
@@ -9,16 +9,15 @@ class GameObject{
 			gameObject: this,
 			src: config.src || "./assets/heroes/hunter/hunterF0.gif",
 		});
-		
+
 		this.behaviorLoop = config.behaviorLoop || [];
 		this.behaviorLoopIndex = 0;
 
 		//if obeject is an npc it will have talking events queue
 		this.talking = config.talking || [];
 	}
-	
 
-	mount(map){
+	mount(map) {
 		this.isMounted = true;
 		map.addWall(this.x, this.y);
 
@@ -27,34 +26,31 @@ class GameObject{
 			this.doBehaviorEvent(map);
 		}, 10)
 	}
-	//updating objects for ex. when they move
-	update(){
-		
-		
-	}
 
-	async doBehaviorEvent(map){
+	//updating objects for ex. when they move
+	update() { }
+
+	async doBehaviorEvent(map) {
 		//if there's something more important going on break
 		//remove isCutscenePlaying if map freezes
-		if(this.behaviorLoop.length === 0 || this.isStanding){
+		if (this.behaviorLoop.length === 0 || this.isStanding) {
 			return;
-		} 
+		}
 		//Setting up eventt with relevant info
 		let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
 		eventConfig.who = this.id;
 
 		//Event handler for changing map, music etc
 		//Create an event instance out of next event config
-		const eventHandler = new OverworldEvent({map, event: eventConfig});
+		const eventHandler = new OverworldEvent({ map, event: eventConfig });
 		await eventHandler.init();
 
 		//Setting the next event
 		this.behaviorLoopIndex += 1;
-		if(this.behaviorLoopIndex === this.behaviorLoop.length){
+		if (this.behaviorLoopIndex === this.behaviorLoop.length) {
 			this.behaviorLoopIndex = 0;
 		}
 
 		this.doBehaviorEvent(map);
 	}
-	
 }

@@ -33,7 +33,7 @@ $(".bp-slot").on("drop", function (event) {
     const toId = dropTarget.attr("id");
     const cleanToId = toId.replace("s", "");
     //check if item is from shop, buying item
-    if(ancestorShop.length > 0){
+    if (ancestorShop.length > 0) {
         const cleanFromId = fromId.replace("s", "")
         buyItem(cleanFromId)
         setTimeout(() => {
@@ -99,15 +99,14 @@ $(".eq-slot").on("drop", function (event) {
             swapItems(cleanFromId, toId)
                 .then((flag) => {
                     if (flag === true) {
-                        if (DoesEqSlotFitsItemType === 2)
-                        {
+                        if (DoesEqSlotFitsItemType === 2) {
                             draggedItem.remove();
-                        }else{
+                        } else {
                             existingItem.removeClass();
                             dropTarget.append(draggedItem);
                         }
-                        
-                        
+
+
                         updateItemPosition(cleanFromId, toId);
                         updateHeroStatLabels();
                     }
@@ -140,10 +139,10 @@ $(document).on("drop", ".shop-slot", function (event) {
     if (draggedItem.parent().hasClass("shop-slot") && dropTarget.hasClass("shop-slot")) {
         console.log("Both items are from shop-slot, nothing should happen");
     }
-    else if(draggedItem.parent().hasClass("eq-slot")){
+    else if (draggedItem.parent().hasClass("eq-slot")) {
         console.log("Item moved from eq-slot cannot be selled, move item to backack")
     }
-    else{
+    else {
         sellItem(cleanFromId);
         console.log(ancestor)
         $(ancestor).empty();
@@ -206,13 +205,13 @@ async function showGrabbedItem(item) {
     try {
         let BPdetails = getBackpackDetails();
         const response = await app.get(apiBaseUrl + `Item?itemType=${item.itemType}&id=${item.itemId}`);
-        const firstEmptySlot = $(".bp-slot").filter(function() {
+        const firstEmptySlot = $(".bp-slot").filter(function () {
             return $(this).children().length === 0; // Filter empty slots
         }).first();
 
         if (firstEmptySlot.length > 0) {
             slot = firstEmptySlot.attr("id").replace("s", "") //extracting slot info from bp.slot div
-            
+
             //updating local list
             const itemLocal = {
                 itemDetails: response.data,
@@ -239,7 +238,7 @@ function buyItem(cleanFromId) {
     let BPdetails = getBackpackDetails();
     let shop = getShopDetails();
 
-    const firstEmptySlot = $(".bp-slot").filter(function() {
+    const firstEmptySlot = $(".bp-slot").filter(function () {
         return $(this).children().length === 0; // Filter empty slots
     }).first();
     slotForBoughtItem = firstEmptySlot.attr("id").replace("s", "");
@@ -248,24 +247,24 @@ function buyItem(cleanFromId) {
     let itemFromShop = shop[itemIndex];
 
     if (itemFromShop) {
-            app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`)
-                .then((response) => {
-                    delete itemFromShop.npcId;
-                    itemFromShop.slotInfo = slotForBoughtItem;
+        app.put(apiBaseUrl + `Npc/buy?npcId=${itemFromShop.npcId}&itemId=${itemFromShop.slotInfo}`)
+            .then((response) => {
+                delete itemFromShop.npcId;
+                itemFromShop.slotInfo = slotForBoughtItem;
 
-                    const draggedItem = $(`#s${cleanFromId}`).children().clone();
-                    draggedItem.css("opacity", "1");
-                    firstEmptySlot.append(draggedItem);
+                const draggedItem = $(`#s${cleanFromId}`).children().clone();
+                draggedItem.css("opacity", "1");
+                firstEmptySlot.append(draggedItem);
 
-                    BPdetails.push(itemFromShop);
-                    setBackpackDetails(BPdetails);
+                BPdetails.push(itemFromShop);
+                setBackpackDetails(BPdetails);
 
-                    updateHeroStatLabels();
-                })
-                .catch((err) => {
-                    console.log("Error npc/buy endpoint", err);
-                    return "ITEM_BUY_ERROR";
-                });
+                updateHeroStatLabels();
+            })
+            .catch((err) => {
+                console.log("Error npc/buy endpoint", err);
+                return "ITEM_BUY_ERROR";
+            });
     } else {
         console.log("Item not found in the shop inventory.");
     }
@@ -278,21 +277,21 @@ function sellItem(cleanFromId) {
     if (itemIndex !== -1) {
         const itemToSell = BPdetails[itemIndex]; //selecting item from backpack
 
-        const shop = document.querySelector(`[id^="seller"]`); 
+        const shop = document.querySelector(`[id^="seller"]`);
         if (shop) {
-          // Extracting shop ID
+            // Extracting shop ID
             const spanId = shop.id;
             const npcId = spanId.replace('seller', '');
             app.put(apiBaseUrl + `Npc/sell?npcId=${npcId}&itemId=${itemToSell.slotInfo}`)
-            .then((_) => {
-                BPdetails.splice(itemIndex, 1);
-                setBackpackDetails(BPdetails); //removing item from backpack local list
-                updateHeroStatLabels(); //gold UI update
-                console.log(`Item sold successfully.`);
-          })
-          .catch((error) => {
-              console.error("Error selling item:", error);
-          });
+                .then((_) => {
+                    BPdetails.splice(itemIndex, 1);
+                    setBackpackDetails(BPdetails); //removing item from backpack local list
+                    updateHeroStatLabels(); //gold UI update
+                    console.log(`Item sold successfully.`);
+                })
+                .catch((error) => {
+                    console.error("Error selling item:", error);
+                });
         }
     } else {
         console.log("Item not found in the hero's backpack.");
@@ -381,7 +380,7 @@ function CanBeEquipped(fromId, toId) {
     const x = BPdetails.find((item) => item.slotInfo === fromId);
     const type = parseEqId(toId);
     if (x.itemDetails.itemType === type || x.itemDetails.itemType === 8) {
-        if(x.itemDetails.itemType === 8){
+        if (x.itemDetails.itemType === 8) {
             return 2;
         }
         return 1;
@@ -419,7 +418,7 @@ function showInfo(element, event) {
         let EQdetails = getEquipmentDetails();
         let shopDetails = getShopDetails();
         let item;
-        if($(element).parent().hasClass("bp-slot")){
+        if ($(element).parent().hasClass("bp-slot")) {
             const id = slot.replace("s", "");
             item = BPdetails.find((item) => item.slotInfo === id);
         }
@@ -427,26 +426,26 @@ function showInfo(element, event) {
             const id = parseEqId(slot);
             item = EQdetails.find((item) => item.slotInfo == id);
         }
-        if($(element).parent().hasClass("shop-slot")){
+        if ($(element).parent().hasClass("shop-slot")) {
             const id = slot.replace("s", "");
             item = shopDetails.find((item) => item.slotInfo === id);
         }
-        
+
         let info = item.itemDetails;
         let infoKeys = [
-            {key: info.name, label: ""},
-            {key: info.attack, label: "Physical Damage: "},
-            {key: info.magicAttack, label: "Magical Damage: "},
-            {key: info.criticalChance, label: "Ciritical Hit Chance: "},
-            {key: info.armor, label: "Physical Defence: "},
-            {key: info.magicArmor, label: "Magical Defence: "},
-            {key: info.healthPoints, label: "Health: "},
-            {key: info.mana, label: "Mana: "},
-            {key: info.agility, label: "Agility: "},
-            {key: info.weight, label: "Weight: "},
-            {key: info.price, label: "Price: "},
-            {key: info.profession, label: "Profession: "},
-            {key: info.level, label: "Level: "},
+            { key: info.name, label: "" },
+            { key: info.attack, label: "Physical Damage: " },
+            { key: info.magicAttack, label: "Magical Damage: " },
+            { key: info.criticalChance, label: "Ciritical Hit Chance: " },
+            { key: info.armor, label: "Physical Defence: " },
+            { key: info.magicArmor, label: "Magical Defence: " },
+            { key: info.healthPoints, label: "Health: " },
+            { key: info.mana, label: "Mana: " },
+            { key: info.agility, label: "Agility: " },
+            { key: info.weight, label: "Weight: " },
+            { key: info.price, label: "Price: " },
+            { key: info.profession, label: "Profession: " },
+            { key: info.level, label: "Level: " },
         ]
         let iconInfo = ``
         iconInfo = createIconInfo(infoKeys)
@@ -462,11 +461,11 @@ function showInfo(element, event) {
         const windowWidth = $(window).width();
         const windowHeight = $(window).height();
 
-        const maxX = windowWidth - infoDivWidth - 10; 
-        const maxY = windowHeight - infoDivHeight - 10; 
+        const maxX = windowWidth - infoDivWidth - 10;
+        const maxY = windowHeight - infoDivHeight - 10;
 
-        let adjustedX = mouseX + 10; 
-        let adjustedY = mouseY + 10; 
+        let adjustedX = mouseX + 10;
+        let adjustedY = mouseY + 10;
         if (adjustedX > maxX) {
             adjustedX = maxX;
         }
@@ -487,15 +486,15 @@ function createIconInfo(infoKeys) {
         if (k.label === "Profession: ") {
             let profession = parseProfession(k.key);
             message += "<br /><p>Requirements: </p>";
-            if(profession !== undefined){
+            if (profession !== undefined) {
                 let line = "<p>" + k.label + " " + profession + "</p>";
                 message += line;
             }
         } else
-        if (k.key !== undefined && k.key !== 0) {
+            if (k.key !== undefined && k.key !== 0) {
                 let line = "<p>" + k.label + " " + k.key + "</p>";
                 message += line;
-        }
+            }
     });
     return message;
 }

@@ -24,7 +24,7 @@ function GameInit() {
 }
 
 function displayCountdown(overworld, remainingTime) {
-	$('#equipment-container').css('pointer-events', 'none'); //disabling Equipment
+    $('#equipment-container').css('pointer-events', 'none'); //disabling Equipment
     const blackOverlay = document.createElement('div');
     blackOverlay.classList.add('black-overlay');
     blackOverlay.id = 'black-overlay';
@@ -48,10 +48,9 @@ function displayCountdown(overworld, remainingTime) {
             setTimeout(() => {
                 blackOverlay.remove();
                 localStorage.removeItem('deathTime'); // Clear the stored death time
-				$('#equipment-container').css('pointer-events', 'auto'); //enabling equipment
+                $('#equipment-container').css('pointer-events', 'auto'); //enabling equipment
                 overworld.init(); // Initialize the game after countdown
             }, 500);
         }
     }, 1000);
 }
-

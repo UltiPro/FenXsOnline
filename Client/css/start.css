@@ -5,7 +5,7 @@
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
-.profession-image{
+.profession-image {
     width: 16vh;
     height: 20vh;
     resize: none;
@@ -17,7 +17,7 @@
     transition: opacity 0.3s ease;
 }
 
-.profession-image:hover{
+.profession-image:hover {
     opacity: 1;
 }
 
@@ -34,7 +34,8 @@
     height: 307px;
 }
 
-.character-slot, .profession-image{
+.character-slot,
+.profession-image {
     cursor: url("./../assets/ui/pointerSmall.png"), auto !important;
 }
 
@@ -47,7 +48,7 @@
     height: 498px;
 }
 
-#profession-info{
+#profession-info {
     margin-top: 20px;
 }
 
@@ -58,14 +59,14 @@
     cursor: pointer;
 }
 
-#hero-conf{
+#hero-conf {
     height: 20%;
 }
 
-#hero-preview{
+#hero-preview {
     height: 40%;
 }
 
-#desc-area{
+#desc-area {
     height: 40%;
 }

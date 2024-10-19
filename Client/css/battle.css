@@ -20,31 +20,33 @@
     padding: 0;
     overflow-y: auto;
     max-height: calc(100% - 70px);
-    padding-right: 15px; /* movign scrollbar to the right */
-    margin-right: -5px; /* keeping it inside the box*/
-    scrollbar-width: thin; 
-    scrollbar-color: goldenrod #303030; 
+    padding-right: 15px;
+    /* movign scrollbar to the right */
+    margin-right: -5px;
+    /* keeping it inside the box*/
+    scrollbar-width: thin;
+    scrollbar-color: goldenrod #303030;
     overflow-y: scroll;
 }
 
 #logList li {
     margin-bottom: 8px;
-    font-size: 12px;  
+    font-size: 12px;
 }
 
 #logList::-webkit-scrollbar {
-width: 8px; 
-border-radius: 10px; 
+    width: 8px;
+    border-radius: 10px;
 }
 
 #logList::-webkit-scrollbar-track {
-background: #303030; 
-border-radius: 10px; 
+    background: #303030;
+    border-radius: 10px;
 }
 
 #logList::-webkit-scrollbar-thumb {
-background-color: goldenrod; 
-border-radius: 10px; 
+    background-color: goldenrod;
+    border-radius: 10px;
 }
 
 #battle-close {
@@ -69,14 +71,14 @@ border-radius: 10px;
     width: 100%;
     height: 100%;
     background-color: black;
-    z-index: 9999; 
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .countdown {
-    font-size: 24px; 
-    color: goldenrod; 
-    text-align: center; 
+    font-size: 24px;
+    color: goldenrod;
+    text-align: center;
 }

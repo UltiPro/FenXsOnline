@@ -137,7 +137,7 @@ class Overworld {
     //comparing refreshed maps to remove/add lacking gameObjects
     async compareRefreshedMaps() {
         const differences = {};
-    
+
         if (this.oldMap && this.refreshedMap) {
             for (const key in this.oldMap) {
                 if (!_.isEqual(this.oldMap[key], this.refreshedMap[key])) {
@@ -154,10 +154,10 @@ class Overworld {
     getSpecificDifference() {
         for (const key in this.refreshDifference) {
             console.log(`Difference in object with key '${key}':`);
-    
+
             const oldList = this.refreshDifference[key].old;
             const newList = this.refreshDifference[key].new;
-    
+
             // Find elements that are in newList but not in oldList
             const added = newList.filter(newItem => !oldList.some(oldItem => _.isEqual(newItem, oldItem)));
             if (added.length > 0) {
@@ -173,16 +173,16 @@ class Overworld {
                         this.placeMonsters(mobsArray);
                         this.map.addWall(addedElem.x * 32, addedElem.y * 32);
                     }
-                    if(key === "heroes"){
+                    if (key === "heroes") {
                         const heroesArray = [addedElem];
                         this.placeOtherPlayers(heroesArray)
                     }
                 });
             }
-    
+
             // Find elements that are in oldList but not in newList
             const removed = oldList.filter(oldItem => !newList.some(newItem => _.isEqual(newItem, oldItem)));
-    
+
             if (removed.length > 0) {
                 console.log(`Removed elements:`, removed);
                 // Same coords are removed
@@ -204,8 +204,8 @@ class Overworld {
             }
         }
     }
-    
-      
+
+
     //fetching hero data
     getHeroData() {
         return app
@@ -246,9 +246,8 @@ class Overworld {
             isPlayerControlled: true,
             x: utils.withGrid(this.heroData.x),
             y: utils.withGrid(this.heroData.y),
-            src: `${getHeroSpritePath(this.heroData.profession)}/${
-                this.heroData.spriteURL
-            }`,
+            src: `${getHeroSpritePath(this.heroData.profession)}/${this.heroData.spriteURL
+                }`,
         });
         this.map.gameObjects[hero] = placeHero;
     }
@@ -270,7 +269,7 @@ class Overworld {
             if (npcData.questsStage && npcData.questsStage.length > 0) {
                 npcData.questsStage.forEach((stage) => {
                     texts.push({
-                        text: stage.npcMessage, 
+                        text: stage.npcMessage,
                         flag: `questStage`,
                     });
                 });
@@ -376,9 +375,9 @@ class Overworld {
             counter++;
         });
     }
-    
+
     //placing human players
-    placeOtherPlayers(heroes){
+    placeOtherPlayers(heroes) {
         let counter = 1;
         heroes.forEach((playerData) => {
             let name = `player${counter}`;
@@ -391,9 +390,8 @@ class Overworld {
                 isPlayerControlled: false,
                 x: utils.withGrid(playerData.x),
                 y: utils.withGrid(playerData.y),
-                src: `${getHeroSpritePath(playerData.profession)}/${
-                    playerData.spriteURL
-                }`,
+                src: `${getHeroSpritePath(playerData.profession)}/${playerData.spriteURL
+                    }`,
                 isOtherPlayer: true,
             });
             this.map.gameObjects[objName] = placePlayer;
@@ -405,10 +403,10 @@ class Overworld {
         if (!this.monstersCache) {
             this.monstersCache = {};
         }
-    
+
         const monsterPromises = this.mapData.mobs.map(mob => {
             const mobId = mob.mobId;
-    
+
             if (!this.monstersCache[mobId]) {
                 return this.getMonsterDetails(mobId)
                     .then(monsterDetails => {
@@ -421,11 +419,11 @@ class Overworld {
                 return Promise.resolve(); // Resolve with an empty promise for already cached monsters
             }
         });
-    
+
         // Wait for all promises to resolve before continuing
         await Promise.all(monsterPromises);
     }
-    
+
     //fetch info if monster ID is absent in cache
     async getMonsterDetails(mobId) {
         try {
@@ -437,16 +435,16 @@ class Overworld {
             return null;
         }
     }
-    
+
     //caching itemDetails
     async cacheItemsDetails() {
         if (!this.itemsCache) {
             this.itemsCache = {};
         }
-    
+
         const itemPromises = this.mapData.items.map(item => {
             const compositeKey = `${item.itemType}_${item.itemId}`;
-    
+
             if (!this.itemsCache[compositeKey]) {
                 return this.getItemDetails(item.itemType, item.itemId)
                     .then(itemDetails => {
@@ -459,11 +457,11 @@ class Overworld {
                 return Promise.resolve(); // Resolve with an empty promise for already cached items
             }
         });
-    
+
         // Wait for all promises to resolve before continuing
         await Promise.all(itemPromises);
     }
-    
+
     //fetching item details if it's absent in itemsCache
     getItemDetails(itemType, itemId) {
         return new Promise((resolve, reject) => {
@@ -478,8 +476,8 @@ class Overworld {
                 });
         });
     }
-    
-    async questUpdate(){
+
+    async questUpdate() {
         this.mapData = await this.getMapData();
         this.placeNPC();
     }

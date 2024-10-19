@@ -30,7 +30,7 @@ function fetchHeroData() {
 }
 
 //refreshing after quest
-function refreshHeroData(){
+function refreshHeroData() {
     const backpackSlots = $(".bp-slot");
     backpackSlots.each(function () {
         $(this).empty();
@@ -70,7 +70,7 @@ function updateHeroStats(heroData) {
     $("#agility\\.value").text(heroData.agility);
     $("#gold\\.value").text(heroData.gold);
     $("#stamina\\.value").text(heroData.stamina + "/" + heroData.maxStamina);
-    $("#name-level-profession").text(heroData.name + " lvl: " + heroData.level + " " +parseProfession(heroData.profession))
+    $("#name-level-profession").text(heroData.name + " lvl: " + heroData.level + " " + parseProfession(heroData.profession))
 }
 
 function getItemDetails(item) {
@@ -132,13 +132,13 @@ function updateHeroEquipment(heroData) {
 }
 
 let questBoxExists = false;
-    async function showQuestList() {
-        if (!questBoxExists) {
-            await app.get(apiBaseUrl + `Quest`).then((response) => {
-                console.log(response.data);
-                let questList = document.createElement("div");
-                questList.classList.add("questBox");
-                questList.innerHTML = `
+async function showQuestList() {
+    if (!questBoxExists) {
+        await app.get(apiBaseUrl + `Quest`).then((response) => {
+            console.log(response.data);
+            let questList = document.createElement("div");
+            questList.classList.add("questBox");
+            questList.innerHTML = `
                     <span id="questMenu" class="text-center"><h5 class="mt-2">Quest List</h5></span>
                     <button id="questBox-close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                         <path d="M.697 1.303a.75.75 0 0 1 1.06 0L8 6.94l6.243-6.637a.75.75 0 1 1 1.06 1.06L9.06 8l6.243 6.637a.75.75 0 1 1-1.06 1.06L8 9.06l-6.243 6.637a.75.75 0 1 1-1.06-1.06L6.94 8 .697 1.303z"/>
@@ -149,44 +149,44 @@ let questBoxExists = false;
                     </div>
                 `;
 
-                document.querySelector(".game-container").appendChild(questList);
-                questList.querySelector("#questBox-close").addEventListener("click", () => {
-                    questList.remove();
-                    questBoxExists = false; // Reset the flag when the questBox is removed
-                });
-                const titlesContainer = questList.querySelector("#questListTitles");
-                const descContainer = questList.querySelector("#questListDesc");
-                let activeTitle = null;
-
-                //adding quests
-                response.data.forEach((quest) => {
-                    const titleElement = document.createElement("div");
-                    titleElement.classList.add("questTitle");
-                    titleElement.textContent = quest.title;
-
-                    // Event to change color
-                    titleElement.addEventListener("click", () => {
-                        if (activeTitle) {
-                            activeTitle.style.color = 'goldenrod'; //switch back
-                        }
-
-                        titleElement.style.color = 'white'; // active
-                        activeTitle = titleElement; // Store the current active title
-
-                        // Description after click
-                        descContainer.innerHTML = "";
-                        const descElement = document.createElement("div");
-                        descElement.classList.add("questDesc");
-                        descElement.textContent = quest.description;
-                        descContainer.appendChild(descElement);
-                    });
-
-                    titlesContainer.appendChild(titleElement);
-                });
-                questBoxExists = true; //QuestBox exists
+            document.querySelector(".game-container").appendChild(questList);
+            questList.querySelector("#questBox-close").addEventListener("click", () => {
+                questList.remove();
+                questBoxExists = false; // Reset the flag when the questBox is removed
             });
-        }
+            const titlesContainer = questList.querySelector("#questListTitles");
+            const descContainer = questList.querySelector("#questListDesc");
+            let activeTitle = null;
+
+            //adding quests
+            response.data.forEach((quest) => {
+                const titleElement = document.createElement("div");
+                titleElement.classList.add("questTitle");
+                titleElement.textContent = quest.title;
+
+                // Event to change color
+                titleElement.addEventListener("click", () => {
+                    if (activeTitle) {
+                        activeTitle.style.color = 'goldenrod'; //switch back
+                    }
+
+                    titleElement.style.color = 'white'; // active
+                    activeTitle = titleElement; // Store the current active title
+
+                    // Description after click
+                    descContainer.innerHTML = "";
+                    const descElement = document.createElement("div");
+                    descElement.classList.add("questDesc");
+                    descElement.textContent = quest.description;
+                    descContainer.appendChild(descElement);
+                });
+
+                titlesContainer.appendChild(titleElement);
+            });
+            questBoxExists = true; //QuestBox exists
+        });
     }
+}
 
 function itemTypeParser(type) {
     switch (type) {

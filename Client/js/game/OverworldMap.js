@@ -123,16 +123,16 @@ class OverworldMap {
         // Ensure the item and its details are defined
         if (item && item.itemDetails) {
             const path = itemTypeParser(item.itemDetails.itemType);
-    
+
             let counter = 1;
             let name = `item${counter}`;
-    
+
             // Check for existing names and increment counter if needed
             while (this.gameObjects[name]) {
                 counter++;
                 name = `item${counter}`;
             }
-           
+
             const placeItem = new Item({
                 isPlayerControlled: false,
                 id: name,
@@ -152,11 +152,11 @@ class OverworldMap {
                 // console.log(`Added item ${compositeKey} to itemsCache.`);
             }
         }
-        else{
+        else {
             console.log("itemDetails not exists?")
         }
     }
-    
+
 
     //adding game object
     addGameObject(gameObject) {
@@ -179,14 +179,14 @@ class OverworldMap {
     checkForNpc() {
         const hero = this.gameObjects["hero"];
         const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
-    
+
         let displayedNPCChanged = false;
-    
+
         const nearbyObject = Object.values(this.gameObjects).find((object) => {
             if (object.id !== "hero" && !(object instanceof Item)) {
                 const distance = Math.sqrt(
                     Math.pow(object.x - nextCoords.x, 2) +
-                        Math.pow(object.y - nextCoords.y, 2)
+                    Math.pow(object.y - nextCoords.y, 2)
                 );
                 if (distance <= 32) {
                     // console.log(`Hero position: (${hero.x}, ${hero.y})`);
@@ -196,7 +196,7 @@ class OverworldMap {
             }
             return false;
         });
-    
+
         // Check if it's an NPC
         if (
             !this.isCutscenePlaying &&
@@ -210,17 +210,17 @@ class OverworldMap {
                     nearbyObject
                 );
                 this.displayedNPC = nearbyObject.id;
-    
+
                 // Remove old button if it exists
                 if (this.talkButtonRef) {
                     this.removeTalkButton();
                 }
-    
+
                 this.displayTalkButton(nearbyObject, approachDirection); // Show talk button
                 displayedNPCChanged = true;
             }
         }
-    
+
         if (!displayedNPCChanged && this.talkButtonRef) {
             // Remove button after walking away if no new NPC is displayed
             this.removeTalkButton();
@@ -241,7 +241,7 @@ class OverworldMap {
             }
             return false;
         });
-    
+
         // if (matchItem) {
         //     this.displayItemPickupButton(); 
         // } else {
@@ -265,7 +265,7 @@ class OverworldMap {
     async displayTalkButton(match, approachDirection) {
         const canvas = document.getElementById('game-canvas');
         const canvasRect = canvas.getBoundingClientRect();
-        
+
         if (match && match.talking && match.talking.length > 0) {
             const talkButton = document.createElement("button");
             const eventType = match.talking[0]?.events[0]?.type;
@@ -277,7 +277,7 @@ class OverworldMap {
             talkButton.classList.add("talk-button");
             talkButton.style.left = `${canvasRect.left + canvasRect.width / 2 - 35}px`;
             talkButton.style.top = `${canvasRect.top + canvasRect.height / 2 - 40}px`;
-    
+
             talkButton.onclick = (e) => {
                 this.removeTalkButton(); // Remove button after click
                 this.displayedNPC = null;
@@ -285,12 +285,12 @@ class OverworldMap {
                 e.stopPropagation();
                 e.preventDefault();
             };
-    
+
             document.body.appendChild(talkButton);
             this.talkButtonRef = talkButton; // Store a reference to the talk button
         }
     }
-    
+
 
     // Function to remove the talk button
     removeTalkButton() {

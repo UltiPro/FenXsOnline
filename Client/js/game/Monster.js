@@ -1,5 +1,5 @@
-class Monster extends GameObject{
-    constructor(config){
+class Monster extends GameObject {
+    constructor(config) {
         super(config)
         this.isMonster = true;
         this.mobId = config.mobId;
@@ -7,7 +7,7 @@ class Monster extends GameObject{
         this.removalKey = "mobs"
     }
 
-    killed(){
+    killed() {
         this.isDead = true;
     }
 

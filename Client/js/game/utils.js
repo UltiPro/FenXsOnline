@@ -1,51 +1,50 @@
-const utils = { 
+const utils = {
 	//used for grid-based movement
-	withGrid(n){
+	withGrid(n) {
 		return n * 32; //n -> position * 16 -> grid pixel size
 	},
 	//used for calculating collisions, return gird placement
-	asGridCoord(x, y) { 
+	asGridCoord(x, y) {
 		return `${x * 32},${y * 32}`;
 	},
 
 	//calculating collisions
-	nextPosition(initialX, initialY, direction){
+	nextPosition(initialX, initialY, direction) {
 		let x = initialX;
 		let y = initialY;
 		const size = 32;
-		if(direction === "left"){
+		if (direction === "left") {
 			x -= size;
 		}
-		else if(direction === "right"){
+		else if (direction === "right") {
 			x += size;
 		}
-		else if(direction === "up"){
+		else if (direction === "up") {
 			y -= size;
 		}
-		else if(direction === "down"){
+		else if (direction === "down") {
 			y += size;
 		}
-		return {x,y};
+		return { x, y };
 	},
-	oppositeDirection(direction){
-		if(direction === "left"){return "right"}
-		if(direction === "right"){return "left"}
-		if(direction === "up"){return "down"}
+	oppositeDirection(direction) {
+		if (direction === "left") { return "right" }
+		if (direction === "right") { return "left" }
+		if (direction === "up") { return "down" }
 		return "up"
 	},
 
-	capitalizeFirstLetter(string){
+	capitalizeFirstLetter(string) {
 		if (typeof string !== 'string' || string.length === 0) {
 			return string;
-		  }
-		  return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+		return string.charAt(0).toUpperCase() + string.slice(1);
 	},
 
-	emitEvent(name, detail){
+	emitEvent(name, detail) {
 		const event = new CustomEvent(name, {
 			detail
 		});
 		document.dispatchEvent(event);
 	}
-	
 }
