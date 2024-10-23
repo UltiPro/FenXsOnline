@@ -56,11 +56,11 @@ Running the app:
 
 > cd "/FenXsOnline/Client"
 
-Open "index.html" file in web browser.
+> Open "index.html" file in web browser.
 
 Publishing the app:
 
-There is no proper script for this.
+> There is no proper script for this.
 
 # Preview
 
