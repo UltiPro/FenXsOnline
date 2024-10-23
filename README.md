@@ -1,11 +1,11 @@
 # FenXsOnline
-FenXsOnline created by Patryk 'UltiPro' Wójtowicz and Dawid Majewski using ASP.NET Core Web API, JavaScript, jQuery, Axios and Bootstrap 5.
+FenXsOnline created by Patryk 'UltiPro' Wójtowicz and Dawid Majewski using ASP.NET Core Web API, Microsoft SQL Server, JavaScript, jQuery, Axios and Bootstrap 5.
 
 desc
 
 # Dependencies and Usage
 
-## Server
+### Server
 
 Dependencies:
 
@@ -28,7 +28,7 @@ Dependencies:
 
 Before running or publishing the application:
 
->
+> Set the correct connection string to the database in the "appsettings.json" file located in "/FenXsOnline/Server/Server". Then push migrations to database using the .NET command "dotnet ef database update" or the NuGet console command "update-database".
 
 Running the app:
 
@@ -44,7 +44,7 @@ Publishing the app:
 
 > cd "/Server/bin/Release/net8.0/publish"
 
-## Client
+### Client
 
 Dependencies:
 
@@ -54,9 +54,9 @@ Dependencies:
 
 Running the app:
 
-> cd ""
+> cd "/FenXsOnline/Client"
 
-> dotnet run
+Open "index.html" file in web browser.
 
 Publishing the app:
 
