@@ -31,6 +31,4 @@ Publishing the app:
 
 # Preview
 
-![Index Page Preview](/screenshots/IndexPage.gif)
-
 https://github.com/user-attachments/assets/96d9d98c-babc-4275-9a15-68236908581d
