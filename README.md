@@ -60,11 +60,7 @@ Open "index.html" file in web browser.
 
 Publishing the app:
 
-> cd "/FenXsOnline/Server"
-
-> dotnet publish
-
-> cd "/Server/bin/Release/net8.0/publish"
+There is no proper script for this.
 
 # Preview
 
