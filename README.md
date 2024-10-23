@@ -49,7 +49,10 @@ Publishing the app:
 Dependencies:
 
 <ul>
-  <li>dep 0.0.0</li>
+  <li>jquery 3.7.1</li>
+  <li>bootstrap 5.3.2</li>
+  <li>axios 1.6.1</li>
+  <li>@microsoft/signalr 8.0.0</li>
 </ul>
 
 Running the app:
