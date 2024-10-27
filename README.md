@@ -3,6 +3,8 @@ FenXsOnline created by Patryk 'UltiPro' Wójtowicz and Dawid Majewski using ASP.
 
 desc
 
+> The project was created as an engineering thesis, but due to a lack of time, it was not continued.
+
 # Dependencies and Usage
 
 ### Server
