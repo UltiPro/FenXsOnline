@@ -1,5 +1,5 @@
 # FenXsOnline
-FenXsOnline created by Patryk 'UltiPro' Wójtowicz and Dawid Majewski using ASP.NET Core Web API, Microsoft SQL Server, JavaScript, jQuery, Axios and Bootstrap 5.
+FenXsOnline created by Patryk 'UltiPro' Wójtowicz and Dawid Majewski using ASP.NET Core Web API, .NET Entity Framework Core, Microsoft SQL Server, JavaScript, jQuery, Axios and Bootstrap 5.
 
 desc
 
