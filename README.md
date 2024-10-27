@@ -1,7 +1,7 @@
 # FenXsOnline
 FenXsOnline created by Patryk 'UltiPro' Wójtowicz and Dawid Majewski using ASP.NET Core Web API, .NET Entity Framework Core, Microsoft SQL Server, JavaScript, jQuery, Axios and Bootstrap 5.
 
-desc
+FenXsOnline is a browser-based MMORPG game set in medieval fantasy. There are 4 professions available to the player: warrior, paladin, mage, and hunter. Some of the player's activities include defeating opponents, completing quests, trading with NPCs and communicating with other players via in-game chat. You can see more details in the video at the bottom of the README. The repository contains server application, client application and tools that were useful in creating the game.
 
 > The project was created as an engineering thesis, but due to a lack of time, it was not continued.
 
